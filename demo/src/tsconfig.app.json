@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "baseUrl": "./",
+    "module": "es2015",
+    "types": [],
+    "paths": {
+      "@angular/*": ["../node_modules/@angular/*"],
+      "bootstrap": ["../node_modules/bootstrap"],
+      "font-awesome": ["../node_modules/font-awesome"],
+      "jquery": ["../node_modules/jquery"],
+      "ngx-sweetalert2": ["../node_modules/ngx-sweetalert2"],
+      "ngx-toastr": ["../node_modules/ngx-toastr"]
+    }
+  },
+  "exclude": [
+    "testing/*",
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}
