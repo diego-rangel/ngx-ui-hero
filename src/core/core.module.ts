@@ -1,28 +1,32 @@
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { ResponseHandlerService } from './services/api/response-handler.service';
+import { AuthService } from './services/auth/auth.service';
+import { LocalStorageService } from './services/storage/local-storage.service';
 
 import { CoreSettings } from './core.settings';
 import { CORE_SETTINGS } from './core.settings.constants';
 
 // Export module's public API
-export { ResponseHandlerService } from './services/api/response-handler.service';
+export { AuthService } from './services/auth/auth.service';
+export { LocalStorageService } from './services/storage/local-storage.service';
 export { CoreSettings } from './core.settings';
 
 @NgModule({
   imports: [
-    CommonModule
-  ],  
+    CommonModule,
+    HttpModule
+  ],
   declarations: [],
-  exports: []
 })
 export class CoreModule {
   static forRoot(settings: CoreSettings): ModuleWithProviders {
     return {
       ngModule: CoreModule,
       providers: [
-        ResponseHandlerService,
+        AuthService,
+        LocalStorageService,
         {
           provide: CORE_SETTINGS,
           useValue: settings

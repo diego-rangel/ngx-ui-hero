@@ -10,8 +10,10 @@
     "projectDescription": "Angular library built with ❤ using ngx-library yeoman generator.",
     "projectKeywords": [
       "ng",
+      "ngx",
       "angular",
-      "library"
+      "ui",
+      "hero"
     ],
     "ngVersion": "5.0.0",
     "ngModules": [
@@ -23,6 +25,7 @@
     ],
     "otherDependencies": [
       "bootstrap",
+      "popper.js",
       "font-awesome",
       "jquery",
       "ngx-sweetalert2",

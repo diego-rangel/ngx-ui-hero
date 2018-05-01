@@ -1,17 +1,19 @@
+import { AlertService } from 'ngx-ui-hero';
 import { Component, OnInit } from '@angular/core';
-import { Title }     from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  constructor(private titleService:Title) { }
+  constructor(
+    private alert: AlertService,
+  ) { }
 
-  ngOnInit() {
-    this.titleService.setTitle('Home | ngx-ui-hero');
+  TestarAuth(): void {
+    
   }
 
 }

@@ -389,6 +389,7 @@ gulp.task('rollup-bundle', (cb) => {
       // This is required for UMD bundle users.
       // See https://github.com/tinesoft/generator-ngx-library/TROUBLESHOUTING.md if trouble
       'bootstrap': _.camelCase('bootstrap'.replace('/','.')),
+      'popper.js': _.camelCase('popper.js'.replace('/','.')),
       'font-awesome': _.camelCase('font-awesome'.replace('/','.')),
       'jquery': _.camelCase('jquery'.replace('/','.')),
       'ngx-sweetalert2': _.camelCase('ngx-sweetalert2'.replace('/','.')),

@@ -14,8 +14,10 @@
   "license": "MIT",
   "keywords": [
     "ng",
+    "ngx",
     "angular",
-    "library"
+    "ui",
+    "hero"
   ],
   "bugs": {
     "url": "https://github.com/diego-rangel/ngx-ui-hero/issues"
@@ -33,11 +35,12 @@
     "@angular/forms": "5.0.0",
     "@angular/http": "5.0.0",
     "@angular/platform-browser": "5.0.0",
-    "bootstrap": "^4.1.0",
+    "bootstrap": "^4.1.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "ngx-sweetalert2": "^0.2.7",
-    "ngx-toastr": "^8.4.0"
+    "ngx-toastr": "^8.4.0",
+    "popper.js": "^1.14.3"
   },
   "devDependencies": {
     "@angular/animations": "5.0.0",

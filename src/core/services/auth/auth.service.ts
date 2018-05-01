@@ -1,13 +1,12 @@
+import { Observable } from 'rxjs/Observable';
 import { Injectable, EventEmitter, Inject } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-//import { LocalStorageService } from 'ngx-localstorage';
 import 'rxjs/add/operator/map';
-import { ResponseHandlerService } from '../api/response-handler.service';
+
+import { LocalStorageService } from './../storage/local-storage.service';
 
 import { CoreSettings } from '../../core.settings';
 import { CORE_SETTINGS } from '../../core.settings.constants';
-
 
 @Injectable()
 export class AuthService {
@@ -16,41 +15,48 @@ export class AuthService {
 
     constructor(
         @Inject(CORE_SETTINGS) public settings: CoreSettings,
-        private localStorage: LocalStorageService,
+        private localStorageService: LocalStorageService,
         private http: Http,
-        private responseHandler: ResponseHandlerService
     ) {}
 
-    Autheticate(username: string, password: string): Observable<boolean> {
+    Autheticate(username: string, password: string): Observable<any> {
         const url = this.settings.apiSettings.apiBaseUrl + this.settings.apiSettings.jwtEndpointPath;
-        const data = `grant_type=password&username=${username}&password=${password}`;
+        const data = {};
+        data[this.settings.apiSettings.requestProperties.usernameAuthProperty] = username;
+        data[this.settings.apiSettings.requestProperties.passwordAuthProperty] = password;
+
         const headers: Headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Content-Type', 'application/json; charset=utf-8');
 
-        return this.http.post(url, data, { headers: headers })
+        return this.http.post(url, JSON.stringify(data), { headers: headers })
             .map(response => {
-                const result = this.responseHandler.handleSuccess(response);
+                const result = response.json();
+                const accessTokenProp = this.settings.apiSettings.responseProperties.accessTokenAuthProperty
+                    ? this.settings.apiSettings.responseProperties.accessTokenAuthProperty
+                    : 'access_token';
 
-                this.storeToken(result.access_token);
+                if (result && result[accessTokenProp]) {
+                    this.storeToken(result[accessTokenProp]);
+                }
+
                 return true;
-            })
-            .catch(reason => this.responseHandler.handleError(reason));
+            });
     }
     Logout(): void {
         this.removeToken();
     }
     IsAuthenticated(): boolean {
-        const storage: any = this.localStorage.get(this.localStorageKey);
+        const storage: any = this.localStorageService.Get(this.localStorageKey);
         return storage != null;
     }
     GetToken(): string {
-        return this.localStorage.get(this.localStorageKey);
+        return this.localStorageService.Get(this.localStorageKey);
     }
 
     private storeToken(token: string): void {
-        this.localStorage.set(this.localStorageKey, token);
+        this.localStorageService.Set(this.localStorageKey, token);
     }
     private removeToken(): void {
-        this.localStorage.remove(this.localStorageKey);
+        this.localStorageService.Remove(this.localStorageKey);
     }
 }

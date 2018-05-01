@@ -8,6 +8,7 @@
     "paths": {
       "@angular/*": ["../node_modules/@angular/*"],
       "bootstrap": ["../node_modules/bootstrap"],
+      "popper.js": ["../node_modules/popper.js"],
       "font-awesome": ["../node_modules/font-awesome"],
       "jquery": ["../node_modules/jquery"],
       "ngx-sweetalert2": ["../node_modules/ngx-sweetalert2"],
