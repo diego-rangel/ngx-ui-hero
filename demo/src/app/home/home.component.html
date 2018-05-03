@@ -20,7 +20,28 @@
 <section class="home">
   <div class="container">
 	
-		<button class="btn btn-primary" (click)="TestarAuth()">Testar Autenticação</button>
+	<h2>AlertService in Action</h2>
+	<div class="in-action">
+		<button class="btn btn-success" (click)="testSweetAlertSuccess()">Success</button>
+		<button class="btn btn-info" (click)="testSweetAlertInfo()">Info</button>
+		<button class="btn btn-danger" (click)="testSweetAlertError()">Error</button>
+		<button class="btn btn-warning" (click)="testSweetAlertWarning()">Warning</button>
+		<button class="btn btn-default" (click)="testSweetAlertQuestion()">Question</button>
+	</div>
+
+	<p>Inject the service into your component:</p>
+	<div class="code">
+		constructor(private alert: <b>AlertService</b>) {{"{ }"}}
+	</div>
+
+	<div class="code">
+		<b>this.alert.success</b>('Yeahhh', 'Some success text here =)');<br/>
+		<b>this.alert.info</b>('Info', 'Some info text here');<br/>
+		<b>this.alert.error</b>('Oops =(', 'My error message');<br/>
+		<b>this.alert.warning</b>('Attention!', 'Some text here');
+	</div>
+
+	<hr />
 
   </div>
 </section>

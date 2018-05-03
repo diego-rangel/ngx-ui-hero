@@ -12,8 +12,22 @@ export class HomeComponent {
     private alert: AlertService,
   ) { }
 
-  TestarAuth(): void {
-    
+  testSweetAlertSuccess(): void {
+    this.alert.success('Yeahhh', 'Some success text here =)');
+  }
+  testSweetAlertInfo(): void {
+    this.alert.info('Info', 'Some info text here');
+  }
+  testSweetAlertError(): void {
+    this.alert.error('Oops =(', 'My error message');
+  }
+  testSweetAlertWarning(): void {
+    this.alert.warning('Attention!', 'Some text here');
+  }
+  testSweetAlertQuestion(): void {
+    this.alert.question('Question?!', 'Some text here', () => {
+      this.testSweetAlertSuccess();
+    });
   }
 
 }

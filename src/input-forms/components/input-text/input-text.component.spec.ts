@@ -2,22 +2,22 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LibComponent } from './lib.component';
+import { InputTextComponent } from './input-text.component';
 
-describe('LibComponent', function () {
+describe('InputTextComponent', function () {
   let de: DebugElement;
-  let comp: LibComponent;
-  let fixture: ComponentFixture<LibComponent>;
+  let comp: InputTextComponent;
+  let fixture: ComponentFixture<InputTextComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LibComponent]
+      declarations: [InputTextComponent]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LibComponent);
+    fixture = TestBed.createComponent(InputTextComponent);
     comp = fixture.componentInstance;
     de = fixture.debugElement.query(By.css('p.description'));
   });

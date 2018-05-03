@@ -5,8 +5,74 @@
 </div>
 
 <section class="getting-started">
-  <div class="container">
-<!-- put your content here-->
-Put your content here. Typically instructions about how to install/use your library.
+  <div class="main container">
+    <h2>Installation</h2>
+    <p>install <b>ngx-ui-hero</b> via:</p>
+    <div class="code">
+      npm install --save ngx-ui-hero
+    </div>
+
+    <h2>Configuring SweetAlert 2</h2>
+    <p>If you want to use <b>SweeAlert2</b> into your apps, you must add the following script reference to your <b>.angular-cli.json</b> file:</p>
+    <div class="code">
+      "scripts": [
+        "../node_modules/sweetalert2/dist/sweetalert2.all.min.js"
+      ],
+    </div>
+
+    <h2>Using the Core Module</h2>
+    <p>To be able for using the ui-hero Core functionalities, you must provide some configurations.</p>
+    <div class="code">
+      {{"import { CoreModule, CoreSettings } from 'ngx-ui-hero';"}}<br/>
+      ...<br/>
+
+      <ul>
+        <li><span>{{"export const coreSettings: CoreSettings = {"}}</span>
+          <ul>
+            <li><span>{{"  apiSettings: {"}}</span>
+              <ul>
+                <li><span>{{"    apiBaseUrl: 'http://localhost:50467/api',"}}</span></li>
+                <li><span>{{"    jwtEndpointPath: '/token',"}}</span></li>
+                <li><span>{{"    localStoragePrefix: 'myDemoAppPrefix_',"}}</span></li>
+                <li><span>{{"    requestProperties: {"}}</span>
+                  <ul>
+                    <li><span>{{"      usernameAuthProperty: 'emailAddress',"}}</span></li>
+                    <li><span>{{"      passwordAuthProperty: 'password'"}}</span></li>
+                  </ul>
+                </li>
+                <li><span>{{"    },"}}</span></li>
+                <li><span>{{"    responseProperties: {"}}</span>
+                  <ul>
+                    <li><span>{{"      accessTokenAuthProperty: 'token'"}}</span></li>
+                  </ul>
+                </li>
+                <li><span>{{"    }"}}</span></li>
+              </ul>
+            </li>
+            <li><span>{{"  },"}}</span></li>
+            <li><span>{{"  errorHandlingSettings: {"}}</span>
+              <ul>
+                <li><span>{{"    unhandledErrorTitle: 'Oops!',"}}</span></li>
+                <li><span>{{"    unhandledErrorMessage: 'We encountered an internal fault while performing this operation.'"}}</span></li>
+              </ul>
+            </li>
+            <li><span>{{"  }"}}</span></li>
+          </ul>
+        </li>
+        <li>{{"};"}}</li>
+      </ul>
+    </div>
+    <p>Add the following import to you module:</p>
+    <div class="code">
+      <b>CoreModule.forRoot(coreSettings)</b>
+    </div>
+
+    <h2>Using the Ui Module</h2>
+    <p>Add the following import to you module:</p>
+    <div class="code">
+      {{"import { UiModule } from 'ngx-ui-hero';"}}<br/>      
+      ...<br/>
+      <b>UiModule.forRoot()</b>
+    </div>
   </div>
 </section>

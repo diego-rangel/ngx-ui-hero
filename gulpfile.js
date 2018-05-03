@@ -392,7 +392,7 @@ gulp.task('rollup-bundle', (cb) => {
       'popper.js': _.camelCase('popper.js'.replace('/','.')),
       'font-awesome': _.camelCase('font-awesome'.replace('/','.')),
       'jquery': _.camelCase('jquery'.replace('/','.')),
-      'ngx-sweetalert2': _.camelCase('ngx-sweetalert2'.replace('/','.')),
+      'sweetalert2': _.camelCase('sweetalert2'.replace('/','.')),
       'ngx-toastr': _.camelCase('ngx-toastr'.replace('/','.'))
 
     };

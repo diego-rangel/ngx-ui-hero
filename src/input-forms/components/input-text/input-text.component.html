@@ -1,0 +1,27 @@
+<!-- <div class="form-group has-feedback" 
+    [ngClass]="{
+      'has-success': touched && !(invalid | async),
+      'has-error': touched && (invalid | async)
+    }">
+  <label *ngIf="label" [attr.for]="identifier" class="control-label">{{label}}</label> -->
+  <input
+    type="text"
+    class="form-control"   
+    [disabled]="disabled" 
+    maxlength="maxlength"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    [id]="identifier"
+  />
+  <!-- <span class="glyphicon form-control-feedback" aria-hidden="true" 
+    [ngClass]="{
+      'glyphicon-ok': touched && !(invalid | async),
+      'glyphicon-remove': touched && (invalid | async)
+    }">
+  </span>
+
+  <input-validations
+    *ngIf="showValidations && touched && (invalid | async)"
+    [messages]="failures | async">
+  </input-validations> -->
+<!-- </div> -->

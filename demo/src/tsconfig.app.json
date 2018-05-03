@@ -11,7 +11,7 @@
       "popper.js": ["../node_modules/popper.js"],
       "font-awesome": ["../node_modules/font-awesome"],
       "jquery": ["../node_modules/jquery"],
-      "ngx-sweetalert2": ["../node_modules/ngx-sweetalert2"],
+      "sweetalert2": ["../node_modules/sweetalert2"],
       "ngx-toastr": ["../node_modules/ngx-toastr"]
     }
   },

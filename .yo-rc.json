@@ -28,7 +28,7 @@
       "popper.js",
       "font-awesome",
       "jquery",
-      "ngx-sweetalert2",
+      "sweetalert2",
       "ngx-toastr"
     ],
     "additionalPackageFiles": [],
@@ -39,10 +39,15 @@
     "useCompodoc": true,
     "enforceNgGitCommitMsg": true,
     "exclusions": [
+      "demo/package.json",
+      "demo/.angular-cli.json",
       "demo/src/jestGlobalMocks.ts",
       "demo/src/setupJest.ts",
+      "demo/src/app/*",
+      "demo/src/app/home/*",
       "config/jestGlobalMocks.ts",
-      "config/setupJest.ts"
+      "config/setupJest.ts",
+      "src/index.ts"
     ]
   }
 }

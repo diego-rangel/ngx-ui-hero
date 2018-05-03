@@ -29,12 +29,6 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/core@4.4.6":
-  version "4.4.6"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.4.6.tgz#13031fd10dcfe438875419b38f21120958bc2354"
-  dependencies:
-    tslib "^1.7.1"
-
 "@angular/core@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.0.0.tgz#4f976a225f7dddf34992f2cad824c9543a46f4c8"
@@ -5126,13 +5120,6 @@ next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-ngx-sweetalert2@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/ngx-sweetalert2/-/ngx-sweetalert2-0.2.7.tgz#d42ad0765043049b7ea027f4ec7f11e6e127a1d5"
-  dependencies:
-    "@angular/core" "4.4.6"
-    sweetalert2 "^6.11.5"
-
 ngx-toastr@^8.4.0:
   version "8.4.0"
   resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-8.4.0.tgz#0fd73b66ab9857cb9eb9974ab259070cb4c458c5"
@@ -7364,9 +7351,9 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-sweetalert2@^6.11.5:
-  version "6.11.5"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-6.11.5.tgz#a1ede34089225eb864898f4b613db4fec5dbe334"
+sweetalert2@^7.19.2:
+  version "7.19.2"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.19.2.tgz#46fa92be1c33c058c76ddfe6bc08327c4ee05fcb"
 
 symbol-observable@^1.0.1:
   version "1.2.0"
