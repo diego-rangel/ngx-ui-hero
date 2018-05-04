@@ -29,7 +29,8 @@
       "font-awesome",
       "jquery",
       "sweetalert2",
-      "ngx-toastr"
+      "ngx-toastr",
+      "rxjs"
     ],
     "additionalPackageFiles": [],
     "dependenciesRange": "^",

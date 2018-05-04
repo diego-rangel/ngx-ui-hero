@@ -1,6 +1,5 @@
 import { Directive, Input, Output, Renderer2, ElementRef, OnInit, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 
 @Directive({
   // tslint:disable-next-line:directive-selector

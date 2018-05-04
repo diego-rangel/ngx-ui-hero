@@ -4,7 +4,7 @@
       'has-error': touched && (invalid | async)
     }">
   <label *ngIf="label" [attr.for]="identifier" class="control-label">{{label}}</label> -->
-  <input
+  <!-- <input
     type="text"
     class="form-control"   
     [disabled]="disabled" 
@@ -12,7 +12,7 @@
     [placeholder]="placeholder"
     [(ngModel)]="value"
     [id]="identifier"
-  />
+  /> -->
   <!-- <span class="glyphicon form-control-feedback" aria-hidden="true" 
     [ngClass]="{
       'glyphicon-ok': touched && !(invalid | async),
@@ -25,3 +25,4 @@
     [messages]="failures | async">
   </input-validations> -->
 <!-- </div> -->
+<input type="text" class="form-control" />

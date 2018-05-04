@@ -12,7 +12,8 @@
       "font-awesome": ["../node_modules/font-awesome"],
       "jquery": ["../node_modules/jquery"],
       "sweetalert2": ["../node_modules/sweetalert2"],
-      "ngx-toastr": ["../node_modules/ngx-toastr"]
+      "ngx-toastr": ["../node_modules/ngx-toastr"],
+      "rxjs": ["../node_modules/rxjs"]
     }
   },
   "exclude": [
