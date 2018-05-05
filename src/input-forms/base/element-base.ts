@@ -30,17 +30,17 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
     super();
   }
 
-  protected validate(): Observable<ValidationResult> {
+  validate(): Observable<ValidationResult> {
     return validate
       (this.validators, this.asyncValidators)
       (this.model.control);
   }
 
-  protected get invalid(): Observable<boolean> {
+  get invalid(): Observable<boolean> {
     return this.validate().map(v => this.invalidPattern || Object.keys(v || {}).length > 0);
   }
 
-  protected get failures(): Observable<Array<string>> {
+  get failures(): Observable<Array<string>> {
     return this.validate().map(v => {
       const fails = Object.keys(v || {}).map(k => message(v, k, this.label, this.config.validationMessages));
 
@@ -52,11 +52,11 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
     });
   }
 
-  protected get touched(): boolean {
+  get touched(): boolean {
     return this.model.touched;
   }
 
-  protected get invalidPattern(): boolean {
+  get invalidPattern(): boolean {
     return this.model.control.hasError('pattern');
   }
 }

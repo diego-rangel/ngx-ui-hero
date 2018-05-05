@@ -1,0 +1,22 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>Components</h1>
+  </div>
+</div>
+
+<section class="getting-started">
+  <div class="main container">  
+    <h2>Input Text</h2>
+    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+  
+    <input-text 
+      [label]="'My Label'" 
+      [placeholder]="'My placeholder...'" 
+      [maxlength]="200" 
+      [disabled]="false"   
+      [showValidations]="true"
+      [(ngModel)]="teste" 
+      required>
+    </input-text>
+  </div>
+</section>

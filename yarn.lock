@@ -5120,11 +5120,11 @@ next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-ngx-toastr@^8.4.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-8.4.0.tgz#0fd73b66ab9857cb9eb9974ab259070cb4c458c5"
+ngx-toastr@^8.5.0:
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-8.5.0.tgz#57bb19c3cba1b2478a37e47bba7a1d939bb61db7"
   dependencies:
-    tslib "^1.7.1"
+    tslib "^1.9.0"
 
 no-case@^2.2.0:
   version "2.3.2"

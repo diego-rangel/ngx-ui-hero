@@ -1,28 +1,18 @@
-<!-- <div class="form-group has-feedback" 
-    [ngClass]="{
-      'has-success': touched && !(invalid | async),
-      'has-error': touched && (invalid | async)
-    }">
-  <label *ngIf="label" [attr.for]="identifier" class="control-label">{{label}}</label> -->
-  <!-- <input
-    type="text"
-    class="form-control"   
-    [disabled]="disabled" 
-    maxlength="maxlength"
-    [placeholder]="placeholder"
-    [(ngModel)]="value"
-    [id]="identifier"
-  /> -->
-  <!-- <span class="glyphicon form-control-feedback" aria-hidden="true" 
-    [ngClass]="{
-      'glyphicon-ok': touched && !(invalid | async),
-      'glyphicon-remove': touched && (invalid | async)
-    }">
-  </span>
+<label *ngIf="label" [attr.for]="identifier">{{label}}</label>
 
-  <input-validations
-    *ngIf="showValidations && touched && (invalid | async)"
-    [messages]="failures | async">
-  </input-validations> -->
-<!-- </div> -->
-<input type="text" class="form-control" />
+<input type="text" 
+  class="form-control" 
+  maxlength="maxlength"
+  [disabled]="disabled" 
+  [placeholder]="placeholder" 
+  [(ngModel)]="value" 
+  [id]="identifier"
+  [ngClass]="{
+    'is-valid': touched && !(invalid | async),
+    'is-invalid': touched && (invalid | async)
+  }" />
+
+<input-validations
+  *ngIf="showValidations && touched && (invalid | async)"
+  [messages]="failures | async">
+</input-validations>

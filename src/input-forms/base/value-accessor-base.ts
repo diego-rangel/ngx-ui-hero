@@ -21,10 +21,10 @@ export class ValueAccessorBase<T> implements ControlValueAccessor {
   writeValue(value: T) {
     this.innerValue = value;
   }
-  registerOnChange(fn: (value: T) => void) {
+  registerOnChange(fn: any): void {
     this.changed.push(fn);
   }
-  registerOnTouched(fn: () => void) {
+  registerOnTouched(fn: any): void {
     this.isTouched.push(fn);
   }
 }

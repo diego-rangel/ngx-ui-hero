@@ -10,6 +10,14 @@ const routes: Routes = [
     {
         path: 'getting-started',
         loadChildren: 'app/getting-started/getting-started.module#GettingStartedModule'
+    },
+    {
+        path: 'components',
+        loadChildren: 'app/components/components.module#ComponentsModule'
+    },
+    {
+        path: 'services',
+        loadChildren: 'app/services/services.module#ServicesModule'
     }
 ];
 
