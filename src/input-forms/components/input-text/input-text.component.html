@@ -1,4 +1,4 @@
-<label *ngIf="label" [attr.for]="identifier">{{label}}</label>
+<label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
 
 <input type="text" 
   class="form-control" 

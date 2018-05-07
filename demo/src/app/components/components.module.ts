@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HighlightModule } from 'ngx-highlightjs';
 
 import { CoreModule, UiModule, InputFormsModule, InputFormsConfig } from 'ngx-ui-hero';
 
@@ -32,6 +33,7 @@ export const inputFormsConfig: InputFormsConfig = {
   imports: [
     CommonModule,
     FormsModule,    
+    HighlightModule.forRoot({ theme: 'github'}),
     InputFormsModule.forRoot(inputFormsConfig),
     ComponentsRoutingModule
   ],

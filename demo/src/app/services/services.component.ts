@@ -17,9 +17,16 @@ constructor(
 
   alertExamplesCode = `
 this.alert.success('Yeahhh', 'Some success text here =)');
+
 this.alert.info('Info', 'Some info text here');
+
 this.alert.error('Oops =(', 'My error message');
+
 this.alert.warning('Attention!', 'Some text here');
+
+this.alert.question('Question?!', 'Some text here', () => {
+  // your success callback code.
+});
   `;
 
 

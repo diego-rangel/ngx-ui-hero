@@ -59,4 +59,22 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   get invalidPattern(): boolean {
     return this.model.control.hasError('pattern');
   }
+
+  public get isRequired(): boolean {
+    if (!this.validators || this.validators.length === 0) {
+      return;
+    }
+
+    for (let i = 0; i < this.validators.length; i++) {
+      const props = Object.keys(this.validators[i] || {});
+
+      for (let p = 0; p < props.length; p++) {
+        if (props[p] === '_required') {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
 }

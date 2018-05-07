@@ -5,18 +5,26 @@
 </div>
 
 <section class="getting-started">
-  <div class="main container">  
-    <h2>Input Text</h2>
-    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-  
-    <input-text 
-      [label]="'My Label'" 
-      [placeholder]="'My placeholder...'" 
-      [maxlength]="200" 
-      [disabled]="false"   
-      [showValidations]="true"
-      [(ngModel)]="teste" 
-      required>
-    </input-text>
+  <div class="main container">
+    <div class="card">
+      <div class="card-header">Input Text</div>
+      <div class="card-body">
+        <div class="form-group">
+          <input-text 
+            [label]="'My Label here'" 
+            [placeholder]="'My placeholder...'" 
+            [maxlength]="200" 
+            [disabled]="false"   
+            [showValidations]="true"
+            [(ngModel)]="myModel" 
+            required>
+          </input-text>
+        </div>
+
+        <div highlight="all" [language]="['Html']">
+          <pre><code [textContent]="inputTextCode"></code></pre>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

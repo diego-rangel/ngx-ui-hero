@@ -4,12 +4,8 @@ import { ElementBase } from '../../base/element-base';
 import { INPUT_FORMS_CONFIG } from './../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
 
-import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS,
-} from '@angular/forms';
+import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
+import { AsyncValidatorArray, ValidatorArray, validate } from '../../base/validate';
 
 let identifier = 0;
 
@@ -23,7 +19,7 @@ let identifier = 0;
     multi: true
   }]
 })
-export class InputTextComponent extends ElementBase<string> {
+export class InputTextComponent extends ElementBase<string> implements OnInit {
   @Input() public placeholder = '';
   @Input() public maxlength: number;
 
@@ -32,10 +28,14 @@ export class InputTextComponent extends ElementBase<string> {
   public identifier = `input-text-${identifier++}`;
 
   constructor(
-    @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
-    @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
+    @Optional() @Inject(NG_VALIDATORS) validators: ValidatorArray,
+    @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: AsyncValidatorArray,
     @Inject( INPUT_FORMS_CONFIG ) public config: InputFormsConfig
   ) {
     super(validators, asyncValidators, config);
+  }
+
+  ngOnInit() {
+    console.log(this.isRequired);
   }
 }
