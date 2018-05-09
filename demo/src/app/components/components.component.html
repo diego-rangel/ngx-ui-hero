@@ -26,5 +26,92 @@
         </div>
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-header">Input Select</div>
+      <div class="card-body">
+        <p>The InputSelect component supports not only a template mode, but an options input too. You can use an array of objects of any types, you just need to set the displayTextProperty and valueProperty values.</p>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <input-select
+                [label]="'My Label'" 
+                [defaultOption]="'Select'" 
+                [disabled]="false"   
+                [showValidations]="true"
+                [(ngModel)]="mySelectModel" 
+                [options]="options"
+                [displayTextProperty]="'text'"
+                [valueProperty]="'value'"
+                required>
+              </input-select>
+            </div>
+    
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="inputSelectCode"></code></pre>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <input-select
+                [label]="'My Label 2'" 
+                [defaultOption]="'Select'" 
+                [disabled]="false"
+                [(ngModel)]="mySelectModel">
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+              </input-select>
+            </div>
+    
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="inputSelectCode2"></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Input Email</div>
+      <div class="card-body">
+        <div class="form-group">
+          <input-email
+            [label]="'My E-mail'" 
+            [placeholder]="'My placeholder...'" 
+            [maxlength]="200" 
+            [disabled]="false"   
+            [showValidations]="true"
+            [(ngModel)]="myEmailModel" 
+            required>
+          </input-email>
+        </div>
+
+        <div highlight="all" [language]="['Html']">
+          <pre><code [textContent]="inputEmailCode"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Input Textarea</div>
+      <div class="card-body">
+        <div class="form-group">
+          <input-textarea 
+            [label]="'My Label'" 
+            [placeholder]="'My placeholder...'" 
+            [maxlength]="2000" 
+            [disabled]="false"   
+            [showValidations]="true"
+            [(ngModel)]="myTextAreaModel" 
+            required>
+          </input-textarea>
+        </div>
+
+        <div highlight="all" [language]="['Html']">
+          <pre><code [textContent]="inputTextAreaCode"></code></pre>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

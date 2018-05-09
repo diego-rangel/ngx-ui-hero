@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { CORE_SETTINGS } from '../../core.settings.constants';
-import { CoreSettings } from '../../core.settings';
+import { API_SETTINGS } from '../../api.settings.constants';
+import { ApiSettings } from '../../api.settings';
 
 declare var localStorage: any;
 
@@ -9,10 +9,10 @@ export class LocalStorageService {
     private _prefix = 'uiHero_';
 
     constructor(
-        @Inject(CORE_SETTINGS) public settings: CoreSettings,
+        @Inject(API_SETTINGS) public settings: ApiSettings,
     ) {
-        if (this.settings.apiSettings.localStoragePrefix) {
-            this._prefix = this.settings.apiSettings.localStoragePrefix
+        if (this.settings.localStoragePrefix) {
+            this._prefix = this.settings.localStoragePrefix
         }
     }
 

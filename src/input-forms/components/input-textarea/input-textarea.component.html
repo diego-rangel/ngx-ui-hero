@@ -1,0 +1,20 @@
+<label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+
+<textarea
+  rows="5"
+  class="form-control"   
+  [disabled]="disabled" 
+  [maxlength]="maxlength"
+  [placeholder]="placeholder"
+  [(ngModel)]="value"
+  [ngClass]="{
+    'is-valid': touched && !(invalid | async),
+    'is-invalid': touched && (invalid | async)
+  }"
+  [id]="identifier">
+</textarea>
+
+<input-validations
+  *ngIf="showValidations && touched && (invalid | async)"
+  [messages]="failures | async">
+</input-validations>

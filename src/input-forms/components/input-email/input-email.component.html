@@ -1,0 +1,28 @@
+<label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class='fa fa-envelope-o' aria-hidden='true'></i></span>
+  </div>
+  <input 
+    type="email"
+    name="email"
+    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+    class="form-control"  
+    [disabled]="disabled" 
+    [maxlength]="maxlength"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    [id]="identifier"
+    [ngClass]="{
+      'is-valid': touched && !(invalid | async),
+      'is-invalid': touched && (invalid | async)
+    }"
+    email
+  />
+</div>
+
+<input-validations
+  *ngIf="showValidations && touched && (invalid | async)"
+  [messages]="failures | async">
+</input-validations>

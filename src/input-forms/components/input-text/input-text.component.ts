@@ -36,6 +36,6 @@ export class InputTextComponent extends ElementBase<string> implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.isRequired);
+
   }
 }

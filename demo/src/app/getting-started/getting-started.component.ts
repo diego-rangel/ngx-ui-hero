@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 
-
 @Component({
   selector: 'app-getting-started',
   templateUrl: './getting-started.component.html',
@@ -16,21 +15,19 @@ export class GettingStartedComponent implements OnInit {
 ],
   `;
 
-  coreModuleSetupCode = `
-import { CoreModule, CoreSettings } from 'ngx-ui-hero';
+  apiModuleSetupCode = `
+import { ApiModule, ApiSettings } from 'ngx-ui-hero';
 
-export const coreSettings: CoreSettings = {
-  apiSettings: {
-      apiBaseUrl: 'http://localhost:50467/api',
-      jwtEndpointPath: '/token',
-      localStoragePrefix: 'myDemoAppPrefix_',
-      requestProperties: {
-          usernameAuthProperty: 'emailAddress',
-          passwordAuthProperty: 'password'
-      },
-      responseProperties: {
-          accessTokenAuthProperty: 'token'
-      }
+export const apiSettings: ApiSettings = {
+  apiBaseUrl: 'http://localhost:50467/api',
+  jwtEndpointPath: '/token',
+  localStoragePrefix: 'myDemoAppPrefix_',
+  requestProperties: {
+      usernameAuthProperty: 'emailAddress',
+      passwordAuthProperty: 'password'
+  },
+  responseProperties: {
+      accessTokenAuthProperty: 'token'
   },
   errorHandlingSettings: {
       unhandledErrorTitle: 'Oops!',
@@ -40,7 +37,7 @@ export const coreSettings: CoreSettings = {
 
 @NgModule({
   imports: [
-    CoreModule.forRoot(coreSettings)
+    ApiModule.forRoot(apiSettings)
   ],
 })
 export class MyModule { }

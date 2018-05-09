@@ -21,6 +21,15 @@ export { InputTextComponent } from './components/input-text/input-text.component
 import { InputValidationsComponent } from './components/input-validations/input-validations.component';
 export { InputValidationsComponent } from './components/input-validations/input-validations.component';
 
+import { InputSelectComponent } from './components/input-select/input-select.component';
+export { InputSelectComponent } from './components/input-select/input-select.component';
+
+import { InputEmailComponent } from './components/input-email/input-email.component';
+export { InputEmailComponent } from './components/input-email/input-email.component';
+
+import { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
+export { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -32,6 +41,9 @@ export { InputValidationsComponent } from './components/input-validations/input-
     // CurrencySymbolPipe,
     InputTextComponent,
     InputValidationsComponent,
+    InputSelectComponent,
+    InputEmailComponent,
+    InputTextareaComponent,
   ],
   exports: [
     // AutoSelectOnFocusDirective,
@@ -39,6 +51,9 @@ export { InputValidationsComponent } from './components/input-validations/input-
     // CurrencySymbolPipe,
     InputTextComponent,
     InputValidationsComponent,
+    InputSelectComponent,
+    InputEmailComponent,
+    InputTextareaComponent,
   ],
 })
 export class InputFormsModule {

@@ -5,8 +5,8 @@ import 'rxjs/add/operator/map';
 
 import { LocalStorageService } from './../storage/local-storage.service';
 
-import { CoreSettings } from '../../core.settings';
-import { CORE_SETTINGS } from '../../core.settings.constants';
+import { ApiSettings } from '../../api.settings';
+import { API_SETTINGS } from '../../api.settings.constants';
 
 @Injectable()
 export class AuthService {
@@ -14,16 +14,16 @@ export class AuthService {
     private localStorageKey = 'authorizationData';
 
     constructor(
-        @Inject(CORE_SETTINGS) public settings: CoreSettings,
+        @Inject(API_SETTINGS) public settings: ApiSettings,
         private localStorageService: LocalStorageService,
         private http: Http,
     ) {}
 
     Autheticate(username: string, password: string): Observable<any> {
-        const url = this.settings.apiSettings.apiBaseUrl + this.settings.apiSettings.jwtEndpointPath;
+        const url = this.settings.apiBaseUrl + this.settings.jwtEndpointPath;
         const data = {};
-        data[this.settings.apiSettings.requestProperties.usernameAuthProperty] = username;
-        data[this.settings.apiSettings.requestProperties.passwordAuthProperty] = password;
+        data[this.settings.requestProperties.usernameAuthProperty] = username;
+        data[this.settings.requestProperties.passwordAuthProperty] = password;
 
         const headers: Headers = new Headers();
         headers.append('Content-Type', 'application/json; charset=utf-8');
@@ -31,8 +31,8 @@ export class AuthService {
         return this.http.post(url, JSON.stringify(data), { headers: headers })
             .map(response => {
                 const result = response.json();
-                const accessTokenProp = this.settings.apiSettings.responseProperties.accessTokenAuthProperty
-                    ? this.settings.apiSettings.responseProperties.accessTokenAuthProperty
+                const accessTokenProp = this.settings.responseProperties.accessTokenAuthProperty
+                    ? this.settings.responseProperties.accessTokenAuthProperty
                     : 'access_token';
 
                 if (result && result[accessTokenProp]) {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HighlightModule } from 'ngx-highlightjs';
 
-import { CoreModule, UiModule, InputFormsModule, InputFormsConfig } from 'ngx-ui-hero';
+import { UiModule, InputFormsModule, InputFormsConfig } from 'ngx-ui-hero';
 
 import { ComponentsComponent } from './components.component';
 import { ComponentsRoutingModule } from './components-routing.module';

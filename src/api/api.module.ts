@@ -5,13 +5,13 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
 import { LocalStorageService } from './services/storage/local-storage.service';
 
-import { CoreSettings } from './core.settings';
-import { CORE_SETTINGS } from './core.settings.constants';
+import { ApiSettings } from './api.settings';
+import { API_SETTINGS } from './api.settings.constants';
 
 // Export module's public API
 export { AuthService } from './services/auth/auth.service';
 export { LocalStorageService } from './services/storage/local-storage.service';
-export { CoreSettings } from './core.settings';
+export { ApiSettings } from './api.settings';
 
 @NgModule({
   imports: [
@@ -20,15 +20,15 @@ export { CoreSettings } from './core.settings';
   ],
   declarations: [],
 })
-export class CoreModule {
-  static forRoot(settings: CoreSettings): ModuleWithProviders {
+export class ApiModule {
+  static forRoot(settings: ApiSettings): ModuleWithProviders {
     return {
-      ngModule: CoreModule,
+      ngModule: ApiModule,
       providers: [
         AuthService,
         LocalStorageService,
         {
-          provide: CORE_SETTINGS,
+          provide: API_SETTINGS,
           useValue: settings
         }
       ]

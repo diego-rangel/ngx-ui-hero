@@ -4,14 +4,14 @@ import { Injectable, Inject } from '@angular/core';
 import { Response, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { CORE_SETTINGS } from '../../core.settings.constants';
-import { CoreSettings } from '../../core.settings';
+import { API_SETTINGS } from '../../api.settings.constants';
+import { ApiSettings } from '../../api.settings';
 
 @Injectable()
 export class ResponseHandlerService {
 
     constructor(
-        @Inject(CORE_SETTINGS) public settings: CoreSettings
+        @Inject(API_SETTINGS) public settings: ApiSettings
     ) { }
 
     // handleSuccess(response: Response, responseContentType?: ResponseContentType): any {

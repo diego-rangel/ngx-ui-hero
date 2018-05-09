@@ -1,14 +1,3 @@
-export interface CoreSettings {
-    /**
-     * Api Settings.
-     */
-    apiSettings: ApiSettings;
-    /**
-     * Error Handling Settings.
-     */
-    errorHandlingSettings: ErrorHandlingSettings;
-}
-
 export interface ApiSettings {
     /**
      * Your api base Url used for Authentication and common http requests.
@@ -37,6 +26,10 @@ export interface ApiSettings {
      * Response properties.
      */
     responseProperties: ResponseProperties;
+    /**
+     * Error Handling Settings.
+     */
+    errorHandlingSettings: ErrorHandlingSettings;
 }
 
 export interface ErrorHandlingSettings {
