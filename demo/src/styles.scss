@@ -73,7 +73,8 @@ $breakpoints: $grid-breakpoints;
 }
 
 .jumbotron {
-    background-color: #0143a3;
-    background: linear-gradient(135deg,#0143a3,#0273d4);
+    // background-color: #0143a3;
+    // background: linear-gradient(135deg,#0143a3,#0273d4);
+    background: url("./assets/img/header-bg.jpg") 0 0 repeat-x;
     color: #FFF;
 }
