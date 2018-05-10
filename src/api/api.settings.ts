@@ -6,6 +6,18 @@ export interface ApiSettings {
     apiBaseUrl: string;
 
     /**
+     * JWT Authentication Settings
+     */
+    jwtAuthSettings: JwtAuthSettings;
+
+    /**
+     * Error Handling Settings.
+     */
+    errorHandlingSettings: ErrorHandlingSettings;
+}
+
+export interface JwtAuthSettings {
+    /**
      * Your endpoint for JWT Authentication.
      * Eg.: '/token'
      */
@@ -26,10 +38,6 @@ export interface ApiSettings {
      * Response properties.
      */
     responseProperties: ResponseProperties;
-    /**
-     * Error Handling Settings.
-     */
-    errorHandlingSettings: ErrorHandlingSettings;
 }
 
 export interface ErrorHandlingSettings {

@@ -10,14 +10,16 @@ import { ServicesRoutingModule } from './services-routing.module';
 
 export const apiSettings: ApiSettings = {
   apiBaseUrl: 'http://localhost:50467/api',
-  jwtEndpointPath: '/token',
-  localStoragePrefix: 'myDemoAppPrefix_',
-  requestProperties: {
-    usernameAuthProperty: 'emailAddress',
-    passwordAuthProperty: 'password'
-  },
-  responseProperties: {
-    accessTokenAuthProperty: 'token'
+  jwtAuthSettings: {
+    jwtEndpointPath: '/token',
+    localStoragePrefix: 'myDemoAppPrefix_',
+    requestProperties: {
+      usernameAuthProperty: 'emailAddress',
+      passwordAuthProperty: 'password'
+    },
+    responseProperties: {
+      accessTokenAuthProperty: 'token'
+    }
   },
   errorHandlingSettings: {
     unhandledErrorTitle: 'Oops!',

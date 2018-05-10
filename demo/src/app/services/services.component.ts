@@ -29,6 +29,11 @@ this.alert.question('Question?!', 'Some text here', () => {
 });
   `;
 
+  sweetAlertSetupCode = `
+"scripts": [
+  "../node_modules/sweetalert2/dist/sweetalert2.all.min.js"
+],
+  `;
 
   constructor(
     private alert: AlertService,

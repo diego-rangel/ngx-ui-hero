@@ -30,7 +30,8 @@
       "jquery",
       "sweetalert2",
       "ngx-toastr",
-      "rxjs"
+      "rxjs",
+      "rxjs-compat"
     ],
     "additionalPackageFiles": [],
     "dependenciesRange": "^",

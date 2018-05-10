@@ -37,11 +37,11 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   }
 
   get invalid(): Observable<boolean> {
-    return this.validate().map(v => this.invalidPattern || Object.keys(v || {}).length > 0);
+    return this.validate().map((v: any) => this.invalidPattern || Object.keys(v || {}).length > 0);
   }
 
   get failures(): Observable<Array<string>> {
-    return this.validate().map(v => {
+    return this.validate().map((v: any) => {
       const fails = Object.keys(v || {}).map(k => message(v, k, this.label, this.config.validationMessages));
 
       if (this.invalidPattern) {

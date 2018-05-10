@@ -20,19 +20,19 @@ export class AuthService {
     ) {}
 
     Autheticate(username: string, password: string): Observable<any> {
-        const url = this.settings.apiBaseUrl + this.settings.jwtEndpointPath;
+        const url = this.settings.apiBaseUrl + this.settings.jwtAuthSettings.jwtEndpointPath;
         const data = {};
-        data[this.settings.requestProperties.usernameAuthProperty] = username;
-        data[this.settings.requestProperties.passwordAuthProperty] = password;
+        data[this.settings.jwtAuthSettings.requestProperties.usernameAuthProperty] = username;
+        data[this.settings.jwtAuthSettings.requestProperties.passwordAuthProperty] = password;
 
         const headers: Headers = new Headers();
         headers.append('Content-Type', 'application/json; charset=utf-8');
 
         return this.http.post(url, JSON.stringify(data), { headers: headers })
-            .map(response => {
+            .map((response: any) => {
                 const result = response.json();
-                const accessTokenProp = this.settings.responseProperties.accessTokenAuthProperty
-                    ? this.settings.responseProperties.accessTokenAuthProperty
+                const accessTokenProp = this.settings.jwtAuthSettings.responseProperties.accessTokenAuthProperty
+                    ? this.settings.jwtAuthSettings.responseProperties.accessTokenAuthProperty
                     : 'access_token';
 
                 if (result && result[accessTokenProp]) {

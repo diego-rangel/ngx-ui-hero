@@ -6,8 +6,15 @@
 
 <section class="getting-started">
   <div class="main container">  
-    <h2>Alert Service</h2>
-    <p>This service requires the import of <b>UiModule</b> as explained at <a routerLink="/getting-started">Getting Started</a>.</p>
+    <h2>AlertService</h2>
+
+    <p>In order to use this service into your apps, you must add the following <b>SweeAlert2</b> script reference to your <b>.angular-cli.json</b> file:</p>
+    
+    <div highlight="all" [language]="['Typescript']">
+      <pre><code [textContent]="sweetAlertSetupCode"></code></pre>
+    </div>
+
+    <p>The <b>AlertService</b> service requires the import of <b>UiModule</b> as explained at <a routerLink="/getting-started">Getting Started</a>.</p>
 
     <div class="in-action">
       <button class="btn btn-success" (click)="testSweetAlertSuccess()">Success</button>
@@ -17,7 +24,7 @@
       <button class="btn btn-default" (click)="testSweetAlertQuestion()">Question</button>
     </div>
     
-    <p>Inject the service into your component:</p>
+    <p>Just inject the service into your component:</p>
     <div highlight="all" [language]="['Typescript']">
       <pre><code [textContent]="alertConstructorCode"></code></pre>
     </div>

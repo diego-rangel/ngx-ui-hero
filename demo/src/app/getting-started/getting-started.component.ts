@@ -9,29 +9,25 @@ import { Title }     from '@angular/platform-browser';
 export class GettingStartedComponent implements OnInit {
   installationCode = `npm install --save ngx-ui-hero`;
 
-  sweetAlertSetupCode = `
-"scripts": [
-  "../node_modules/sweetalert2/dist/sweetalert2.all.min.js"
-],
-  `;
-
   apiModuleSetupCode = `
 import { ApiModule, ApiSettings } from 'ngx-ui-hero';
 
 export const apiSettings: ApiSettings = {
   apiBaseUrl: 'http://localhost:50467/api',
-  jwtEndpointPath: '/token',
-  localStoragePrefix: 'myDemoAppPrefix_',
-  requestProperties: {
+  jwtAuthSettings: {
+    jwtEndpointPath: '/token',
+    localStoragePrefix: 'myDemoAppPrefix_',
+    requestProperties: {
       usernameAuthProperty: 'emailAddress',
       passwordAuthProperty: 'password'
-  },
-  responseProperties: {
+    },
+    responseProperties: {
       accessTokenAuthProperty: 'token'
+    }
   },
   errorHandlingSettings: {
-      unhandledErrorTitle: 'Oops!',
-      unhandledErrorMessage: 'We encountered an internal fault while performing this operation.'
+    unhandledErrorTitle: 'Oops!',
+    unhandledErrorMessage: 'We encountered an internal fault while performing this operation.'
   }
 };
 

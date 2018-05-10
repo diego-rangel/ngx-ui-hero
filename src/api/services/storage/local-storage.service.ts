@@ -11,8 +11,8 @@ export class LocalStorageService {
     constructor(
         @Inject(API_SETTINGS) public settings: ApiSettings,
     ) {
-        if (this.settings.localStoragePrefix) {
-            this._prefix = this.settings.localStoragePrefix
+        if (this.settings.jwtAuthSettings.localStoragePrefix) {
+            this._prefix = this.settings.jwtAuthSettings.localStoragePrefix
         }
     }
 

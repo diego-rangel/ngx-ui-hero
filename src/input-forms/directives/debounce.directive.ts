@@ -19,7 +19,7 @@ export class DebounceDirective implements OnInit {
     const event = Observable.fromEvent(this.elementRef.nativeElement, 'keyup')
       .debounceTime(this.delay)
       .distinctUntilChanged()
-      .subscribe(input => this.callback.emit());
+      .subscribe((input: any) => this.callback.emit());
   }
 
 }

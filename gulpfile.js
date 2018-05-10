@@ -394,7 +394,8 @@ gulp.task('rollup-bundle', (cb) => {
       'jquery': _.camelCase('jquery'.replace('/','.')),
       'sweetalert2': _.camelCase('sweetalert2'.replace('/','.')),
       'ngx-toastr': _.camelCase('ngx-toastr'.replace('/','.')),
-      'rxjs': _.camelCase('rxjs'.replace('/','.'))
+      'rxjs': _.camelCase('rxjs'.replace('/','.')),
+      'rxjs-compat': _.camelCase('rxjs-compat'.replace('/','.'))
 
     };
     const rollupBaseConfig = {
