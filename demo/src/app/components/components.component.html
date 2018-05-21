@@ -7,16 +7,8 @@
 <section class="getting-started">
   <div class="main container">
     <div class="row">
-      <div class="col-3">
-        <div id="components-sidebar" class="list-group">
-          <a class="list-group-item list-group-item-action" href="#input-text">Text</a>
-          <a class="list-group-item list-group-item-action" href="#input-select">Select</a>
-          <a class="list-group-item list-group-item-action" href="#input-email">E-mail</a>
-          <a class="list-group-item list-group-item-action" href="#input-textarea">Textarea</a>
-        </div>
-      </div>
-      <div class="col" data-spy="scroll" data-target="#components-sidebar" data-offset="0">
-        <div class="card" id="input-text">
+      <div class="col-12">
+        <div class="card">
           <div class="card-header">Input Text</div>
           <div class="card-body">
             <div class="form-group">
@@ -37,7 +29,7 @@
           </div>
         </div>
     
-        <div class="card" id="input-select">
+        <div class="card">
           <div class="card-header">Input Select</div>
           <div class="card-body">
             <p>The InputSelect component supports not only a template mode, but an options input too. You can use an array of objects of any types, you just need to set the displayTextProperty and valueProperty values.</p>
@@ -82,7 +74,7 @@
           </div>
         </div>
     
-        <div class="card" id="input-email">
+        <div class="card">
           <div class="card-header">Input Email</div>
           <div class="card-body">
             <div class="form-group">
@@ -103,7 +95,7 @@
           </div>
         </div>
     
-        <div class="card" id="input-textarea">
+        <div class="card">
           <div class="card-header">Input Textarea</div>
           <div class="card-body">
             <div class="form-group">
@@ -120,6 +112,23 @@
     
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="inputTextAreaCode"></code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Input Checkbox</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-checkbox 
+                [label]="'My checkbox Label'" 
+                [disabled]="false"
+                [(ngModel)]="myCheckboxModel">
+              </input-checkbox>
+            </div>
+    
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="checkboxCode"></code></pre>
             </div>
           </div>
         </div>

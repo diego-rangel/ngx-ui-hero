@@ -69,10 +69,19 @@ export class ComponentsComponent {
 </input-textarea>
   `;
 
+  checkboxCode = `
+<input-checkbox 
+  [label]="'My checkbox Label'" 
+  [disabled]="false"
+  [(ngModel)]="myCheckboxModel">
+</input-checkbox>
+  `;
+
   myModel: string;
   myEmailModel: string;
   myTextAreaModel: string;
   mySelectModel: any = '';
+  myCheckboxModel: boolean;
 
   options = [
     { value: 1, text: 'Option 1' },

@@ -30,6 +30,12 @@ export { InputEmailComponent } from './components/input-email/input-email.compon
 import { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
 export { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
 
+import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
+export { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
+
+import { InputRadioComponent } from './components/input-radio/input-radio.component';
+export { InputRadioComponent } from './components/input-radio/input-radio.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -44,6 +50,8 @@ export { InputTextareaComponent } from './components/input-textarea/input-textar
     InputSelectComponent,
     InputEmailComponent,
     InputTextareaComponent,
+    InputCheckboxComponent,
+    InputRadioComponent,
   ],
   exports: [
     // AutoSelectOnFocusDirective,
@@ -54,6 +62,8 @@ export { InputTextareaComponent } from './components/input-textarea/input-textar
     InputSelectComponent,
     InputEmailComponent,
     InputTextareaComponent,
+    InputCheckboxComponent,
+    InputRadioComponent,
   ],
 })
 export class InputFormsModule {
