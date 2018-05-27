@@ -32,7 +32,6 @@
     "ngx-highlightjs": "1.4.1",
     "popper.js": "^1.14.3",
     "rxjs": "^5.5.6",
-    "sweetalert2": "^7.19.2",
     "zone.js": "^0.8.19",
     "@angular/platform-server": "^5.2.0"
   },

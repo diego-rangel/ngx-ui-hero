@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
 // import { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
 // export { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
 
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
+
 import { InputFormsConfig } from './input-forms-config';
 export { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
@@ -36,6 +39,9 @@ export { InputCheckboxComponent } from './components/input-checkbox/input-checkb
 import { InputRadioComponent } from './components/input-radio/input-radio.component';
 export { InputRadioComponent } from './components/input-radio/input-radio.component';
 
+import { InputCurrencyComponent } from './components/input-currency/input-currency.component';
+export { InputCurrencyComponent } from './components/input-currency/input-currency.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -52,6 +58,7 @@ export { InputRadioComponent } from './components/input-radio/input-radio.compon
     InputTextareaComponent,
     InputCheckboxComponent,
     InputRadioComponent,
+    InputCurrencyComponent,
   ],
   exports: [
     // AutoSelectOnFocusDirective,
@@ -64,6 +71,7 @@ export { InputRadioComponent } from './components/input-radio/input-radio.compon
     InputTextareaComponent,
     InputCheckboxComponent,
     InputRadioComponent,
+    InputCurrencyComponent,
   ],
 })
 export class InputFormsModule {
@@ -74,6 +82,10 @@ export class InputFormsModule {
         {
           provide: INPUT_FORMS_CONFIG,
           useValue: config
+        },
+        {
+          provide: CURRENCY_MASK_CONFIG,
+          useValue: config.currency
         }
       ]
     };

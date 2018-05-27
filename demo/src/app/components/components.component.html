@@ -132,6 +132,51 @@
             </div>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-header">Input Radio</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-radio 
+                [label]="'My radio 1'" 
+                [disabled]="false"
+                [name]="'radioOptions'" 
+                [radioValue]="1" 
+                [(ngModel)]="myRadioModel">
+              </input-radio>
+              <input-radio 
+                  [label]="'My radio 2'" 
+                  [disabled]="false"
+                  [name]="'radioOptions'" 
+                  [radioValue]="2" 
+                  [(ngModel)]="myRadioModel">
+              </input-radio>
+            </div>
+    
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="radioCode"></code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Input Currency</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-currency 
+                [label]="'My Label'" 
+                [disabled]="false"   
+                [showValidations]="true"
+                [(ngModel)]="myCurrencyModel" 
+                required>
+              </input-currency>
+            </div>
+    
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="currencyCode"></code></pre>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

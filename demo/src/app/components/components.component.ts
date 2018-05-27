@@ -77,11 +77,40 @@ export class ComponentsComponent {
 </input-checkbox>
   `;
 
+  radioCode = `
+<input-radio 
+  [label]="'My radio 1'" 
+  [disabled]="false"
+  [name]="'radioOptions'" 
+  [radioValue]="1" 
+  [(ngModel)]="myRadioModel">
+</input-radio>
+<input-radio 
+    [label]="'My radio 2'" 
+    [disabled]="false"
+    [name]="'radioOptions'" 
+    [radioValue]="2" 
+    [(ngModel)]="myRadioModel">
+</input-radio>
+  `;
+
+  currencyCode = `
+<input-currency 
+  [label]="'My Label'" 
+  [disabled]="false"   
+  [showValidations]="true"
+  [(ngModel)]="myCurrencyModel" 
+  required>
+</input-currency>
+  `;
+
   myModel: string;
   myEmailModel: string;
   myTextAreaModel: string;
   mySelectModel: any = '';
   myCheckboxModel: boolean;
+  myRadioModel: any;
+  myCurrencyModel: any;
 
   options = [
     { value: 1, text: 'Option 1' },

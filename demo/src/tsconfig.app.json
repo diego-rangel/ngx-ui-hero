@@ -8,12 +8,14 @@
     "paths": {
       "@angular/*": ["../node_modules/@angular/*"],
       "bootstrap": ["../node_modules/bootstrap"],
-      "popper.js": ["../node_modules/popper.js"],
       "font-awesome": ["../node_modules/font-awesome"],
       "jquery": ["../node_modules/jquery"],
-      "sweetalert2": ["../node_modules/sweetalert2"],
+      "ng2-currency-mask": ["../node_modules/ng2-currency-mask"],
       "ngx-toastr": ["../node_modules/ngx-toastr"],
-      "rxjs": ["../node_modules/rxjs"]
+      "popper.js": ["../node_modules/popper.js"],
+      "rxjs": ["../node_modules/rxjs"],
+      "rxjs-compat": ["../node_modules/rxjs-compat"],
+      "sweetalert2": ["../node_modules/sweetalert2"]
     }
   },
   "exclude": [

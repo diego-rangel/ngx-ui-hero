@@ -25,13 +25,14 @@
     ],
     "otherDependencies": [
       "bootstrap",
-      "popper.js",
       "font-awesome",
       "jquery",
-      "sweetalert2",
+      "ng2-currency-mask",
       "ngx-toastr",
+      "popper.js",
       "rxjs",
-      "rxjs-compat"
+      "rxjs-compat",
+      "sweetalert2"
     ],
     "additionalPackageFiles": [],
     "dependenciesRange": "^",
