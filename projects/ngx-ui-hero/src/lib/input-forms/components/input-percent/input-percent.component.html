@@ -1,0 +1,25 @@
+<label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">%</span>
+  </div>
+  <input
+    currencyMask
+    autoSelectOnFocus
+    class="form-control"
+    [options]="{ precision: 1 }"
+    [disabled]="disabled" 
+    [(ngModel)]="value"
+    [id]="identifier"
+    [ngClass]="{
+      'is-valid': touched && !(invalid | async),
+      'is-invalid': touched && (invalid | async)
+    }"
+  />
+</div>
+  
+<input-validations
+  *ngIf="showValidations && touched && (invalid | async)"
+  [messages]="failures | async">
+</input-validations>

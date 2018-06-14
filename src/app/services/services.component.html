@@ -1,0 +1,41 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>Services</h1>
+  </div>
+</div>
+
+<section>
+  <div class="main container">  
+    <h2>AlertService</h2>
+
+    <!-- <p>In order to use this service into your apps, you must add the following <b>SweeAlert2</b> script reference to your <b>.angular-cli.json</b> file:</p>
+    
+    <div highlight="all" [language]="['Typescript']">
+      <pre><code [textContent]="sweetAlertSetupCode"></code></pre>
+    </div>
+
+    <p>The <b>AlertService</b> service requires the import of <b>UiModule</b> as explained at <a routerLink="/get-started">Getting Started</a>.</p> -->
+
+    <div class="row my-3">
+      <div class="col">
+        <div class="btn-block">
+          <button type="button" class="btn btn-success mr-1" (click)="testSweetAlertSuccess()">Success</button>
+          <button type="button" class="btn btn-info mr-1" (click)="testSweetAlertInfo()">Info</button>
+          <button type="button" class="btn btn-danger mr-1" (click)="testSweetAlertError()">Error</button>
+          <button type="button" class="btn btn-warning mr-1" (click)="testSweetAlertWarning()">Warning</button>
+          <button type="button" class="btn btn-default" (click)="testSweetAlertQuestion()">Question</button>
+        </div>
+      </div>
+    </div>
+    
+    <p>Just inject the service into your component:</p>
+    <div highlight="all" [language]="['Typescript']">
+      <pre><code [textContent]="alertConstructorCode"></code></pre>
+    </div>
+    
+    <p>Examples:</p>
+    <div highlight="all" [language]="['Typescript']">
+      <pre><code [textContent]="alertExamplesCode"></code></pre>
+    </div>
+  </div>
+</section>

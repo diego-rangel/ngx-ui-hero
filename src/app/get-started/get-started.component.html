@@ -1,0 +1,36 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 d-flex justify-content-center justify-content-md-end">
+        <img src="assets/img/logo.svg" alt="ngx-ui-hero logo" class="logo">
+      </div>
+      <div class="col-sm-8 text-center text-md-left">
+        <h1>ngx-ui-hero</h1>
+        <p>An Angular awesome library for easily build really nice apps.</p>
+        <a class="btn btn-light btn-lg mr-1" href="https://github.com/diego-rangel/ngx-ui-hero" target="_blank"><fa name="github"></fa>  Code on Github</a>
+        <a class="btn btn-light btn-lg" href="doc/index.html" target="_blank"><fa name="book"></fa>  Documentation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="main container">
+    <h2>Installation</h2>
+    <div highlight="all">
+      <pre><code [textContent]="installationCode"></code></pre>
+    </div>
+
+    <h2>NgxUiHeroModule</h2>
+    <p>Import this module to access the <b>ngx-ui-hero</b> Core functionalities.</p>
+    <div highlight="all" [language]="['Typescript']">
+      <pre><code [textContent]="mainModuleSetupCode"></code></pre>
+    </div>
+
+    <h2>NgxUiHero<mark>Api</mark>Module</h2>
+    <p>In order to use the ui-hero Api functionalities like <b>Base Http Services, Base Crud Services, Local Storage Services and JWT Authentication</b>, you must import this module providing some configurations.</p>
+    <div highlight="all" [language]="['Typescript']">
+      <pre><code [textContent]="apiModuleSetupCode"></code></pre>
+    </div>
+  </div>
+</section>

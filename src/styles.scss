@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+.jumbotron {
+    // background-color: #0143a3;
+    // background: linear-gradient(135deg,#0143a3,#0273d4);
+    background: url("./assets/img/header-bg.jpg") 0 0 repeat-x;
+    color: #FFF;
+    border-bottom: 8px solid #00559a;
+}
+.hljs {
+    padding: 1em !important;
+}
+.mark, mark {
+    padding: 0;
+    background-color: #FFEB3B;
+}
+h2 mark {
+    background-color: transparent;
+    color: #999;
+}
