@@ -39,6 +39,38 @@ export const apiSettings: ApiSettings = {
 export class MyModule { }
   `;
 
+  inputFormsModuleSetupCode = `
+import { NgxUiHeroInputFormsModule, InputFormsConfig } from 'ngx-ui-hero';
+
+export const inputFormsConfig: InputFormsConfig = {
+  currency: {
+    currencyCode: 'USD',
+    align: 'right',
+    allowNegative: true,
+    allowZero: true,
+    decimal: '.',
+    thousands: ',',
+    precision: 2,
+    prefix: '',
+    suffix: ''
+  },
+  validationMessages: {
+    invalid: '{label} is invalid',
+    required: '{label} is required',
+    pattern: '{label} is invalid',
+    maxlength: 'The filled-in value is greater than the maximum allowed',
+    minlength: 'The filled-in value is less than the minimum allowed'
+  }
+};
+
+@NgModule({
+  imports: [
+    NgxUiHeroInputFormsModule.forRoot(inputFormsConfig)
+  ],
+})
+export class MyModule { }
+  `;
+
   mainModuleSetupCode = `
 import { NgxUiHeroModule } from 'ngx-ui-hero';
 
