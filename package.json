@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_lib": "ng build --prod && if exist docs RMDIR /S /Q docs && mkdir docs && xcopy dist\\ngx-ui-hero-app docs /E /C /H /R /K /Y"
+    "build_lib": "ng build --prod ngx-ui-hero",
+    "package": "ng build --prod --base-href /ngx-ui-hero/ --deploy-url /ngx-ui-hero/ && if exist docs RMDIR /S /Q docs && mkdir docs && xcopy dist\\ngx-ui-hero-app docs /E /C /H /R /K /Y"
   },
   "private": true,
   "dependencies": {
