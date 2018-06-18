@@ -8,9 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_lib": "ng build --prod ngx-ui-hero",
-    "npm_pack": "cd dist/ngx-ui-hero && npm pack",
-    "package": "npm run build_lib && npm run npm_pack"
+    "build_lib": "ng build --prod && if exist docs RMDIR /S /Q docs && mkdir docs && xcopy dist\\ngx-ui-hero-app docs /E /C /H /R /K /Y"
   },
   "private": true,
   "dependencies": {
