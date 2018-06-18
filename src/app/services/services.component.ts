@@ -14,15 +14,15 @@ constructor(
 `;
 
   alertExamplesCode = `
-this.alert.success('Yeahhh', 'Some success text here =)');
+this.alertService.success('Yeahhh', 'Some success text here =)');
 
-this.alert.info('Info', 'Some info text here');
+this.alertService.info('Info', 'Some info text here');
 
-this.alert.error('Oops =(', 'My error message');
+this.alertService.error('Oops =(', 'My error message');
 
-this.alert.warning('Attention!', 'Some text here');
+this.alertService.warning('Attention!', 'Some text here');
 
-this.alert.question('Question?!', 'Some text here', () => {
+this.alertService.question('Question?!', 'Some text here', () => {
   // your success callback code.
 });
   `;
