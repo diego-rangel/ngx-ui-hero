@@ -39,6 +39,12 @@ constructor(
 ) {}
 `;
 
+  apiConstructorCode = `
+constructor(
+  private apiService: ApiService
+) {}
+`;
+
   constructor(
     private alertService: AlertService
   ) { }
