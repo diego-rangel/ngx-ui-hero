@@ -8,12 +8,12 @@ export interface ApiSettings {
     /**
      * JWT Authentication Settings
      */
-    jwtAuthSettings: JwtAuthSettings;
+    jwtAuthSettings?: JwtAuthSettings;
 
     /**
      * Error Handling Settings.
      */
-    errorHandlingSettings: ErrorHandlingSettings;
+    errorHandlingSettings?: ErrorHandlingSettings;
 }
 
 export interface JwtAuthSettings {

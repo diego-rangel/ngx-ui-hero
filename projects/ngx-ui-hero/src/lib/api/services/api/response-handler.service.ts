@@ -1,11 +1,9 @@
-// import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-
 import { Injectable, Inject } from '@angular/core';
 import { Response, ResponseContentType } from '@angular/http';
-// import { Observable } from 'rxjs/Observable';
+import { Observable, throwError } from 'rxjs';
 
-import { API_SETTINGS } from '../../api.settings.constants';
 import { ApiSettings } from '../../api.settings';
+import { API_SETTINGS } from '../../api.settings.constants';
 
 @Injectable()
 export class ResponseHandlerService {
@@ -14,53 +12,45 @@ export class ResponseHandlerService {
         @Inject(API_SETTINGS) public settings: ApiSettings
     ) { }
 
-    // handleSuccess(response: Response, responseContentType?: ResponseContentType): any {
-    //     let responseType = ResponseContentType.Json;
+    handleSuccess(response: Response, responseType: ResponseContentType): any {
+        switch (responseType) {
+            case ResponseContentType.Json:
+                return response.json();
+            case ResponseContentType.Blob:
+                return response.blob();
+            default:
+                return response.text();
+        }
+    }
+    handleError(response: Response): Observable<any> {
+        let error: any;
 
-    //     if (responseContentType !== null && responseContentType !== responseType) {
-    //         responseType = responseContentType;
-    //     }
+        if (response.status == 401) {
+            error = {
+                unauthorized: true
+            };
+        } else if (response.status === 400 || response.status === 404) {
+            const responseBody = response.text();
 
-    //     switch (responseType) {
-    //         case ResponseContentType.ArrayBuffer:
-    //             return response.arrayBuffer();
-    //         case ResponseContentType.Blob:
-    //             return response.blob();
-    //         case ResponseContentType.Text:
-    //             return response.text();
-    //         default:
-    //             return response.json();
-    //     }
-    // }
-    // handleError(response: Response): ErrorObservable {
-    //     let error: any;
+            if (responseBody) {
+                error = {
+                    message: responseBody
+                };
+            } else {
+                error = this.getDefaultErrorObject();
+            }
+        } else {
+            error = this.getDefaultErrorObject();
+        }
 
-    //     if (response.status === 400) {
-    //         const responseBody = response.json();
+        return throwError(error);
+    }
 
-    //         if (responseBody.error instanceof Object) {
-    //             error = responseBody.error;
-    //         } else if (responseBody.error && responseBody.error_description) {
-    //             error = {
-    //                 title: responseBody.error,
-    //                 message: responseBody.error_description
-    //             };
-    //         } else {
-    //             error = this.getDefaultErrorObject();
-    //         }
-    //     } else {
-    //         error = this.getDefaultErrorObject();
-    //     }
-
-    //     const e = Observable.throw(error);
-    //     return null;
-    // }
-
-    // private getDefaultErrorObject(): any {
-    //     return {
-    //         title: this.settings.errorHandlingSettings.unhandledErrorTitle,
-    //         message: this.settings.errorHandlingSettings.unhandledErrorMessage
-    //     };
-    // }
-
+    private getDefaultErrorObject(): any {
+        return {
+            unauthorized: false,
+            title: this.settings.errorHandlingSettings.unhandledErrorTitle,
+            message: this.settings.errorHandlingSettings.unhandledErrorMessage
+        };
+    }
 }

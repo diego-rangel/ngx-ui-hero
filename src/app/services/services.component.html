@@ -8,14 +8,6 @@
   <div class="main container">  
     <h2>AlertService</h2>
 
-    <!-- <p>In order to use this service into your apps, you must add the following <b>SweeAlert2</b> script reference to your <b>.angular-cli.json</b> file:</p>
-    
-    <div highlight="all" [language]="['Typescript']">
-      <pre><code [textContent]="sweetAlertSetupCode"></code></pre>
-    </div>
-
-    <p>The <b>AlertService</b> service requires the import of <b>UiModule</b> as explained at <a routerLink="/get-started">Getting Started</a>.</p> -->
-
     <div class="row my-3">
       <div class="col">
         <div class="btn-block">
@@ -28,7 +20,7 @@
       </div>
     </div>
     
-    <p>Just inject the service into your component:</p>
+    <p>Just inject the service wherever you need:</p>
     <div highlight="all" [language]="['Typescript']">
       <pre><code [textContent]="alertConstructorCode"></code></pre>
     </div>
@@ -37,5 +29,71 @@
     <div highlight="all" [language]="['Typescript']">
       <pre><code [textContent]="alertExamplesCode"></code></pre>
     </div>
+
+    <h2>LocalStorageService</h2>
+    <p>Provides methods for localstorage management. Yout just need to inject the service wherever you want:</p>
+
+    <div highlight="all" [language]="['Typescript']">
+      <pre><code [textContent]="localStorageConstructorCode"></code></pre>
+    </div>
+
+    <p>Functionalities:</p>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Get(key: string): any</td>
+          <td>Returns the local stored value for the provided <b>key</b>.</td>
+        </tr>
+        <tr>
+          <td>Set(key: string, value: any): void</td>
+          <td>Sets a <b>value</b> into the provided <b>key</b>.</td>
+        </tr>
+        <tr>
+          <td>Remove(key: string): void</td>
+          <td>Removes the stored value for the provided <b>key</b>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>AuthService</h2>
+    <p>Provides methods for JWT authentication management. Yout just need to inject the service wherever you want:</p>
+
+    <div highlight="all" [language]="['Typescript']">
+      <pre><code [textContent]="authConstructorCode"></code></pre>
+    </div>
+
+    <p>Functionalities:</p>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Autheticate(username: string, password: string): Observable&lt;any&gt;</td>
+          <td>Sends an http POST for the configured enpoint into the ApiModule's settings and stores the access token into the local storage in case of success.</td>
+        </tr>
+        <tr>
+          <td>Logout(): void</td>
+          <td>Removes the access token from the local storage.</td>
+        </tr>
+        <tr>
+          <td>IsAuthenticated(): boolean</td>
+          <td>Checks if the access token keeps stored into the local storage.</td>
+        </tr>
+        <tr>
+          <td>GetToken(): string</td>
+          <td>Returns the local stored access token.</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>

@@ -113,6 +113,18 @@ export class ComponentsComponent implements OnInit {
 </input-percent>
   `;
 
+  numberCode = `
+<input-number
+  [label]="'My Label'" 
+  [disabled]="false"   
+  [maxValue]="100"
+  [minValue]="0"
+  [showValidations]="true"
+  [(ngModel)]="myNumberModel" 
+  required>
+</input-number>
+  `;
+
   myModel: string;
   myEmailModel: string;
   myTextAreaModel: string;

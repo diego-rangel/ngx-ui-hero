@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService, LocalStorageService } from 'ngx-ui-hero';
+import { AlertService } from 'ngx-ui-hero';
 
 @Component({
   selector: 'app-services',
@@ -26,16 +26,21 @@ this.alert.question('Question?!', 'Some text here', () => {
   // your success callback code.
 });
   `;
+  
+  localStorageConstructorCode = `
+constructor(
+  private localStorageService: LocalStorageService
+) {}
+`;
 
-//   sweetAlertSetupCode = `
-// "scripts": [
-//   "../node_modules/sweetalert2/dist/sweetalert2.all.min.js"
-// ],
-//   `;
+  authConstructorCode = `
+constructor(
+  private authService: AuthService
+) {}
+`;
 
   constructor(
-    private alertService: AlertService,
-    private localStorageService: LocalStorageService
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {}

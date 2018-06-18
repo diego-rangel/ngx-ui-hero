@@ -1,17 +1,22 @@
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { NgModule, ModuleWithProviders } from '@angular/core';
-
-import { AuthService } from './services/auth/auth.service';
-import { LocalStorageService } from './services/storage/local-storage.service';
 
 import { ApiSettings } from './api.settings';
+export { ApiSettings } from './api.settings';
 import { API_SETTINGS } from './api.settings.constants';
 
-// Export module's public API
+import { ApiService } from './services/api/api.service';
+export { ApiService } from './services/api/api.service';
+
+import { AuthService } from './services/auth/auth.service';
 export { AuthService } from './services/auth/auth.service';
+
+import { LocalStorageService } from './services/storage/local-storage.service';
 export { LocalStorageService } from './services/storage/local-storage.service';
-export { ApiSettings } from './api.settings';
+
+import { ResponseHandlerService } from './services/api/response-handler.service';
+export { ResponseHandlerService } from './services/api/response-handler.service';
 
 @NgModule({
   imports: [
@@ -25,8 +30,10 @@ export class NgxUiHeroApiModule {
     return {
       ngModule: NgxUiHeroApiModule,
       providers: [
+        ApiService,
         AuthService,
         LocalStorageService,
+        ResponseHandlerService,
         {
           provide: API_SETTINGS,
           useValue: settings

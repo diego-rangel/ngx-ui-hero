@@ -5,11 +5,7 @@ import { UiModule } from './ui/ui.module';
   imports: [
     UiModule
   ],
-  declarations: [
-    
-  ],
-  exports: [
-    
-  ]
+  declarations: [],
+  exports: []
 })
 export class NgxUiHeroModule { }
