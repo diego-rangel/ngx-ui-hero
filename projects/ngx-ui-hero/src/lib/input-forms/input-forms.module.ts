@@ -48,6 +48,9 @@ export { InputPercentComponent } from './components/input-percent/input-percent.
 import { InputNumberComponent } from './components/input-number/input-number.component';
 export { InputNumberComponent } from './components/input-number/input-number.component';
 
+import { InputDateComponent } from './components/input-date/input-date.component';
+export { InputDateComponent } from './components/input-date/input-date.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -68,6 +71,7 @@ export { InputNumberComponent } from './components/input-number/input-number.com
     InputCurrencyComponent,
     InputPercentComponent,
     InputNumberComponent,
+    InputDateComponent,
   ],
   exports: [
     AutoSelectOnFocusDirective,
@@ -83,6 +87,7 @@ export { InputNumberComponent } from './components/input-number/input-number.com
     InputCurrencyComponent,
     InputPercentComponent,
     InputNumberComponent,
+    InputDateComponent,
   ],
 })
 export class NgxUiHeroInputFormsModule {

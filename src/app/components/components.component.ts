@@ -125,6 +125,16 @@ export class ComponentsComponent implements OnInit {
 </input-number>
   `;
 
+  dateCode = `
+<input-date
+  [label]="'My Label'" 
+  [disabled]="false"
+  [showValidations]="true"
+  [(ngModel)]="myDateModel" 
+  required>
+</input-date>
+  `;
+
   myModel: string;
   myEmailModel: string;
   myTextAreaModel: string;
@@ -134,6 +144,7 @@ export class ComponentsComponent implements OnInit {
   myCurrencyModel: any;
   myPercentModel: any;
   myNumberModel: any;
+  myDateModel: any;
 
   options = [
     { value: 1, text: 'Option 1' },

@@ -1,0 +1,22 @@
+<label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><i class='fa fa-calendar' aria-hidden='true'></i></span>
+  </div>
+  <input type="date" 
+  class="form-control"
+  [disabled]="disabled" 
+  [placeholder]="placeholder" 
+  [(ngModel)]="value" 
+  [id]="identifier"
+  [ngClass]="{
+    'is-valid': touched && !(invalid | async),
+    'is-invalid': touched && (invalid | async)
+  }" />
+</div>
+
+<input-validations
+  *ngIf="showValidations && touched && (invalid | async)"
+  [messages]="failures | async">
+</input-validations>

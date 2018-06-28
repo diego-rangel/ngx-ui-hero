@@ -217,6 +217,25 @@
             </div>
           </div>
         </div>
+
+        <div class="card mt-4">
+          <div class="card-header">Input Date</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-date
+                [label]="'My Label'" 
+                [disabled]="false"
+                [showValidations]="true"
+                [(ngModel)]="myDateModel" 
+                required>
+              </input-date>
+            </div>
+    
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="dateCode"></code></pre>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
