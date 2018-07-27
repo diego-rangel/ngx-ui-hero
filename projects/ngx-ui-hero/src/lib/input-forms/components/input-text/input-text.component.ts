@@ -5,7 +5,7 @@ import { INPUT_FORMS_CONFIG } from './../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
 
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
-import { AsyncValidatorArray, ValidatorArray, validate } from '../../base/validate';
+import { AsyncValidatorArray, ValidatorArray } from '../../base/validate';
 
 let identifier = 0;
 

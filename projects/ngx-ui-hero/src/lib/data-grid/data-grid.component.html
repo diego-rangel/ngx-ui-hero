@@ -1,0 +1,35 @@
+<div class="ui-hero-datagrid">
+    <div [ngClass]="{'table-responsive': responsive}">
+        <table class="table" [ngClass]="{
+            'table-striped': striped,
+            'table-bordered': bordered,
+            'table-hover': hoverEffect
+        }">
+            <thead>
+                <tr>
+                    <th *ngFor="let column of columns; let i = index;" class="{{column.captionClasses}}" [ngClass]="{'sortable': column.sortable}" [ngStyle]="{'width': column.width}">
+                        <div class="d-flex justify-content-between align-items-center">                            
+                            <div class="flex-grow-1" [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}">
+                                {{column.caption}}
+                            </div>
+                            <i class="fa fa-sort" *ngIf="column.sortable"></i>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of value; let rowIndex = index;">
+                    <td *ngFor="let column of columns; let columnIndex = index;" class="{{column.dataClasses}}" [ngClass]="{
+                        'text-center': column.dataAlignment == 1,
+                        'text-right': column.dataAlignment == 2
+                    }">
+                        <span *ngIf="column.data">{{row[column.data]}}</span>
+                        <span *ngIf="!column.data && column.render">{{column.render(row, row[column.data], rowIndex)}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+
+    <p *ngIf="!value || value.length == 0">{{emptyResultsMessage}}</p>
+</div>

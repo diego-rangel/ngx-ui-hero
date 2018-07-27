@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build_lib": "ng build --prod ngx-ui-hero",
+    "build_lib_serve": "ng build --prod ngx-ui-hero && ng serve",
     "package": "ng build --prod --base-href /ngx-ui-hero/ --deploy-url /ngx-ui-hero/ && if exist docs RMDIR /S /Q docs && mkdir docs && xcopy dist\\ngx-ui-hero-app docs /E /C /H /R /K /Y"
   },
   "private": true,
@@ -28,7 +29,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "ng2-currency-mask": "^5.3.1",
-    "ngx-bootstrap": "^3.0.0",
+    "ngx-bootstrap": "^3.0.1",
     "ngx-highlightjs": "^2.1.1",
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
