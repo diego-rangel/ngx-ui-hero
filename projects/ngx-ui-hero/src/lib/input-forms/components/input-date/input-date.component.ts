@@ -37,4 +37,6 @@ export class InputDateComponent extends ElementBase<string> implements OnInit {
   ngOnInit() {
 
   }
+
+  OnValueChanged(): void {}
 }

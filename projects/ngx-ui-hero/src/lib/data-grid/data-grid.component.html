@@ -7,12 +7,19 @@
         }">
             <thead>
                 <tr>
-                    <th *ngFor="let column of columns; let i = index;" class="{{column.captionClasses}}" [ngClass]="{'sortable': column.sortable}" [ngStyle]="{'width': column.width}">
+                    <th *ngFor="let column of columns; let i = index;" class="{{column.captionClasses}}" [ngStyle]="{'width': column.width}" [ngClass]="{
+                        'sortable': column.sortable,
+                        'sorting': column.sort?.sorting,
+                        'asc': column.sort?.sortDirection == 'asc',
+                        'desc': column.sort?.sortDirection == 'desc'
+                    }">
                         <div class="d-flex justify-content-between align-items-center">                            
                             <div class="flex-grow-1" [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}">
                                 {{column.caption}}
                             </div>
-                            <i class="fa fa-sort" *ngIf="column.sortable"></i>
+                            <i class="fa fa-sort" *ngIf="column.sortable && !column.sort?.sorting"></i>
+                            <i class="fa fa-sort-amount-asc" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'asc'"></i>
+                            <i class="fa fa-sort-amount-desc" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc'"></i>
                         </div>
                     </th>
                 </tr>

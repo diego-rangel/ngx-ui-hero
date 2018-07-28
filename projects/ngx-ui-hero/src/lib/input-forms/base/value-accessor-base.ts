@@ -1,6 +1,6 @@
 import { ControlValueAccessor } from '@angular/forms';
 
-export class ValueAccessorBase<T> implements ControlValueAccessor {
+export abstract class ValueAccessorBase<T> implements ControlValueAccessor {
   private innerValue: T;
   private changed = new Array<(value: T) => void>();
   private isTouched = new Array<() => void>();
@@ -9,9 +9,14 @@ export class ValueAccessorBase<T> implements ControlValueAccessor {
     return this.innerValue;
   }
   set value(value: T) {
+    console.log('setou', value)
     if (this.innerValue !== value) {
       this.innerValue = value;
       this.changed.forEach(f => f(value));
+
+      if (this.OnValueChanged) {
+        this.OnValueChanged();
+      }
     }
   }
 
@@ -19,6 +24,7 @@ export class ValueAccessorBase<T> implements ControlValueAccessor {
     this.isTouched.forEach(f => f());
   }
   writeValue(value: T) {
+    console.log('writeValue', value)
     this.innerValue = value;
   }
   registerOnChange(fn: any): void {
@@ -27,4 +33,6 @@ export class ValueAccessorBase<T> implements ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.isTouched.push(fn);
   }
+
+  abstract OnValueChanged(): void;
 }

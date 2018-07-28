@@ -31,4 +31,6 @@ export class InputCurrencyComponent extends ElementBase<string> {
     super(validators, asyncValidators, config);
     this.currencyCode = this.config.currency.currencyCode;
   }
+
+  OnValueChanged(): void {}
 }

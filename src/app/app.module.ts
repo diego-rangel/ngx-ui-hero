@@ -33,7 +33,11 @@ export const apiSettings: ApiSettings = {
 };
 
 export const dataGridSettings: DataGridConfig = {
-
+  styles: {
+    striped: true,
+    bordered: false,
+    hoverEffect: true,
+  }
 };
 
 @NgModule({

@@ -35,4 +35,6 @@ export class InputCheckboxComponent extends ElementBase<string> {
   ) {
     super(validators, asyncValidators, config);
   }
+
+  OnValueChanged(): void {}
 }

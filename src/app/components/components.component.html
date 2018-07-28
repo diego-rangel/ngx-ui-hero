@@ -11,7 +11,10 @@
         <div class="card">
           <div class="card-header">Datatable</div>
           <div class="card-body">
-            <datagrid [(ngModel)]="myDatagridModel" [columns]="datagridColumns"></datagrid>
+            <datagrid [(ngModel)]="myDatagridModel" 
+              [columns]="datagridColumns" 
+              [initialColumnToSort]="0">
+            </datagrid>
           </div>
         </div>
 

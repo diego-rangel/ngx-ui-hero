@@ -21,8 +21,8 @@ export class DataGridSortingModel {
 }
 
 export enum EnumSortDirection {
-    Ascending = 0,
-    Descending = 1
+    Ascending = 'asc',
+    Descending = 'desc'
 }
 
 export enum EnumAlignment {

@@ -146,23 +146,7 @@ export class ComponentsComponent implements OnInit {
   myPercentModel: any;
   myNumberModel: any;
   myDateModel: any;
-  myDatagridModel: Array<any> = [
-    {
-      name: 'Diego da Cunha Rangel',
-      email: 'my-email@domain.com',
-      active: true
-    },
-    {
-      name: 'Foo',
-      email: 'my-email@domain.com',
-      active: true
-    },
-    {
-      name: 'Baar',
-      email: 'my-email@domain.com',
-      active: false
-    }
-  ];
+  myDatagridModel: Array<any>;
   datagridColumns: Array<DataGridColumnModel> = [
     {
       caption: 'Name',
@@ -189,6 +173,23 @@ export class ComponentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.myDatagridModel = [
+      {
+        name: 'Diego da Cunha Rangel',
+        email: 'my-email@domain.com',
+        active: true
+      },
+      {
+        name: 'Foo',
+        email: 'my-email@domain.com',
+        active: true
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      }
+    ];
   }
 
 }

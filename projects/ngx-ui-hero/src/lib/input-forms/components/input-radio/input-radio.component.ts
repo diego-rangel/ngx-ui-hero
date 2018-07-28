@@ -37,4 +37,6 @@ export class InputRadioComponent extends ElementBase<string> {
   ) {
     super(validators, asyncValidators, config);
   }
+
+  OnValueChanged(): void {}
 }

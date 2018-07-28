@@ -38,4 +38,6 @@ export class InputEmailComponent extends ElementBase<string> {
   ) {
     super(validators, asyncValidators, config);
   }
+
+  OnValueChanged(): void {}
 }
