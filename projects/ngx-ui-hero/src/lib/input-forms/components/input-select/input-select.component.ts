@@ -50,8 +50,6 @@ export class InputSelectComponent extends ElementBase<string> implements OnInit 
     }, 0);
   }
 
-  OnValueChanged(): void {}
-
   getOptionDisplayText(option: any): string {
     const prop = this.displayTextProperty || 'displayText';
     return option[prop];

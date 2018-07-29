@@ -36,8 +36,6 @@ export class InputNumberComponent extends ElementBase<string> {
   ) {
     super(validators, asyncValidators, config);
   }
-
-  OnValueChanged(): void {}
 }
 
 let identifier = 0;

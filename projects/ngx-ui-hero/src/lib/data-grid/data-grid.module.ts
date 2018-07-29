@@ -1,6 +1,7 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { UiModule } from './../ui/ui.module';
 
 import { DATAGRID_CONFIG } from './data-grid-config.constants';
 
@@ -16,6 +17,7 @@ export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirec
   imports: [
     CommonModule,
     FormsModule,
+    UiModule
   ],
   declarations: [
     DataGridComponent

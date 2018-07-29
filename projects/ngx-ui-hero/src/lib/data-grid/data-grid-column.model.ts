@@ -17,7 +17,7 @@ export class DataGridColumnModel {
 
 export class DataGridSortingModel {
     sorting: boolean;
-    sortDirection: EnumSortDirection;
+    sortDirection?: EnumSortDirection;
 }
 
 export enum EnumSortDirection {

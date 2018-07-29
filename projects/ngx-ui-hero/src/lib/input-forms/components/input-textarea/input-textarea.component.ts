@@ -38,6 +38,4 @@ export class InputTextareaComponent extends ElementBase<string> {
   ) {
     super(validators, asyncValidators, config);
   }
-
-  OnValueChanged(): void {}
 }

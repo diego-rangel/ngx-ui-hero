@@ -20,7 +20,7 @@ import * as _ from 'lodash';
     }]
 })
 
-export class DataGridComponent extends ValueAccessorBase<Array<any>> implements OnInit, AfterViewInit {
+export class DataGridComponent extends ValueAccessorBase<Array<any>> implements OnInit {
     @ViewChild(NgModel) model: NgModel;
     @Input() columns: Array<DataGridColumnModel>;
     @Input() emptyResultsMessage?: string = this.config.emptyResultsMessage;
@@ -31,6 +31,8 @@ export class DataGridComponent extends ValueAccessorBase<Array<any>> implements 
     @Input() initialColumnToSort?: number;
     @Input() initialSortDirection?: EnumSortDirection = EnumSortDirection.Ascending;
 
+    sortApplied: boolean = false;
+
     constructor(
         @Inject(DATAGRID_CONFIG) public config: DataGridConfig
     ) {
@@ -38,16 +40,34 @@ export class DataGridComponent extends ValueAccessorBase<Array<any>> implements 
     }
 
     ngOnInit() {
-        console.log('ngOnInit grid', this.value);
         this.initializeColumns();
-    }
-    ngAfterViewInit(): void {   
-        console.log('ngAfterViewInit grid', this.value);     
-        this.initializeSorting();
+
+        setTimeout(() => {
+            this.initializeSorting();
+        },0);
     }
 
-    OnValueChanged(): void {
-        console.log('OnValueChanged', this.value);  
+    ToogleSorting(column: DataGridColumnModel): void {
+        if (!column.sortable || !column.sort) {
+            return;
+        }
+
+        if (column.sort.sorting) {
+            if (column.sort.sortDirection == EnumSortDirection.Ascending) {
+                column.sort.sortDirection = EnumSortDirection.Descending;
+            } else {
+                column.sort.sortDirection = EnumSortDirection.Ascending;
+            }
+        } else {
+            for (let i = 0; i < this.columns.length; i++) {
+                this.columns[i].sort.sorting = false;
+            }
+
+            column.sort.sorting = true;
+            column.sort.sortDirection = EnumSortDirection.Ascending;
+        }
+
+        this.sort(column);
     }
 
     private initializeColumns(): void {
@@ -72,9 +92,9 @@ export class DataGridComponent extends ValueAccessorBase<Array<any>> implements 
             Object.assign(target, this.columns[i]);
 
             this.columns[i] = target;
+            this.columns[i].sort = new DataGridSortingModel();
 
             if (!this.isUndefinedOrNull(this.initialColumnToSort) && this.initialColumnToSort == i) {
-                this.columns[i].sort = new DataGridSortingModel();
                 this.columns[i].sort.sorting = true;
                 this.columns[i].sort.sortDirection = this.initialSortDirection;
             }
@@ -82,24 +102,29 @@ export class DataGridComponent extends ValueAccessorBase<Array<any>> implements 
     }
     private initializeSorting(): void {
         if (this.isUndefinedOrNull(this.value) || this.isUndefinedOrNull(this.initialColumnToSort)) {
+            this.sortApplied = true;
             return;
         }
         if (this.initialColumnToSort > (this.columns.length - 1)) {
             console.error('Param [initialColumnToSort] greater than the number of columns.');
+            this.sortApplied = true;
             return;
         }
 
-        const columnToSort = _.findIndex(this.columns, x => x.sortable && x.sort && x.sort.sorting);
+        const columnToSort = _.find(this.columns, x => x.sortable && x.sort && x.sort.sorting);
 
-        if (columnToSort < 0) {
+        if (this.isUndefinedOrNull(columnToSort)) {
+            this.sortApplied = true;
             return;
         }
-
-        console.log(`sorting ${this.value} at index ${columnToSort} in direction ${this.initialSortDirection}`);
-
-        this.value = _.orderBy(this.value, [columnToSort], [this.initialSortDirection]);
+        
+        this.sort(columnToSort);
+        this.sortApplied = true;
     }
     private isUndefinedOrNull(value: any): boolean {
         return value == undefined || value == null;
     }
+    private sort(column: DataGridColumnModel): void {
+        this.value = _.orderBy(this.value, [column.data], [column.sort.sortDirection]);
+    }    
 }
