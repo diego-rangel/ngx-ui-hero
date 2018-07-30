@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { NgxUiHeroModule, NgxUiHeroApiModule, NgxUiHeroInputFormsModule, ApiSettings, NgxUiHeroDataGridModule, DataGridConfig } from 'ngx-ui-hero';
+import { NgxUiHeroModule, NgxUiHeroApiModule, NgxUiHeroInputFormsModule, ApiSettings, NgxUiHeroDataGridModule, DataGridConfig, InputFormsConfig } from 'ngx-ui-hero';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HighlightModule } from 'ngx-highlightjs';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -12,6 +13,7 @@ import { GetStartedComponent } from './get-started/get-started.component';
 import { AppRoutingModule } from './app.routing.module';
 import { ComponentsComponent } from './components/components.component';
 import { ServicesComponent } from './services/services.component';
+import { DatagridComponent } from './datagrid/datagrid.component';
 
 export const apiSettings: ApiSettings = {
   apiBaseUrl: 'http://localhost:50467/api',
@@ -40,16 +42,38 @@ export const dataGridSettings: DataGridConfig = {
   }
 };
 
+export const inputFormsConfig: InputFormsConfig = {
+  currency: {
+    currencyCode: 'USD',
+    align: 'right',
+    allowNegative: true,
+    allowZero: true,
+    decimal: '.',
+    thousands: ',',
+    precision: 2,
+    prefix: '',
+    suffix: ''
+  },
+  validationMessages: {
+    invalid: '{label} is invalid',
+    required: '{label} is required',
+    pattern: '{label} is invalid',
+    maxlength: 'The filled-in value is greater than the maximum allowed',
+    minlength: 'The filled-in value is less than the minimum allowed'
+  }
+};
+
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule,
+    AngularFontAwesomeModule,
     NgxUiHeroModule,
     NgxUiHeroApiModule.forRoot(apiSettings),
     NgxUiHeroDataGridModule.forRoot(dataGridSettings),
-    NgxUiHeroInputFormsModule.forRoot(),
-    AppRoutingModule,
-    AngularFontAwesomeModule,
+    NgxUiHeroInputFormsModule.forRoot(inputFormsConfig),
+    TabsModule.forRoot(),
     HighlightModule.forRoot({ theme: 'github'}),
   ],
   declarations: [
@@ -58,6 +82,7 @@ export const dataGridSettings: DataGridConfig = {
     GetStartedComponent,
     ComponentsComponent,
     ServicesComponent,
+    DatagridComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,15 +1,21 @@
 export interface DataGridConfig {
     emptyResultsMessage?: string;
+    actionsColumnCaption?: string;
+    mode?: EnumDataGridMode;
     paging?: DataGridPagingConfig;
     styles?: DataGridStylesConfig;
 }
 
 export interface DataGridPagingConfig {
-    pagingMode?: EnumDataGridPagingMode;
     firstText?: string;
     previousText?: string;
     nextText?: string;
     lastText?: string;
+
+    /**
+     * maximum number of items per page. If value less than 1 will display all items on one page
+     */
+    itemsPerPage?: number;
 
     /**
      * if false first and last buttons will be hidden
@@ -39,7 +45,7 @@ export interface DataGridStylesConfig {
     responsive?: boolean;
 }
 
-export enum EnumDataGridPagingMode {
+export enum EnumDataGridMode {
     OnClient,
     OnServer
 }

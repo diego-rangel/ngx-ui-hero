@@ -1,5 +1,3 @@
-import { Type } from "@angular/compiler/src/core";
-
 export class DataGridColumnModel {
     caption?: string = '';
     captionAlignment?: EnumAlignment = EnumAlignment.Left;
@@ -7,7 +5,6 @@ export class DataGridColumnModel {
     data?: string = '';
     dataAlignment?: EnumAlignment = EnumAlignment.Left;
     dataClasses?: string = '';
-    dataType?: Type = String;
     width?: string;
     sortable?: boolean = true;
     sortDirection?: EnumSortDirection = EnumSortDirection.Ascending;

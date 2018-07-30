@@ -3,5 +3,20 @@
         th.sortable {
             cursor: pointer;
         }
+        th.sortable:hover {
+            background-color: #dee2e6;
+            color: #666;
+        }
+
+        td.action, th.action {
+            white-space: nowrap;
+            width: 1%;
+        }
+    }
+    table.table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+    table * {
+        transition: all .35s ease-in-out;
     }
 }

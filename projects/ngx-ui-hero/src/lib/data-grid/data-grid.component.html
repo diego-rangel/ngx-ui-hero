@@ -7,13 +7,14 @@
         }">
             <thead>
                 <tr>
-                    <th *ngFor="let column of columns; let i = index;" class="{{column.captionClasses}}" [ngStyle]="{'width': column.width}" [ngClass]="{
+                    <th class="action text-center" *ngIf="showActionsColumn">{{actionsColumnCaption}}</th>
+                    <th *ngFor="let column of columns; let i = index;" (click)="ToogleSorting(column)" class="{{column.captionClasses}}" [ngStyle]="{'width': column.width}" [ngClass]="{
                         'sortable': column.sortable,
                         'sorting': column.sort?.sorting,
                         'asc': column.sort?.sortDirection == 'asc',
                         'desc': column.sort?.sortDirection == 'desc'
                     }">
-                        <div class="d-flex justify-content-between align-items-center" (click)="ToogleSorting(column)">                            
+                        <div class="d-flex justify-content-between align-items-center">                            
                             <div class="flex-grow-1" [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}">
                                 {{column.caption}}
                             </div>
@@ -25,13 +26,22 @@
                 </tr>
             </thead>
             <tbody *ngIf="sortApplied">
-                <tr *ngFor="let row of value; let rowIndex = index;">
+                <tr *ngFor="let row of gridData; let rowIndex = index;">
+                    <td class="action text-center" *ngIf="showActionsColumn">
+                        <ng-container 
+                            [ngTemplateOutlet]="actionsColumnTemplate"
+                            [ngTemplateOutletContext]="{
+                                row: row,
+                                rowIndex: rowIndex
+                            }">
+                        </ng-container>
+                    </td>
                     <td *ngFor="let column of columns; let columnIndex = index;" class="{{column.dataClasses}}" [ngClass]="{
                         'text-center': column.dataAlignment == 1,
                         'text-right': column.dataAlignment == 2
                     }">
-                        <span *ngIf="column.data">{{row[column.data]}}</span>
-                        <span *ngIf="!column.data && column.render">{{column.render(row, row[column.data], rowIndex)}}</span>
+                        <span *ngIf="!column.render">{{row[column.data]}}</span>
+                        <span *ngIf="column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
                     </td>
                 </tr>
             </tbody>
@@ -40,7 +50,23 @@
         <div class="loading-box" *ngIf="!sortApplied">
             <spinner></spinner>
         </div>
+
+        <pagination *ngIf="gridData?.length > 0"
+            [(ngModel)]="currentPage"
+            [totalItems]="totalItems"
+            [itemsPerPage]="itemsPerPage"
+            [boundaryLinks]="boundaryLinks"
+            [directionLinks]="directionLinks"
+            [maxSize]="maxSize"
+            [rotate]="rotate"
+            [firstText]="firstText"
+            [lastText]="lastText"
+            [nextText]="nextText"
+            [previousText]="previousText"
+            (pageChanged)="PageChanged($event)"
+        >
+        </pagination>
     </div>    
 
-    <p *ngIf="!value || value.length == 0">{{emptyResultsMessage}}</p>
+    <p class="text-center py-3" *ngIf="!gridData || gridData.length == 0">{{emptyResultsMessage}}</p>
 </div>

@@ -82,4 +82,38 @@ import { NgxUiHeroModule } from 'ngx-ui-hero';
 export class MyModule { }
   `;
 
+  dataGridModuleSetupCode = `
+import { NgxUiHeroDataGridModule, DataGridConfig, EnumDataGridMode } from 'ngx-ui-hero';
+
+export const dataGridSettings: DataGridConfig = {
+  emptyResultsMessage: 'No results found at this moment.',
+  actionsColumnCaption: '#',
+  mode: EnumDataGridMode.OnClient,
+  paging: {
+    firstText: 'First',
+    previousText: 'Previous',
+    nextText: 'Next',
+    lastText: 'Last',
+    boundaryLinks: true,
+    directionLinks: true,
+    rotate: true,
+    maxSize: 10,
+    itemsPerPage: 10
+  },
+  styles: {
+    striped: true,
+    bordered: true,
+    hoverEffect: true,
+    responsive: true
+  }
+};
+
+@NgModule({
+  imports: [
+    NgxUiHeroDataGridModule.forRoot(dataGridSettings)
+  ],
+})
+export class MyModule { }
+  `;
+
 }

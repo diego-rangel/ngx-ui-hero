@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataGridColumnModel, EnumAlignment } from 'ngx-ui-hero';
 
 @Component({
   selector: 'app-components',
@@ -146,24 +145,6 @@ export class ComponentsComponent implements OnInit {
   myPercentModel: any;
   myNumberModel: any;
   myDateModel: any;
-  myDatagridModel: Array<any>;
-  datagridColumns: Array<DataGridColumnModel> = [
-    {
-      caption: 'Name',
-      data: 'name',
-    },
-    {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
-      caption: 'Status',
-      captionAlignment: EnumAlignment.Center,
-      data: 'active',
-      dataAlignment: EnumAlignment.Center,
-      width: '200px'
-    }
-  ];
 
   options = [
     { value: 1, text: 'Option 1' },
@@ -173,23 +154,7 @@ export class ComponentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.myDatagridModel = [
-      {
-        name: 'Diego da Cunha Rangel',
-        email: 'my-email@domain.com',
-        active: true
-      },
-      {
-        name: 'Foo',
-        email: 'my-email@domain.com',
-        active: true
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      }
-    ];
+    
   }
 
 }

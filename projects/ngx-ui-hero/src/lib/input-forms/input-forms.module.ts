@@ -91,42 +91,17 @@ export { InputDateComponent } from './components/input-date/input-date.component
   ],
 })
 export class NgxUiHeroInputFormsModule {
-  static forRoot(config?: InputFormsConfig): ModuleWithProviders {
-    let source = config || {};
-
-    let target: InputFormsConfig = {
-      currency: {
-        currencyCode: 'USD',
-        align: 'right',
-        allowNegative: true,
-        allowZero: true,
-        decimal: '.',
-        thousands: ',',
-        precision: 2,
-        prefix: '',
-        suffix: ''
-      },
-      validationMessages: {
-        invalid: '{label} is invalid',
-        required: '{label} is required',
-        pattern: '{label} is invalid',
-        maxlength: 'The filled-in value is greater than the maximum allowed',
-        minlength: 'The filled-in value is less than the minimum allowed'
-      }
-    };
-
-    let result = Object.assign(target, source);
-
+  static forRoot(config: InputFormsConfig): ModuleWithProviders {
     return {
       ngModule: NgxUiHeroInputFormsModule,
       providers: [
         {
           provide: INPUT_FORMS_CONFIG,
-          useValue: result
+          useValue: config
         },
         {
           provide: CURRENCY_MASK_CONFIG,
-          useValue: result.currency
+          useValue: config.currency
         }
       ]
     };

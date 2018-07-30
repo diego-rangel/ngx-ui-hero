@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { ComponentsComponent } from './components/components.component';
 import { ServicesComponent } from './services/services.component';
+import { DatagridComponent } from './datagrid/datagrid.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'get-started', pathMatch: 'full' },
   { path: 'get-started', component: GetStartedComponent },
   { path: 'components', component: ComponentsComponent },
+  { path: 'datagrid', component: DatagridComponent },
   { path: 'services', component: ServicesComponent },
 ];
 
