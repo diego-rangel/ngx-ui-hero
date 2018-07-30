@@ -42,7 +42,7 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
     @Input() directionLinks?: boolean = true;
     @Input() rotate?: boolean = true;
     @Input() showActionsColumn?: boolean = false;
-    @Input() actionsColumnCaption?: string = this.actionsColumnCaption;
+    @Input() actionsColumnCaption?: string = '#';
     @Input() firstText: string = 'First';
     @Input() previousText: string = 'Previous';
     @Input() nextText: string = 'Next';
