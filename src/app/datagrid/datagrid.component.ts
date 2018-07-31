@@ -128,7 +128,88 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
   constructor() { }
 
   ngOnInit() {
-    let model = [];
+    let model = [
+      {
+        name: 'Diego da Cunha Rangel',
+        email: 'my-email@domain.com',
+        active: true
+      },
+      {
+        name: 'Foo',
+        email: 'my-email@domain.com',
+        active: true
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      }
+    ];
 
     this.myBasicDatagridModel = model;
     this.myComplexDatagridModel = model;
