@@ -87,6 +87,7 @@ import { NgxUiHeroDataGridModule, DataGridConfig, EnumDataGridMode } from 'ngx-u
 
 export const dataGridSettings: DataGridConfig = {
   emptyResultsMessage: 'No results found at this moment.',
+  infoMessage: 'Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.',
   actionsColumnCaption: '#',
   mode: EnumDataGridMode.OnClient,
   paging: {

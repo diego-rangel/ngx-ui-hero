@@ -45,36 +45,39 @@
                     </td>
                 </tr>
             </tbody>
+            <tfoot *ngIf="!gridData || gridData.length == 0">
+                <tr>
+                    <td class="empty-results text-center p-3" [attr.colspan]="columns?.length + (actionsColumnTemplate ? 1 : 0)">
+                        <p class="mb-0">{{emptyResultsMessage}}</p>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
 
         <div class="loading-box" *ngIf="!sortApplied">
             <spinner></spinner>
         </div>
-        
-        <div class="d-flex justify-content-between align-items-center flex-wrap mt-3"  *ngIf="gridData?.length > 0">
-            <div class="info mr-auto mb-3">
-                <span>{{GetInfo()}}</span>
-            </div>
-            <div class="pagination">
-                <pagination
-                    [(ngModel)]="currentPage"
-                    [totalItems]="totalItems"
-                    [itemsPerPage]="itemsPerPage"
-                    [boundaryLinks]="boundaryLinks"
-                    [directionLinks]="directionLinks"
-                    [maxSize]="maxSize"
-                    [rotate]="rotate"
-                    [firstText]="firstText"
-                    [lastText]="lastText"
-                    [nextText]="nextText"
-                    [previousText]="previousText"
-                    (pageChanged)="PageChanged($event)">
-                </pagination>
-            </div>
-        </div>
-    </div>    
+    </div>
 
-    <div class="empty-results text-center p-3" *ngIf="!gridData || gridData.length == 0">
-        <p class="mb-0">{{emptyResultsMessage}}</p>
-    </div>    
+    <div class="d-flex justify-content-between align-items-center flex-wrap mt-3"  *ngIf="gridData?.length > 0">
+        <div class="info mr-auto mb-3">
+            <span>{{GetInfo()}}</span>
+        </div>
+        <div class="pagination">
+            <pagination
+                [(ngModel)]="currentPage"
+                [totalItems]="totalItems"
+                [itemsPerPage]="itemsPerPage"
+                [boundaryLinks]="boundaryLinks"
+                [directionLinks]="directionLinks"
+                [maxSize]="maxSize"
+                [rotate]="rotate"
+                [firstText]="firstText"
+                [lastText]="lastText"
+                [nextText]="nextText"
+                [previousText]="previousText"
+                (pageChanged)="PageChanged($event)">
+            </pagination>
+        </div>
+    </div>   
 </div>
