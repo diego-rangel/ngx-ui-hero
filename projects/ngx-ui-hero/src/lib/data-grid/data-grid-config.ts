@@ -1,5 +1,6 @@
 export interface DataGridConfig {
     emptyResultsMessage?: string;
+    infoMessage?: string;
     actionsColumnCaption?: string;
     mode?: EnumDataGridMode;
     paging?: DataGridPagingConfig;

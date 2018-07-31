@@ -65,172 +65,176 @@
     <hr />
 
     <h2>Inputs</h2>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>columns</b></td>
-          <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">DataGridColumnModel</a>[]</td>
-          <td>The columns definitions.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>emptyResultsMessage</b><br/>
-            Default: <small>No results found at this moment.</small>
-          </td>
-          <td>string</td>
-          <td>The message to show when the Datagrid's model is empty or null.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>striped</b><br/>
-            Default: <small>true</small>
-          </td>
-          <td>boolean</td>
-          <td>Applies a style for even & odd background-color.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>bordered</b><br/>
-            Default: <small>true</small>
-          </td>
-          <td>boolean</td>
-          <td>Applies a style to get a bordered grid.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>hoverEffect</b><br/>
-            Default: <small>true</small>
-          </td>
-          <td>boolean</td>
-          <td>Applies a style of effects on hover.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>responsive</b><br/>
-            Default: <small>true</small>
-          </td>
-          <td>boolean</td>
-          <td>
-            Defines when the DataGrid should be responsive or not. 
-            It'll create an horizontal scroll when the page space is not enought.
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <b>initialColumnToSort</b>
-          </td>
-          <td>number</td>
-          <td>The column index that should be initially sorted.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>initialSortDirection</b><br/>
-              Default: <small>Ascending</small>
-          </td>
-          <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">EnumSortDirection</a></td>
-          <td>When <b>initialColumnToSort</b> is provided, the column sort direction that should be initially sorted.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>mode</b><br/>
-              Default: <small>OnClient</small>
-          </td>
-          <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumDataGridMode</a></td>
-          <td>Defines if sorting and paging should be OnServer or OnClient.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>totalItems</b>
-          </td>
-          <td>number</td>
-          <td>When mode is <b>OnServer</b>, you must provide the <b>totalItems</b> manually.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>itemsPerPage</b><br/>
-            Default: <small>10</small>
-          </td>
-          <td>number</td>
-          <td>Maximum number of items per page. If value is less than 1, it will display all items in a single page.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>maxSize</b><br/>
-            Default: <small>10</small>
-          </td>
-          <td>number</td>
-          <td>Limit number for page links in pager.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>boundaryLinks</b><br/>
-            Default: <small>true</small>
-          </td>
-          <td>boolean</td>
-          <td>If false, first and last buttons will be hidden.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>directionLinks</b><br/>
-            Default: <small>true</small>
-          </td>
-          <td>boolean</td>
-          <td>If false, previous and next buttons will be hidden.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>rotate</b><br/>
-            Default: <small>true</small>
-          </td>
-          <td>boolean</td>
-          <td>If true, current page will be in the middle of pages list.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>showActionsColumn</b><br/>
-            Default: <small>false</small>
-          </td>
-          <td>boolean</td>
-          <td>If true, a column for actions provided by ng-template will be displayed at the beginning of the table.</td>
-        </tr>
-        <tr>
-          <td>
-            <b>actionsColumnCaption</b>
-          </td>
-          <td>string</td>
-          <td>When <b>showActionsColumn</b> is true, the captions text of the actions column.</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>columns</b></td>
+            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">DataGridColumnModel</a>[]</td>
+            <td>The columns definitions.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>emptyResultsMessage</b><br/>
+              Default: <small>No results found at this moment.</small>
+            </td>
+            <td>string</td>
+            <td>The message to show when the Datagrid's model is empty or null.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>striped</b><br/>
+              Default: <small>true</small>
+            </td>
+            <td>boolean</td>
+            <td>Applies a style for even & odd background-color.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>bordered</b><br/>
+              Default: <small>true</small>
+            </td>
+            <td>boolean</td>
+            <td>Applies a style to get a bordered grid.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>hoverEffect</b><br/>
+              Default: <small>true</small>
+            </td>
+            <td>boolean</td>
+            <td>Applies a style of effects on hover.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>responsive</b><br/>
+              Default: <small>true</small>
+            </td>
+            <td>boolean</td>
+            <td>
+              Defines when the DataGrid should be responsive or not. 
+              It'll create an horizontal scroll when the page space is not enought.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>initialColumnToSort</b>
+            </td>
+            <td>number</td>
+            <td>The column index that should be initially sorted.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>initialSortDirection</b><br/>
+                Default: <small>Ascending</small>
+            </td>
+            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">EnumSortDirection</a></td>
+            <td>When <b>initialColumnToSort</b> is provided, the column sort direction that should be initially sorted.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>mode</b><br/>
+                Default: <small>OnClient</small>
+            </td>
+            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumDataGridMode</a></td>
+            <td>Defines if sorting and paging should be OnServer or OnClient.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>totalItems</b>
+            </td>
+            <td>number</td>
+            <td>When mode is <b>OnServer</b>, you must provide the <b>totalItems</b> manually.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>itemsPerPage</b><br/>
+              Default: <small>10</small>
+            </td>
+            <td>number</td>
+            <td>Maximum number of items per page. If value is less than 1, it will display all items in a single page.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>maxSize</b><br/>
+              Default: <small>10</small>
+            </td>
+            <td>number</td>
+            <td>Limit number for page links in pager.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>boundaryLinks</b><br/>
+              Default: <small>true</small>
+            </td>
+            <td>boolean</td>
+            <td>If false, first and last buttons will be hidden.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>directionLinks</b><br/>
+              Default: <small>true</small>
+            </td>
+            <td>boolean</td>
+            <td>If false, previous and next buttons will be hidden.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>rotate</b><br/>
+              Default: <small>true</small>
+            </td>
+            <td>boolean</td>
+            <td>If true, current page will be in the middle of pages list.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>showActionsColumn</b><br/>
+              Default: <small>false</small>
+            </td>
+            <td>boolean</td>
+            <td>If true, a column for actions provided by ng-template will be displayed at the beginning of the table.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>actionsColumnCaption</b>
+            </td>
+            <td>string</td>
+            <td>When <b>showActionsColumn</b> is true, the captions text of the actions column.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Outputs</h2>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>OnPaginate</b></td>
-          <td>EventEmitter&lt;any&gt;</td>
-          <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling paging operations. This callback will receive as a parameter an object with the current page number.</td>
-        </tr>
-        <tr>
-          <td><b>OnSort</b></td>
-          <td>EventEmitter&lt;DataGridColumnModel&gt;</td>
-          <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling sorting operations. This callback will receive as a parameter an object with the sorted column.</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>OnPaginate</b></td>
+            <td>EventEmitter&lt;any&gt;</td>
+            <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling paging operations. This callback will receive as a parameter an object with the current page number.</td>
+          </tr>
+          <tr>
+            <td><b>OnSort</b></td>
+            <td>EventEmitter&lt;DataGridColumnModel&gt;</td>
+            <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling sorting operations. This callback will receive as a parameter an object with the sorted column.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>

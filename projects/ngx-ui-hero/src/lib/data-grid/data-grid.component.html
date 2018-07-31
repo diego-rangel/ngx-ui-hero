@@ -18,9 +18,9 @@
                             <div class="flex-grow-1" [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}">
                                 {{column.caption}}
                             </div>
-                            <i class="fa fa-sort" *ngIf="column.sortable && !column.sort?.sorting"></i>
-                            <i class="fa fa-sort-amount-asc" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'asc'"></i>
-                            <i class="fa fa-sort-amount-desc" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc'"></i>
+                            <i class="fa fa-sort ml-1" *ngIf="column.sortable && !column.sort?.sorting"></i>
+                            <i class="fa fa-sort-amount-asc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'asc'"></i>
+                            <i class="fa fa-sort-amount-desc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc'"></i>
                         </div>
                     </th>
                 </tr>
@@ -50,23 +50,31 @@
         <div class="loading-box" *ngIf="!sortApplied">
             <spinner></spinner>
         </div>
-
-        <pagination *ngIf="gridData?.length > 0"
-            [(ngModel)]="currentPage"
-            [totalItems]="totalItems"
-            [itemsPerPage]="itemsPerPage"
-            [boundaryLinks]="boundaryLinks"
-            [directionLinks]="directionLinks"
-            [maxSize]="maxSize"
-            [rotate]="rotate"
-            [firstText]="firstText"
-            [lastText]="lastText"
-            [nextText]="nextText"
-            [previousText]="previousText"
-            (pageChanged)="PageChanged($event)"
-        >
-        </pagination>
+        
+        <div class="d-flex justify-content-between align-items-center flex-wrap mt-3"  *ngIf="gridData?.length > 0">
+            <div class="info mr-auto mb-3">
+                <span>{{GetInfo()}}</span>
+            </div>
+            <div class="pagination">
+                <pagination
+                    [(ngModel)]="currentPage"
+                    [totalItems]="totalItems"
+                    [itemsPerPage]="itemsPerPage"
+                    [boundaryLinks]="boundaryLinks"
+                    [directionLinks]="directionLinks"
+                    [maxSize]="maxSize"
+                    [rotate]="rotate"
+                    [firstText]="firstText"
+                    [lastText]="lastText"
+                    [nextText]="nextText"
+                    [previousText]="previousText"
+                    (pageChanged)="PageChanged($event)">
+                </pagination>
+            </div>
+        </div>
     </div>    
 
-    <p class="text-center py-3" *ngIf="!gridData || gridData.length == 0">{{emptyResultsMessage}}</p>
+    <div class="empty-results text-center p-3" *ngIf="!gridData || gridData.length == 0">
+        <p class="mb-0">{{emptyResultsMessage}}</p>
+    </div>    
 </div>

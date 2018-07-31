@@ -28,6 +28,7 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
     @ViewChild(NgModel) model: NgModel;
     @Input() columns: Array<DataGridColumnModel>;
     @Input() emptyResultsMessage?: string = 'No results found at this moment.';
+    @Input() infoMessage?: string = 'Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.';
     @Input() striped?: boolean = true;
     @Input() bordered?: boolean = true;
     @Input() hoverEffect?: boolean = true;
@@ -121,6 +122,22 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
 
             this.OnPaginate.emit(event);
         }
+    }
+
+    GetInfo(): string {
+        let result = this.infoMessage;
+        let recordsFrom: number = this.currentPage * this.itemsPerPage - (this.itemsPerPage - 1);
+        let recordsTo: number = this.currentPage * this.itemsPerPage;
+        let totalRecords: number = this.innerValue ? this.innerValue.length : 0;
+
+        if (recordsTo > totalRecords) {
+            recordsTo = recordsTo - (recordsTo - totalRecords);
+        }
+
+        return result
+            .replace('{recordsFrom}', recordsFrom.toString())
+            .replace('{recordsTo}', recordsTo.toString())
+            .replace('{totalRecords}', totalRecords.toString());
     }
 
     private renderData(): void {

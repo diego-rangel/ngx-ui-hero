@@ -37,7 +37,7 @@ export const apiSettings: ApiSettings = {
 export const dataGridSettings: DataGridConfig = {
   styles: {
     striped: true,
-    bordered: false,
+    bordered: true,
     hoverEffect: true,
   }
 };

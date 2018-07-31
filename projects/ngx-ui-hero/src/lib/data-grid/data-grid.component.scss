@@ -1,5 +1,9 @@
 .ui-hero-datagrid {
+    margin-bottom: 20px;
+
     table {
+        margin-bottom: 0;
+
         th.sortable {
             cursor: pointer;
         }
@@ -18,5 +22,11 @@
     }
     table * {
         transition: all .35s ease-in-out;
+    }
+
+    .empty-results {
+        border: 1px solid #dee2e6;
+        background-color: #f9f9f9;
+        color: #666;
     }
 }
