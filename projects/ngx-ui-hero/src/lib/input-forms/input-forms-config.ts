@@ -1,6 +1,9 @@
+import { InputDateConfig } from './components/input-date/input-date-config';
+
 export interface InputFormsConfig {
     currency?: InputFormsCurrencyConfig;
     validationMessages?: InputFormsValidationConfig;
+    date?: InputDateConfig;
 }
 
 export interface InputFormsCurrencyConfig {

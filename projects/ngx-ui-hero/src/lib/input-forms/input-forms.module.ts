@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { DebounceDirective } from './directives/debounce.directive';
 export { DebounceDirective } from './directives/debounce.directive';
@@ -50,12 +51,14 @@ export { InputNumberComponent } from './components/input-number/input-number.com
 
 import { InputDateComponent } from './components/input-date/input-date.component';
 export { InputDateComponent } from './components/input-date/input-date.component';
+export { InputDateConfig } from './components/input-date/input-date-config';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     CurrencyMaskModule,
+    BsDatepickerModule.forRoot(),
   ],
   declarations: [
     AutoSelectOnFocusDirective,
@@ -88,6 +91,7 @@ export { InputDateComponent } from './components/input-date/input-date.component
     InputPercentComponent,
     InputNumberComponent,
     InputDateComponent,
+    BsDatepickerModule
   ],
 })
 export class NgxUiHeroInputFormsModule {

@@ -60,6 +60,10 @@ export const inputFormsConfig: InputFormsConfig = {
     pattern: '{label} is invalid',
     maxlength: 'The filled-in value is greater than the maximum allowed',
     minlength: 'The filled-in value is less than the minimum allowed'
+  },
+  date: {
+    format: 'dd/MM/yyyy',
+    locale: 'pt-br'
   }
 };
 

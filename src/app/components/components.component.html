@@ -234,6 +234,66 @@
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="dateCode"></code></pre>
             </div>
+
+            <h2>Inputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>placeholder</b></td>
+                    <td>string</td>
+                    <td>Input placeholder.</td>
+                  </tr>
+                  <tr>
+                    <td><b>minDate</b></td>
+                    <td>Date</td>
+                    <td>Minimum date allowed.</td>
+                  </tr>
+                  <tr>
+                    <td><b>maxDate</b></td>
+                    <td>Date</td>
+                    <td>Maximum date allowed.</td>
+                  </tr>
+                  <tr>
+                    <td><b>format</b></td>
+                    <td>string</td>
+                    <td>The date format to show.</td>
+                  </tr>
+                  <tr>
+                    <td><b>theme</b><br/>
+                      <b>Default: </b><small>theme-dark-blue</small>
+                    </td>
+                    <td>string</td>
+                    <td>Defines the layout colors of the picker.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Outputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>onChange</b></td>
+                    <td>Emitted every time a date is changed with the new value as a parameter.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

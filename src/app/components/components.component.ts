@@ -144,7 +144,7 @@ export class ComponentsComponent implements OnInit {
   myCurrencyModel: any;
   myPercentModel: any;
   myNumberModel: any;
-  myDateModel: any;
+  myDateModel: Date;
 
   options = [
     { value: 1, text: 'Option 1' },
@@ -154,7 +154,7 @@ export class ComponentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
+    this.myDateModel = new Date();
   }
 
 }

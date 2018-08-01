@@ -215,4 +215,13 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
     this.myComplexDatagridModel = model;
   }
 
+  teste(): void {
+    this.myBasicDatagridModel.push({
+      name: 'XXXXX',
+      email: 'XXXXXXXX',
+      active: false
+    });
+    this.myBasicDatagridModel = this.myBasicDatagridModel.slice(0);
+  }
+
 }
