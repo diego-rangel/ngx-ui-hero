@@ -221,7 +221,7 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
       email: 'XXXXXXXX',
       active: false
     });
-    this.myBasicDatagridModel = this.myBasicDatagridModel.slice(0);
+    // this.myBasicDatagridModel = this.myBasicDatagridModel.slice(0);
   }
 
 }

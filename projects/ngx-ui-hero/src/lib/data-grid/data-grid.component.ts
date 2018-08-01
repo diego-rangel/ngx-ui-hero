@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, Inject, Input, Output, EventEmitter, ContentChild, TemplateRef, Optional } from '@angular/core';
-import { NgModel, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Component, OnInit, Inject, Input, Output, EventEmitter, ContentChild, TemplateRef, Optional, DoCheck } from '@angular/core';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 import { DATAGRID_CONFIG } from './data-grid-config.constants';
@@ -12,20 +11,14 @@ import * as _ from 'lodash';
 @Component({
     selector: 'datagrid',
     templateUrl: 'data-grid.component.html',
-    styleUrls: ['data-grid.component.scss'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: DataGridComponent,
-        multi: true
-    }]
+    styleUrls: ['data-grid.component.scss']
 })
 
-export class DataGridComponent implements OnInit, ControlValueAccessor, DataGridConfig {
+export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     sortApplied: boolean = false;
     currentPage: number;
     gridData: Array<any>;
 
-    @ViewChild(NgModel) model: NgModel;
     @Input() columns: Array<DataGridColumnModel>;
     @Input() emptyResultsMessage?: string = 'No results found at this moment.';
     @Input() infoMessage?: string = 'Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.';
@@ -52,9 +45,21 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef}) actionsColumnTemplate: ActionsColumnDirective;
 
-    private innerValue: Array<any>;
-    private changed = new Array<(value: Array<any>) => void>();
-    private isTouched = new Array<() => void>();
+    private _internalData: Array<any>;
+    private _externalData: Array<any>;
+    get data(): Array<any> {
+        return this._externalData;
+    }    
+    @Input('data')
+    set data(value: Array<any>) {
+        this._externalData = value;
+
+        console.log('set data', value);
+
+        if (this.sortApplied) {
+            this.Rerender();
+        }
+    }
 
     constructor(
         @Inject(DATAGRID_CONFIG) @Optional() defaultOptions: DataGridConfig
@@ -64,19 +69,16 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
         Object.assign(this, defaultOptions.styles);
     }
 
-    get value(): Array<any> {
-        return this.innerValue;
-    }
-    set value(value: Array<any>) {
-        if (this.innerValue !== value) {
-            this.innerValue = value;
-            this.changed.forEach(f => f(value));
-        }
-    }
-
     ngOnInit() {
         this.initializeColumns();
         this.renderData();
+    }
+    ngDoCheck(): void {
+        console.log('ngDoCheck!', this._externalData, this._internalData);
+        if (this.sortApplied && this._externalData && this._internalData && this._externalData.length != this._internalData.length) {
+            console.log('Rerender called!');
+            this.Rerender();
+        }
     }
 
     ToogleSorting(column: DataGridColumnModel): void {
@@ -128,7 +130,7 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
         let result = this.infoMessage;
         let recordsFrom: number = this.currentPage * this.itemsPerPage - (this.itemsPerPage - 1);
         let recordsTo: number = this.currentPage * this.itemsPerPage;
-        let totalRecords: number = this.innerValue ? this.innerValue.length : 0;
+        let totalRecords: number = this._internalData ? this._internalData.length : 0;
 
         if (recordsTo > totalRecords) {
             recordsTo = recordsTo - (recordsTo - totalRecords);
@@ -140,6 +142,11 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
             .replace('{totalRecords}', totalRecords.toString());
     }
 
+    Rerender(): void {
+        this._internalData = this._externalData;
+        this.renderData();
+    }
+
     private renderData(): void {
         setTimeout(() => {
             this.initializeGridData();
@@ -148,7 +155,11 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
         },0);
     }
     private initializeGridData(): void {
-        this.gridData = Object.assign([], this.innerValue);
+        if (!this._internalData && this._externalData) {
+            this._internalData = this._externalData.slice(0);
+        }
+
+        this.gridData = Object.assign([], this._internalData);
     }
     private initializeColumns(): void {
         if (!this.columns || this.columns.length == 0) {
@@ -180,7 +191,7 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
         }
     }
     private initializeSorting(): void {
-        if (this.isUndefinedOrNull(this.innerValue) || this.innerValue.length == 0 || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
+        if (this.isUndefinedOrNull(this._internalData) || this._internalData.length == 0 || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
             this.sortApplied = true;
             return;
         }
@@ -203,38 +214,21 @@ export class DataGridComponent implements OnInit, ControlValueAccessor, DataGrid
     private initializePaging(): void {
         this.currentPage = 1;
 
-        if (this.innerValue && this.mode == EnumDataGridMode.OnClient) {
-            this.totalItems = this.innerValue.length;
+        if (this._internalData && this.mode == EnumDataGridMode.OnClient) {
+            this.totalItems = this._internalData.length;
         }
     }
     private isUndefinedOrNull(value: any): boolean {
         return value == undefined || value == null;
     }
     private sortOnClient(column: DataGridColumnModel): void {
-        this.innerValue = _.orderBy(this.innerValue, [column.data], [column.sort.sortDirection]);
+        this._internalData = _.orderBy(this._externalData, [column.data], [column.sort.sortDirection]);
 
         this.paginateOnClient(this.currentPage);
     }
     private paginateOnClient(page: number): void {
         const startItem = (page - 1) * this.itemsPerPage;
         const endItem = page * this.itemsPerPage;
-        this.gridData = this.innerValue.slice(startItem, endItem);
-    }
-    
-    touch() {
-        this.isTouched.forEach(f => f());
-    }
-    writeValue(value: Array<any>) {
-        this.innerValue = value;
-
-        if (this.sortApplied) {
-            this.renderData();
-        }
-    }
-    registerOnChange(fn: any): void {
-        this.changed.push(fn);
-    }
-    registerOnTouched(fn: any): void {
-        this.isTouched.push(fn);
+        this.gridData = this._internalData.slice(startItem, endItem);
     }
 }
