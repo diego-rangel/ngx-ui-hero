@@ -1,27 +1,12 @@
 import { Component, Input, ViewChild, Optional, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { defineLocale } from 'ngx-bootstrap/chronos';
 
 import { InputDateConfig } from './input-date-config';
 import { ElementBase } from '../../base/element-base';
 import { INPUT_FORMS_CONFIG } from './../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
 import { AsyncValidatorArray, ValidatorArray } from '../../base/validate';
-
-import { arLocale, csLocale, daLocale, deLocale, enGbLocale, esLocale, 
-  esDoLocale, esUsLocale, fiLocale, frLocale, hiLocale, huLocale, 
-  idLocale, itLocale, jaLocale, koLocale, mnLocale, nlLocale, nlBeLocale, 
-  plLocale, ptBrLocale, svLocale, ruLocale, roLocale, zhCnLocale, trLocale, 
-  heLocale, thLocale, slLocale, glLocale } from 'ngx-bootstrap/locale';
-
-const locales = [arLocale, csLocale, daLocale, deLocale, enGbLocale, esLocale, 
-  esDoLocale, esUsLocale, fiLocale, frLocale, hiLocale, huLocale, 
-  idLocale, itLocale, jaLocale, koLocale, mnLocale, nlLocale, nlBeLocale, 
-  plLocale, ptBrLocale, svLocale, ruLocale, roLocale, zhCnLocale, trLocale, 
-  heLocale, thLocale, slLocale, glLocale];
-
-locales.forEach(locale => defineLocale(locale.abbr, locale)); 
 
 let identifier = 0;
 

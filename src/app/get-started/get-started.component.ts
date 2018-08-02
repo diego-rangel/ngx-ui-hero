@@ -41,6 +41,9 @@ export class MyModule { }
 
   inputFormsModuleSetupCode = `
 import { NgxUiHeroInputFormsModule, InputFormsConfig } from 'ngx-ui-hero';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+defineLocale('pt-br', ptBrLocale);
 
 export const inputFormsConfig: InputFormsConfig = {
   currency: {
