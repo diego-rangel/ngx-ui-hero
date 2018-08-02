@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter, ContentChild, TemplateRef, Optional, DoCheck, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output, EventEmitter, ContentChild, TemplateRef, Optional, DoCheck, ViewChild, IterableDiffers } from '@angular/core';
 import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 
 import { DATAGRID_CONFIG } from './data-grid-config.constants';
@@ -46,6 +46,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @ContentChild(ActionsColumnDirective, {read: TemplateRef}) actionsColumnTemplate: ActionsColumnDirective;
     @ViewChild('paginator') paginator: PaginationComponent;
 
+    private _differ: any;
     private _internalData: Array<any>;
     private _externalData: Array<any>;
     get data(): Array<any> {
@@ -61,11 +62,14 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     constructor(
-        @Inject(DATAGRID_CONFIG) @Optional() defaultOptions: DataGridConfig
+        @Inject(DATAGRID_CONFIG) @Optional() defaultOptions: DataGridConfig,
+        private iterableDiffers: IterableDiffers
     ) {
         Object.assign(this, defaultOptions);
         Object.assign(this, defaultOptions.paging);
         Object.assign(this, defaultOptions.styles);
+
+        this._differ = this.iterableDiffers.find([]).create(null);
     }
 
     ngOnInit() {
@@ -73,7 +77,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.Rerender();
     }
     ngDoCheck(): void {
-        if (this.sortApplied && this._externalData && this._internalData && (this._externalData.length != this._internalData.length)) {
+        let changes = this._differ.diff(this._externalData);
+        if (changes) {
             this.Rerender();
         }
     }
@@ -222,7 +227,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         return value == undefined || value == null;
     }
     private sortOnClient(column: DataGridColumnModel): void {
-        this._internalData = _.orderBy(this._externalData, [column.data], [column.sort.sortDirection]);
+        this._internalData = _.orderBy(this._internalData, [column.data], [column.sort.sortDirection]);
 
         this.paginateOnClient(this.currentPage);
     }
