@@ -52,7 +52,7 @@ export class DatagridComponent implements OnInit {
 
   dataGridBasicUsageExampleTemplate: string = `
 <datagrid 
-  [(ngModel)]="myBasicDatagridModel" 
+  [data]="myBasicDatagridModel" 
   [columns]="myBasicDatagridColumns" 
   [initialColumnToSort]="0">
 </datagrid>
@@ -85,7 +85,7 @@ myBasicDatagridColumns: Array<DataGridColumnModel> = [
 
   dataGridComplexUsageExampleTemplate: string = `
 <datagrid 
-  [(ngModel)]="myComplexDatagridModel" 
+  [data]="myComplexDatagridModel" 
   [columns]="myComplexDatagridColumns" 
   [showActionsColumn]="true"
   [initialColumnToSort]="0">
@@ -154,74 +154,10 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
         email: 'my-email@domain.com',
         active: false
       },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      },
-      {
-        name: 'Baar',
-        email: 'my-email@domain.com',
-        active: false
-      }
     ];
-
+    
     this.myBasicDatagridModel = model;
     this.myComplexDatagridModel = model;
-  }
-
-  teste(): void {
-    this.myBasicDatagridModel.push({
-      name: 'XXXXX',
-      email: 'XXXXXXXX',
-      active: false
-    });
-    // this.myBasicDatagridModel = this.myBasicDatagridModel.slice(0);
   }
 
 }

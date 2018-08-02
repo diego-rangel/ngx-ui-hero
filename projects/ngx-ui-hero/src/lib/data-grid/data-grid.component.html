@@ -64,7 +64,7 @@
             <span>{{GetInfo()}}</span>
         </div>
         <div class="pagination">
-            <pagination
+            <pagination #paginator
                 [(ngModel)]="currentPage"
                 [totalItems]="totalItems"
                 [itemsPerPage]="itemsPerPage"

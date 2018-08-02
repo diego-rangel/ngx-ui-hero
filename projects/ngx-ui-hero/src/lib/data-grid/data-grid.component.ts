@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter, ContentChild, TemplateRef, Optional, DoCheck } from '@angular/core';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { Component, OnInit, Inject, Input, Output, EventEmitter, ContentChild, TemplateRef, Optional, DoCheck, ViewChild } from '@angular/core';
+import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 
 import { DATAGRID_CONFIG } from './data-grid-config.constants';
 import { DataGridColumnModel, EnumAlignment, EnumSortDirection, DataGridSortingModel } from './data-grid-column.model';
@@ -44,6 +44,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef}) actionsColumnTemplate: ActionsColumnDirective;
+    @ViewChild('paginator') paginator: PaginationComponent;
 
     private _internalData: Array<any>;
     private _externalData: Array<any>;
@@ -54,9 +55,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     set data(value: Array<any>) {
         this._externalData = value;
 
-        console.log('set data', value);
-
-        if (this.sortApplied) {
+        if (this.isUndefinedOrNull(value) && !this.isUndefinedOrNull(this._internalData)) {
             this.Rerender();
         }
     }
@@ -71,12 +70,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
     ngOnInit() {
         this.initializeColumns();
-        this.renderData();
+        this.Rerender();
     }
     ngDoCheck(): void {
-        console.log('ngDoCheck!', this._externalData, this._internalData);
-        if (this.sortApplied && this._externalData && this._internalData && this._externalData.length != this._internalData.length) {
-            console.log('Rerender called!');
+        if (this.sortApplied && this._externalData && this._internalData && (this._externalData.length != this._internalData.length)) {
             this.Rerender();
         }
     }
@@ -143,20 +140,18 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     Rerender(): void {
-        this._internalData = this._externalData;
-        this.renderData();
-    }
-
-    private renderData(): void {
         setTimeout(() => {
             this.initializeGridData();
             this.initializePaging();
             this.initializeSorting();
         },0);
     }
+
     private initializeGridData(): void {
-        if (!this._internalData && this._externalData) {
-            this._internalData = this._externalData.slice(0);
+        if (this._externalData) {
+            this._internalData = Object.assign([], this._externalData);
+        } else {
+            this._internalData = [];
         }
 
         this.gridData = Object.assign([], this._internalData);
@@ -217,6 +212,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         if (this._internalData && this.mode == EnumDataGridMode.OnClient) {
             this.totalItems = this._internalData.length;
         }
+
+        if (this.paginator) {
+            this.paginator.page = this.currentPage;
+            this.paginator.totalItems = this.totalItems;
+        }        
     }
     private isUndefinedOrNull(value: any): boolean {
         return value == undefined || value == null;
