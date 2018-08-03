@@ -1,4 +1,4 @@
-import { Component, ViewChild, Optional, Inject } from '@angular/core';
+import { Component, ViewChild, Optional, Inject, Input } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
@@ -18,7 +18,9 @@ let identifier = 0;
   }]
 })
 export class InputCurrencyComponent extends ElementBase<string> {
+  @Input() showInputGroup?: boolean = true;
   @ViewChild(NgModel) model: NgModel;
+  
   currencyCode: string;
 
   public identifier = `input-currency-${identifier++}`;

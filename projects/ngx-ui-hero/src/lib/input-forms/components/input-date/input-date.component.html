@@ -1,8 +1,8 @@
 <label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
 
 <div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text"><i class='fa fa-calendar' aria-hidden='true'></i></span>
+  <div class="input-group-prepend" *ngIf="showInputGroup">
+    <span class="input-group-text" [innerHtml]="inputGroupText"></span>
   </div>
 
   <input type="text" class="form-control" [id]="identifier" #dp="bsDatepicker"
@@ -12,6 +12,7 @@
     [placement]="placement"
     [placeholder]="placeholder"
     [disabled]="disabled" 
+    [bsConfig]="bsConfig"
     [(ngModel)]="value"
     (bsValueChange)="onValueChange($event)"
     [ngClass]="{

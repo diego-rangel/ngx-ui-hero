@@ -1,4 +1,5 @@
-import { Component, Input, ViewChild, Optional, Inject } from '@angular/core';
+import { Component, Input, ViewChild, Optional, Inject, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { ElementBase } from '../../base/element-base';
 import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
@@ -23,9 +24,11 @@ import {
     multi: true
   }]
 })
-export class InputEmailComponent extends ElementBase<string> {
+export class InputEmailComponent extends ElementBase<string> implements OnInit {
   @Input() public placeholder = '';
   @Input() public maxlength: number;
+  @Input() showInputGroup?: boolean = true;
+  @Input() inputGroupText?: string | SafeHtml;
 
   @ViewChild(NgModel) model: NgModel;
 
@@ -34,8 +37,15 @@ export class InputEmailComponent extends ElementBase<string> {
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<any>,
-    @Inject( INPUT_FORMS_CONFIG ) public config: InputFormsConfig
+    @Inject( INPUT_FORMS_CONFIG ) public config: InputFormsConfig,
+    private domSanitizer: DomSanitizer
   ) {
     super(validators, asyncValidators, config);
+  }
+
+  ngOnInit() {
+    if (!this.inputGroupText) {
+      this.inputGroupText = this.domSanitizer.bypassSecurityTrustHtml("<i class='fa fa-envelope-o' aria-hidden='true'></i>");
+    }
   }
 }

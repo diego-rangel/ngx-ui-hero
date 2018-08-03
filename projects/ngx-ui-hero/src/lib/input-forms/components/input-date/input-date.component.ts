@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, Optional, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
-import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig, BsLocaleService, BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { InputDateConfig } from './input-date-config';
 import { ElementBase } from '../../base/element-base';
@@ -23,18 +24,19 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, Inp
   @Input() placeholder = '';
   @Input() minDate?: Date;
   @Input() maxDate?: Date;
-  @Input() format?: string;
+  @Input() format?: string = 'MM/dd/yyyy';
+  @Input() showInputGroup?: boolean = true;
+  @Input() inputGroupText?: string | SafeHtml;
   @Input() placement?: string = 'bottom';
   @Input() theme?: string = 'theme-dark-blue';
   @Output() onChange = new EventEmitter<Date>();
+  @ViewChild('dp') datepicker: BsDatepickerDirective;
+  @ViewChild(NgModel) model: NgModel;
 
   locale?: string = 'en-gb';
   bsConfig: Partial<BsDatepickerConfig> = {
-    dateInputFormat: this.format,
     containerClass: this.theme
   };
-
-  @ViewChild(NgModel) model: NgModel;
 
   public identifier = `input-date-${identifier++}`;
 
@@ -42,7 +44,8 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, Inp
     @Optional() @Inject(NG_VALIDATORS) validators: ValidatorArray,
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: AsyncValidatorArray,
     @Inject( INPUT_FORMS_CONFIG ) public config: InputFormsConfig,
-    private localeService: BsLocaleService
+    private localeService: BsLocaleService,
+    private domSanitizer: DomSanitizer
   ) {
     super(validators, asyncValidators, config);
 
@@ -53,6 +56,11 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, Inp
 
   ngOnInit() {
     this.localeService.use(this.locale);
+    this.datepicker.setConfig();
+
+    if (!this.inputGroupText) {
+      this.inputGroupText = this.domSanitizer.bypassSecurityTrustHtml("<i class='fa fa-calendar' aria-hidden='true'></i>");
+    }
   }
 
   onValueChange(value: any): void {

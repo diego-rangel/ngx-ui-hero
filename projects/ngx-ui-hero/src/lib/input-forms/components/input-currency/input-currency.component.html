@@ -1,7 +1,7 @@
 <label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
 
 <div class="input-group">
-  <div class="input-group-prepend">
+  <div class="input-group-prepend" *ngIf="showInputGroup">
     <span class="input-group-text">{{currencyCode | currencySymbol}}</span>
   </div>
   <input
