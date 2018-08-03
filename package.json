@@ -1,6 +1,33 @@
 {
   "name": "ngx-ui-hero-app",
   "version": "0.0.0",
+  "homepage": "https://github.com/diego-rangel/ngx-ui-hero",
+  "description": "Simple, fast and reliable utilities for Angular.",
+  "author": {
+    "name": "Diego Rangel",
+    "url": "https://github.com/diego-rangel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/diego-rangel/ngx-ui-hero.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ng",
+    "ngx",
+    "angular",
+    "ui",
+    "hero",
+    "input",
+    "forms",
+    "input forms",
+    "datagrid",
+    "datatable",
+    "gridview"
+  ],
+  "bugs": {
+    "url": "https://github.com/diego-rangel/ngx-ui-hero/issues"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

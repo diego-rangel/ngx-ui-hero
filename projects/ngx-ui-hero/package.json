@@ -2,6 +2,7 @@
   "name": "ngx-ui-hero",
   "version": "3.0.5",
   "homepage": "https://github.com/diego-rangel/ngx-ui-hero",
+  "description": "Simple, fast and reliable utilities for Angular.",
   "author": {
     "name": "Diego Rangel",
     "url": "https://github.com/diego-rangel"
@@ -16,7 +17,13 @@
     "ngx",
     "angular",
     "ui",
-    "hero"
+    "hero",
+    "input",
+    "forms",
+    "input forms",
+    "datagrid",
+    "datatable",
+    "gridview"
   ],
   "bugs": {
     "url": "https://github.com/diego-rangel/ngx-ui-hero/issues"
