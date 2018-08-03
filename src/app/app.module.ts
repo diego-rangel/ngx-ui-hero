@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { NgxUiHeroModule, NgxUiHeroApiModule, NgxUiHeroInputFormsModule, ApiSettings, NgxUiHeroDataGridModule, DataGridConfig, InputFormsConfig } from 'ngx-ui-hero';
+import { NgxUiHeroModule, NgxUiHeroApiModule, NgxUiHeroInputFormsModule, ApiSettings, NgxUiHeroDataGridModule, DataGridConfig, InputFormsConfig, EnumAutoFitMode } from 'ngx-ui-hero';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HighlightModule } from 'ngx-highlightjs';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -39,6 +39,7 @@ export const apiSettings: ApiSettings = {
 };
 
 export const dataGridSettings: DataGridConfig = {
+  autoFitMode: EnumAutoFitMode.ByContent,
   styles: {
     striped: true,
     bordered: true,

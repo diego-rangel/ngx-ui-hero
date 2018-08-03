@@ -5,6 +5,7 @@ export interface DataGridConfig {
     mode?: EnumDataGridMode;
     paging?: DataGridPagingConfig;
     styles?: DataGridStylesConfig;
+    autoFitMode?: EnumAutoFitMode;
 }
 
 export interface DataGridPagingConfig {
@@ -49,4 +50,10 @@ export interface DataGridStylesConfig {
 export enum EnumDataGridMode {
     OnClient,
     OnServer
+}
+
+export enum EnumAutoFitMode {
+    Default,
+    ByCaption,
+    ByContent
 }

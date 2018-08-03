@@ -7,8 +7,8 @@ import { UiModule } from './../ui/ui.module';
 
 import { DATAGRID_CONFIG } from './data-grid-config.constants';
 
-import { DataGridConfig, EnumDataGridMode } from './data-grid-config';
-export { DataGridConfig, EnumDataGridMode } from './data-grid-config';
+import { DataGridConfig } from './data-grid-config';
+export { DataGridConfig, EnumDataGridMode, EnumAutoFitMode } from './data-grid-config';
 
 import { DataGridComponent } from './data-grid.component';
 export { DataGridComponent } from './data-grid.component';

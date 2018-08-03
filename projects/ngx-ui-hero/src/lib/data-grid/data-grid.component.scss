@@ -4,6 +4,17 @@
     table {
         margin-bottom: 0;
 
+        th {
+            > div > div {
+                flex-shrink: 0;
+            }
+        }    
+        td, th {
+            overflow: hidden;
+        }
+        td > * {
+            word-break: break-all;
+        }
         th.sortable {
             cursor: pointer;
         }
@@ -16,6 +27,9 @@
             white-space: nowrap;
             width: 1%;
         }
+    }
+    table.table-fixed {        
+        table-layout: fixed;
     }
     table.table-striped tbody tr:nth-of-type(odd) {
         background-color: #f9f9f9;

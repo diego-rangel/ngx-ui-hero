@@ -3,10 +3,12 @@ import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination'
 
 import { DATAGRID_CONFIG } from './data-grid-config.constants';
 import { DataGridColumnModel, EnumAlignment, EnumSortDirection, DataGridSortingModel } from './data-grid-column.model';
-import { DataGridConfig, EnumDataGridMode } from './data-grid-config';
+import { DataGridConfig, EnumDataGridMode, EnumAutoFitMode } from './data-grid-config';
 import { ActionsColumnDirective } from './data-grid-templates.directive';
 
 import * as _ from 'lodash';
+
+let identifier = 0;
 
 @Component({
     selector: 'datagrid',
@@ -18,6 +20,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     sortApplied: boolean = false;
     currentPage: number;
     gridData: Array<any>;
+
+    public identifier = `datagrid-${identifier++}`;
 
     @Input() columns: Array<DataGridColumnModel>;
     @Input() emptyResultsMessage?: string = 'No results found at this moment.';
@@ -41,6 +45,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() previousText: string = 'Previous';
     @Input() nextText: string = 'Next';
     @Input() lastText: string = 'Last';
+    @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.Default;
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef}) actionsColumnTemplate: ActionsColumnDirective;
@@ -49,6 +54,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     private _differ: any;
     private _internalData: Array<any>;
     private _externalData: Array<any>;
+
     get data(): Array<any> {
         return this._externalData;
     }    
@@ -149,6 +155,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             this.initializeGridData();
             this.initializePaging();
             this.initializeSorting();
+            this.handleAutoFit();
         },0);
     }
 
@@ -235,5 +242,28 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         const startItem = (page - 1) * this.itemsPerPage;
         const endItem = page * this.itemsPerPage;
         this.gridData = this._internalData.slice(startItem, endItem);
+    }
+    private handleAutoFit(): void {
+        switch (this.autoFitMode) {
+            case EnumAutoFitMode.ByCaption:
+                this.autofitByCaption();
+                break;
+            case EnumAutoFitMode.ByContent:
+            this.autofitByContent();
+                break;
+        
+            default:                
+                break;
+        }
+    }
+    private autofitByCaption(): void {
+        setTimeout(()=> {
+            
+        });
+    }
+    private autofitByContent(): void {
+        setTimeout(()=> {
+            
+        });
     }
 }

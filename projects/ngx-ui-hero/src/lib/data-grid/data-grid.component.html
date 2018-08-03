@@ -1,9 +1,10 @@
 <div class="ui-hero-datagrid">
     <div [ngClass]="{'table-responsive': responsive}">
-        <table class="table" [ngClass]="{
+        <table [id]="identifier" class="table" [ngClass]="{
             'table-striped': striped,
             'table-bordered': bordered,
-            'table-hover': hoverEffect
+            'table-hover': hoverEffect,
+            'table-fixed': autoFitMode == 1 || autoFitMode == 2
         }">
             <thead>
                 <tr>

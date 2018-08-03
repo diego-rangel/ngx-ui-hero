@@ -18,6 +18,38 @@ export class DatagridComponent implements OnInit {
       data: 'email'
     },
     {
+      caption: 'E-mail',
+      data: 'email'
+    },
+    {
+      caption: 'E-mail',
+      data: 'email'
+    },
+    {
+      caption: 'E-mail',
+      data: 'email'
+    },
+    {
+      caption: 'E-mail',
+      data: 'email'
+    },
+    {
+      caption: 'E-mail',
+      data: 'email'
+    },
+    {
+      caption: 'E-mail',
+      data: 'email'
+    },
+    {
+      caption: 'E-mail',
+      data: 'email'
+    },
+    {
+      caption: 'E-mail',
+      data: 'email'
+    },
+    {
       caption: 'Status',
       captionAlignment: EnumAlignment.Center,
       data: 'active',
