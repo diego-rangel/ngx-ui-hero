@@ -221,6 +221,27 @@
             <td>string</td>
             <td>When <b>showActionsColumn</b> is true, the captions text of the actions column.</td>
           </tr>
+          <tr>
+            <td>
+              <b>actionsColumnWidth</b><br/>
+              Default: <small>100px</small>
+            </td>
+            <td>string</td>
+            <td>When <b>showActionsColumn</b> is true, the width of the actions column.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>autoFitMode</b><br/>
+                Default: <small>Default</small>
+            </td>
+            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumAutoFitMode</a></td>
+            <td>
+              <p>Defines the way the datagrid should handle the columns sizes.</p>
+              <p><b>Default:</b> All collumns will try to fit the entire available space.</p>
+              <p><b>ByCaption:</b> All collumns will respect the width that you provided into the <b>columns</b> width property.</p>
+              <p><b>ByContent:</b> This is a special mode, where the datagrid will automatically keep you columns fitting the necessary space by their content.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

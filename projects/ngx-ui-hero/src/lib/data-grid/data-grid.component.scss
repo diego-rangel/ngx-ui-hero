@@ -22,14 +22,24 @@
             background-color: #dee2e6;
             color: #666;
         }
-
-        td.action, th.action {
-            white-space: nowrap;
-            width: 1%;
-        }
     }
     table.table-fixed {        
         table-layout: fixed;
+
+        td * {
+            word-break: keep-all;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+        }
+    }
+    table:not(.table-fixed) th.action {        
+        white-space: nowrap;
+        width: 1%;
+    }
+    table.table-animating td * {        
+        opacity: 0.5;
     }
     table.table-striped tbody tr:nth-of-type(odd) {
         background-color: #f9f9f9;

@@ -4,11 +4,12 @@
             'table-striped': striped,
             'table-bordered': bordered,
             'table-hover': hoverEffect,
+            'table-animating': animating,
             'table-fixed': autoFitMode == 1 || autoFitMode == 2
         }">
             <thead>
                 <tr>
-                    <th class="action text-center" *ngIf="showActionsColumn">{{actionsColumnCaption}}</th>
+                    <th class="action text-center" *ngIf="showActionsColumn" [ngStyle]="{'width': actionsColumnWidth}">{{actionsColumnCaption}}</th>
                     <th *ngFor="let column of columns; let i = index;" (click)="ToogleSorting(column)" class="{{column.captionClasses}}" [ngStyle]="{'width': column.width}" [ngClass]="{
                         'sortable': column.sortable,
                         'sorting': column.sort?.sorting,

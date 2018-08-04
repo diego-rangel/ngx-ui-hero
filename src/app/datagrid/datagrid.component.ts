@@ -18,43 +18,11 @@ export class DatagridComponent implements OnInit {
       data: 'email'
     },
     {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
-      caption: 'E-mail',
-      data: 'email'
-    },
-    {
       caption: 'Status',
       captionAlignment: EnumAlignment.Center,
       data: 'active',
       dataAlignment: EnumAlignment.Center,
-      width: '200px',
+      width: '100px',
       sortable: false
     }
   ];
@@ -77,7 +45,7 @@ export class DatagridComponent implements OnInit {
         return currentData ? `<span class='badge badge-success'>Ativo</span>` : `<span class='badge badge-danger'>Inativo</span>`;
       },
       dataAlignment: EnumAlignment.Center,
-      width: '200px',
+      width: '100px',
       sortable: false
     }
   ];
@@ -109,7 +77,7 @@ myBasicDatagridColumns: Array<DataGridColumnModel> = [
     captionAlignment: EnumAlignment.Center,
     data: 'active',
     dataAlignment: EnumAlignment.Center,
-    width: '200px',
+    width: '100px',
     sortable: false
   }
 ];
@@ -151,7 +119,7 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
       return currentData ? "<span class='badge badge-success'>Ativo</span>" : "<span class='badge badge-danger'>Inativo</span>";
     },
     dataAlignment: EnumAlignment.Center,
-    width: '200px',
+    width: '100px',
     sortable: false
   }
 ];
@@ -184,6 +152,51 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
       {
         name: 'Baar',
         email: 'my-email@domain.com',
+        active: false
+      },      
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },      
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },      
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },      
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },      
+      {
+        name: 'Baar',
+        email: 'my-email@domain.com',
+        active: false
+      },      
+      {
+        name: 'Very Very Very large Name for example',
+        email: 'myverylargeexampleofemail@domain.com',
+        active: false
+      },
+      {
+        name: 'Very Very Very large Name for example',
+        email: 'myverylargeexampleofemail@domain.com',
+        active: false
+      },
+      {
+        name: 'Very Very Very large Name for example',
+        email: 'myverylargeexampleofemail@domain.com',
+        active: false
+      },
+      {
+        name: 'Very Very Very large Name for example',
+        email: 'myverylargeexampleofemail@domain.com',
         active: false
       },
     ];

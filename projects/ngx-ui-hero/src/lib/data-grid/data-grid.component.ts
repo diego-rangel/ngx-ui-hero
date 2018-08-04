@@ -18,6 +18,7 @@ let identifier = 0;
 
 export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     sortApplied: boolean = false;
+    animating: boolean = false;
     currentPage: number;
     gridData: Array<any>;
 
@@ -41,6 +42,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() rotate?: boolean = true;
     @Input() showActionsColumn?: boolean = false;
     @Input() actionsColumnCaption?: string = '#';
+    @Input() actionsColumnWidth?: string = '100px';
     @Input() firstText: string = 'First';
     @Input() previousText: string = 'Previous';
     @Input() nextText: string = 'Next';
@@ -242,28 +244,71 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         const startItem = (page - 1) * this.itemsPerPage;
         const endItem = page * this.itemsPerPage;
         this.gridData = this._internalData.slice(startItem, endItem);
+        this.handleAutoFit();
     }
     private handleAutoFit(): void {
         switch (this.autoFitMode) {
-            case EnumAutoFitMode.ByCaption:
-                this.autofitByCaption();
-                break;
             case EnumAutoFitMode.ByContent:
-            this.autofitByContent();
-                break;
-        
+                this.autofitByContent();
+                break;        
             default:                
                 break;
         }
     }
-    private autofitByCaption(): void {
-        setTimeout(()=> {
-            
-        });
-    }
     private autofitByContent(): void {
+        if (!this.gridData || this.gridData.length == 0) {
+            return;
+        }
+
+        this.animating = true;
+
         setTimeout(()=> {
+            let widths: number[] = [];
+
+            for (let rowIndex = 0; rowIndex < this.gridData.length; rowIndex++) {
+                for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+                    let width: number = 150;
+                    let currentData: string;
+    
+                    if (!this.isUndefinedOrNull(this.columns[columnIndex].data)) {
+                        currentData = this.gridData[rowIndex][this.columns[columnIndex].data];
+                    }
+                    if (!this.isUndefinedOrNull(currentData)) {
+                        width = (currentData.toString().length * 10) + 20;
+                    }
+                    if (!this.isUndefinedOrNull(this.columns[columnIndex].caption)) {
+                        let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 60;
+
+                        if (widthByCaption > width) {
+                            width = widthByCaption;
+                        }
+                    }
+    
+                    if (this.isUndefinedOrNull(widths[columnIndex]) || width > widths[columnIndex]){
+                        widths[columnIndex] = width;
+                    }
+                }
+            }
+
+            let biggestColumnIndex = 0;
+            let biggestWidth = widths[widths.length - 1];
+
+            for (let i = (widths.length - 2); i >= 0; i--) {
+                if (widths[i] > biggestWidth) {
+                    biggestWidth = widths[i];
+                    biggestColumnIndex = i;
+                }
+            }
+    
+            for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+                if (columnIndex == biggestColumnIndex) {
+                    this.columns[columnIndex].width = `auto`;
+                } else {
+                    this.columns[columnIndex].width = `${widths[columnIndex]}px`;
+                }                
+            }
             
-        });
+            this.animating = false;
+        },0);
     }
 }
