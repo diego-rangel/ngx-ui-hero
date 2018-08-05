@@ -141,7 +141,7 @@ export class ComponentsComponent implements OnInit {
   myModel: string;
   myEmailModel: string;
   myTextAreaModel: string;
-  mySelectModel: any = '';
+  mySelectModel: any;
   myCheckboxModel: boolean;
   myRadioModel: any;
   myCurrencyModel: any;

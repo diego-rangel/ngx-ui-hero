@@ -61,9 +61,19 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, Inp
     if (!this.inputGroupText) {
       this.inputGroupText = this.domSanitizer.bypassSecurityTrustHtml("<i class='fa fa-calendar' aria-hidden='true'></i>");
     }
+
+    this.handleInitialValue();
   }
 
   onValueChange(value: any): void {
     this.onChange.emit(value);  
+  }
+
+  private handleInitialValue(): void {
+    setTimeout(()=> {
+      if (this.value && (typeof this.value == "string" || this.value instanceof String)) {        
+        this.value = new Date(this.value);
+      }
+    });
   }
 }

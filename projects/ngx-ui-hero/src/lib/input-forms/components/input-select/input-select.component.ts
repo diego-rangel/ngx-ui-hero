@@ -7,7 +7,6 @@ import {
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms';
 
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ElementBase } from '../../base/element-base';
 import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
@@ -24,7 +23,7 @@ let identifier = 0;
     multi: true
   }]
 })
-export class InputSelectComponent extends ElementBase<string> implements OnInit {
+export class InputSelectComponent extends ElementBase<any> implements OnInit {
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
   @Input() public defaultOption: string;
@@ -43,11 +42,7 @@ export class InputSelectComponent extends ElementBase<string> implements OnInit 
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      if (this.value === null) {
-        this.writeValue('');
-      }
-    }, 0);
+    this.handleInitialValue();
   }
 
   getOptionDisplayText(option: any): string {
@@ -57,5 +52,15 @@ export class InputSelectComponent extends ElementBase<string> implements OnInit 
   getOptionValue(option: any): string {
     const prop = this.valueProperty || 'value';
     return option[prop];
+  }
+
+  private handleInitialValue(): void {
+    setTimeout(()=> {
+      if (this.value != undefined && this.value != null) {
+        this.value = this.value.toString();
+      } else {
+        this.writeValue('');
+      }
+    });
   }
 }
