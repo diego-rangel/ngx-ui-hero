@@ -47,7 +47,7 @@
                     </td>
                 </tr>
             </tbody>
-            <tfoot *ngIf="!gridData || gridData.length == 0">
+            <tfoot *ngIf="sortApplied && (!gridData || gridData.length == 0)">
                 <tr>
                     <td class="empty-results text-center p-3" [attr.colspan]="columns?.length + (actionsColumnTemplate ? 1 : 0)">
                         <p class="mb-0">{{emptyResultsMessage}}</p>
