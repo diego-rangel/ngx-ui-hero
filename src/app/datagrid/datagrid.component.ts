@@ -11,11 +11,12 @@ export class DatagridComponent implements OnInit {
   myBasicDatagridColumns: Array<DataGridColumnModel> = [
     {
       caption: 'Name',
-      data: 'name',
-    },
+      data: 'name'
+    },    
     {
       caption: 'E-mail',
-      data: 'email'
+      data: 'email',
+      width: '250px'
     },
     {
       caption: 'Status',

@@ -85,6 +85,19 @@
             <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">DataGridColumnModel</a>[]</td>
             <td>The columns definitions.</td>
           </tr>
+          <tr class="table-warning">
+            <td>
+              <b>autoFitMode</b><br/>
+                Default: <small>Default</small>
+            </td>
+            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumAutoFitMode</a></td>
+            <td>
+              <p>Defines the way the datagrid should handle the columns sizes.</p>
+              <p><b>Default:</b> All collumns will try to fit the entire available space. It's recommend when you have a small number of columns.</p>
+              <p><b>ByCaption:</b> All collumns will respect the width that you provided into the <b>columns</b> width property. It's recommended when you want to define every single width for all your columns.</p>
+              <p><b>ByContent:</b> This is a special mode, where the datagrid will automatically keep your columns fitting the necessary space by their content. It's the most dynamic mode, strongly recommended to use.</p>
+            </td>
+          </tr>
           <tr>
             <td>
               <b>emptyResultsMessage</b><br/>
@@ -228,19 +241,6 @@
             </td>
             <td>string</td>
             <td>When <b>showActionsColumn</b> is true, the width of the actions column.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>autoFitMode</b><br/>
-                Default: <small>Default</small>
-            </td>
-            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumAutoFitMode</a></td>
-            <td>
-              <p>Defines the way the datagrid should handle the columns sizes.</p>
-              <p><b>Default:</b> All collumns will try to fit the entire available space.</p>
-              <p><b>ByCaption:</b> All collumns will respect the width that you provided into the <b>columns</b> width property.</p>
-              <p><b>ByContent:</b> This is a special mode, where the datagrid will automatically keep you columns fitting the necessary space by their content.</p>
-            </td>
           </tr>
         </tbody>
       </table>

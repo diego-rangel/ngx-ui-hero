@@ -250,6 +250,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         switch (this.autoFitMode) {
             case EnumAutoFitMode.ByContent:
                 this.autofitByContent();
+                break;
+            case EnumAutoFitMode.ByCaption:
+                this.autofitByCaption();
                 break;        
             default:                
                 break;
@@ -307,6 +310,23 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                     this.columns[columnIndex].width = `${widths[columnIndex]}px`;
                 }                
             }
+            
+            this.animating = false;
+        },0);
+    }
+    private autofitByCaption(): void {
+        if (!this.gridData || this.gridData.length == 0) {
+            return;
+        }
+
+        this.animating = true;
+
+        setTimeout(()=> {
+            for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+                if (this.isUndefinedOrNull(this.columns[columnIndex].width)) {
+                    this.columns[columnIndex].width = '150px';
+                }
+            }            
             
             this.animating = false;
         },0);

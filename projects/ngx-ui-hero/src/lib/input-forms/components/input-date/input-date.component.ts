@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, Optional, Inject, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, Optional, Inject, OnInit, Output, EventEmitter, DoCheck } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
 import { BsDatepickerConfig, BsLocaleService, BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ let identifier = 0;
     multi: true
   }]
 })
-export class InputDateComponent extends ElementBase<Date> implements OnInit, InputDateConfig {
+export class InputDateComponent extends ElementBase<Date> implements OnInit, DoCheck, InputDateConfig {
   @Input() placeholder = '';
   @Input() minDate?: Date;
   @Input() maxDate?: Date;
@@ -62,6 +62,9 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, Inp
       this.inputGroupText = this.domSanitizer.bypassSecurityTrustHtml("<i class='fa fa-calendar' aria-hidden='true'></i>");
     }
 
+    this.handleInitialValue();
+  }
+  ngDoCheck(): void {
     this.handleInitialValue();
   }
 
