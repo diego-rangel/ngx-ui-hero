@@ -42,7 +42,9 @@ export class InputSelectComponent extends ElementBase<any> implements OnInit {
   }
 
   ngOnInit(): void {
-    this.handleInitialValue();
+    setTimeout(()=> {
+      this.handleInitialValue();
+    });
   }
 
   getOptionDisplayText(option: any): string {
@@ -55,12 +57,10 @@ export class InputSelectComponent extends ElementBase<any> implements OnInit {
   }
 
   private handleInitialValue(): void {
-    setTimeout(()=> {
-      if (this.value != undefined && this.value != null) {
-        this.value = this.value.toString();
-      } else {
-        this.writeValue('');
-      }
-    });
+    if (this.value != undefined && this.value != null) {
+      this.value = this.value.toString();
+    } else {
+      this.writeValue('');
+    }
   }
 }
