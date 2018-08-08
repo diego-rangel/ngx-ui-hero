@@ -27,6 +27,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() columns: Array<DataGridColumnModel>;
     @Input() emptyResultsMessage?: string = 'No results found at this moment.';
     @Input() infoMessage?: string = 'Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.';
+    @Input() animated?: boolean = true;
     @Input() striped?: boolean = true;
     @Input() bordered?: boolean = true;
     @Input() hoverEffect?: boolean = true;
@@ -47,7 +48,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() previousText: string = 'Previous';
     @Input() nextText: string = 'Next';
     @Input() lastText: string = 'Last';
-    @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.Default;
+    @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef}) actionsColumnTemplate: ActionsColumnDirective;

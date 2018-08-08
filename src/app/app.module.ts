@@ -39,8 +39,8 @@ export const apiSettings: ApiSettings = {
 };
 
 export const dataGridSettings: DataGridConfig = {
-  autoFitMode: EnumAutoFitMode.ByContent,
   styles: {
+    animated: true,
     striped: true,
     bordered: true,
     hoverEffect: true,

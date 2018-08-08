@@ -3,7 +3,7 @@
 </a>
 
 <p align="center">
-The Best way to quickly develop any app with a very nice set of Components in <a href="https://angular.io/">Angular</a>.
+The Best way to quickly develop any app with a very nice set of Components in <a href="https://angular.io/">Angular</a> based on <a href="https://getbootstrap.com/">Bootstrap@4</a> styles.
 </p>
 
 <p align="center">

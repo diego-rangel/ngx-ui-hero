@@ -112,6 +112,7 @@ export const dataGridSettings: DataGridConfig = {
     itemsPerPage: 10
   },
   styles: {
+    animated: true,
     striped: true,
     bordered: true,
     hoverEffect: true,

@@ -45,6 +45,7 @@ export interface DataGridStylesConfig {
     bordered?: boolean;
     hoverEffect?: boolean;
     responsive?: boolean;
+    animated?: boolean;
 }
 
 export enum EnumDataGridMode {
