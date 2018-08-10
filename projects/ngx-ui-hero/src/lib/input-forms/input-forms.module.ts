@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { DebounceDirective } from './directives/debounce.directive';
 export { DebounceDirective } from './directives/debounce.directive';
@@ -53,11 +54,15 @@ import { InputDateComponent } from './components/input-date/input-date.component
 export { InputDateComponent } from './components/input-date/input-date.component';
 export { InputDateConfig } from './components/input-date/input-date-config';
 
+import { InputUploadComponent } from './components/input-upload/input-upload.component';
+export { InputUploadComponent } from './components/input-upload/input-upload.component';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     CurrencyMaskModule,
+    FileUploadModule,
     BsDatepickerModule.forRoot(),
   ],
   declarations: [
@@ -75,6 +80,7 @@ export { InputDateConfig } from './components/input-date/input-date-config';
     InputPercentComponent,
     InputNumberComponent,
     InputDateComponent,
+    InputUploadComponent
   ],
   exports: [
     AutoSelectOnFocusDirective,
@@ -91,7 +97,9 @@ export { InputDateConfig } from './components/input-date/input-date-config';
     InputPercentComponent,
     InputNumberComponent,
     InputDateComponent,
-    BsDatepickerModule
+    BsDatepickerModule,
+    FileUploadModule,
+    InputUploadComponent
   ],
 })
 export class NgxUiHeroInputFormsModule {

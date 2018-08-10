@@ -225,7 +225,7 @@
           <div class="card-body">
             <p>It automatically handles string dates into the model.</p>
 
-            <p>In order to localize the BsDatePicker form ngx-bootstrap, you <b>must</b> import your locale as described into the <a routerLink="/get-started">Get Started</a> section.</p>
+            <p>In order to localize the BsDatePicker from ngx-bootstrap, you <b>must</b> import your locale as described into the <a routerLink="/get-started">Get Started</a> section.</p>
 
             <div class="form-group">
               <input-date
@@ -299,6 +299,22 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-4">
+          <div class="card-header">Input Upload</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-upload
+                [label]="'My Upload'" 
+                [url]="'http://exemplo.com/api'"
+                [allowedExtensions]="['jpg']"
+                [maxFileSizeInMegaBytes]="4"
+                [disabled]="false"
+                (onError)="OnUploadError($event)">
+              </input-upload>
             </div>
           </div>
         </div>

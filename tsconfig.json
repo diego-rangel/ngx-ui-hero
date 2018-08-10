@@ -18,10 +18,10 @@
     ],
     "paths": {
       "ngx-ui-hero": [
-        "dist/ngx-ui-hero"
+        "projects/ngx-ui-hero/src"
       ],
       "ngx-ui-hero/*": [
-        "dist/ngx-ui-hero/*"
+        "projects/ngx-ui-hero/src/*"
       ]
     }
   }

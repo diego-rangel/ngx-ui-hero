@@ -1,0 +1,13 @@
+<input type="file" class="d-none" #fileInput ng2FileSelect [uploader]="uploader" />
+
+<div class="input-group">
+    <input type="text" class="form-control" [(ngModel)]="selectedFileName" placeholder="{{placeholder}}" readonly />
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="button" (click)="fileInput.click()"><i *ngIf="selectButtonIcon" class="{{selectButtonIcon}}"></i> {{selectButtonLabel}}</button>
+      <button class="btn btn-outline-danger" type="button" *ngIf="false"><i *ngIf="removeButtonIcon" class="{{removeButtonIcon}}"></i> {{removeButtonLabel}}</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <small class="text-danger">{{errorMessage}}</small>
+</div>

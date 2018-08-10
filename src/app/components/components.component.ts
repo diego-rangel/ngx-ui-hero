@@ -160,4 +160,6 @@ export class ComponentsComponent implements OnInit {
     this.myDateModel = new Date();
   }
 
+  OnUploadError(event: any): void {}
+
 }
