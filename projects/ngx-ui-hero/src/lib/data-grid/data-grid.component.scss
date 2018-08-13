@@ -14,7 +14,7 @@
             vertical-align: middle;
         }
         td > * {
-            word-break: break-all;
+            word-break: break-word;
         }
         th.sortable {
             cursor: pointer;
@@ -27,8 +27,8 @@
     table.table-fixed {        
         table-layout: fixed;
 
-        td * {
-            word-break: keep-all;
+        td:not(.td-break-word) * {
+            word-break: keep-word;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;

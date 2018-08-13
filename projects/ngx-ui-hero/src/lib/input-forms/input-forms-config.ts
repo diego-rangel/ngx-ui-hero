@@ -4,6 +4,7 @@ export interface InputFormsConfig {
     currency?: InputFormsCurrencyConfig;
     validationMessages?: InputFormsValidationConfig;
     date?: InputDateConfig;
+    upload?: InputFormsUploadConfig;
 }
 
 export interface InputFormsCurrencyConfig {
@@ -24,4 +25,20 @@ export interface InputFormsValidationConfig {
     minlength?: string;
     maxlength?: string;
     invalid?: string;
+}
+
+export interface InputFormsUploadConfig {
+    placeholder?: string;
+    dropZonePlaceholder?: string;
+    autoUpload?: boolean;
+    showDropZone?: boolean;
+    maxFileSize?: number;
+    selectButtonIcon?: string;
+    selectButtonLabel?: string;
+    removeButtonIcon?: string;
+    removeButtonLabel?: string;
+    fileTypeErrorMessage?: string;
+    fileSizeErrorMessage?: string;
+    maxFileSizeLabel?: string;
+    allowedExtensionsLabel?: string;
 }

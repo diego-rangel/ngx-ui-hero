@@ -7,25 +7,7 @@
 <section>
   <div class="main container">
     <div class="row">
-      <div class="col-12">
-        <div class="card mt-4">
-          <div class="card-header">Input Upload</div>
-          <div class="card-body">
-            <div class="form-group">
-              <input-upload
-                [label]="'My Upload'" 
-                [url]="'http://exemplo.com/api'"
-                [allowedExtensions]="['jpg']"
-                [maxFileSizeInMegaBytes]="4"
-                [disabled]="false"
-                [showDropZone]="true"
-                [autoUpload]="false"
-                (onError)="OnUploadError($event)">
-              </input-upload>
-            </div>
-          </div>
-        </div>
-
+      <div class="col">
         <div class="card mt-4">
           <div class="card-header">Input Text</div>
           <div class="card-body">
@@ -317,6 +299,180 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card mt-4">
+          <div class="card-header">Input Upload</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-upload
+                [label]="'My Upload'" 
+                [url]="'http://exemplo.com/api'"
+                [allowedExtensions]="['jpg', 'png']"
+                [maxFileSize]="4"
+                [disabled]="false"
+                [showDropZone]="true"
+                [autoUpload]="false"
+                (onError)="OnUploadError($event)">
+              </input-upload>
+
+              <div highlight="all" [language]="['Html']">
+                <pre><code [textContent]="uploadCode"></code></pre>
+              </div>
+
+              <h2>Inputs</h2>
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><b>url</b><br/>
+                      <small class="text-danger">Required</small>
+                      </td>
+                      <td>string</td>
+                      <td>The URL where the selected file should be uploaded.</td>
+                    </tr>
+                    <tr>
+                      <td><b>autoUpload</b><br/>
+                        Default: <small>true</small>
+                      </td>
+                      <td>boolean</td>
+                      <td>Defines when the component should automatically POST the selected file or not.</td>
+                    </tr>
+                    <tr>
+                      <td><b>label</b></td>
+                      <td>string</td>
+                      <td>The input's label.</td>
+                    </tr>
+                    <tr>
+                      <td><b>disabled</b><br/>
+                        Default: <small>false</small>
+                      </td>
+                      <td>boolean</td>
+                      <td>Disables the component.</td>
+                    </tr>
+                    <tr>
+                      <td><b>placeholder</b><br/>
+                        Default: <small>Select a file to upload...</small>
+                      </td>
+                      <td>string</td>
+                      <td>The input's placeholder.</td>
+                    </tr>
+                    <tr>
+                      <td><b>dropZonePlaceholder</b><br/>
+                        Default: <small>Drag & drop a file to import.</small>
+                      </td>
+                      <td>string</td>
+                      <td>The Dropzone's placeholder.</td>
+                    </tr>
+                    <tr>
+                      <td><b>showDropZone</b><br/>
+                        Default: <small>false</small>
+                      </td>
+                      <td>boolean</td>
+                      <td>Defines if the Dropzone should be visible or not.</td>
+                    </tr>
+                    <tr>
+                      <td><b>maxFileSize</b><br/>
+                        Default: <small>4</small>
+                      </td>
+                      <td>number</td>
+                      <td>Defines the max file size limit in <b>megabytes</b>. Use 0 for no limit.</td>
+                    </tr>
+                    <tr>
+                      <td><b>selectButtonIcon</b><br/>Default: <small>fa fa-folder</small>
+                      </td>
+                      <td>string</td>
+                      <td>The select button's icon.</td>
+                    </tr>
+                    <tr>
+                      <td><b>selectButtonLabel</b><br/>Default: <small>Select</small>
+                      </td>
+                      <td>string</td>
+                      <td>The select button's label.</td>
+                    </tr>
+                    <tr>
+                      <td><b>removeButtonIcon</b><br/>Default: <small>fa fa-trash</small>
+                      </td>
+                      <td>string</td>
+                      <td>The remove's button icon.</td>
+                    </tr>
+                    <tr>
+                      <td><b>removeButtonLabel</b><br/>Default: <small>Remove</small>
+                      </td>
+                      <td>string</td>
+                      <td>The remove's button label.</td>
+                    </tr>
+                    <tr>
+                      <td><b>fileTypeErrorMessage</b><br/>Default: <small>The file type [{{'{extension}'}}] is not allowed.</small>
+                      </td>
+                      <td>string</td>
+                      <td>The error message to show when the file type is invalid.</td>
+                    </tr>
+                    <tr>
+                      <td><b>fileSizeErrorMessage</b><br/>Default: <small>This file exceeds the max file size allowed of {{'{maxFileSize}'}}MB.</small>
+                      </td>
+                      <td>string</td>
+                      <td>The error message to show when the file size is invalid.</td>
+                    </tr>
+                    <tr>
+                      <td><b>maxFileSizeLabel</b><br/>Default: <small>Max file size:</small>
+                      </td>
+                      <td>string</td>
+                      <td>The max file size label.</td>
+                    </tr>
+                    <tr>
+                      <td><b>allowedExtensionsLabel</b><br/>Default: <small>Allowed extensions:</small>
+                      </td>
+                      <td>string</td>
+                      <td>The allowed extensions label.</td>
+                    </tr>
+                    <tr>
+                      <td><b>allowedExtensions</b></td>
+                      <td>string[]</td>
+                      <td>The allowed extensions.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h2>Outputs</h2>
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><b>onSuccessFileAdded</b></td>
+                      <td>Emitted when the <b>autoUpload</b> is <b>false</b> and a file is selected.</td>
+                    </tr>
+                    <tr>
+                      <td><b>onSuccessUpload</b></td>
+                      <td>Emitted when the <b>autoUpload</b> is <b>true</b> and a file is selected.</td>
+                    </tr>
+                    <tr>
+                      <td><b>onError</b></td>
+                      <td>Emitted every time an error occurs.</td>
+                    </tr>
+                    <tr>
+                      <td><b>onClear</b></td>
+                      <td>Emitted every time the component is cleared.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

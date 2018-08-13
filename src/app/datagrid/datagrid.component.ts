@@ -181,7 +181,7 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
         active: false
       },      
       {
-        name: 'Very Very Very large Name for example',
+        name: 'Very Very Very large Name for example Very Very Very large Name for example',
         email: 'myverylargeexampleofemail@domain.com',
         active: false
       },

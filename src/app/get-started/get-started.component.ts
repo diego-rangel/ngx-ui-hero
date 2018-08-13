@@ -69,6 +69,21 @@ export const inputFormsConfig: InputFormsConfig = {
     theme: 'theme-dark-blue',
     placement: 'bottom',
     locale: 'pt-br'
+  },
+  upload: {
+    placeholder: 'Select a file to upload...',
+    dropZonePlaceholder: 'Drag & drop a file to import.',
+    autoUpload: true,
+    showDropZone: true,
+    maxFileSize: 4,
+    selectButtonIcon: 'fa fa-folder',
+    selectButtonLabel: 'Select',
+    removeButtonIcon: 'fa fa-trash',
+    removeButtonLabel: 'Remove',
+    fileTypeErrorMessage: 'The file type [{extension}] is not allowed.',
+    fileSizeErrorMessage: 'This file exceeds the max file size allowed of {maxFileSize}MB.',
+    maxFileSizeLabel: 'Max file size:',
+    allowedExtensionsLabel: 'Allowed extensions:'
   }
 };
 

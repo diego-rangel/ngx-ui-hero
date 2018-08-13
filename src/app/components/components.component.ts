@@ -139,6 +139,19 @@ export class ComponentsComponent implements OnInit {
 </input-date>
   `;
 
+  uploadCode = `
+<input-upload
+  [label]="'My Upload'" 
+  [url]="'http://exemplo.com/api'"
+  [allowedExtensions]="['jpg', 'png']"
+  [maxFileSize]="4"
+  [disabled]="false"
+  [showDropZone]="true"
+  [autoUpload]="false"
+  (onError)="OnUploadError($event)">
+</input-upload>
+  `;
+
   myModel: string;
   myEmailModel: string;
   myTextAreaModel: string;

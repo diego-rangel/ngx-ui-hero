@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, Optional, Inject, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, Optional, Inject, OnInit, DoCheck } from '@angular/core';
 
 import {
   NgModel,
@@ -23,7 +23,7 @@ let identifier = 0;
     multi: true
   }]
 })
-export class InputSelectComponent extends ElementBase<any> implements OnInit {
+export class InputSelectComponent extends ElementBase<any> implements OnInit, DoCheck {
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
   @Input() public defaultOption: string;
@@ -45,6 +45,9 @@ export class InputSelectComponent extends ElementBase<any> implements OnInit {
     setTimeout(()=> {
       this.handleInitialValue();
     });
+  }
+  ngDoCheck(): void {
+    this.handleInitialValue();
   }
 
   getOptionDisplayText(option: any): string {

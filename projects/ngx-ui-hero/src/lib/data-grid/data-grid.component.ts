@@ -57,6 +57,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     private _differ: any;
     private _internalData: Array<any>;
     private _externalData: Array<any>;
+    private _maxWidth = 400;
 
     get data(): Array<any> {
         return this._externalData;
@@ -255,12 +256,14 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             case EnumAutoFitMode.ByCaption:
                 this.autofitByCaption();
                 break;        
-            default:                
+            default:    
+                this.autofitByFixedWidths();            
                 break;
         }
     }
     private autofitByContent(): void {
         if (!this.gridData || this.gridData.length == 0) {
+            this.autofitByCaption();
             return;
         }
 
@@ -293,20 +296,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                     }
                 }
             }
-
-            let biggestColumnIndex = 0;
-            let biggestWidth = widths[widths.length - 1];
-
-            for (let i = (widths.length - 2); i >= 0; i--) {
-                if (widths[i] > biggestWidth) {
-                    biggestWidth = widths[i];
-                    biggestColumnIndex = i;
-                }
-            }
     
             for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
-                if (columnIndex == biggestColumnIndex) {
-                    this.columns[columnIndex].width = `auto`;
+                if (widths[columnIndex] > this._maxWidth) {
+                    this.columns[columnIndex].width = `${this._maxWidth}px`;
+                    this.columns[columnIndex].dataClasses = 'td-break-word';
                 } else {
                     this.columns[columnIndex].width = `${widths[columnIndex]}px`;
                 }                
@@ -316,10 +310,20 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         },0);
     }
     private autofitByCaption(): void {
-        if (!this.gridData || this.gridData.length == 0) {
-            return;
-        }
+        this.animating = true;
 
+        setTimeout(()=> {
+            for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+                if (this.isUndefinedOrNull(this.columns[columnIndex].width)) {
+                    let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 60;
+                    this.columns[columnIndex].width = `${widthByCaption}px`;
+                }
+            }            
+            
+            this.animating = false;
+        },0);
+    }
+    private autofitByFixedWidths(): void {
         this.animating = true;
 
         setTimeout(()=> {
