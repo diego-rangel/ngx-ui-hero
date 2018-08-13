@@ -4,10 +4,19 @@
     <input type="text" class="form-control" [(ngModel)]="selectedFileName" placeholder="{{placeholder}}" readonly />
     <div class="input-group-append">
       <button class="btn btn-primary" type="button" (click)="fileInput.click()"><i *ngIf="selectButtonIcon" class="{{selectButtonIcon}}"></i> {{selectButtonLabel}}</button>
-      <button class="btn btn-outline-danger" type="button" *ngIf="false"><i *ngIf="removeButtonIcon" class="{{removeButtonIcon}}"></i> {{removeButtonLabel}}</button>
+      <button class="btn btn-outline-danger" type="button" *ngIf="selectedFileName" (click)="Clear()"><i *ngIf="removeButtonIcon" class="{{removeButtonIcon}}"></i> {{removeButtonLabel}}</button>
     </div>
 </div>
 
 <div *ngIf="errorMessage">
     <small class="text-danger">{{errorMessage}}</small>
+</div>
+
+<div ng2FileDrop *ngIf="showDropZone"
+    [ngClass]="{'mouse-over': hasDropZoneOver}"
+    (fileOver)="OnFileOver($event)"
+    [uploader]="uploader"
+    class="dropzone">
+    <i class="fa fa-cloud-download fa-4x"></i><br/>
+    <span>{{dropZonePlaceholder}}</span>
 </div>

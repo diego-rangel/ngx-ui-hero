@@ -9,6 +9,24 @@
     <div class="row">
       <div class="col-12">
         <div class="card mt-4">
+          <div class="card-header">Input Upload</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-upload
+                [label]="'My Upload'" 
+                [url]="'http://exemplo.com/api'"
+                [allowedExtensions]="['jpg']"
+                [maxFileSizeInMegaBytes]="4"
+                [disabled]="false"
+                [showDropZone]="true"
+                [autoUpload]="false"
+                (onError)="OnUploadError($event)">
+              </input-upload>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-4">
           <div class="card-header">Input Text</div>
           <div class="card-body">
             <div class="form-group">
@@ -299,22 +317,6 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mt-4">
-          <div class="card-header">Input Upload</div>
-          <div class="card-body">
-            <div class="form-group">
-              <input-upload
-                [label]="'My Upload'" 
-                [url]="'http://exemplo.com/api'"
-                [allowedExtensions]="['jpg']"
-                [maxFileSizeInMegaBytes]="4"
-                [disabled]="false"
-                (onError)="OnUploadError($event)">
-              </input-upload>
             </div>
           </div>
         </div>

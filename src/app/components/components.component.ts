@@ -1,3 +1,4 @@
+import { AlertService } from 'ngx-ui-hero';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -154,12 +155,16 @@ export class ComponentsComponent implements OnInit {
     { value: 2, text: 'Option 2' }
   ];
 
-  constructor() { }
+  constructor(
+    private alert: AlertService
+  ) { }
 
   ngOnInit() {
     this.myDateModel = new Date();
   }
 
-  OnUploadError(event: any): void {}
+  OnUploadError(event: any): void {
+    this.alert.error('Oops =(', "It's only a test and does not have a test backend.");
+  }
 
 }

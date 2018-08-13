@@ -1,0 +1,30 @@
+.dropzone { 
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed #CCC;
+    margin: 10px 0;
+    padding: 40px;
+    text-align: center;
+
+    i {
+        color: #CCC;
+    }
+    span {
+        color: #999;
+    }
+
+    
+}
+.dropzone,
+.dropzone >* {
+    transition: color .35s ease-in-out, background-color .35s ease-in-out;
+}
+.dropzone.mouse-over { 
+    background-color: #f0f0f0;
+    border: 2px solid #CCC;
+    opacity: .5;
+
+    i, span {        
+        color: #292929;
+    }
+}
