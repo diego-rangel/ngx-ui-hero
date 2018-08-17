@@ -336,4 +336,18 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             this.animating = false;
         },0);
     }
+    private getPropertyValue(propertyPath: string, object: any): any {
+        let parts: string[] = propertyPath.split( "." );
+        let property: any = object || {};
+      
+        for (let i = 0; i < parts.length; i++) {
+            if (!property) {
+                return null;
+            }
+
+            property = property[parts[i]];
+        }
+      
+        return property;
+    }
 }
