@@ -43,7 +43,8 @@
                         'text-center': column.dataAlignment == 1,
                         'text-right': column.dataAlignment == 2
                     }">
-                        <span *ngIf="!column.render">{{row[column.data]}}</span>
+                        <span *ngIf="!column.render && column.data?.split('.').length == 1">{{row[column.data]}}</span>
+                        <span *ngIf="!column.render && column.data?.split('.').length > 1">{{RenderPropertyValue(column.data, row)}}</span>
                         <span *ngIf="column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
                     </td>
                 </tr>

@@ -41,13 +41,13 @@ export class DatagridComponent implements OnInit {
     {
       caption: 'Status',
       captionAlignment: EnumAlignment.Center,
+      dataAlignment: EnumAlignment.Center,
       data: 'active',
+      width: '100px',
+      sortable: false,
       render: (row, currentData, index) => {
         return currentData ? `<span class='badge badge-success'>Ativo</span>` : `<span class='badge badge-danger'>Inativo</span>`;
-      },
-      dataAlignment: EnumAlignment.Center,
-      width: '100px',
-      sortable: false
+      }
     }
   ];
 

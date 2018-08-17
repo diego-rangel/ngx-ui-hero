@@ -163,6 +163,21 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         },0);
     }
 
+    RenderPropertyValue(propertyPath: string, object: any): any {
+        let parts: string[] = propertyPath.split( "." );
+        let property: any = object || {};
+      
+        for (let i = 0; i < parts.length; i++) {
+            if (!property) {
+                return null;
+            }
+
+            property = property[parts[i]];
+        }
+
+        return property;
+    }
+
     private initializeGridData(): void {
         if (this._externalData) {
             this._internalData = Object.assign([], this._externalData);
@@ -277,14 +292,18 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                     let width: number = 150;
                     let currentData: string;
     
-                    if (!this.isUndefinedOrNull(this.columns[columnIndex].data)) {
-                        currentData = this.gridData[rowIndex][this.columns[columnIndex].data];
+                    if (!this.isUndefinedOrNull(this.columns[columnIndex].data)) {                        
+                        if (this.columns[columnIndex].data.split('.').length > 1) {
+                            currentData = this.RenderPropertyValue(this.columns[columnIndex].data, this.gridData[rowIndex]);
+                        } else {
+                            currentData = this.gridData[rowIndex][this.columns[columnIndex].data];
+                        }
                     }
                     if (!this.isUndefinedOrNull(currentData)) {
                         width = (currentData.toString().length * 10) + 20;
                     }
                     if (!this.isUndefinedOrNull(this.columns[columnIndex].caption)) {
-                        let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 60;
+                        let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 40;
 
                         if (widthByCaption > width) {
                             width = widthByCaption;
@@ -315,7 +334,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         setTimeout(()=> {
             for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
                 if (this.isUndefinedOrNull(this.columns[columnIndex].width)) {
-                    let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 60;
+                    let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 40;
                     this.columns[columnIndex].width = `${widthByCaption}px`;
                 }
             }            
@@ -335,19 +354,5 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             
             this.animating = false;
         },0);
-    }
-    private getPropertyValue(propertyPath: string, object: any): any {
-        let parts: string[] = propertyPath.split( "." );
-        let property: any = object || {};
-      
-        for (let i = 0; i < parts.length; i++) {
-            if (!property) {
-                return null;
-            }
-
-            property = property[parts[i]];
-        }
-      
-        return property;
-    }
+    }    
 }
