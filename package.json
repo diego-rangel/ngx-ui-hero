@@ -23,7 +23,10 @@
     "input forms",
     "datagrid",
     "datatable",
-    "gridview"
+    "gridview",
+    "upload",
+    "file upload",
+    "chunk"
   ],
   "bugs": {
     "url": "https://github.com/diego-rangel/ngx-ui-hero/issues"

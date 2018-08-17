@@ -7,8 +7,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./components.component.scss']
 })
 export class ComponentsComponent implements OnInit {
-  @ViewChild('upload') inputUpload: InputUploadComponent;
-
   inputTextCode = `
 <input-text
   [label]="'My Label here'"
@@ -145,11 +143,26 @@ export class ComponentsComponent implements OnInit {
 <input-upload
   [label]="'My Upload'"
   [url]="'http://exemplo.com/api'"
+  [autoUpload]="true"
   [allowedExtensions]="['jpg', 'png']"
   [maxFileSize]="4"
   [disabled]="false"
   [showDropZone]="true"
+  (onError)="OnUploadError($event)">
+</input-upload>
+  `;
+
+  uploadCodeChunked = `
+<input-upload
+  [label]="'My Upload chunked'"
+  [url]="'http://exemplo.com/api'"
   [autoUpload]="false"
+  [allowedExtensions]="['jpg', 'png']"
+  [maxFileSize]="4"
+  [disabled]="false"
+  [chunk]="true"
+  [showDropZone]="true"
+  [showQueue]="true"
   (onError)="OnUploadError($event)">
 </input-upload>
   `;
@@ -180,10 +193,6 @@ export class ComponentsComponent implements OnInit {
 
   OnUploadError(event: any): void {
     this.alert.error('Oops =(', "It's only a test and does not have a test backend.");
-  }
-
-  Upar(): void {
-    this.inputUpload.StartUploadManually();
   }
 
 }

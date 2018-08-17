@@ -306,22 +306,42 @@
         <div class="card mt-4">
           <div class="card-header">Input Upload</div>
           <div class="card-body">
-            <button type="button" class="btn btn-primary" (click)="Upar()">GO!</button>
             <div class="form-group">
-              <input-upload #upload
-                [label]="'My Upload'"
-                [url]="'http://exemplo.com/api'"
-                [maxFileSize]="4"
-                [disabled]="false"
-                [showDropZone]="true"
-                [chunk]="true"
-                [showQueue]="true"
-                [autoUpload]="false"
-                (onError)="OnUploadError($event)">
-              </input-upload>
+              <div class="row">
+                <div class="col-lg-6">
+                  <input-upload
+                    [label]="'My Upload'"
+                    [url]="'http://exemplo.com/api'"
+                    [autoUpload]="true"
+                    [allowedExtensions]="['jpg', 'png']"
+                    [maxFileSize]="4"
+                    [disabled]="false"
+                    [showDropZone]="true"
+                    (onError)="OnUploadError($event)">
+                  </input-upload>
 
-              <div highlight="all" [language]="['Html']">
-                <pre><code [textContent]="uploadCode"></code></pre>
+                  <div highlight="all" [language]="['Html']">
+                    <pre><code [textContent]="uploadCode"></code></pre>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <input-upload
+                    [label]="'My Upload chunked'"
+                    [url]="'http://exemplo.com/api'"
+                    [autoUpload]="false"
+                    [allowedExtensions]="['jpg', 'png']"
+                    [maxFileSize]="4"
+                    [disabled]="false"
+                    [chunk]="true"
+                    [showDropZone]="true"
+                    [showQueue]="true"
+                    (onError)="OnUploadError($event)">
+                  </input-upload>
+
+                  <div highlight="all" [language]="['Html']">
+                    <pre><code [textContent]="uploadCodeChunked"></code></pre>
+                  </div>
+                </div>
               </div>
 
               <h2>Inputs</h2>
@@ -383,11 +403,46 @@
                       <td>Defines if the Dropzone should be visible or not.</td>
                     </tr>
                     <tr>
-                      <td><b>maxFileSize</b><br/>
-                        Default: <small>4</small>
+                      <td><b>showQueue</b><br/>
+                        Default: <small>false</small>
+                      </td>
+                      <td>boolean</td>
+                      <td>Defines if the Files queue should be visible or not. Currently only visible when chunking is enabled.</td>
+                    </tr>
+                    <tr>
+                      <td><b>chunk</b><br/>
+                        Default: <small>false</small>
+                      </td>
+                      <td>boolean</td>
+                      <td>Defines when the selected file should be chunked or not. If true, the selected file will be splitted into N parts according to a <b>chunkSize</b>.</td>
+                    </tr>
+                    <tr>
+                      <td><b>chunkRetries</b><br/>
+                        Default: <small>3</small>
                       </td>
                       <td>number</td>
-                      <td>Defines the max file size limit in <b>megabytes</b>. Use 0 for no limit.</td>
+                      <td>Defines how many times each chunk part should be retried in case of errors.</td>
+                    </tr>
+                    <tr>
+                      <td><b>chunkSize</b><br/>
+                        Default: <small>1048576</small>
+                      </td>
+                      <td>number</td>
+                      <td>Defines the max size for each chunk part in <b>bytes</b>.</td>
+                    </tr>
+                    <tr>
+                      <td><b>maxFileSize</b><br/>
+                        Default: <small>0</small>
+                      </td>
+                      <td>number</td>
+                      <td>Defines the max file size limit in <b>megabytes</b>. Omit or use 0 for no limit.</td>
+                    </tr>
+                    <tr>
+                      <td><b>withCredentials</b><br/>
+                        Default: <small>false</small>
+                      </td>
+                      <td>boolean</td>
+                      <td>Defines if the POST requests should contain the <b>withCredentials</b> parameter.</td>
                     </tr>
                     <tr>
                       <td><b>selectButtonIcon</b><br/>Default: <small>fa fa-folder</small>
@@ -457,12 +512,16 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><b>onSuccessFileAdded</b></td>
-                      <td>Emitted when the <b>autoUpload</b> is <b>false</b> and a file is selected.</td>
+                      <td><b>onFileAdded</b></td>
+                      <td>Emitted every time a file is selected.</td>
                     </tr>
                     <tr>
-                      <td><b>onSuccessUpload</b></td>
-                      <td>Emitted when the <b>autoUpload</b> is <b>true</b> and a file is selected.</td>
+                      <td><b>onUploadComplete</b></td>
+                      <td>Emitted when the selected file is completely uploaded. When chunking, it's called when all parts were successfully sent.</td>
+                    </tr>
+                    <tr>
+                      <td><b>onChunkFileUpload</b></td>
+                      <td>Emitted when <b>chunk</b> is true, for each successfully chunk part upload.</td>
                     </tr>
                     <tr>
                       <td><b>onError</b></td>

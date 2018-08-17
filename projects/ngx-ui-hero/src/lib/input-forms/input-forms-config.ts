@@ -32,6 +32,11 @@ export interface InputFormsUploadConfig {
     dropZonePlaceholder?: string;
     autoUpload?: boolean;
     showDropZone?: boolean;
+    showQueue?: boolean;
+    withCredentials?: boolean;
+    chunk?: boolean;
+    chunkSize?: number;
+    chunkRetries?: number;
     maxFileSize?: number;
     selectButtonIcon?: string;
     selectButtonLabel?: string;

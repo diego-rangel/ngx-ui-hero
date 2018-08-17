@@ -1,7 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FileUploader, FileItem } from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
 import { retry } from 'rxjs/operators';
+
+import { InputFormsConfig } from './../../input-forms-config';
+import { INPUT_FORMS_CONFIG } from './../../input-forms-config.constants';
 
 @Component({
     selector: 'input-upload',
@@ -17,10 +20,12 @@ export class InputUploadComponent implements OnInit {
     @Input() disabled?: boolean = false;
     @Input() autoUpload?: boolean = true;
     @Input() showDropZone?: boolean = false;
+    @Input() showQueue?: boolean = false;
     @Input() chunk?: boolean = false;
     @Input() chunkSize?: number = 1048576;
-    @Input() showQueue?: boolean = false;
-    @Input() maxFileSize?: number = 4;
+    @Input() chunkRetries?: number = 3;
+    @Input() maxFileSize?: number = 0;
+    @Input() withCredentials?: boolean = false;
     @Input() selectButtonIcon?: string = 'fa fa-folder';
     @Input() selectButtonLabel?: string = 'Select';
     @Input() removeButtonIcon?: string = 'fa fa-trash';
@@ -30,8 +35,9 @@ export class InputUploadComponent implements OnInit {
     @Input() fileSizeErrorMessage?: string = 'This file exceeds the max file size allowed of {maxFileSize}MB.';
     @Input() maxFileSizeLabel?: string = 'Max file size:';
     @Input() allowedExtensionsLabel?: string = 'Allowed extensions:';
-    @Output() onSuccessFileAdded = new EventEmitter<any>();
-    @Output() onSuccessUpload = new EventEmitter<any>();
+    @Output() onFileAdded = new EventEmitter<any>();
+    @Output() onUploadComplete = new EventEmitter();
+    @Output() onChunkFileUpload = new EventEmitter<any>();
     @Output() onError = new EventEmitter<any>();
     @Output() onClear = new EventEmitter();
 
@@ -42,15 +48,21 @@ export class InputUploadComponent implements OnInit {
     uploader: FileUploader;
     hasDropZoneOver: boolean = false;
     chunks: any[];
+    chunkProgress: number = 0;
 
     constructor(
-      private http: HttpClient
-    ) { }
+        @Inject(INPUT_FORMS_CONFIG) @Optional() config: InputFormsConfig,
+        private http: HttpClient
+    ) {
+        if (config && config.upload) {
+            Object.assign(this, config.upload);
+        }        
+    }
 
     ngOnInit() {
         this.uploader = new FileUploader({
             url: this.url,
-            autoUpload: this.autoUpload,
+            autoUpload: false,
             maxFileSize: this.maxFileSize * 1000000,
         });
 
@@ -58,6 +70,7 @@ export class InputUploadComponent implements OnInit {
     }
 
     Clear(): void {
+        this.chunkProgress = 0;
         this.selectedFileModel = null;
         this.selectedFileName = '';
         this.errorMessage = null;
@@ -103,34 +116,35 @@ export class InputUploadComponent implements OnInit {
     private startChunkUpload(): void {
         let chunksPromises: Array<Promise<void>> = [];
 
+        this.chunkProgress = 0;
+
         for (let i = 0; i < this.chunks.length; i++) {
             chunksPromises.push(this.sendChunk(this.chunks[i]));
         }
 
         Promise.all(chunksPromises)
             .then(()=> {
-                console.log('FIM');
+                this.chunkProgress = 100;
+                this.onUploadComplete.emit();
             })
-            .catch(()=> {
-                console.error('DEU RUIM');
+            .catch(error => {
+                this.onError.emit(error);
             });
     }
     private sendChunk(chunk: any): Promise<void> {
         let promise = new Promise<void>((resolve, reject) => {
-            chunk.progress = Math.random() * 10;
-
             let formData = new FormData();
             formData.append("file", chunk.blob, chunk.name);
 
-            this.http.post('http://localhost:64538/api/files/chunk', formData, { withCredentials: false })
-                .pipe(retry(3))
+            this.http.post(this.url, formData, { withCredentials: this.withCredentials })
+                .pipe(retry(this.chunkRetries))
                 .subscribe(
                     result => {
-                        chunk.progress = 100;
+                        this.chunkProgress += 100 / this.chunks.length;
+                        this.onChunkFileUpload.emit(chunk.blob);
                         resolve();
                     },
                     error => {
-                        console.error(error);
                         reject();
                     }
                 );
@@ -167,15 +181,11 @@ export class InputUploadComponent implements OnInit {
     }
     private handleUploaderEvents(): void {
         this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
-            this.SetSelectedFileName(item.file.name);
-            this.onSuccessUpload.emit({item, response, status});
+            this.onUploadComplete.emit(item);
         };
         this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
             this.Clear();
             this.onError.emit({item, response, status});
-        };
-        this.uploader.onBeforeUploadItem = (item: FileItem) => {
-            this.validate(item);
         };
     }
     private addSelectedFileForManualUploading(file: any): void {
@@ -197,7 +207,11 @@ export class InputUploadComponent implements OnInit {
           this.splitSelectedFileInChunks();
         }
 
-        this.onSuccessFileAdded.emit(file);
+        this.onFileAdded.emit(file);
+
+        if (this.autoUpload) {
+            this.StartUploadManually();
+        }
       }
     }
     private validate(item: any): boolean {

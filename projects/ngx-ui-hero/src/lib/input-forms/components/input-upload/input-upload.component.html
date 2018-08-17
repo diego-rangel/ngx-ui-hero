@@ -26,20 +26,20 @@
     <small class="text-danger">{{errorMessage}}</small>
 </div>
 
-<div class="chunks-queue" *ngIf="chunk && chunks?.length > 0 && showQueue" [ngClass]="{'scrollable': chunks?.length > 5}">
-  <div class="chunk" *ngFor="let item of chunks;">
+<div class="chunks-queue" *ngIf="chunk && chunks?.length > 0 && showQueue">
+  <div class="chunk">
     <div class="d-flex">
       <div class="icon mr-2">
         <i class="fa fa-file fa-2x"></i>
       </div>
       <div class="data flex-grow-1">
         <div class="d-flex align-items-center">
-          <small class="file-name"><b>{{item.name}}</b></small>
-          <small class="file-size ml-auto">{{chunkSize / 1000 | number:'1.2-2'}}KB</small>
+          <small class="file-name"><b>{{selectedFileName}} ({{chunks.length}})</b></small>
+          <small class="file-size ml-auto">{{selectedFileBlob?.size / 1000 | number:'1.2-2'}}KB</small>
         </div>
         <progressbar
-          [value]="item.progress || 0">
-          {{item.progress || 0}}%
+          [value]="chunkProgress">
+          {{chunkProgress}}%
         </progressbar>
       </div>
     </div>

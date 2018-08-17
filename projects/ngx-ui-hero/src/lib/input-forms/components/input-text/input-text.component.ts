@@ -10,7 +10,6 @@ import { AsyncValidatorArray, ValidatorArray } from '../../base/validate';
 let identifier = 0;
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'input-text',
   templateUrl: './input-text.component.html',
   providers: [{
