@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FileUploader, FileLikeObject, FileItem } from 'ng2-file-upload';
+import { HttpClient } from '@angular/common/http';
+import { FileUploader, FileItem } from 'ng2-file-upload';
+import { retry } from 'rxjs/operators';
 
 @Component({
     selector: 'input-upload',
@@ -15,9 +17,10 @@ export class InputUploadComponent implements OnInit {
     @Input() disabled?: boolean = false;
     @Input() autoUpload?: boolean = true;
     @Input() showDropZone?: boolean = false;
-    // @Input() showQueue?: boolean = false;
+    @Input() chunk?: boolean = false;
+    @Input() chunkSize?: number = 1048576;
+    @Input() showQueue?: boolean = false;
     @Input() maxFileSize?: number = 4;
-    // @Input() queueLimit?: number = 10;
     @Input() selectButtonIcon?: string = 'fa fa-folder';
     @Input() selectButtonLabel?: string = 'Select';
     @Input() removeButtonIcon?: string = 'fa fa-trash';
@@ -32,86 +35,190 @@ export class InputUploadComponent implements OnInit {
     @Output() onError = new EventEmitter<any>();
     @Output() onClear = new EventEmitter();
 
-    selectedFile: any;
+    selectedFileBlob: any;
+    selectedFileModel: any;
     selectedFileName: string = '';
     errorMessage: string;
     uploader: FileUploader;
-    hasDropZoneOver:boolean = false;
+    hasDropZoneOver: boolean = false;
+    chunks: any[];
 
-    constructor() { }
+    constructor(
+      private http: HttpClient
+    ) { }
 
     ngOnInit() {
         this.uploader = new FileUploader({
             url: this.url,
             autoUpload: this.autoUpload,
             maxFileSize: this.maxFileSize * 1000000,
-            // queueLimit: this.queueLimit
         });
 
-        this.handleUploaderEvents();        
+        this.handleUploaderEvents();
     }
 
     Clear(): void {
-        this.selectedFile = null;
+        this.selectedFileModel = null;
         this.selectedFileName = '';
         this.errorMessage = null;
+        this.chunks = null;
         this.uploader.clearQueue();
         this.uploader.cancelAll();
         this.onClear.emit();
     }
 
     StartUploadManually(): void {
-        if (this.selectedFileName) {
-            this.uploader.uploadAll();
+        if (!this.selectedFileBlob) {
+          return;
+        }
+
+        if (this.chunk && this.chunks && this.chunks.length > 0) {
+          this.startChunkUpload();
+        } else {
+          this.startSingleUpload();
         }
     }
- 
-    OnFileOver(e:any): void {
-      this.hasDropZoneOver = e;
-    }
-    
-    SetSelectedFileText(fileName: string): void {
+
+    SetSelectedFileName(fileName: string): void {
         this.selectedFileName = fileName;
     }
 
+    OnFileOver(e:any): void {
+      this.hasDropZoneOver = e;
+    }
+    OnFileChange(event: any): void {
+        if (event.target.files[0]) {
+            this.addSelectedFileForManualUploading(event.target.files[0]);
+        }        
+    }
+    OnFileDrop(event: any): void {
+        if (event[0]) {
+            this.addSelectedFileForManualUploading(event[0]);
+        }      
+    }
+
+    private startSingleUpload(): void {
+      this.uploader.uploadAll();
+    }
+    private startChunkUpload(): void {
+        let chunksPromises: Array<Promise<void>> = [];
+
+        for (let i = 0; i < this.chunks.length; i++) {
+            chunksPromises.push(this.sendChunk(this.chunks[i]));
+        }
+
+        Promise.all(chunksPromises)
+            .then(()=> {
+                console.log('FIM');
+            })
+            .catch(()=> {
+                console.error('DEU RUIM');
+            });
+    }
+    private sendChunk(chunk: any): Promise<void> {
+        let promise = new Promise<void>((resolve, reject) => {
+            chunk.progress = Math.random() * 10;
+
+            let formData = new FormData();
+            formData.append("file", chunk.blob, chunk.name);
+
+            this.http.post('http://localhost:64538/api/files/chunk', formData, { withCredentials: false })
+                .pipe(retry(3))
+                .subscribe(
+                    result => {
+                        chunk.progress = 100;
+                        resolve();
+                    },
+                    error => {
+                        console.error(error);
+                        reject();
+                    }
+                );
+        });
+
+        return promise;
+    }
+    private splitSelectedFileInChunks(): void {
+      this.chunks = [];
+      let file: File = this.selectedFileBlob;
+      let fileSize = file.size;
+      let start = 0;
+      let end = this.chunkSize;
+      let chunksCount = 0;
+      let chunkGuid = Math.random()
+        .toString()
+        .replace("0.", "");
+
+      if (fileSize % this.chunkSize == 0) {
+        chunksCount = fileSize / this.chunkSize;
+      } else {
+        chunksCount = Math.floor(fileSize / this.chunkSize) + 1;
+      }
+
+      for (let i = 0; i < chunksCount; i++) {
+        this.chunks.push({
+          name: `${chunkGuid}_${i}`,
+          blob: file.slice(start, end)
+        });
+
+        start = end;
+        end = start + this.chunkSize;
+      }
+    }
     private handleUploaderEvents(): void {
         this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
-            this.setSelectedFile(item);
-            this.onSuccessUpload.emit({item, response, status});      
-        };
-        this.uploader.onAfterAddingFile = (item: FileItem) => {
-            if (this.validate(item)) {
-                if (this.uploader.queue.length > 1) {
-                    this.uploader.removeFromQueue(this.uploader.queue[0]);
-                }
-                
-                this.setSelectedFile(item);
-                this.onSuccessFileAdded.emit(item);
-            }            
+            this.SetSelectedFileName(item.file.name);
+            this.onSuccessUpload.emit({item, response, status});
         };
         this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
             this.Clear();
             this.onError.emit({item, response, status});
         };
-        this.uploader.onWhenAddingFileFailed = (item: FileLikeObject, filter: any, options: any) => {
-            this.Clear();
-
-            if (filter.name == 'fileSize') {
-                this.errorMessage = this.fileSizeErrorMessage.replace('{maxFileSize}', `${this.maxFileSize}`);
-            } else {
-                console.error('Error on trying to add this file.', item, filter);
-            }
-        };
         this.uploader.onBeforeUploadItem = (item: FileItem) => {
             this.validate(item);
         };
     }
-    private validateFileType(item: FileItem): boolean {
+    private addSelectedFileForManualUploading(file: any): void {
+      this.selectedFileBlob = null;
+
+      if (!file) {
+        return;
+      }
+
+      if (this.validate(file)) {
+        this.selectedFileBlob = file;
+        this.SetSelectedFileName(file.name);
+
+        if (this.uploader.queue.length > 1) {
+            this.uploader.removeFromQueue(this.uploader.queue[0]);
+        }
+
+        if (this.chunk) {
+          this.splitSelectedFileInChunks();
+        }
+
+        this.onSuccessFileAdded.emit(file);
+      }
+    }
+    private validate(item: any): boolean {
+        this.selectedFileName = null;
+        this.errorMessage = null;
+
+        if (!this.validateFileType(item) || !this.validateFileSize(item)) {
+            this.selectedFileModel = null;
+            this.uploader.clearQueue();
+            return false;
+        }
+
+        return true;
+    }
+    private validateFileType(file: any): boolean {
         if (!this.allowedExtensions || this.allowedExtensions.length == 0) {
             return true;
         }
 
-        let extension = item.file.name.split('.')[1];
+        let extensionArray = file.name.split('.');
+        let extension = extensionArray[extensionArray.length - 1];
         let result = this.allowedExtensions.find(x => x == extension);
 
         if (result == undefined || result == null) {
@@ -121,21 +228,13 @@ export class InputUploadComponent implements OnInit {
 
         return true;
     }
-    private setSelectedFile(item: any): void {
-        if (!item || !item.file) {
-            return;
+    private validateFileSize(file: any): boolean {
+        if (this.maxFileSize == 0) {
+            return true;
         }
 
-        this.SetSelectedFileText(item.file.name);
-    }
-    private validate(item: any): boolean {
-        this.selectedFileName = null;
-        this.errorMessage = null;
-
-        if (!this.validateFileType(item)) {
-            this.selectedFile = null;
-            this.uploader.cancelItem(item);
-            this.uploader.clearQueue();
+        if (file.size > this.maxFileSize * 1048576) {
+            this.errorMessage = this.fileSizeErrorMessage.replace('{maxFileSize}', `${this.maxFileSize}`);
             return false;
         }
 

@@ -1,6 +1,6 @@
 <label *ngIf="label">{{label}}</label>
 
-<input type="file" class="d-none" [(ngModel)]="selectedFile" #fileInput ng2FileSelect [uploader]="uploader" [disabled]="disabled" />
+<input type="file" class="d-none" [(ngModel)]="selectedFileModel" (change)="OnFileChange($event)" #fileInput ng2FileSelect [uploader]="uploader" [disabled]="disabled" />
 
 <div class="input-group">
     <input type="text" class="form-control" [value]="selectedFileName" placeholder="{{placeholder}}" (click)="fileInput.click()" readonly />
@@ -13,7 +13,6 @@
 <small class="text-muted" *ngIf="maxFileSize > 0">
     {{maxFileSizeLabel}} <b>{{maxFileSize}}MB</b>.
 </small>
-
 <small class="text-muted" *ngIf="allowedExtensions?.length > 0">
     {{allowedExtensionsLabel}}
     <span *ngFor="let item of allowedExtensions; let first = first;">
@@ -27,9 +26,30 @@
     <small class="text-danger">{{errorMessage}}</small>
 </div>
 
+<div class="chunks-queue" *ngIf="chunk && chunks?.length > 0 && showQueue" [ngClass]="{'scrollable': chunks?.length > 5}">
+  <div class="chunk" *ngFor="let item of chunks;">
+    <div class="d-flex">
+      <div class="icon mr-2">
+        <i class="fa fa-file fa-2x"></i>
+      </div>
+      <div class="data flex-grow-1">
+        <div class="d-flex align-items-center">
+          <small class="file-name"><b>{{item.name}}</b></small>
+          <small class="file-size ml-auto">{{chunkSize / 1000 | number:'1.2-2'}}KB</small>
+        </div>
+        <progressbar
+          [value]="item.progress || 0">
+          {{item.progress || 0}}%
+        </progressbar>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div ng2FileDrop *ngIf="showDropZone"
     [ngClass]="{'mouse-over': hasDropZoneOver}"
     (fileOver)="OnFileOver($event)"
+    (onFileDrop)="OnFileDrop($event)"
     [uploader]="uploader"
     class="dropzone">
     <i class="fa fa-cloud-download fa-4x"></i><br/>

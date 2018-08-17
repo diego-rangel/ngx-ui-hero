@@ -1,5 +1,5 @@
-import { AlertService } from 'ngx-ui-hero';
-import { Component, OnInit } from '@angular/core';
+import { AlertService, InputUploadComponent } from 'ngx-ui-hero';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-components',
@@ -7,38 +7,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./components.component.scss']
 })
 export class ComponentsComponent implements OnInit {
+  @ViewChild('upload') inputUpload: InputUploadComponent;
+
   inputTextCode = `
-<input-text 
-  [label]="'My Label here'" 
+<input-text
+  [label]="'My Label here'"
   [placeholder]="'My placeholder...'" 
-  [maxlength]="200" 
-  [disabled]="false"   
+  [maxlength]="200"
+  [disabled]="false"
   [showValidations]="true"
-  [(ngModel)]="myModel" 
+  [(ngModel)]="myModel"
   required>
 </input-text>
   `;
-  
+
   inputEmailCode = `
 <input-email
-  [label]="'My E-mail'" 
-  [placeholder]="'My placeholder...'" 
-  [maxlength]="200" 
-  [disabled]="false"   
+  [label]="'My E-mail'"
+  [placeholder]="'My placeholder...'"
+  [maxlength]="200"
+  [disabled]="false"
   [showValidations]="true"
   [showInputGroup]="true"
-  [(ngModel)]="myEmailModel" 
+  [(ngModel)]="myEmailModel"
   required>
 </input-email>
   `;
 
   inputSelectCode = `
 <input-select
-  [label]="'My Label'" 
-  [defaultOption]="'Select'" 
-  [disabled]="false"   
+  [label]="'My Label'"
+  [defaultOption]="'Select'"
+  [disabled]="false"
   [showValidations]="true"
-  [(ngModel)]="mySelectModel" 
+  [(ngModel)]="mySelectModel"
   [options]="options"
   [displayTextProperty]="'text'"
   [valueProperty]="'value'"
@@ -49,8 +51,8 @@ export class ComponentsComponent implements OnInit {
 
   inputSelectCode2 = `
 <input-select
-  [label]="'My Label 2'" 
-  [defaultOption]="'Select'" 
+  [label]="'My Label 2'"
+  [defaultOption]="'Select'"
   [disabled]="false"
   [(ngModel)]="mySelectModel">
   <option value="1">Option 1</option>
@@ -59,89 +61,89 @@ export class ComponentsComponent implements OnInit {
   `;
 
   inputTextAreaCode = `
-<input-textarea 
-  [label]="'My Label'" 
-  [placeholder]="'My placeholder...'" 
-  [maxlength]="2000" 
-  [disabled]="false"   
+<input-textarea
+  [label]="'My Label'"
+  [placeholder]="'My placeholder...'"
+  [maxlength]="2000"
+  [disabled]="false"
   [showValidations]="true"
-  [(ngModel)]="myTextAreaModel" 
+  [(ngModel)]="myTextAreaModel"
   required>
 </input-textarea>
   `;
 
   checkboxCode = `
-<input-checkbox 
-  [label]="'My checkbox Label'" 
+<input-checkbox
+  [label]="'My checkbox Label'"
   [disabled]="false"
   [(ngModel)]="myCheckboxModel">
 </input-checkbox>
   `;
 
   radioCode = `
-<input-radio 
-  [label]="'My radio 1'" 
+<input-radio
+  [label]="'My radio 1'"
   [disabled]="false"
-  [name]="'radioOptions'" 
-  [radioValue]="1" 
+  [name]="'radioOptions'"
+  [radioValue]="1"
   [(ngModel)]="myRadioModel">
 </input-radio>
-<input-radio 
-    [label]="'My radio 2'" 
+<input-radio
+    [label]="'My radio 2'"
     [disabled]="false"
-    [name]="'radioOptions'" 
-    [radioValue]="2" 
+    [name]="'radioOptions'"
+    [radioValue]="2"
     [(ngModel)]="myRadioModel">
 </input-radio>
   `;
 
   currencyCode = `
-<input-currency 
-  [label]="'My Label'" 
-  [disabled]="false"   
+<input-currency
+  [label]="'My Label'"
+  [disabled]="false"
   [showValidations]="true"
   [showInputGroup]="true"
-  [(ngModel)]="myCurrencyModel" 
+  [(ngModel)]="myCurrencyModel"
   required>
 </input-currency>
   `;
 
   percentCode = `
-<input-percent 
-  [label]="'My Label'" 
-  [disabled]="false"   
+<input-percent
+  [label]="'My Label'"
+  [disabled]="false"
   [showValidations]="true"
   [showInputGroup]="true"
-  [(ngModel)]="myPercentModel" 
+  [(ngModel)]="myPercentModel"
   required>
 </input-percent>
   `;
 
   numberCode = `
 <input-number
-  [label]="'My Label'" 
-  [disabled]="false"   
+  [label]="'My Label'"
+  [disabled]="false"
   [maxValue]="100"
   [minValue]="0"
   [showValidations]="true"
-  [(ngModel)]="myNumberModel" 
+  [(ngModel)]="myNumberModel"
   required>
 </input-number>
   `;
 
   dateCode = `
 <input-date
-  [label]="'My Label'" 
+  [label]="'My Label'"
   [disabled]="false"
   [showValidations]="true"
-  [(ngModel)]="myDateModel" 
+  [(ngModel)]="myDateModel"
   required>
 </input-date>
   `;
 
   uploadCode = `
 <input-upload
-  [label]="'My Upload'" 
+  [label]="'My Upload'"
   [url]="'http://exemplo.com/api'"
   [allowedExtensions]="['jpg', 'png']"
   [maxFileSize]="4"
@@ -178,6 +180,10 @@ export class ComponentsComponent implements OnInit {
 
   OnUploadError(event: any): void {
     this.alert.error('Oops =(', "It's only a test and does not have a test backend.");
+  }
+
+  Upar(): void {
+    this.inputUpload.StartUploadManually();
   }
 
 }

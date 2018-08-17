@@ -12,46 +12,46 @@
           <div class="card-header">Input Text</div>
           <div class="card-body">
             <div class="form-group">
-              <input-text 
+              <input-text
                 [label]="'My Label here'"
                 [placeholder]="'My placeholder...'"
                 [maxlength]="200"
                 [disabled]="false"
                 [showValidations]="true"
-                [(ngModel)]="myModel" 
+                [(ngModel)]="myModel"
                 required>
               </input-text>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="inputTextCode"></code></pre>
             </div>
           </div>
         </div>
-    
+
         <div class="card mt-4">
           <div class="card-header">Input Select</div>
           <div class="card-body">
             <p>Never more get confused when using a number as your ngModel.</p>
 
             <p>The InputSelect component supports not only a template mode, but an options input too. You can use an array of objects of any types, you just need to set the displayTextProperty and valueProperty values.</p>
-    
+
             <div class="row">
               <div class="col">
                 <div class="form-group">
                   <input-select
-                    [label]="'My Label'" 
-                    [defaultOption]="'Select'" 
-                    [disabled]="false"   
+                    [label]="'My Label'"
+                    [defaultOption]="'Select'"
+                    [disabled]="false"
                     [showValidations]="true"
-                    [(ngModel)]="mySelectModel" 
+                    [(ngModel)]="mySelectModel"
                     [options]="options"
                     [displayTextProperty]="'text'"
                     [valueProperty]="'value'"
                     required>
                   </input-select>
                 </div>
-        
+
                 <div highlight="all" [language]="['Html']">
                   <pre><code [textContent]="inputSelectCode"></code></pre>
                 </div>
@@ -59,15 +59,15 @@
               <div class="col">
                 <div class="form-group">
                   <input-select
-                    [label]="'My Label 2'" 
-                    [defaultOption]="'Select'" 
+                    [label]="'My Label 2'"
+                    [defaultOption]="'Select'"
                     [disabled]="false"
                     [(ngModel)]="mySelectModel">
                     <option value="1">Option 1</option>
                     <option value="2">Option 2</option>
                   </input-select>
                 </div>
-        
+
                 <div highlight="all" [language]="['Html']">
                   <pre><code [textContent]="inputSelectCode2"></code></pre>
                 </div>
@@ -75,43 +75,43 @@
             </div>
           </div>
         </div>
-    
+
         <div class="card mt-4">
           <div class="card-header">Input Email</div>
           <div class="card-body">
             <div class="form-group">
               <input-email
-                [label]="'My E-mail'" 
-                [placeholder]="'My placeholder...'" 
-                [maxlength]="200" 
-                [disabled]="false"   
+                [label]="'My E-mail'"
+                [placeholder]="'My placeholder...'"
+                [maxlength]="200"
+                [disabled]="false"
                 [showValidations]="true"
-                [(ngModel)]="myEmailModel" 
+                [(ngModel)]="myEmailModel"
                 required>
               </input-email>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="inputEmailCode"></code></pre>
             </div>
           </div>
         </div>
-    
+
         <div class="card mt-4">
           <div class="card-header">Input Textarea</div>
           <div class="card-body">
             <div class="form-group">
-              <input-textarea 
-                [label]="'My Label'" 
-                [placeholder]="'My placeholder...'" 
-                [maxlength]="2000" 
-                [disabled]="false"   
+              <input-textarea
+                [label]="'My Label'"
+                [placeholder]="'My placeholder...'"
+                [maxlength]="2000"
+                [disabled]="false"
                 [showValidations]="true"
-                [(ngModel)]="myTextAreaModel" 
+                [(ngModel)]="myTextAreaModel"
                 required>
               </input-textarea>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="inputTextAreaCode"></code></pre>
             </div>
@@ -122,13 +122,13 @@
           <div class="card-header">Input Checkbox</div>
           <div class="card-body">
             <div class="form-group">
-              <input-checkbox 
-                [label]="'My checkbox Label'" 
+              <input-checkbox
+                [label]="'My checkbox Label'"
                 [disabled]="false"
                 [(ngModel)]="myCheckboxModel">
               </input-checkbox>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="checkboxCode"></code></pre>
             </div>
@@ -139,22 +139,22 @@
           <div class="card-header">Input Radio</div>
           <div class="card-body">
             <div class="form-group">
-              <input-radio 
-                [label]="'My radio 1'" 
+              <input-radio
+                [label]="'My radio 1'"
                 [disabled]="false"
-                [name]="'radioOptions'" 
-                [radioValue]="1" 
+                [name]="'radioOptions'"
+                [radioValue]="1"
                 [(ngModel)]="myRadioModel">
               </input-radio>
-              <input-radio 
-                  [label]="'My radio 2'" 
+              <input-radio
+                  [label]="'My radio 2'"
                   [disabled]="false"
-                  [name]="'radioOptions'" 
-                  [radioValue]="2" 
+                  [name]="'radioOptions'"
+                  [radioValue]="2"
                   [(ngModel)]="myRadioModel">
               </input-radio>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="radioCode"></code></pre>
             </div>
@@ -165,15 +165,15 @@
           <div class="card-header">Input Currency</div>
           <div class="card-body">
             <div class="form-group">
-              <input-currency 
-                [label]="'My Label'" 
-                [disabled]="false"   
+              <input-currency
+                [label]="'My Label'"
+                [disabled]="false"
                 [showValidations]="true"
-                [(ngModel)]="myCurrencyModel" 
+                [(ngModel)]="myCurrencyModel"
                 required>
               </input-currency>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="currencyCode"></code></pre>
             </div>
@@ -184,15 +184,15 @@
           <div class="card-header">Input Percent</div>
           <div class="card-body">
             <div class="form-group">
-              <input-percent 
-                [label]="'My Label'" 
-                [disabled]="false"   
+              <input-percent
+                [label]="'My Label'"
+                [disabled]="false"
                 [showValidations]="true"
-                [(ngModel)]="myPercentModel" 
+                [(ngModel)]="myPercentModel"
                 required>
               </input-percent>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="percentCode"></code></pre>
             </div>
@@ -204,16 +204,16 @@
           <div class="card-body">
             <div class="form-group">
               <input-number
-                [label]="'My Label'" 
-                [disabled]="false"   
+                [label]="'My Label'"
+                [disabled]="false"
                 [maxValue]="100"
                 [minValue]="0"
                 [showValidations]="true"
-                [(ngModel)]="myNumberModel" 
+                [(ngModel)]="myNumberModel"
                 required>
               </input-number>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="numberCode"></code></pre>
             </div>
@@ -229,14 +229,14 @@
 
             <div class="form-group">
               <input-date
-                [label]="'My Label'" 
+                [label]="'My Label'"
                 [disabled]="false"
                 [showValidations]="true"
-                [(ngModel)]="myDateModel" 
+                [(ngModel)]="myDateModel"
                 required>
               </input-date>
             </div>
-    
+
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="dateCode"></code></pre>
             </div>
@@ -302,18 +302,20 @@
             </div>
           </div>
         </div>
-        
+
         <div class="card mt-4">
           <div class="card-header">Input Upload</div>
           <div class="card-body">
+            <button type="button" class="btn btn-primary" (click)="Upar()">GO!</button>
             <div class="form-group">
-              <input-upload
-                [label]="'My Upload'" 
+              <input-upload #upload
+                [label]="'My Upload'"
                 [url]="'http://exemplo.com/api'"
-                [allowedExtensions]="['jpg', 'png']"
                 [maxFileSize]="4"
                 [disabled]="false"
                 [showDropZone]="true"
+                [chunk]="true"
+                [showQueue]="true"
                 [autoUpload]="false"
                 (onError)="OnUploadError($event)">
               </input-upload>

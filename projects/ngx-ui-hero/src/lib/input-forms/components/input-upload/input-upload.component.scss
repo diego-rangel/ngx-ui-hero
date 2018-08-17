@@ -1,4 +1,4 @@
-.dropzone { 
+.dropzone {
     background: white;
     border-radius: 5px;
     border: 2px dashed #CCC;
@@ -13,18 +13,45 @@
         color: #999;
     }
 
-    
+
 }
 .dropzone,
 .dropzone >* {
     transition: color .35s ease-in-out, background-color .35s ease-in-out;
 }
-.dropzone.mouse-over { 
+.dropzone.mouse-over {
     background-color: #f0f0f0;
     border: 2px solid #CCC;
     opacity: .5;
 
-    i, span {        
+    i, span {
         color: #292929;
     }
+}
+
+.chunks-queue {
+  border: 1px solid #CCC;
+  border-radius: 6px;
+  margin: 10px 0;
+
+  .chunk {
+    padding: 10px;
+    border-bottom: 1px solid #CCC;
+
+    .icon i {
+      font-size: 2.2em;
+    }
+
+    .icon i,
+    .data .file-name {
+      color: #00559a;
+    }
+  }
+  .chunk:last-child {
+    border-bottom: 0;
+  }
+}
+.chunks-queue.scrollable {
+    max-height: 300px;
+    overflow-y: scroll;
 }

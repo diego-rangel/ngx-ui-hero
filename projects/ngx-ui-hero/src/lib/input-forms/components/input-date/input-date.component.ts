@@ -76,7 +76,12 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, DoC
 
   private handleInitialValue(): void {
     if (this.value && (typeof this.value == "string" || this.value instanceof String)) {
-      this.writeValue(new Date(this.value));
+      let data = new Date(this.value);
+      data.setHours(0);
+      data.setMinutes(0);
+      data.setSeconds(0);
+      data.setMilliseconds(0);
+      this.writeValue(data);
     }
   }
 }
