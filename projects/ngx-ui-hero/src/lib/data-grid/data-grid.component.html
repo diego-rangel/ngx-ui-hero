@@ -10,6 +10,9 @@
         }">
             <thead>
                 <tr>
+                    <th class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.length > 0" style="width: 50px;">
+                        <input type="checkbox" [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" />
+                    </th>
                     <th class="action text-center" *ngIf="showActionsColumn" [ngStyle]="{'width': actionsColumnWidth}">{{actionsColumnCaption}}</th>
                     <th *ngFor="let column of columns; let i = index;" (click)="ToogleSorting(column)" class="{{column.captionClasses}}" [ngStyle]="{'width': column.width}" [ngClass]="{
                         'sortable': column.sortable,
@@ -30,6 +33,9 @@
             </thead>
             <tbody *ngIf="sortApplied">
                 <tr *ngFor="let row of gridData; let rowIndex = index;">
+                    <td class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.length > 0">
+                        <input type="checkbox" [(ngModel)]="row.selected" (change)="OnRowSelectedChanged(row)" />
+                    </td>
                     <td class="action text-center" *ngIf="showActionsColumn">
                         <ng-container 
                             [ngTemplateOutlet]="actionsColumnTemplate"
@@ -51,7 +57,7 @@
             </tbody>
             <tfoot *ngIf="sortApplied && (!gridData || gridData.length == 0)">
                 <tr>
-                    <td class="empty-results text-center p-3" [attr.colspan]="columns?.length + (actionsColumnTemplate ? 1 : 0)">
+                    <td class="empty-results text-center p-3" [attr.colspan]="columns?.length + (actionsColumnTemplate ? 1 : 0) + (showCheckboxColumn ? 1 : 0)">
                         <p class="mb-0">{{emptyResultsMessage}}</p>
                     </td>
                 </tr>

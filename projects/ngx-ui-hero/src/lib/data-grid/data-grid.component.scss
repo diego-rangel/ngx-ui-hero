@@ -23,8 +23,24 @@
             background-color: #dee2e6;
             color: #666;
         }
+        th.checkbox-column {
+            input[type="checkbox"] {
+                margin: 0;
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+            }
+        }
+        td.checkbox-column {
+            input[type="checkbox"] {
+                margin: 0 auto;
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+            }
+        }
     }
-    table.table-fixed {        
+    table.table-fixed {
         table-layout: fixed;
 
         td:not(.td-break-word) * {
@@ -35,11 +51,11 @@
             display: block;
         }
     }
-    table:not(.table-fixed) th.action {        
+    table:not(.table-fixed) th.action {
         white-space: nowrap;
         width: 1%;
     }
-    table.table-animated.table-animating td * {        
+    table.table-animated.table-animating td * {
         opacity: 0.5;
     }
     table.table-striped tbody tr:nth-of-type(odd) {

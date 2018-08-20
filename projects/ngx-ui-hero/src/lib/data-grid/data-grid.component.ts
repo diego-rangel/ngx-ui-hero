@@ -8,6 +8,7 @@ import { ActionsColumnDirective } from './data-grid-templates.directive';
 
 import * as _ from 'lodash';
 
+declare var $: any;
 let identifier = 0;
 
 @Component({
@@ -19,6 +20,7 @@ let identifier = 0;
 export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     sortApplied: boolean = false;
     animating: boolean = false;
+    selectAll: boolean = false;
     currentPage: number;
     gridData: Array<any>;
 
@@ -32,6 +34,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() bordered?: boolean = true;
     @Input() hoverEffect?: boolean = true;
     @Input() responsive?: boolean = true;
+    @Input() showCheckboxColumn?: boolean = false;
     @Input() initialColumnToSort?: number;
     @Input() initialSortDirection?: EnumSortDirection = EnumSortDirection.Ascending;
     @Input() mode?: EnumDataGridMode = EnumDataGridMode.OnClient;
@@ -49,6 +52,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() nextText: string = 'Next';
     @Input() lastText: string = 'Last';
     @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
+    @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef}) actionsColumnTemplate: ActionsColumnDirective;
@@ -178,6 +182,21 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         return property;
     }
 
+    OnSelectAllChanged(): void {
+        if (!this.gridData || this.gridData.length == 0) {
+            return;
+        }
+
+        for (let i = 0; i < this.gridData.length; i++) {
+            this.gridData[i].selected = this.selectAll;
+        }
+    }
+
+    OnRowSelectedChanged(row: any): void {
+        this.handleSelectAllCheckboxState();
+        this.OnRowSelected.emit(row);
+    }
+
     private initializeGridData(): void {
         if (this._externalData) {
             this._internalData = Object.assign([], this._externalData);
@@ -261,6 +280,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         const startItem = (page - 1) * this.itemsPerPage;
         const endItem = page * this.itemsPerPage;
         this.gridData = this._internalData.slice(startItem, endItem);
+        
+        this.handleSelectAllCheckboxState();
         this.handleAutoFit();
     }
     private handleAutoFit(): void {
@@ -286,6 +307,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
         setTimeout(()=> {
             let widths: number[] = [];
+            let gridWidth: number = $(`#${this.identifier}`).parent().width();
 
             for (let rowIndex = 0; rowIndex < this.gridData.length; rowIndex++) {
                 for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
@@ -311,19 +333,16 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                     }
     
                     if (this.isUndefinedOrNull(widths[columnIndex]) || width > widths[columnIndex]){
-                        widths[columnIndex] = width;
+                        if (width > this._maxWidth) {
+                            widths[columnIndex] = this._maxWidth;
+                        } else {
+                            widths[columnIndex] = width;
+                        }                        
                     }
                 }
             }
-    
-            for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
-                if (widths[columnIndex] > this._maxWidth) {
-                    this.columns[columnIndex].width = `${this._maxWidth}px`;
-                    this.columns[columnIndex].dataClasses = 'td-break-word';
-                } else {
-                    this.columns[columnIndex].width = `${widths[columnIndex]}px`;
-                }                
-            }
+
+            this.setDataGridWidths(widths, gridWidth);
             
             this.animating = false;
         },0);
@@ -354,5 +373,55 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             
             this.animating = false;
         },0);
-    }    
+    }
+    private handleSelectAllCheckboxState(): void {
+        if (!this.gridData || this.gridData.length == 0) {
+            this.selectAll = false;
+            return;
+        }
+
+        for (let i = 0; i < this.gridData.length; i++) {
+            if (!this.gridData[i].selected) {
+                this.selectAll = false;
+                return;
+            }
+        }
+
+        this.selectAll = true;
+    }
+    private setDataGridWidths(widths: number[], gridWidth: number): void {
+        let totalColumnsWidth = _.sum(widths);
+        let totalColumnsWidthGreaterThanGrid = totalColumnsWidth > gridWidth;
+
+        if (!totalColumnsWidthGreaterThanGrid) {
+            let biggestColumnIndex = 0;
+            let biggestWidth = widths[widths.length - 1];
+            for (let i = (widths.length - 2); i >= 0; i--) {
+                if (widths[i] > biggestWidth) {
+                    biggestWidth = widths[i];
+                    biggestColumnIndex = i;
+                }
+            }
+    
+            for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+                if (columnIndex == biggestColumnIndex) {
+                    this.columns[columnIndex].width = `auto`;
+
+                    if (widths[columnIndex] >= this._maxWidth) {
+                        this.columns[columnIndex].dataClasses = 'td-break-word';
+                    }
+                } else {
+                    this.columns[columnIndex].width = `${widths[columnIndex]}px`;
+                }                
+            }
+        } else {
+            for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+                if (widths[columnIndex] >= this._maxWidth) {
+                    this.columns[columnIndex].dataClasses = 'td-break-word';
+                }
+
+                this.columns[columnIndex].width = `${widths[columnIndex]}px`;             
+            }
+        }
+    }
 }

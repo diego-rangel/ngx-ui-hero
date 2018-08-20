@@ -16,14 +16,13 @@ export class DatagridComponent implements OnInit {
     {
       caption: 'E-mail',
       data: 'email',
-      width: '250px'
     },
     {
       caption: 'Status',
-      captionAlignment: EnumAlignment.Center,
       data: 'active',
-      dataAlignment: EnumAlignment.Center,
       width: '100px',
+      captionAlignment: EnumAlignment.Center,
+      dataAlignment: EnumAlignment.Center,
       sortable: false
     }
   ];
