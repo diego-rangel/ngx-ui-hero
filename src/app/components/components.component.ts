@@ -1,5 +1,6 @@
-import { AlertService, InputUploadComponent } from 'ngx-ui-hero';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AlertService } from 'ngx-ui-hero';
+import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-components',
@@ -189,6 +190,13 @@ export class ComponentsComponent implements OnInit {
 
   ngOnInit() {
     this.myDateModel = new Date();
+
+    setTimeout(()=> {
+      $('body').scrollspy({ 
+        target: '#components-menu',
+        offset: 40
+      });
+    });
   }
 
   OnUploadError(event: any): void {

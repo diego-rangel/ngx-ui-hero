@@ -1,0 +1,8 @@
+#components-menu {
+    a:not(.active):hover {
+        background-color: rgb(216, 216, 216) !important;
+    }
+    a i {
+        width: 25px;
+    }
+}

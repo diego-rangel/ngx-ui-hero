@@ -283,6 +283,16 @@
             <td>EventEmitter&lt;DataGridColumnModel&gt;</td>
             <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling sorting operations. This callback will receive as a parameter an object with the sorted column.</td>
           </tr>
+          <tr>
+            <td><b>OnRowSelected</b></td>
+            <td>EventEmitter&lt;any&gt;</td>
+            <td>An event emitted when <b>showCheckboxColumn</b> is defined to <b>true</b> and a row is selected/deselected. This callback will receive as a parameter an object with the checked row.</td>
+          </tr>
+          <tr>
+            <td><b>OnSelectionChanged</b></td>
+            <td>EventEmitter&lt;void&gt;</td>
+            <td>An event emitted when <b>showCheckboxColumn</b> is defined to <b>true</b> and any selection is changed.</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -52,6 +52,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() nextText: string = 'Next';
     @Input() lastText: string = 'Last';
     @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
+    @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
@@ -190,11 +191,14 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         for (let i = 0; i < this.gridData.length; i++) {
             this.gridData[i].selected = this.selectAll;
         }
+
+        this.OnSelectionChanged.emit();
     }
 
     OnRowSelectedChanged(row: any): void {
         this.handleSelectAllCheckboxState();
         this.OnRowSelected.emit(row);
+        this.OnSelectionChanged.emit();
     }
 
     private initializeGridData(): void {

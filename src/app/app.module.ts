@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { NgxUiHeroModule, NgxUiHeroApiModule, NgxUiHeroInputFormsModule, ApiSettings, NgxUiHeroDataGridModule, DataGridConfig, InputFormsConfig, EnumAutoFitMode } from 'ngx-ui-hero';
+import { NgxUiHeroModule, NgxUiHeroApiModule, NgxUiHeroInputFormsModule, ApiSettings, NgxUiHeroDataGridModule, DataGridConfig, InputFormsConfig } from 'ngx-ui-hero';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HighlightModule } from 'ngx-highlightjs';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { ComponentsComponent } from './components/components.component';
 import { ServicesComponent } from './services/services.component';
 import { DatagridComponent } from './datagrid/datagrid.component';
+import { AnchorLinkDirective } from './directives/anchor.directive';
 
 export const apiSettings: ApiSettings = {
   apiBaseUrl: 'http://localhost:50467/api',
@@ -92,6 +93,7 @@ export const inputFormsConfig: InputFormsConfig = {
     ComponentsComponent,
     ServicesComponent,
     DatagridComponent,
+    AnchorLinkDirective
   ],
   providers: [],
   bootstrap: [AppComponent]
