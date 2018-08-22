@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UiModule } from './../ui/ui.module';
 
 import { DATAGRID_CONFIG } from './data-grid-config.constants';
@@ -17,12 +18,15 @@ import { ActionsColumnDirective } from './data-grid-templates.directive';
 
 export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './data-grid-column.model';
 
+import { ExcelService } from './services/excel.service';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     UiModule,
     PaginationModule.forRoot(),
+    BsDropdownModule.forRoot(),
   ],
   declarations: [
     DataGridComponent,
@@ -32,7 +36,9 @@ export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirec
     DataGridComponent,
     ActionsColumnDirective
   ],
-  providers: [],  
+  providers: [
+    ExcelService
+  ],  
 })
 export class NgxUiHeroDataGridModule {
   static forRoot(config: DataGridConfig): ModuleWithProviders {

@@ -54,6 +54,7 @@ export class DatagridComponent implements OnInit {
 <datagrid 
   [data]="myBasicDatagridModel" 
   [columns]="myBasicDatagridColumns" 
+  [allowExports]="true"
   [initialColumnToSort]="0">
 </datagrid>
   `;

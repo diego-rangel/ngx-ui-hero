@@ -70,10 +70,20 @@
     </div>
 
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-3"  *ngIf="gridData?.length > 0">
-        <div class="info mr-auto mb-3">
+        <div class="export-actions mr-3 mb-3" *ngIf="allowExports">
+            <div class="btn-group" dropdown>
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                    <i class="fa fa-external-link"></i> {{exportLabel}} <span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem"><a class="dropdown-item" href="#" (click)="ExportToExcel()"><i class="fa fa-file-excel-o"></i> Excel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="info mb-3">
             <span>{{GetInfo()}}</span>
         </div>
-        <div class="pagination">
+        <div class="pagination ml-auto">
             <pagination #paginator
                 [(ngModel)]="currentPage"
                 [totalItems]="totalItems"

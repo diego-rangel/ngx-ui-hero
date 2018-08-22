@@ -5,6 +5,7 @@ import { DATAGRID_CONFIG } from './data-grid-config.constants';
 import { DataGridColumnModel, EnumAlignment, EnumSortDirection, DataGridSortingModel } from './data-grid-column.model';
 import { DataGridConfig, EnumDataGridMode, EnumAutoFitMode } from './data-grid-config';
 import { ActionsColumnDirective } from './data-grid-templates.directive';
+import { ExcelService } from './services/excel.service';
 
 import * as _ from 'lodash';
 
@@ -35,6 +36,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() hoverEffect?: boolean = true;
     @Input() responsive?: boolean = true;
     @Input() showCheckboxColumn?: boolean = false;
+    @Input() allowExports?: boolean = false;
+    @Input() exportLabel?: string = 'Export';
+    @Input() exportedFileName?: string = 'Export';
+    @Input() exportedExcelSheetName?: string = 'Sheet';
     @Input() initialColumnToSort?: number;
     @Input() initialSortDirection?: EnumSortDirection = EnumSortDirection.Ascending;
     @Input() mode?: EnumDataGridMode = EnumDataGridMode.OnClient;
@@ -78,7 +83,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
     constructor(
         @Inject(DATAGRID_CONFIG) @Optional() defaultOptions: DataGridConfig,
-        private iterableDiffers: IterableDiffers
+        private iterableDiffers: IterableDiffers,
+        private excelService: ExcelService
     ) {
         Object.assign(this, defaultOptions);
         Object.assign(this, defaultOptions.paging);
@@ -199,6 +205,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.handleSelectAllCheckboxState();
         this.OnRowSelected.emit(row);
         this.OnSelectionChanged.emit();
+    }
+
+    ExportToExcel() {
+        this.excelService.ExportTableToExcel(this.identifier, this.exportedFileName, this.exportedExcelSheetName);
+        return false;
     }
 
     private initializeGridData(): void {
