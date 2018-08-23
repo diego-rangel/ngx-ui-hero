@@ -1,6 +1,6 @@
 <div class="ui-hero-datagrid">
     <div [ngClass]="{'table-responsive': responsive}">
-        <table [id]="identifier" class="table" [ngClass]="{
+        <table [id]="tableId" class="table" [ngClass]="{
             'table-striped': striped,
             'table-bordered': bordered,
             'table-hover': hoverEffect,
@@ -48,16 +48,24 @@
                     <td *ngFor="let column of columns; let columnIndex = index;" class="{{column.dataClasses}}" [ngClass]="{
                         'text-center': column.dataAlignment == 1,
                         'text-right': column.dataAlignment == 2
-                    }">
-                        <span *ngIf="!column.render && column.data?.split('.').length == 1">{{row[column.data]}}</span>
-                        <span *ngIf="!column.render && column.data?.split('.').length > 1">{{RenderPropertyValue(column.data, row)}}</span>
-                        <span *ngIf="column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
+                    }">                        
+                        <div *ngIf="!isPrinterMode">
+                            <span *ngIf="!column.render && column.data?.split('.').length == 1">{{row[column.data]}}</span>
+                            <span *ngIf="!column.render && column.data?.split('.').length > 1">{{RenderPropertyValue(column.data, row)}}</span>
+                            <span *ngIf="column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
+                        </div>
+                        <div *ngIf="isPrinterMode">
+                            <span *ngIf="!column.render && !column.renderOnPrint && column.data?.split('.').length == 1">{{row[column.data]}}</span>
+                            <span *ngIf="!column.render && !column.renderOnPrint && column.data?.split('.').length > 1">{{RenderPropertyValue(column.data, row)}}</span>
+                            <span *ngIf="!column.renderOnPrint && column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
+                            <span *ngIf="column.renderOnPrint" [innerHtml]="column.renderOnPrint(row, row[column.data], rowIndex)"></span>
+                        </div>
                     </td>
                 </tr>
             </tbody>
             <tfoot *ngIf="sortApplied && (!gridData || gridData.length == 0)">
                 <tr>
-                    <td class="empty-results text-center p-3" [attr.colspan]="columns?.length + (actionsColumnTemplate ? 1 : 0) + (showCheckboxColumn ? 1 : 0)">
+                    <td class="empty-results text-center p-3" [attr.colspan]="columns?.length + (showActionsColumn ? 1 : 0) + (showCheckboxColumn && gridData?.length > 0 ? 1 : 0)">
                         <p class="mb-0">{{emptyResultsMessage}}</p>
                     </td>
                 </tr>
@@ -73,7 +81,7 @@
         <div class="export-actions mr-3 mb-3" *ngIf="allowExports">
             <div class="btn-group" dropdown>
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                    <i class="fa fa-external-link"></i> {{exportLabel}} <span class="caret"></span>
+                    <i class="fa fa-external-link"></i> {{exportButtonLabel}} <span class="caret"></span>
                 </button>
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                     <li role="menuitem"><a class="dropdown-item" href="#" (click)="ExportToExcel()"><i class="fa fa-file-excel-o"></i> Excel</a></li>

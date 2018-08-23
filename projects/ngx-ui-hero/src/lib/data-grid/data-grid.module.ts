@@ -2,21 +2,21 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { UiModule } from './../ui/ui.module';
 
-import { DATAGRID_CONFIG } from './data-grid-config.constants';
+import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
 
-import { DataGridConfig } from './data-grid-config';
-export { DataGridConfig, EnumDataGridMode, EnumAutoFitMode } from './data-grid-config';
+import { DataGridConfig } from './config/data-grid-config';
+export { DataGridConfig, DataGridStylesConfig, DataGridPagingConfig, DataGridExportingConfig, EnumDataGridMode, EnumAutoFitMode } from './config/data-grid-config';
 
 import { DataGridComponent } from './data-grid.component';
 export { DataGridComponent } from './data-grid.component';
 
-import { ActionsColumnDirective } from './data-grid-templates.directive';
+import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
 
-export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './data-grid-column.model';
+import { ActionsColumnDirective } from './directives/data-grid-templates.directive';
+
+export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
 
 import { ExcelService } from './services/excel.service';
 
@@ -25,16 +25,18 @@ import { ExcelService } from './services/excel.service';
     CommonModule,
     FormsModule,
     UiModule,
-    PaginationModule.forRoot(),
-    BsDropdownModule.forRoot(),
   ],
   declarations: [
     DataGridComponent,
-    ActionsColumnDirective
+    ActionsColumnDirective,
+    DatagridExportingModalComponent
   ],  
   exports: [
     DataGridComponent,
     ActionsColumnDirective
+  ],
+  entryComponents: [
+    DatagridExportingModalComponent
   ],
   providers: [
     ExcelService

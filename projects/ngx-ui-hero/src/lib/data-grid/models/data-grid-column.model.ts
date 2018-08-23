@@ -10,6 +10,7 @@ export class DataGridColumnModel {
     sortDirection?: EnumSortDirection = EnumSortDirection.Ascending;
     sort?: DataGridSortingModel;
     render?(row: any, currentData: any, rowIndex: number): string;
+    renderOnPrint?(row: any, currentData: any, rowIndex: number): string;
 }
 
 export class DataGridSortingModel {

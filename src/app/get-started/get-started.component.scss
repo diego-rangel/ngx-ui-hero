@@ -7,3 +7,13 @@ a.link {
     color: #FFF;
     text-decoration: underline;
 }
+.badge.badge-warning-dark {
+    background-color: #856404;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: -1px 1px 0 #4c3900;
+    border-bottom: 2px solid #4c3900;
+    border-left: 2px solid #4c3900;
+    line-height: 1;
+}

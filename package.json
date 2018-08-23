@@ -40,6 +40,7 @@
     "e2e": "ng e2e",
     "build_lib": "ng build --prod ngx-ui-hero",
     "build_lib_serve": "ng build --prod ngx-ui-hero && ng serve",
+    "build_package": "npm run build_lib && npm run package",
     "package": "ng build --prod --base-href /ngx-ui-hero/ --deploy-url /ngx-ui-hero/ && if exist docs RMDIR /S /Q docs && mkdir docs && xcopy dist\\ngx-ui-hero-app docs /E /C /H /R /K /Y"
   },
   "private": true,

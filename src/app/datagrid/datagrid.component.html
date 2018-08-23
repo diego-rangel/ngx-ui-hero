@@ -77,6 +77,13 @@
         </thead>
         <tbody>
           <tr>
+            <td><b>tableId</b><br/>
+              Default: <small><i>automatically generated</i></small>
+            </td>
+            <td>string</td>
+            <td>A custom id for the table inside the datagrid.</td>
+          </tr>
+          <tr>
             <td><b>data</b></td>
             <td>any[]</td>
             <td>The data to show into the Datagrid.</td>
@@ -258,6 +265,38 @@
             </td>
             <td>string</td>
             <td>When <b>showActionsColumn</b> is true, the width of the actions column.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>allowExports</b><br/>
+              Default: <small>false</small>
+            </td>
+            <td>boolean</td>
+            <td>If true, an export button will be visible for exportations.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>exportButtonLabel</b><br/>
+              Default: <small>Export</small>
+            </td>
+            <td>string</td>
+            <td>The export button's label.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>exportedFileName</b><br/>
+              Default: <small>Export</small>
+            </td>
+            <td>string</td>
+            <td>The exported file name.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>exportedExcelSheetName</b><br/>
+              Default: <small>Sheet</small>
+            </td>
+            <td>string</td>
+            <td>The exported Excel Sheet name.</td>
           </tr>
         </tbody>
       </table>

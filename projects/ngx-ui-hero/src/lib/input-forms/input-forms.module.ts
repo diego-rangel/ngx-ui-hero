@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+
+import { UiModule } from './../ui/ui.module';
 import { FileUploadModule } from 'ng2-file-upload';
 
 import { DebounceDirective } from './directives/debounce.directive';
@@ -66,8 +66,7 @@ export { InputUploadComponent } from './components/input-upload/input-upload.com
     HttpClientModule,
     CurrencyMaskModule,
     FileUploadModule,
-    BsDatepickerModule.forRoot(),
-    ProgressbarModule.forRoot()
+    UiModule
   ],
   declarations: [
     AutoSelectOnFocusDirective,
@@ -90,8 +89,6 @@ export { InputUploadComponent } from './components/input-upload/input-upload.com
     AutoSelectOnFocusDirective,
     DebounceDirective,
     CurrencySymbolPipe,
-    BsDatepickerModule,
-    ProgressbarModule,
     FileUploadModule,
     InputTextComponent,
     InputValidationsComponent,

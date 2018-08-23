@@ -1,11 +1,13 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter, ContentChild, TemplateRef, Optional, DoCheck, ViewChild, IterableDiffers } from '@angular/core';
-import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 
-import { DATAGRID_CONFIG } from './data-grid-config.constants';
-import { DataGridColumnModel, EnumAlignment, EnumSortDirection, DataGridSortingModel } from './data-grid-column.model';
-import { DataGridConfig, EnumDataGridMode, EnumAutoFitMode } from './data-grid-config';
-import { ActionsColumnDirective } from './data-grid-templates.directive';
-import { ExcelService } from './services/excel.service';
+import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
+import { BsModalService } from 'ngx-bootstrap';
+
+import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
+import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
+import { DataGridColumnModel, EnumAlignment, EnumSortDirection, DataGridSortingModel } from './models/data-grid-column.model';
+import { DataGridConfig, EnumDataGridMode, EnumAutoFitMode } from './config/data-grid-config';
+import { ActionsColumnDirective } from './directives/data-grid-templates.directive';
 
 import * as _ from 'lodash';
 
@@ -27,6 +29,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
     public identifier = `datagrid-${identifier++}`;
 
+    @Input() tableId?: string = this.identifier;
     @Input() columns: Array<DataGridColumnModel>;
     @Input() emptyResultsMessage?: string = 'No results found at this moment.';
     @Input() infoMessage?: string = 'Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.';
@@ -37,7 +40,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() responsive?: boolean = true;
     @Input() showCheckboxColumn?: boolean = false;
     @Input() allowExports?: boolean = false;
-    @Input() exportLabel?: string = 'Export';
+    @Input() exportButtonLabel?: string = 'Export';
     @Input() exportedFileName?: string = 'Export';
     @Input() exportedExcelSheetName?: string = 'Sheet';
     @Input() initialColumnToSort?: number;
@@ -57,6 +60,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() nextText: string = 'Next';
     @Input() lastText: string = 'Last';
     @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
+    @Input() isPrinterMode?: boolean = false;
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnPaginate = new EventEmitter<any>();
@@ -84,11 +88,19 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     constructor(
         @Inject(DATAGRID_CONFIG) @Optional() defaultOptions: DataGridConfig,
         private iterableDiffers: IterableDiffers,
-        private excelService: ExcelService
+        private modalService: BsModalService
     ) {
         Object.assign(this, defaultOptions);
-        Object.assign(this, defaultOptions.paging);
-        Object.assign(this, defaultOptions.styles);
+
+        if (defaultOptions.paging) {
+            Object.assign(this, defaultOptions.paging);
+        }
+        if (defaultOptions.styles) {
+            Object.assign(this, defaultOptions.styles);
+        }
+        if (defaultOptions.exporting) {
+            Object.assign(this, defaultOptions.exporting);
+        }
 
         this._differ = this.iterableDiffers.find([]).create(null);
     }
@@ -208,7 +220,18 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     ExportToExcel() {
-        this.excelService.ExportTableToExcel(this.identifier, this.exportedFileName, this.exportedExcelSheetName);
+        this.modalService.show(DatagridExportingModalComponent, {
+            class: 'modal-md',
+            initialState: {
+                data: this._externalData,
+                columns: this.columns.slice(0),
+                exportedFileName: this.exportedFileName,
+                exportedExcelSheetName: this.exportedExcelSheetName,
+                initialColumnToSort: this.initialColumnToSort,
+                initialSortDirection: this.initialSortDirection,
+            }
+        });
+        
         return false;
     }
 
@@ -322,7 +345,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
         setTimeout(()=> {
             let widths: number[] = [];
-            let gridWidth: number = $(`#${this.identifier}`).parent().width();
+            let gridWidth: number = $(`#${this.tableId}`).parent().width();
 
             for (let rowIndex = 0; rowIndex < this.gridData.length; rowIndex++) {
                 for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {

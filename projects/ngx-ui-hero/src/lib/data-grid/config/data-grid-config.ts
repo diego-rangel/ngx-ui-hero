@@ -6,6 +6,7 @@ export interface DataGridConfig {
     paging?: DataGridPagingConfig;
     styles?: DataGridStylesConfig;
     autoFitMode?: EnumAutoFitMode;
+    exporting?: DataGridExportingConfig;
 }
 
 export interface DataGridPagingConfig {
@@ -46,6 +47,13 @@ export interface DataGridStylesConfig {
     hoverEffect?: boolean;
     responsive?: boolean;
     animated?: boolean;
+}
+
+export interface DataGridExportingConfig {
+    allowExports?: boolean;
+    exportButtonLabel?: string;
+    exportedFileName?: string;
+    exportedExcelSheetName?: string;
 }
 
 export enum EnumDataGridMode {

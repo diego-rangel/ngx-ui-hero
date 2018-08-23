@@ -137,6 +137,12 @@ export const dataGridSettings: DataGridConfig = {
     bordered: true,
     hoverEffect: true,
     responsive: true
+  },
+  exporting: {
+    allowExports: false,
+    exportButtonLabel: 'Export',
+    exportedFileName: 'Export',
+    exportedExcelSheetName: 'Sheet'
   }
 };
 
