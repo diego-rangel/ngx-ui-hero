@@ -1,15 +1,5 @@
 <ui-modal [hideActions]="true" [noPaddings]="true">
   <div class="body">
     <img [src]="loadingImage" class="w-100" />
-
-    <datagrid *ngIf="data && columns" #grid class="d-none"
-      [tableId]="tableId"
-      [data]="data" 
-      [columns]="columns" 
-      [initialColumnToSort]="initialColumnToSort"
-      [initialSortDirection]="initialSortDirection"
-      [isPrinterMode]="true"
-      [itemsPerPage]="data?.length">
-    </datagrid>
   </div>
 </ui-modal>

@@ -49,17 +49,9 @@
                         'text-center': column.dataAlignment == 1,
                         'text-right': column.dataAlignment == 2
                     }">                        
-                        <div *ngIf="!isPrinterMode">
-                            <span *ngIf="!column.render && column.data?.split('.').length == 1">{{row[column.data]}}</span>
-                            <span *ngIf="!column.render && column.data?.split('.').length > 1">{{RenderPropertyValue(column.data, row)}}</span>
-                            <span *ngIf="column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
-                        </div>
-                        <div *ngIf="isPrinterMode">
-                            <span *ngIf="!column.render && !column.renderOnPrint && column.data?.split('.').length == 1">{{row[column.data]}}</span>
-                            <span *ngIf="!column.render && !column.renderOnPrint && column.data?.split('.').length > 1">{{RenderPropertyValue(column.data, row)}}</span>
-                            <span *ngIf="!column.renderOnPrint && column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
-                            <span *ngIf="column.renderOnPrint" [innerHtml]="column.renderOnPrint(row, row[column.data], rowIndex)"></span>
-                        </div>
+                        <span *ngIf="!column.render && column.data?.split('.').length == 1">{{row[column.data]}}</span>
+                        <span *ngIf="!column.render && column.data?.split('.').length > 1">{{RenderPropertyValue(column.data, row)}}</span>
+                        <span *ngIf="column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
                     </td>
                 </tr>
             </tbody>

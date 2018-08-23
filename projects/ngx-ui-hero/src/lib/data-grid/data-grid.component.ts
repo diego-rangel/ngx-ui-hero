@@ -60,7 +60,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() nextText: string = 'Next';
     @Input() lastText: string = 'Last';
     @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
-    @Input() isPrinterMode?: boolean = false;
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnPaginate = new EventEmitter<any>();
