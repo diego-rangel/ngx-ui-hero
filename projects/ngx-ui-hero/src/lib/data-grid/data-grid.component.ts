@@ -39,6 +39,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() hoverEffect?: boolean = true;
     @Input() responsive?: boolean = true;
     @Input() showCheckboxColumn?: boolean = false;
+    @Input() showSummaries?: boolean = false;
     @Input() allowExports?: boolean = false;
     @Input() exportButtonLabel?: string = 'Export';
     @Input() exportedFileName?: string = 'Export';
@@ -198,6 +199,22 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
 
         return property;
+    }
+
+    RenderColumnSummary(column: DataGridColumnModel): number {
+        if (!this.gridData || this.gridData.length == 0) {
+            return 0;
+        }
+        
+        return _.sumBy(this.gridData, x => Number(this.RenderPropertyValue(column.data, x)));
+    }
+
+    HasSummarizableColumns(): boolean {
+        if (!this.columns || this.columns.length == 0) {
+            return false;
+        }
+        
+        return _.some(this.columns, x => x.summarizable);
     }
 
     OnSelectAllChanged(): void {

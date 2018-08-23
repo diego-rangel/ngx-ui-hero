@@ -39,6 +39,13 @@
                 vertical-align: middle;
             }
         }
+        tr.summaries {
+            border-top: 2px solid #c1c1c1;
+            
+            td {
+                background-color: #dee2e6;
+            }
+        }
     }
     table.table-fixed {
         table-layout: fixed;

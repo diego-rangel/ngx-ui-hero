@@ -1,340 +1,349 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1>Datagrid</h1>
+    <p>The easiest, performative, responsive, beautiful, customizable and powerfull Datagrid component ever.</p>
   </div>
 </div>
 
 <section>
-  <div class="main container">    
-    <h2>Basic usage example</h2>
-
-    <div class="row">
-      <div class="col-12">
-        <datagrid 
-          [data]="myBasicDatagridModel" 
-          [columns]="myBasicDatagridColumns" 
-          [allowExports]="true" 
-          [initialColumnToSort]="0">
-        </datagrid>
-      </div>
-    </div>
-
-    <tabset>
-      <tab heading="Template">
-        <div highlight="all" [language]="['Html']">
-          <pre><code [textContent]="dataGridBasicUsageExampleTemplate"></code></pre>
+  <div class="main container">   
+    <tabset class="custom-tab">
+      <tab heading="Basic usage example">
+        <div class="row">
+          <div class="col-12">
+            <datagrid 
+              [data]="myBasicDatagridModel" 
+              [columns]="myBasicDatagridColumns" 
+              [allowExports]="true" 
+              [initialColumnToSort]="0">
+            </datagrid>
+          </div>
         </div>
+    
+        <tabset>
+          <tab heading="Template">
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="dataGridBasicUsageExampleTemplate"></code></pre>
+            </div>
+          </tab>
+          <tab heading="Component">
+            <div highlight="all" [language]="['Typescript']">
+              <pre><code [textContent]="dataGridBasicUsageExampleCode"></code></pre>
+            </div>
+          </tab>
+        </tabset>
       </tab>
-      <tab heading="Component">
-        <div highlight="all" [language]="['Typescript']">
-          <pre><code [textContent]="dataGridBasicUsageExampleCode"></code></pre>
+      <tab heading="Complex usage example">
+        <div class="row">
+          <div class="col-12">
+            <datagrid 
+              [data]="myComplexDatagridModel" 
+              [columns]="myComplexDatagridColumns" 
+              [showActionsColumn]="true"
+              [initialColumnToSort]="0">
+    
+              <ng-template actions-column let-row="row" let-rowIndex="rowIndex">
+                <button class="btn btn-primary btn-sm mr-1"><fa name="edit"></fa></button>
+                <button class="btn btn-outline-danger btn-sm"><fa name="trash"></fa></button>
+              </ng-template>
+            </datagrid>
+          </div>
+        </div>
+    
+        <tabset>
+          <tab heading="Template">
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="dataGridComplexUsageExampleTemplate"></code></pre>
+            </div>
+          </tab>
+          <tab heading="Component">
+            <div highlight="all" [language]="['Typescript']">
+              <pre><code [textContent]="dataGridComplexUsageExampleCode"></code></pre>
+            </div>
+          </tab>
+        </tabset>
+      </tab>
+      <tab heading="Inputs / Outputs">
+        <h2>Inputs</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>tableId</b><br/>
+                  Default: <small><i>automatically generated</i></small>
+                </td>
+                <td>string</td>
+                <td>A custom id for the table inside the datagrid.</td>
+              </tr>
+              <tr>
+                <td><b>data</b></td>
+                <td>any[]</td>
+                <td>The data to show into the Datagrid.</td>
+              </tr>
+              <tr>
+                <td><b>columns</b></td>
+                <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">DataGridColumnModel</a>[]</td>
+                <td>The columns definitions.</td>
+              </tr>
+              <tr class="table-warning">
+                <td>
+                  <b>autoFitMode</b><br/>
+                    Default: <small>ByContent</small>
+                </td>
+                <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumAutoFitMode</a></td>
+                <td>
+                  <p>Defines the way the datagrid should handle the columns sizes.</p>
+                  <p><b>Default:</b> All collumns will try to fit the entire available space. It's recommend when you have a small number of columns.</p>
+                  <p><b>ByCaption:</b> All collumns will respect the width that you provided into the <b>columns</b> width property. It's recommended when you want to define every single width for all your columns.</p>
+                  <p><b>ByContent:</b> This is a special mode, where the datagrid will automatically keep your columns fitting the necessary space by their content. It's the most dynamic mode, strongly recommended to use.</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>emptyResultsMessage</b><br/>
+                  Default: <small>No results found at this moment.</small>
+                </td>
+                <td>string</td>
+                <td>The message to show when the Datagrid's model is empty or null.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>infoMessage</b><br/>
+                  Default: <small>{{'Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.'}}</small>
+                </td>
+                <td>string</td>
+                <td>The info messages to show for representing the Datagrid's info.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>animated</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>Enables some awesome animations effects.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>striped</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>Applies a style for even & odd background-color.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>bordered</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>Applies a style to get a bordered grid.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>hoverEffect</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>Applies a style of effects on hover.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>responsive</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>
+                  Defines when the DataGrid should be responsive or not. 
+                  It'll create an horizontal scroll when the page space is not enought.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>initialColumnToSort</b>
+                </td>
+                <td>number</td>
+                <td>The column index that should be initially sorted.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>initialSortDirection</b><br/>
+                    Default: <small>Ascending</small>
+                </td>
+                <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">EnumSortDirection</a></td>
+                <td>When <b>initialColumnToSort</b> is provided, the column sort direction that should be initially sorted.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>mode</b><br/>
+                    Default: <small>OnClient</small>
+                </td>
+                <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumDataGridMode</a></td>
+                <td>Defines if sorting and paging should be OnServer or OnClient.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>totalItems</b>
+                </td>
+                <td>number</td>
+                <td>When mode is <b>OnServer</b>, you must provide the <b>totalItems</b> manually.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>itemsPerPage</b><br/>
+                  Default: <small>10</small>
+                </td>
+                <td>number</td>
+                <td>Maximum number of items per page. If value is less than 1, it will display all items in a single page.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>maxSize</b><br/>
+                  Default: <small>10</small>
+                </td>
+                <td>number</td>
+                <td>Limit number for page links in pager.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>boundaryLinks</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>If false, first and last buttons will be hidden.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>directionLinks</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>If false, previous and next buttons will be hidden.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>rotate</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>If true, current page will be in the middle of pages list.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>showActionsColumn</b><br/>
+                  Default: <small>false</small>
+                </td>
+                <td>boolean</td>
+                <td>If true, a column for actions provided by ng-template will be displayed at the beginning of the table.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>showCheckboxColumn</b><br/>
+                  Default: <small>false</small>
+                </td>
+                <td>boolean</td>
+                <td>When true, a column will be displayed at the beginning of the datagrid and each <b>data</b> object will have a <b>selected</b> property.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>actionsColumnCaption</b>
+                </td>
+                <td>string</td>
+                <td>When <b>showActionsColumn</b> is true, the captions text of the actions column.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>actionsColumnWidth</b><br/>
+                  Default: <small>100px</small>
+                </td>
+                <td>string</td>
+                <td>When <b>showActionsColumn</b> is true, the width of the actions column.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>allowExports</b><br/>
+                  Default: <small>false</small>
+                </td>
+                <td>boolean</td>
+                <td>If true, an export button will be visible for exportations.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>exportButtonLabel</b><br/>
+                  Default: <small>Export</small>
+                </td>
+                <td>string</td>
+                <td>The export button's label.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>exportedFileName</b><br/>
+                  Default: <small>Export</small>
+                </td>
+                <td>string</td>
+                <td>The exported file name.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>exportedExcelSheetName</b><br/>
+                  Default: <small>Sheet</small>
+                </td>
+                <td>string</td>
+                <td>The exported Excel Sheet name.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>showSummaries</b><br/>
+                  Default: <small>false</small>
+                </td>
+                <td>boolean</td>
+                <td>When true, a row will be displayed at the end of the datagrid with all columns tha are defined as <b>summarizable</b>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+        <h2>Outputs</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>OnPaginate</b></td>
+                <td>EventEmitter&lt;any&gt;</td>
+                <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling paging operations. This callback will receive as a parameter an object with the current page number.</td>
+              </tr>
+              <tr>
+                <td><b>OnSort</b></td>
+                <td>EventEmitter&lt;DataGridColumnModel&gt;</td>
+                <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling sorting operations. This callback will receive as a parameter an object with the sorted column.</td>
+              </tr>
+              <tr>
+                <td><b>OnRowSelected</b></td>
+                <td>EventEmitter&lt;any&gt;</td>
+                <td>An event emitted when <b>showCheckboxColumn</b> is defined to <b>true</b> and a row is selected/deselected. This callback will receive as a parameter an object with the checked row.</td>
+              </tr>
+              <tr>
+                <td><b>OnSelectionChanged</b></td>
+                <td>EventEmitter&lt;void&gt;</td>
+                <td>An event emitted when <b>showCheckboxColumn</b> is defined to <b>true</b> and any selection is changed.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </tab>
     </tabset>
-
-    <h2 class="mt-5">Complex usage example</h2>
-
-    <div class="row">
-      <div class="col-12">
-        <datagrid 
-          [data]="myComplexDatagridModel" 
-          [columns]="myComplexDatagridColumns" 
-          [showActionsColumn]="true"
-          [initialColumnToSort]="0">
-
-          <ng-template actions-column let-row="row" let-rowIndex="rowIndex">
-            <button class="btn btn-primary btn-sm mr-1"><fa name="edit"></fa></button>
-            <button class="btn btn-outline-danger btn-sm"><fa name="trash"></fa></button>
-          </ng-template>
-        </datagrid>
-      </div>
-    </div>
-
-    <tabset>
-      <tab heading="Template">
-        <div highlight="all" [language]="['Html']">
-          <pre><code [textContent]="dataGridComplexUsageExampleTemplate"></code></pre>
-        </div>
-      </tab>
-      <tab heading="Component">
-        <div highlight="all" [language]="['Typescript']">
-          <pre><code [textContent]="dataGridComplexUsageExampleCode"></code></pre>
-        </div>
-      </tab>
-    </tabset>
-
-    <hr />
-
-    <h2>Inputs</h2>
-    <div class="table-responsive">
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><b>tableId</b><br/>
-              Default: <small><i>automatically generated</i></small>
-            </td>
-            <td>string</td>
-            <td>A custom id for the table inside the datagrid.</td>
-          </tr>
-          <tr>
-            <td><b>data</b></td>
-            <td>any[]</td>
-            <td>The data to show into the Datagrid.</td>
-          </tr>
-          <tr>
-            <td><b>columns</b></td>
-            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">DataGridColumnModel</a>[]</td>
-            <td>The columns definitions.</td>
-          </tr>
-          <tr class="table-warning">
-            <td>
-              <b>autoFitMode</b><br/>
-                Default: <small>ByContent</small>
-            </td>
-            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumAutoFitMode</a></td>
-            <td>
-              <p>Defines the way the datagrid should handle the columns sizes.</p>
-              <p><b>Default:</b> All collumns will try to fit the entire available space. It's recommend when you have a small number of columns.</p>
-              <p><b>ByCaption:</b> All collumns will respect the width that you provided into the <b>columns</b> width property. It's recommended when you want to define every single width for all your columns.</p>
-              <p><b>ByContent:</b> This is a special mode, where the datagrid will automatically keep your columns fitting the necessary space by their content. It's the most dynamic mode, strongly recommended to use.</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>emptyResultsMessage</b><br/>
-              Default: <small>No results found at this moment.</small>
-            </td>
-            <td>string</td>
-            <td>The message to show when the Datagrid's model is empty or null.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>infoMessage</b><br/>
-              Default: <small>{{'Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.'}}</small>
-            </td>
-            <td>string</td>
-            <td>The info messages to show for representing the Datagrid's info.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>animated</b><br/>
-              Default: <small>true</small>
-            </td>
-            <td>boolean</td>
-            <td>Enables some awesome animations effects.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>striped</b><br/>
-              Default: <small>true</small>
-            </td>
-            <td>boolean</td>
-            <td>Applies a style for even & odd background-color.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>bordered</b><br/>
-              Default: <small>true</small>
-            </td>
-            <td>boolean</td>
-            <td>Applies a style to get a bordered grid.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>hoverEffect</b><br/>
-              Default: <small>true</small>
-            </td>
-            <td>boolean</td>
-            <td>Applies a style of effects on hover.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>responsive</b><br/>
-              Default: <small>true</small>
-            </td>
-            <td>boolean</td>
-            <td>
-              Defines when the DataGrid should be responsive or not. 
-              It'll create an horizontal scroll when the page space is not enought.
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <b>initialColumnToSort</b>
-            </td>
-            <td>number</td>
-            <td>The column index that should be initially sorted.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>initialSortDirection</b><br/>
-                Default: <small>Ascending</small>
-            </td>
-            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-column.model.ts" target="_blank">EnumSortDirection</a></td>
-            <td>When <b>initialColumnToSort</b> is provided, the column sort direction that should be initially sorted.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>mode</b><br/>
-                Default: <small>OnClient</small>
-            </td>
-            <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/data-grid-config.ts" target="_blank">EnumDataGridMode</a></td>
-            <td>Defines if sorting and paging should be OnServer or OnClient.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>totalItems</b>
-            </td>
-            <td>number</td>
-            <td>When mode is <b>OnServer</b>, you must provide the <b>totalItems</b> manually.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>itemsPerPage</b><br/>
-              Default: <small>10</small>
-            </td>
-            <td>number</td>
-            <td>Maximum number of items per page. If value is less than 1, it will display all items in a single page.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>maxSize</b><br/>
-              Default: <small>10</small>
-            </td>
-            <td>number</td>
-            <td>Limit number for page links in pager.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>boundaryLinks</b><br/>
-              Default: <small>true</small>
-            </td>
-            <td>boolean</td>
-            <td>If false, first and last buttons will be hidden.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>directionLinks</b><br/>
-              Default: <small>true</small>
-            </td>
-            <td>boolean</td>
-            <td>If false, previous and next buttons will be hidden.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>rotate</b><br/>
-              Default: <small>true</small>
-            </td>
-            <td>boolean</td>
-            <td>If true, current page will be in the middle of pages list.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>showActionsColumn</b><br/>
-              Default: <small>false</small>
-            </td>
-            <td>boolean</td>
-            <td>If true, a column for actions provided by ng-template will be displayed at the beginning of the table.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>showCheckboxColumn</b><br/>
-              Default: <small>false</small>
-            </td>
-            <td>boolean</td>
-            <td>When true, a column will be displayed at the beginning of the datagrid and each <b>data</b> object will have a <b>selected</b> property.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>actionsColumnCaption</b>
-            </td>
-            <td>string</td>
-            <td>When <b>showActionsColumn</b> is true, the captions text of the actions column.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>actionsColumnWidth</b><br/>
-              Default: <small>100px</small>
-            </td>
-            <td>string</td>
-            <td>When <b>showActionsColumn</b> is true, the width of the actions column.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>allowExports</b><br/>
-              Default: <small>false</small>
-            </td>
-            <td>boolean</td>
-            <td>If true, an export button will be visible for exportations.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>exportButtonLabel</b><br/>
-              Default: <small>Export</small>
-            </td>
-            <td>string</td>
-            <td>The export button's label.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>exportedFileName</b><br/>
-              Default: <small>Export</small>
-            </td>
-            <td>string</td>
-            <td>The exported file name.</td>
-          </tr>
-          <tr>
-            <td>
-              <b>exportedExcelSheetName</b><br/>
-              Default: <small>Sheet</small>
-            </td>
-            <td>string</td>
-            <td>The exported Excel Sheet name.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h2>Outputs</h2>
-    <div class="table-responsive">
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><b>OnPaginate</b></td>
-            <td>EventEmitter&lt;any&gt;</td>
-            <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling paging operations. This callback will receive as a parameter an object with the current page number.</td>
-          </tr>
-          <tr>
-            <td><b>OnSort</b></td>
-            <td>EventEmitter&lt;DataGridColumnModel&gt;</td>
-            <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling sorting operations. This callback will receive as a parameter an object with the sorted column.</td>
-          </tr>
-          <tr>
-            <td><b>OnRowSelected</b></td>
-            <td>EventEmitter&lt;any&gt;</td>
-            <td>An event emitted when <b>showCheckboxColumn</b> is defined to <b>true</b> and a row is selected/deselected. This callback will receive as a parameter an object with the checked row.</td>
-          </tr>
-          <tr>
-            <td><b>OnSelectionChanged</b></td>
-            <td>EventEmitter&lt;void&gt;</td>
-            <td>An event emitted when <b>showCheckboxColumn</b> is defined to <b>true</b> and any selection is changed.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </section>

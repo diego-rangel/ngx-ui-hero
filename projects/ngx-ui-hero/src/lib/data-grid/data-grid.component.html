@@ -54,6 +54,15 @@
                         <span *ngIf="column.render" [innerHtml]="column.render(row, row[column.data], rowIndex)"></span>
                     </td>
                 </tr>
+                <tr *ngIf="showSummaries && HasSummarizableColumns()" class="summaries">
+                    <td *ngFor="let column of columns; let columnIndex = index;" class="{{column.dataClasses}}" [ngClass]="{
+                        'text-center': column.dataAlignment == 1,
+                        'text-right': column.dataAlignment == 2
+                    }">                        
+                        <span *ngIf="column.summarizable && !column.summarizeAsCurrency">{{RenderColumnSummary(column) | number:'1.2-2'}}</span>
+                        <span *ngIf="column.summarizable && column.summarizeAsCurrency">{{RenderColumnSummary(column) | currency}}</span>
+                    </td>
+                </tr>
             </tbody>
             <tfoot *ngIf="sortApplied && (!gridData || gridData.length == 0)">
                 <tr>

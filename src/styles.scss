@@ -24,3 +24,30 @@ h2 mark {
         color: #FFF;
     }
 }
+.custom-tab {
+    .tab-content {
+        background-color: #FFF;
+        border-left: 1px solid #CCC;
+        border-bottom: 1px solid #CCC;
+        border-right: 1px solid #CCC;
+        padding: 20px;
+    }
+    .nav-tabs {
+        li a {
+            border-radius: 0;
+            margin: 0;
+            padding: 10px 15px;
+            color: #00559A;
+        }
+        li.active a {
+            border-top: 4px solid #00559A;
+            border-left-color: #CCC;
+            border-right-color: #CCC;
+            padding-top: 7px;
+            color: #00559A;
+        }
+        li:not(.active) a:hover {
+            background-color: #f0f0f0;
+        }
+    }
+}
