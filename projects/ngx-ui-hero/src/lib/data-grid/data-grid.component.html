@@ -55,12 +55,13 @@
                     </td>
                 </tr>
                 <tr *ngIf="showSummaries && HasSummarizableColumns()" class="summaries">
+                    <td *ngIf="showCheckboxColumn && gridData?.length > 0"></td>
+                    <td *ngIf="showActionsColumn"></td>
                     <td *ngFor="let column of columns; let columnIndex = index;" class="{{column.dataClasses}}" [ngClass]="{
                         'text-center': column.dataAlignment == 1,
                         'text-right': column.dataAlignment == 2
                     }">                        
-                        <span *ngIf="column.summarizable && !column.summarizeAsCurrency">{{RenderColumnSummary(column) | number:'1.2-2'}}</span>
-                        <span *ngIf="column.summarizable && column.summarizeAsCurrency">{{RenderColumnSummary(column) | currency}}</span>
+                        <span *ngIf="column.summarizable">{{column.summaryPrefix}}{{RenderColumnSummary(column) | number:'1.2-2'}}</span>
                     </td>
                 </tr>
             </tbody>

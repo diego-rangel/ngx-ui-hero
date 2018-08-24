@@ -17,7 +17,7 @@ export class DataGridColumnModel {
      * @var name It must be a numeric property.
      */
     summarizable?: boolean = false;
-    summarizeAsCurrency?: boolean = false;
+    summaryPrefix?: string = '';
 }
 
 export class DataGridSortingModel {
