@@ -110,6 +110,10 @@ export class InputUploadComponent implements OnInit {
         }      
     }
 
+    HasSelectedFile(): boolean {
+        return this.selectedFileBlob != null && this.selectedFileBlob != undefined;
+    }
+
     private startSingleUpload(): void {
       this.uploader.uploadAll();
     }

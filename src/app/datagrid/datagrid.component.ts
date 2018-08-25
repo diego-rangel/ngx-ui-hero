@@ -20,7 +20,6 @@ export class DatagridComponent implements OnInit {
     {
       caption: 'Status',
       data: 'active',
-      width: '100px',
       captionAlignment: EnumAlignment.Center,
       dataAlignment: EnumAlignment.Center,
       sortable: false

@@ -71,6 +71,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     private _differ: any;
     private _internalData: Array<any>;
     private _externalData: Array<any>;
+    private _externalColumns: Array<DataGridColumnModel>;
     private _maxWidth = 400;
 
     get data(): Array<any> {
@@ -179,10 +180,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
     Rerender(): void {
         setTimeout(() => {
-            this.initializeGridData();
-            this.initializePaging();
-            this.initializeSorting();
-            this.handleAutoFit();
+            if (!this.sortApplied) {
+                this.initializeGridData();
+                this.initializePaging();
+                this.initializeSorting();
+                this.handleAutoFit();
+            }
         },0);
     }
 
@@ -265,6 +268,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             console.error('Param [columns] cannot be undefined or empty.');
             return;
         }
+        
+        this._externalColumns = Object.assign([], this.columns);
 
         for (let i = 0; i < this.columns.length; i++) {
             let target: DataGridColumnModel = {
@@ -363,6 +368,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             let widths: number[] = [];
             let gridWidth: number = $(`#${this.tableId}`).parent().width();
 
+            if ($(`#${this.tableId}`).parents('.tab-content').length) {
+                gridWidth = $(`#${this.tableId}`).parents('.tab-content').width();
+            }
+
             for (let rowIndex = 0; rowIndex < this.gridData.length; rowIndex++) {
                 for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
                     let width: number = 150;
@@ -444,6 +453,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.selectAll = true;
     }
     private setDataGridWidths(widths: number[], gridWidth: number): void {
+        let initialColumnsWidths = _.map(this._externalColumns, 'width');
         let totalColumnsWidth = _.sum(widths);
         let totalColumnsWidthGreaterThanGrid = totalColumnsWidth > gridWidth;
 
@@ -475,6 +485,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 }
 
                 this.columns[columnIndex].width = `${widths[columnIndex]}px`;             
+            }
+        }
+
+        for (let i = 0; i < initialColumnsWidths.length; i++) {
+            if (initialColumnsWidths[i]) {
+                this.columns[i].width = initialColumnsWidths[i];
             }
         }
     }
