@@ -91,8 +91,8 @@ myBasicDatagridColumns: Array<DataGridColumnModel> = [
   [initialColumnToSort]="0">
 
   <ng-template actions-column let-row="row" let-rowIndex="rowIndex">
-    <button class="btn btn-primary btn-sm mr-1"><fa name="edit"></fa></button>
-    <button class="btn btn-outline-danger btn-sm"><fa name="trash"></fa></button>
+    <button class="btn btn-primary btn-sm mr-1"><i class="fa fa-edit"></i></button>
+    <button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
   </ng-template>
 </datagrid>
   `;
