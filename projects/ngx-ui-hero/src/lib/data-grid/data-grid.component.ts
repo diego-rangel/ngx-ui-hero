@@ -180,12 +180,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
     Rerender(): void {
         setTimeout(() => {
-            if (!this.sortApplied) {
-                this.initializeGridData();
-                this.initializePaging();
-                this.initializeSorting();
-                this.handleAutoFit();
-            }
+            this.initializeGridData();
+			this.initializePaging();
+			this.initializeSorting();
+			this.handleAutoFit();
         },0);
     }
 
@@ -368,7 +366,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             let widths: number[] = [];
             let gridWidth: number = $(`#${this.tableId}`).parent().width();
 
-            if ($(`#${this.tableId}`).parents('.tab-content').length) {
+            if (gridWidth == 0 && $(`#${this.tableId}`).parents('.tab-content').length) {
                 gridWidth = $(`#${this.tableId}`).parents('.tab-content').width();
             }
 
