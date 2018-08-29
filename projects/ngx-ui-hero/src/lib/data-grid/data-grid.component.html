@@ -4,8 +4,8 @@
             'table-striped': striped,
             'table-bordered': bordered,
             'table-hover': hoverEffect,
-            'table-animated': animated,
-            'table-animating': animating,
+            'table-animated': animated && initialRenderApplied,
+            'table-animating': animating && initialRenderApplied,
             'table-fixed': autoFitMode == 1 || autoFitMode == 2
         }">
             <thead>

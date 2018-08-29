@@ -21,6 +21,7 @@ let identifier = 0;
 })
 
 export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
+    initialRenderApplied: boolean = false;
     sortApplied: boolean = false;
     animating: boolean = false;
     selectAll: boolean = false;
@@ -183,7 +184,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             this.initializeGridData();
 			this.initializePaging();
 			this.initializeSorting();
-			this.handleAutoFit();
+            this.handleAutoFit();
+            this.handleInitialRenderingFlag();
         },0);
     }
 
@@ -490,6 +492,13 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             if (initialColumnsWidths[i]) {
                 this.columns[i].width = initialColumnsWidths[i];
             }
+        }
+    }
+    private handleInitialRenderingFlag(): void {
+        if (!this.initialRenderApplied) {
+            setTimeout(()=> {
+                this.initialRenderApplied = true;
+            }, 1500);
         }
     }
 }
