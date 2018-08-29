@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { UiModule } from './ui/ui.module';
 
 @NgModule({
-  imports: [
-    UiModule
-  ],
+  imports: [UiModule],
   declarations: [],
-  exports: []
+  exports: [UiModule]
 })
 export class NgxUiHeroModule { }
