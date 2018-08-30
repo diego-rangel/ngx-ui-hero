@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./radial-button.component.scss']
 })
 export class RadialButtonComponent implements OnInit {
+  @Input() disabled?: boolean = false;
   @Input() label: string;
   @Input() labelPlacement: string = 'bottom';
   @Input() iconClass: string;
