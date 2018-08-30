@@ -45,7 +45,7 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, DoC
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: AsyncValidatorArray,
     @Inject( INPUT_FORMS_CONFIG ) public config: InputFormsConfig,
     private localeService: BsLocaleService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
   ) {
     super(validators, asyncValidators, config);
 

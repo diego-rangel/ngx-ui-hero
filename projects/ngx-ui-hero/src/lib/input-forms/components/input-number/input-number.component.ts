@@ -11,8 +11,9 @@ import {
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms';
 
+let identifier = 0;
+
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'input-number',
   templateUrl: './input-number.component.html',
   providers: [{
@@ -21,7 +22,7 @@ import {
     multi: true
   }]
 })
-export class InputNumberComponent extends ElementBase<string> {
+export class InputNumberComponent extends ElementBase<string> implements OnInit {
   @Input() public maxValue: number;
   @Input() public minValue: number;
 
@@ -36,6 +37,6 @@ export class InputNumberComponent extends ElementBase<string> {
   ) {
     super(validators, asyncValidators, config);
   }
-}
 
-let identifier = 0;
+  ngOnInit(): void {}
+}

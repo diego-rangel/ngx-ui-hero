@@ -43,7 +43,7 @@ export class InputEmailComponent extends ElementBase<string> implements OnInit {
     super(validators, asyncValidators, config);
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     if (!this.inputGroupText) {
       this.inputGroupText = this.domSanitizer.bypassSecurityTrustHtml("<i class='fa fa-envelope-o' aria-hidden='true'></i>");
     }

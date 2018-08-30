@@ -290,7 +290,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
             if (!this.isUndefinedOrNull(this.initialColumnToSort) && this.initialColumnToSort == i) {
                 this.columns[i].sort.sorting = true;
-                this.columns[i].sort.sortDirection = this.initialSortDirection;
+
+                if (this.columns[i].sortDirection) {
+                    this.columns[i].sort.sortDirection = this.columns[i].sortDirection;
+                } else {
+                    this.columns[i].sort.sortDirection = this.initialSortDirection;
+                }
             }
         }
     }

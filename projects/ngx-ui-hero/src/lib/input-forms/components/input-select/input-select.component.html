@@ -1,6 +1,10 @@
 <label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
 
-<select class="form-control" [(ngModel)]="value" [id]="identifier" [disabled]="disabled" [ngClass]="{
+<select class="form-control" 
+  [(ngModel)]="value"
+  [id]="identifier" 
+  [disabled]="disabled" 
+  [ngClass]="{
     'is-valid': touched && !(invalid | async),
     'is-invalid': touched && (invalid | async)
   }">

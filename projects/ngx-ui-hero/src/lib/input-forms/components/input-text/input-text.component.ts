@@ -34,7 +34,5 @@ export class InputTextComponent extends ElementBase<string> implements OnInit {
     super(validators, asyncValidators, config);
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }

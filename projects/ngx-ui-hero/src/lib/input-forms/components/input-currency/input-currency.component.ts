@@ -1,4 +1,4 @@
-import { Component, ViewChild, Optional, Inject, Input } from '@angular/core';
+import { Component, ViewChild, Optional, Inject, Input, OnInit } from '@angular/core';
 import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
@@ -8,7 +8,6 @@ import { InputFormsConfig } from '../../input-forms-config';
 let identifier = 0;
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'input-currency',
   templateUrl: './input-currency.component.html',
   providers: [{
@@ -17,7 +16,7 @@ let identifier = 0;
     multi: true
   }]
 })
-export class InputCurrencyComponent extends ElementBase<string> {
+export class InputCurrencyComponent extends ElementBase<string> implements OnInit {
   @Input() showInputGroup?: boolean = true;
   @ViewChild(NgModel) model: NgModel;
   
@@ -33,4 +32,6 @@ export class InputCurrencyComponent extends ElementBase<string> {
     super(validators, asyncValidators, config);
     this.currencyCode = this.config.currency.currencyCode;
   }
+
+  ngOnInit(): void {}
 }

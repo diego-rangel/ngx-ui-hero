@@ -11,8 +11,9 @@ import {
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms';
 
+let identifier = 0;
+
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'input-percent',
   templateUrl: './input-percent.component.html',
   providers: [{
@@ -21,7 +22,7 @@ import {
     multi: true
   }]
 })
-export class InputPercentComponent extends ElementBase<string> {
+export class InputPercentComponent extends ElementBase<string> implements OnInit {
   @Input() showInputGroup?: boolean = true;
   @Input() inputGroupText?: string = '%';
   @ViewChild(NgModel) model: NgModel;
@@ -35,6 +36,6 @@ export class InputPercentComponent extends ElementBase<string> {
   ) {
     super(validators, asyncValidators, config);
   }
-}
 
-let identifier = 0;
+  ngOnInit(): void {}
+}

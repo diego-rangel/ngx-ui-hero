@@ -1,9 +1,18 @@
 <label *ngIf="label">{{label}}</label>
 
-<input type="file" class="d-none" [(ngModel)]="selectedFileModel" (change)="OnFileChange($event)" #fileInput ng2FileSelect [uploader]="uploader" [disabled]="disabled" />
+<input type="file" class="d-none" 
+  [(ngModel)]="selectedFileModel"
+  (change)="OnFileChange($event)" #fileInput ng2FileSelect 
+  [uploader]="uploader" 
+  [disabled]="disabled"
+  id="{{identifier}}-0" />
 
 <div class="input-group">
-    <input type="text" class="form-control" [value]="selectedFileName" placeholder="{{placeholder}}" (click)="fileInput.click()" readonly />
+    <input type="text" class="form-control" 
+      [value]="selectedFileName" 
+      placeholder="{{placeholder}}" 
+      id="{{identifier}}-1"
+      (click)="fileInput.click()" readonly />
     <div class="input-group-append">
       <button class="btn btn-primary" type="button" (click)="fileInput.click()" [disabled]="disabled"><i *ngIf="selectButtonIcon" class="{{selectButtonIcon}}"></i> {{selectButtonLabel}}</button>
       <button class="btn btn-outline-danger" type="button" *ngIf="selectedFileName" (click)="Clear()" [disabled]="disabled"><i *ngIf="removeButtonIcon" class="{{removeButtonIcon}}"></i> {{removeButtonLabel}}</button>

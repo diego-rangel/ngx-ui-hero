@@ -6,12 +6,13 @@ import { retry } from 'rxjs/operators';
 import { InputFormsConfig } from './../../input-forms-config';
 import { INPUT_FORMS_CONFIG } from './../../input-forms-config.constants';
 
+let identifier = 0;
+
 @Component({
     selector: 'input-upload',
     templateUrl: 'input-upload.component.html',
     styleUrls: ['input-upload.component.scss']
 })
-
 export class InputUploadComponent implements OnInit {
     @Input() url: string;
     @Input() label?: string;
@@ -40,6 +41,8 @@ export class InputUploadComponent implements OnInit {
     @Output() onChunkFileUpload = new EventEmitter<any>();
     @Output() onError = new EventEmitter<any>();
     @Output() onClear = new EventEmitter();
+
+    public identifier = `input-upload-${identifier++}`;
 
     selectedFileBlob: any;
     selectedFileModel: any;
@@ -80,16 +83,24 @@ export class InputUploadComponent implements OnInit {
         this.onClear.emit();
     }
 
-    StartUploadManually(): void {
-        if (!this.selectedFileBlob) {
-          return;
-        }
+    StartUploadManually(): Promise<void> {
+        let promise = new Promise<void>((resolve, reject) => {
+            if (!this.selectedFileBlob) {
+                reject();
+                return;
+            }
 
-        if (this.chunk && this.chunks && this.chunks.length > 0) {
-          this.startChunkUpload();
-        } else {
-          this.startSingleUpload();
-        }
+            this.onUploadComplete.subscribe(result => resolve(), error => reject(error));
+            this.onError.subscribe(result => { reject(); });
+
+            if (this.chunk && this.chunks && this.chunks.length > 0) {
+                this.startChunkUpload();
+            } else {
+                this.startSingleUpload();
+            }
+        });
+
+        return promise;
     }
 
     SetSelectedFileName(fileName: string): void {

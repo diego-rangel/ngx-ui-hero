@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, Optional, Inject } from '@angular/core';
+import { Component, Input, ViewChild, Optional, Inject, OnInit } from '@angular/core';
 
 import { ElementBase } from '../../base/element-base';
 import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
@@ -14,7 +14,6 @@ import {
 } from '@angular/forms';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'input-textarea',
   templateUrl: './input-textarea.component.html',
   providers: [{
@@ -23,7 +22,7 @@ import {
     multi: true
   }]
 })
-export class InputTextareaComponent extends ElementBase<string> {
+export class InputTextareaComponent extends ElementBase<string> implements OnInit {
   @Input() public placeholder = '';
   @Input() public maxlength: number;
 
@@ -38,4 +37,6 @@ export class InputTextareaComponent extends ElementBase<string> {
   ) {
     super(validators, asyncValidators, config);
   }
+
+  ngOnInit(): void {}
 }

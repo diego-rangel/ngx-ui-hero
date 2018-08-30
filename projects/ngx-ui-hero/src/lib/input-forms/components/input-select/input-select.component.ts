@@ -14,7 +14,6 @@ import { InputFormsConfig } from '../../input-forms-config';
 let identifier = 0;
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'input-select',
   templateUrl: './input-select.component.html',
   providers: [{
