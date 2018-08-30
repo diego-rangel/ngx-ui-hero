@@ -6,6 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { SpinnerComponent } from './components/spinner/spinner.component';
 export { SpinnerComponent } from './components/spinner/spinner.component';
@@ -24,7 +25,8 @@ export * from './services/alert.service';
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    TooltipModule.forRoot(),
   ],
   declarations: [
     SpinnerComponent,
@@ -38,6 +40,7 @@ export * from './services/alert.service';
     ModalModule,
     BsDatepickerModule,
     ProgressbarModule,
+    TooltipModule
   ],
   entryComponents: [
     ModalComponent

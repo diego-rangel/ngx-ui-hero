@@ -19,6 +19,7 @@ import { ComponentsComponent } from './components/components.component';
 import { ServicesComponent } from './services/services.component';
 import { DatagridComponent } from './datagrid/datagrid.component';
 import { AnchorLinkDirective } from './directives/anchor.directive';
+import { ButtonsComponent } from './buttons/buttons.component';
 
 export const apiSettings: ApiSettings = {
   apiBaseUrl: 'http://localhost:50467/api',
@@ -93,7 +94,8 @@ export const inputFormsConfig: InputFormsConfig = {
     ComponentsComponent,
     ServicesComponent,
     DatagridComponent,
-    AnchorLinkDirective
+    AnchorLinkDirective,
+    ButtonsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -59,6 +59,9 @@ export { InputDateConfig } from './components/input-date/input-date-config';
 import { InputUploadComponent } from './components/input-upload/input-upload.component';
 export { InputUploadComponent } from './components/input-upload/input-upload.component';
 
+import { RadialButtonComponent } from './components/radial-button/radial-button.component';
+export { RadialButtonComponent } from './components/radial-button/radial-button.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -83,7 +86,8 @@ export { InputUploadComponent } from './components/input-upload/input-upload.com
     InputPercentComponent,
     InputNumberComponent,
     InputDateComponent,
-    InputUploadComponent
+    InputUploadComponent,
+    RadialButtonComponent
   ],
   exports: [
     AutoSelectOnFocusDirective,
@@ -101,7 +105,8 @@ export { InputUploadComponent } from './components/input-upload/input-upload.com
     InputPercentComponent,
     InputNumberComponent,
     InputDateComponent,
-    InputUploadComponent
+    InputUploadComponent,
+    RadialButtonComponent
   ],
 })
 export class NgxUiHeroInputFormsModule {

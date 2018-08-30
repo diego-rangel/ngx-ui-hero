@@ -1,0 +1,32 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>Buttons</h1>
+  </div>
+</div>
+
+<section>
+  <div class="main container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4">
+        <div id="components-menu" class="list-group sticky-top" style="top: 20px;">
+          <a anchorLink="card-radial-button" href="#card-radial-button" class="list-group-item list-group-item-action"><i class="fa fa-dot-circle-o"></i> Radial Button</a>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8">
+        <div id="card-radial-button" class="card">
+          <div class="card-header">Radial Button</div>
+          <div class="card-body">
+            <ui-radial-button class="mx-1" iconClass="fa fa-times" backgroundColorClass="btn-outline-secondary" label="Cancel"></ui-radial-button>
+            <ui-radial-button class="mx-1" iconClass="fa fa-plus" backgroundColorClass="btn-primary" label="Add"></ui-radial-button>
+            <ui-radial-button class="mx-1" iconClass="fa fa-save" backgroundColorClass="btn-success" label="Save"></ui-radial-button>
+            <ui-radial-button class="mx-1" iconClass="fa fa-trash" backgroundColorClass="btn-danger" label="Delete"></ui-radial-button>
+
+            <div class="mt-4" highlight="all" [language]="['Html']">
+              <pre><code [textContent]="buttonsCode"></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
