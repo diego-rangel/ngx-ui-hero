@@ -80,6 +80,7 @@ export const inputFormsConfig: InputFormsConfig = {
     chunk: false,
     chunkSize: 1048576,
     chunkRetries: 3,
+    chunkRequestsCountInParallel: 50,
     maxFileSize: 4,
     selectButtonIcon: 'fa fa-folder',
     selectButtonLabel: 'Select',

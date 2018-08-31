@@ -37,6 +37,7 @@ export interface InputFormsUploadConfig {
     chunk?: boolean;
     chunkSize?: number;
     chunkRetries?: number;
+    chunkRequestsCountInParallel?: number;
     maxFileSize?: number;
     selectButtonIcon?: string;
     selectButtonLabel?: string;

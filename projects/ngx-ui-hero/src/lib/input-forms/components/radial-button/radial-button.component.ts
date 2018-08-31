@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ui-radial-button',
@@ -11,6 +11,7 @@ export class RadialButtonComponent implements OnInit {
   @Input() labelPlacement: string = 'bottom';
   @Input() iconClass: string;
   @Input() backgroundColorClass?: string = 'btn-primary';
+  @Output() onClick = new EventEmitter<any>();
 
   constructor() { }
 

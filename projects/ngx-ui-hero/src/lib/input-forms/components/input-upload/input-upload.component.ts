@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload';
+import { Observable, zip } from 'rxjs';
 import { retry } from 'rxjs/operators';
 
 import { InputFormsConfig } from './../../input-forms-config';
@@ -25,6 +26,7 @@ export class InputUploadComponent implements OnInit {
     @Input() chunk?: boolean = false;
     @Input() chunkSize?: number = 1048576;
     @Input() chunkRetries?: number = 3;
+    @Input() chunkRequestsCountInParallel?: number = 50;
     @Input() maxFileSize?: number = 0;
     @Input() withCredentials?: boolean = false;
     @Input() selectButtonIcon?: string = 'fa fa-folder';
@@ -37,12 +39,13 @@ export class InputUploadComponent implements OnInit {
     @Input() maxFileSizeLabel?: string = 'Max file size:';
     @Input() allowedExtensionsLabel?: string = 'Allowed extensions:';
     @Output() onFileAdded = new EventEmitter<any>();
-    @Output() onUploadComplete = new EventEmitter();
+    @Output() onUploadComplete = new EventEmitter<any>();
     @Output() onChunkFileUpload = new EventEmitter<any>();
     @Output() onError = new EventEmitter<any>();
     @Output() onClear = new EventEmitter();
 
     public identifier = `input-upload-${identifier++}`;
+    private onParallelChunkCompletes = new EventEmitter();
 
     selectedFileBlob: any;
     selectedFileModel: any;
@@ -83,14 +86,14 @@ export class InputUploadComponent implements OnInit {
         this.onClear.emit();
     }
 
-    StartUploadManually(): Promise<void> {
-        let promise = new Promise<void>((resolve, reject) => {
+    StartUploadManually(): Promise<any> {
+        let promise = new Promise<any>((resolve, reject) => {
             if (!this.selectedFileBlob) {
                 reject();
                 return;
             }
 
-            this.onUploadComplete.subscribe(result => resolve(), error => reject(error));
+            this.onUploadComplete.subscribe(result => resolve(result), error => reject(error));
             this.onError.subscribe(result => { reject(); });
 
             if (this.chunk && this.chunks && this.chunks.length > 0) {
@@ -121,7 +124,7 @@ export class InputUploadComponent implements OnInit {
         }      
     }
 
-    HasSelectedFile(): boolean {
+    HasFile(): boolean {
         return this.selectedFileBlob != null && this.selectedFileBlob != undefined;
     }
 
@@ -129,43 +132,75 @@ export class InputUploadComponent implements OnInit {
       this.uploader.uploadAll();
     }
     private startChunkUpload(): void {
-        let chunksPromises: Array<Promise<void>> = [];
-
         this.chunkProgress = 0;
 
-        for (let i = 0; i < this.chunks.length; i++) {
-            chunksPromises.push(this.sendChunk(this.chunks[i]));
-        }
+        if (this.chunkRequestsCountInParallel > 0 && this.chunks.length > this.chunkRequestsCountInParallel) {
+            this.sendGroupedPromisesSequentially();
 
-        Promise.all(chunksPromises)
-            .then(()=> {
+            this.onParallelChunkCompletes.subscribe(()=> {
                 this.chunkProgress = 100;
-                this.onUploadComplete.emit();
-            })
-            .catch(error => {
-                this.onError.emit(error);
+                this.onUploadComplete.emit({ chunkId: this.chunks[0].id });
             });
+        } else {
+            let chunksPromises: Array<Promise<void>> = [];
+            chunksPromises.push(this.sendChunks(this.chunks));
+            
+            Promise.all(chunksPromises)
+                .then(()=> {
+                    this.chunkProgress = 100;
+                    this.onUploadComplete.emit({ chunkId: this.chunks[0].id });
+                })
+                .catch(error => {
+                    this.onError.emit(error);
+                });
+        }
     }
-    private sendChunk(chunk: any): Promise<void> {
+    private sendChunks(chunks: any[]): Promise<void> {
         let promise = new Promise<void>((resolve, reject) => {
-            let formData = new FormData();
-            formData.append("file", chunk.blob, chunk.name);
+            let requests: Array<Observable<any>> = [];
 
-            this.http.post(this.url, formData, { withCredentials: this.withCredentials })
-                .pipe(retry(this.chunkRetries))
-                .subscribe(
-                    result => {
-                        this.chunkProgress += 100 / this.chunks.length;
-                        this.onChunkFileUpload.emit(chunk.blob);
-                        resolve();
-                    },
-                    error => {
-                        reject();
-                    }
-                );
+            for (let i = 0; i < chunks.length; i++) {
+                let formData = new FormData();
+                formData.append("file", chunks[i].blob, chunks[i].name);
+
+                requests.push(this.http.post(this.url, formData, { withCredentials: this.withCredentials })
+                    .pipe(retry(this.chunkRetries)));
+            }
+
+            zip(...requests).subscribe(
+                () => {
+                    this.chunkProgress += (100 / this.chunks.length) * chunks.length;
+                    resolve();
+                },
+                error => {
+                    reject();
+                }
+            );
         });
 
         return promise;
+    }
+    private sendGroupedPromisesSequentially(index: number = 0): void {
+        let start = index * this.chunkRequestsCountInParallel;
+        let end = ((index + 1) * this.chunkRequestsCountInParallel) - 1;
+        let lastIndex = end + 1 >= this.chunks.length;
+
+        if (end > this.chunks.length - 1) {
+            end = this.chunks.length - 1;
+        }
+
+        this.sendChunks(this.chunks.slice(start, end + 1))
+            .then(() => {
+                if (!lastIndex) {
+                    this.sendGroupedPromisesSequentially(index + 1);
+                } else {
+                    this.onParallelChunkCompletes.emit();
+                }
+            })
+            .catch(error => {
+                this.onError.emit(error);
+                this.Clear();
+            });
     }
     private splitSelectedFileInChunks(): void {
       this.chunks = [];
@@ -186,6 +221,7 @@ export class InputUploadComponent implements OnInit {
 
       for (let i = 0; i < chunksCount; i++) {
         this.chunks.push({
+          id: chunkGuid,
           name: `${chunkGuid}_${i}`,
           blob: file.slice(start, end)
         });
@@ -196,6 +232,7 @@ export class InputUploadComponent implements OnInit {
     }
     private handleUploaderEvents(): void {
         this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
+            this.chunkProgress = 100;
             this.onUploadComplete.emit(item);
         };
         this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
