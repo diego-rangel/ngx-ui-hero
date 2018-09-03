@@ -11,7 +11,7 @@
             <thead>
                 <tr>
                     <th class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.length > 0" style="width: 50px;">
-                        <input type="checkbox" [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" />
+                        <input type="checkbox" [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" *ngIf="showSelectAllCheckbox" />
                     </th>
                     <th class="action text-center" *ngIf="showActionsColumn" [ngStyle]="{'width': actionsColumnWidth}">{{actionsColumnCaption}}</th>
                     <th *ngFor="let column of columns; let i = index;" (click)="ToogleSorting(column)" class="{{column.captionClasses}}" [ngStyle]="{'width': column.width}" [ngClass]="{

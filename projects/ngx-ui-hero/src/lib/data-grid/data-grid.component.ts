@@ -1,15 +1,14 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter, ContentChild, TemplateRef, Optional, DoCheck, ViewChild, IterableDiffers } from '@angular/core';
-
-import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
-import { BsModalService } from 'ngx-bootstrap';
-
-import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
-import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
-import { DataGridColumnModel, EnumAlignment, EnumSortDirection, DataGridSortingModel } from './models/data-grid-column.model';
-import { DataGridConfig, EnumDataGridMode, EnumAutoFitMode } from './config/data-grid-config';
-import { ActionsColumnDirective } from './directives/data-grid-templates.directive';
-
 import * as _ from 'lodash';
+import { BsModalService } from 'ngx-bootstrap';
+import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
+
+import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, IterableDiffers, OnInit, Optional, Output, TemplateRef, ViewChild } from '@angular/core';
+
+import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data-grid-config';
+import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
+import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
+import { ActionsColumnDirective } from './directives/data-grid-templates.directive';
+import { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
 
 declare var $: any;
 let identifier = 0;
@@ -40,6 +39,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() hoverEffect?: boolean = true;
     @Input() responsive?: boolean = true;
     @Input() showCheckboxColumn?: boolean = false;
+    @Input() showSelectAllCheckbox?: boolean = true;
     @Input() showSummaries?: boolean = false;
     @Input() allowExports?: boolean = false;
     @Input() exportButtonLabel?: string = 'Export';
