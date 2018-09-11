@@ -82,7 +82,7 @@ ul {
     
         .columns {
             .column {
-                padding: 0 10px;
+                padding: 0 13px;
             }
         }
     }
@@ -141,4 +141,10 @@ ul::before {
 }
 .item.has-no-icons.has-children > div > label {
     margin-left: 8px;
+}
+
+@media (max-width: 860px) {
+    .columns {
+        display: none !important;
+    }
 }

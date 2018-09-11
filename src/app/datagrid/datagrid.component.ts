@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
 import { DataGridColumnModel, EnumAlignment } from 'ngx-ui-hero';
+
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-datagrid',
@@ -44,7 +45,7 @@ export class DatagridComponent implements OnInit {
       width: '100px',
       sortable: false,
       render: (row, currentData, index) => {
-        return currentData ? `<span class='badge badge-success'>Ativo</span>` : `<span class='badge badge-danger'>Inativo</span>`;
+        return currentData ? `<span class='badge badge-success'>Active</span>` : `<span class='badge badge-danger'>Inactive</span>`;
       }
     }
   ];

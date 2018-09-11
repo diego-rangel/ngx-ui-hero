@@ -52,6 +52,15 @@ export class TreeviewComponent implements OnInit {
       captionAlignment: EnumAlignment.Center,
       dataType: EnumTreeViewColumnDataType.Currency
     },
+    {
+      caption: 'Amount',
+      data: 'amount',
+      width: '200px',
+      editable: true,
+      dataAlignment: EnumAlignment.Right,
+      captionAlignment: EnumAlignment.Center,
+      dataType: EnumTreeViewColumnDataType.Currency
+    },
   ];
 
   treeViewBasicUsageExampleTemplate = `

@@ -25,11 +25,18 @@
   
     <div class="columns d-flex align-items-center justify-content-between h-100" *ngIf="columns?.length > 0">
       <div class="column {{column.dataClasses}}" 
-        *ngFor="let column of columns" 
+        *ngFor="let column of columns; let i = index;" 
         [ngStyle]="{'width': column.width}"
         [ngClass]="{'text-center': column.dataAlignment == 1, 'text-right': column.dataAlignment == 2}">
   
-        <span *ngIf="!column.editable || row[collectionProperty]?.length > 0">{{row[column.data]}}</span>
+        <div *ngIf="!column.editable || row[collectionProperty]?.length > 0">          
+          <div *ngIf="!column.render && column.data">
+            <span *ngIf="!column.dataType || column.dataType == 0">{{row[column.data]}}</span>
+            <span *ngIf="column.dataType == 1">{{row[column.data] | date:'short'}}</span>
+            <span *ngIf="column.dataType >= 2">{{row[column.data] | number:'1.2-2'}}</span>
+          </div>
+          <span *ngIf="column.render" [innerHtml]="column.render(row, row[column.data], i)"></span>
+        </div>
         
         <div *ngIf="column.editable && (!row[collectionProperty] || row[collectionProperty].length == 0)">
           <input-text *ngIf="!column.dataType || column.dataType == 0" [(ngModel)]="row[column.data]"></input-text>
