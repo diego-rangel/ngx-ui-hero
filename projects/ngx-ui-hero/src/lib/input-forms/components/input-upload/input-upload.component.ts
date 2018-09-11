@@ -233,7 +233,7 @@ export class InputUploadComponent implements OnInit {
     private handleUploaderEvents(): void {
         this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
             this.chunkProgress = 100;
-            this.onUploadComplete.emit(item);
+            this.onUploadComplete.emit({item, response});
         };
         this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
             this.Clear();
