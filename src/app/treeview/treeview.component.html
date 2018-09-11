@@ -1,0 +1,178 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>Tree View</h1>
+    <p>A 100% pure Angular+CSS Tree View implementation.</p>
+  </div>
+</div>
+
+<section>
+  <div class="main container">
+    <tabset class="custom-tab">
+      <tab heading="Basic usage example">
+        <div class="row mb-4">
+          <div class="col-12">
+            <ui-tree-view
+              [data]="data"
+              labelProperty="name"
+              collectionProperty="children">
+            </ui-tree-view>
+          </div>
+        </div>
+    
+        <tabset>
+          <tab heading="Template">
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="treeViewBasicUsageExampleTemplate"></code></pre>
+            </div>
+          </tab>
+          <tab heading="Component">
+            <div highlight="all" [language]="['Typescript']">
+              <pre><code [textContent]="treeViewBasicUsageExampleDataCode"></code></pre>
+            </div>
+          </tab>
+        </tabset>
+      </tab>
+      <tab heading="Complex usage example">
+        <div class="alert alert-primary" role="alert">
+          You can define as many <b>columns</b> as you need.
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-12">
+            <ui-tree-view
+              [data]="data"
+              [columns]="columns"
+              labelProperty="name"
+              collectionProperty="children">
+            </ui-tree-view>
+          </div>
+        </div>
+    
+        <tabset>
+          <tab heading="Template">
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="treeViewComplexUsageExampleTemplate"></code></pre>
+            </div>
+          </tab>
+          <tab heading="Component">
+            <div highlight="all" [language]="['Typescript']">
+              <pre><code [textContent]="treeViewComplexUsageExampleDataCode"></code></pre>
+            </div>
+          </tab>
+        </tabset>
+      </tab>
+      <tab heading="Inputs / Outputs">
+        <h2>Inputs</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <b>columns</b>
+                </td>
+                <td><a href="https://github.com/diego-rangel/ngx-ui-hero/tree/master/projects/ngx-ui-hero/src/lib/tree-view/models/tree-view-column.model.ts" target="_blank">TreeViewColumnModel[]</a></td>
+                <td>The columns definitions.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>data</b>
+                </td>
+                <td>any[]</td>
+                <td>The data to show into the TreeView.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>labelProperty</b>
+                </td>
+                <td>string</td>
+                <td>The property name for the value to show as the item's label.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>collectionProperty</b>
+                </td>
+                <td>string</td>
+                <td>The property name for the collections.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>emptyResultsMessage</b><br/>
+                  Default: <small>No results found at this moment.</small>
+                </td>
+                <td>string</td>
+                <td>The message to show when the TreeView's model is empty or null.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>showIcons</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>Defines if the icons should be visible or not.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>normalItemIconClass</b><br/>
+                  Default: <small>fa fa-file</small>
+                </td>
+                <td>string</td>
+                <td>The normal icon class.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>collapsableClosedItemIconClass</b><br/>
+                  Default: <small>fa fa-folder</small>
+                </td>
+                <td>string</td>
+                <td>The expand icon class.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>collapsableOpennedItemIconClass</b><br/>
+                  Default: <small>fa fa-folder-open</small>
+                </td>
+                <td>string</td>
+                <td>The collapse icon class.</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>expandAllOnInit</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>Defines if the TreeView should be initialized expanded or not.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+        <h2>Outputs</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>OnItemExpanded</b></td>
+                <td>EventEmitter&lt;any&gt;</td>
+                <td>An event emitted when a row is expanded with the expanded data as parameter.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</section>

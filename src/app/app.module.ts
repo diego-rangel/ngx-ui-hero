@@ -1,25 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-import { NgxUiHeroModule, NgxUiHeroApiModule, NgxUiHeroInputFormsModule, ApiSettings, NgxUiHeroDataGridModule, DataGridConfig, InputFormsConfig } from 'ngx-ui-hero';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { HighlightModule } from 'ngx-highlightjs';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
-defineLocale('pt-br', ptBrLocale);
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { HighlightModule } from 'ngx-highlightjs';
+import { ApiSettings, DataGridConfig, InputFormsConfig, NgxUiHeroApiModule, NgxUiHeroDataGridModule, NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, TreeViewConfig } from 'ngx-ui-hero';
+
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { GetStartedComponent } from './get-started/get-started.component';
 import { AppRoutingModule } from './app.routing.module';
+import { ButtonsComponent } from './buttons/buttons.component';
 import { ComponentsComponent } from './components/components.component';
-import { ServicesComponent } from './services/services.component';
 import { DatagridComponent } from './datagrid/datagrid.component';
 import { AnchorLinkDirective } from './directives/anchor.directive';
-import { ButtonsComponent } from './buttons/buttons.component';
+import { GetStartedComponent } from './get-started/get-started.component';
+import { HeaderComponent } from './header/header.component';
+import { ServicesComponent } from './services/services.component';
+import { TreeviewComponent } from './treeview/treeview.component';
+
+defineLocale('pt-br', ptBrLocale);
 
 export const apiSettings: ApiSettings = {
   apiBaseUrl: 'http://localhost:50467/api',
@@ -74,6 +75,17 @@ export const inputFormsConfig: InputFormsConfig = {
   }
 };
 
+export const treeViewConfig: TreeViewConfig = {
+  showIcons: true,
+  expandAllOnInit: true,
+  emptyResultsMessage: 'No results found at this moment.',
+  styles: {
+    normalItemIconClass: 'fa fa-file',
+    collapsableClosedItemIconClass: 'fa fa-folder',
+    collapsableOpennedItemIconClass: 'fa fa-folder-open'
+  }
+};
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -84,6 +96,7 @@ export const inputFormsConfig: InputFormsConfig = {
     NgxUiHeroApiModule.forRoot(apiSettings),
     NgxUiHeroDataGridModule.forRoot(dataGridSettings),
     NgxUiHeroInputFormsModule.forRoot(inputFormsConfig),
+    NgxUiHeroTreeViewModule.forRoot(treeViewConfig),
     TabsModule.forRoot(),
     HighlightModule.forRoot({theme: 'github'}),
   ],
@@ -95,7 +108,8 @@ export const inputFormsConfig: InputFormsConfig = {
     ServicesComponent,
     DatagridComponent,
     AnchorLinkDirective,
-    ButtonsComponent
+    ButtonsComponent,
+    TreeviewComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

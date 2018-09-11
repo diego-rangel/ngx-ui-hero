@@ -1,0 +1,63 @@
+<div class="item" [ngClass]="{
+    'has-children': row[collectionProperty]?.length > 0,
+    'has-many-children': row[collectionProperty]?.length > 1,
+    'has-no-columns': !columns || columns.length == 0,
+    'has-no-icons': !showIcons,
+    'first': first,
+    'last': last
+  }">
+  <div class="d-flex align-items-center justify-content-between w-100" 
+    [ngClass]="{
+      'summarized-style': summarizedStyle, 
+      'equal-height': equalHeightStyle,
+      'open': openned
+    }">
+    <i class="mx-1 fa empty" *ngIf="!row[collectionProperty] || row[collectionProperty].length == 0"></i>
+    <i class="mx-1 fa toogler" [ngClass]="{
+      'fa-plus-square-o': row[collectionProperty]?.length > 0 && !openned,
+      'fa-minus-square-o': row[collectionProperty]?.length > 0 && openned
+    }" (click)="Toogle()"></i>
+    <i class="mx-1 folder-item fa {{collapsableClosedItemIconClass}}" *ngIf="row[collectionProperty]?.length > 0 && !openned && showIcons"></i>
+    <i class="mx-1 folder-item fa {{collapsableOpennedItemIconClass}}" *ngIf="row[collectionProperty]?.length > 0 && openned && showIcons"></i>
+    <i class="mx-1 normal-item fa {{normalItemIconClass}}" *ngIf="(!row[collectionProperty] || row[collectionProperty].length == 0) && showIcons"></i>
+  
+    <label class="mb-0 mr-auto no-selection" (dblclick)="Toogle()">{{row[labelProperty]}}</label>
+  
+    <div class="columns d-flex align-items-center justify-content-between h-100" *ngIf="columns?.length > 0">
+      <div class="column {{column.dataClasses}}" 
+        *ngFor="let column of columns" 
+        [ngStyle]="{'width': column.width}"
+        [ngClass]="{'text-center': column.dataAlignment == 1, 'text-right': column.dataAlignment == 2}">
+  
+        <span *ngIf="!column.editable || row[collectionProperty]?.length > 0">{{row[column.data]}}</span>
+        
+        <div *ngIf="column.editable && (!row[collectionProperty] || row[collectionProperty].length == 0)">
+          <input-text *ngIf="!column.dataType || column.dataType == 0" [(ngModel)]="row[column.data]"></input-text>
+          <input-date *ngIf="column.dataType == 1" [(ngModel)]="row[column.data]"></input-date>
+          <input-number *ngIf="column.dataType == 2" [(ngModel)]="row[column.data]"></input-number>
+          <input-currency *ngIf="column.dataType == 3" [(ngModel)]="row[column.data]"></input-currency>
+          <input-percent *ngIf="column.dataType == 4" [(ngModel)]="row[column.data]"></input-percent>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ul class="fadeInDown" *ngIf="row[collectionProperty]?.length > 0 && openned">
+    <li *ngFor="let subitem of row[collectionProperty]; let first = first; let last = last;" 
+      ui-tree-view-item
+      [row]="subitem"
+      [columns]="columns"
+      [labelProperty]="labelProperty"
+      [collectionProperty]="collectionProperty"
+      [showIcons]="showIcons"
+      [normalItemIconClass]="normalItemIconClass"
+      [collapsableClosedItemIconClass]="collapsableClosedItemIconClass"
+      [collapsableOpennedItemIconClass]="collapsableOpennedItemIconClass"
+      [first]="first"
+      [last]="last"
+      [expandedOnInit]="expandedOnInit"
+      [showIcons]="showIcons"
+      (OnItemExpanded)="HandleSubItemExpanded($event)">
+    </li>
+  </ul>
+</div>

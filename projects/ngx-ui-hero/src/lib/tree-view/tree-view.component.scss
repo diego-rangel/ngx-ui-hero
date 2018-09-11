@@ -1,0 +1,33 @@
+.treeview-container {
+    .treeview-header {        
+        border-bottom: 3px solid #CCC;
+
+        .column-header {
+            border: 1px solid #CCC;
+            border-bottom: 0;
+            padding: 10px;
+            margin-left: 5px;
+        }
+    }
+    .treeview-content {
+        ul {
+            position: relative;
+            padding: 0;
+            margin: 0;
+
+            li {
+                list-style: none !important;
+            }
+        }
+        // ul::before {
+        //     content: "";
+        //     position: absolute;
+        //     top: 33px;
+        //     bottom: 24px;
+        //     left: 9px;
+        //     z-index: 10;
+        //     width: 0;
+        //     border-right: 1px solid #CCC;
+        // }
+    }
+}

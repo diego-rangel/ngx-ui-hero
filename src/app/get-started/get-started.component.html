@@ -41,38 +41,61 @@
       <pre><code [textContent]="installationCode"></code></pre>
     </div>
 
-    <h2>NgxUiHeroModule</h2>
-    <p>Import this module to access the <b>ngx-ui-hero</b> Core functionalities.</p>
-    <div highlight="all" [language]="['Typescript']">
-      <pre><code [textContent]="mainModuleSetupCode"></code></pre>
-    </div>
+    <h2>Modules</h2>
+    <tabset class="custom-tab">
+      <tab heading="Core">
+        <h3>NgxUiHeroModule</h3>
+        <p>Import this module to access the <b>ngx-ui-hero</b> Core functionalities.</p>
+        <div highlight="all" [language]="['Typescript']">
+          <pre><code [textContent]="mainModuleSetupCode"></code></pre>
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <i class="fa fa-star"></i> DataGrid <span class="badge badge-danger">new</span>
+        </ng-template>
+        
+        <h3>NgxUiHero<mark>DataGrid</mark>Module</h3>
+        <p>In order to use the ui-hero DataGrid, you must import this module with a bit of configurations.</p>
+        <div highlight="all" [language]="['Typescript']">
+          <pre><code [textContent]="dataGridModuleSetupCode"></code></pre>
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <i class="fa fa-star"></i> TreeView <span class="badge badge-danger">new</span>
+        </ng-template>
 
-    <h2>NgxUiHero<mark>DataGrid</mark>Module</h2>
-    <p>In order to use the ui-hero DataGrid, you must import this module with a bit of configurations.</p>
-    <div highlight="all" [language]="['Typescript']">
-      <pre><code [textContent]="dataGridModuleSetupCode"></code></pre>
-    </div>
-
-    <h2>NgxUiHero<mark>Api</mark>Module</h2>
-    <p>In order to use the ui-hero Api functionalities like <b>Base Http Services, Base Crud Services, Local Storage Services and JWT Authentication</b>, you must import this module providing some configurations.</p>
-    <div highlight="all" [language]="['Typescript']">
-      <pre><code [textContent]="apiModuleSetupCode"></code></pre>
-    </div>
-
-    <h2>NgxUiHero<mark>InputForms</mark>Module</h2>
-    <p>In order to use the ui-hero Forms functionalities like <b>Input text, select, textarea, etc...</b>, you must import this module providing some configurations.</p>
-
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <p>
-        In order to use the <b>Input-date</b>, you must include into your <b>angular.json</b> the following style <strong>"node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"</strong>.
-      </p>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    <div highlight="all" [language]="['Typescript']">
-      <pre><code [textContent]="inputFormsModuleSetupCode"></code></pre>
-    </div>
+        <h3>NgxUiHero<mark>TreeView</mark>Module</h3>
+        <p>In order to use the ui-hero TreeView, you must import this module with a bit of configurations.</p>
+        <div highlight="all" [language]="['Typescript']">
+          <pre><code [textContent]="treeViewModuleSetupCode"></code></pre>
+        </div>
+      </tab>
+      <tab heading="API's">
+        <h3>NgxUiHero<mark>Api</mark>Module</h3>
+        <p>In order to use the ui-hero Api functionalities like <b>Base Http Services, Base Crud Services, Local Storage Services and JWT Authentication</b>, you must import this module providing some configurations.</p>
+        <div highlight="all" [language]="['Typescript']">
+          <pre><code [textContent]="apiModuleSetupCode"></code></pre>
+        </div>
+      </tab>
+      <tab heading="InputForms">
+        <h3>NgxUiHero<mark>InputForms</mark>Module</h3>
+        <p>In order to use the ui-hero Forms functionalities like <b>Input text, select, textarea, etc...</b>, you must import this module providing some configurations.</p>
+    
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <p>
+            In order to use the <b>Input-date</b>, you must include into your <b>angular.json</b> the following style <strong>"node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"</strong>.
+          </p>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    
+        <div highlight="all" [language]="['Typescript']">
+          <pre><code [textContent]="inputFormsModuleSetupCode"></code></pre>
+        </div>
+      </tab>
+    </tabset>
   </div>
 </section>

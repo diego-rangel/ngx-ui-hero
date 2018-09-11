@@ -13,7 +13,7 @@
     padding: 0;
     background-color: #FFEB3B;
 }
-h2 mark {
+h3 mark {
     background-color: transparent;
     color: rgb(0, 132, 255);
 }
@@ -50,4 +50,10 @@ h2 mark {
             background-color: #f0f0f0;
         }
     }
+}
+.navbar .navbar-nav .nav-item.active .nav-link {
+    background-color: #327ace;
+    color: #ffffff;
+    box-shadow: -2px 2px 0 0 #034880;
+    border-radius: 10px;
 }

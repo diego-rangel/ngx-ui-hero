@@ -1,0 +1,144 @@
+@keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -10%, 0);
+      transform: translate3d(0, -10%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+}
+  
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    animation-duration: .35s;    
+    animation-fill-mode: both;
+}
+
+i.folder-item {
+    color: #FFB822;
+}
+i.normal-item {
+    color: #C1BFD0;
+}
+i.fa.fa-plus-square-o,
+i.fa.fa-minus-square-o {
+    background-color: #f0f0f0;
+    z-index: 11;
+}
+i.fa.empty {
+    width: 7px;
+}
+
+.item.has-no-columns i.fa.fa-plus-square-o,
+.item.has-no-columns i.fa.fa-minus-square-o {
+    background-color: #FFF;
+}
+
+.toogler,
+.item.has-children > div > label {
+    cursor: pointer;
+}
+
+.no-selection::selection { 
+    background: transparent; 
+}
+
+ul {
+    position: relative;
+    padding: 0;
+    margin: 0 0 0 20px;
+
+    li {
+        position: relative;
+        list-style: none !important;
+    }
+}
+
+.columns {
+    .column {
+        margin-left: 5px;
+    }
+}
+
+.item {
+    position: relative;
+    overflow: hidden;
+
+    > div {
+        position: relative;
+        height: 30px;
+    }
+    > div.equal-height {
+        height: 45px;
+    }
+    > div.summarized-style {
+        background-color: #f0f0f0;
+        border-bottom: 1px solid #CCC;
+    
+        .columns {
+            .column {
+                padding: 0 10px;
+            }
+        }
+    }
+}
+
+.item > div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 9px;
+    z-index: 10;
+    width: 0;
+    border-right: 1px solid #CCC;
+}
+.item.has-children.first > div::before {
+    top: 17px;
+}
+.item.last > div::before {
+    bottom: 22px;
+}
+.item.has-children.last > div::before {
+    bottom: 17px;
+}
+
+ul::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -11px;
+    z-index: 10;
+    width: 0;
+    border-right: 1px solid #CCC;
+}
+.item.has-children.last > ul::before {
+    display: none;
+}
+
+.item > div::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 9px;
+    z-index: 10;
+    width: 13px;
+    border-bottom: 1px solid #CCC;
+}
+
+.item.has-no-columns.last > div::before {
+    bottom: 15px;
+}
+
+.item.has-no-icons > div > label {
+    margin-left: 5px;
+}
+.item.has-no-icons.has-children > div > label {
+    margin-left: 8px;
+}

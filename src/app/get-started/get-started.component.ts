@@ -155,4 +155,26 @@ export const dataGridSettings: DataGridConfig = {
 export class MyModule { }
   `;
 
+  treeViewModuleSetupCode = `
+import { NgxUiHeroTreeViewModule, TreeViewConfig } from 'ngx-ui-hero';
+
+export const treeViewConfig: TreeViewConfig = {
+  showIcons: true,
+  expandAllOnInit: true,
+  emptyResultsMessage: 'No results found at this moment.',
+  styles: {
+    normalItemIconClass: 'fa fa-file',
+    collapsableClosedItemIconClass: 'fa fa-folder',
+    collapsableOpennedItemIconClass: 'fa fa-folder-open'
+  }
+};
+
+@NgModule({
+  imports: [
+    NgxUiHeroTreeViewModule.forRoot(treeViewConfig)
+  ],
+})
+export class MyModule { }
+  `;
+
 }

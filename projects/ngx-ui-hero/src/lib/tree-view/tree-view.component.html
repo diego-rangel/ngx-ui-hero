@@ -1,0 +1,35 @@
+<div class="treeview-container">
+  <div class="treeview-header d-flex align-items-center justify-content-end" *ngIf="columns?.length > 0">
+    <div class="column-header {{column.captionClasses}}" *ngFor="let column of columns" 
+      [ngStyle]="{'width': column.width}"
+      [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}">
+      
+      {{column.caption}}
+    </div>
+  </div>
+  
+  <div class="treeview-content" *ngIf="data?.length > 0">
+    <ul>
+      <li *ngFor="let row of data; let first = first; let last = last;" 
+        ui-tree-view-item
+        [row]="row"
+        [columns]="columns"
+        [labelProperty]="labelProperty"
+        [collectionProperty]="collectionProperty"
+        [showIcons]="showIcons"
+        [normalItemIconClass]="normalItemIconClass"
+        [collapsableClosedItemIconClass]="collapsableClosedItemIconClass"
+        [collapsableOpennedItemIconClass]="collapsableOpennedItemIconClass"
+        [first]="first"
+        [last]="last"
+        [expandedOnInit]="expandAllOnInit"
+        [rootItem]="true"
+        [showIcons]="showIcons"
+        (OnItemExpanded)="OnItemExpanded.emit($event)"
+        >
+      </li>
+    </ul>
+  </div>
+
+  <p *ngIf="!data || data.length == 0">{{emptyResultsMessage}}</p>
+</div>
