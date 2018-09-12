@@ -40,8 +40,17 @@ i.fa.empty {
 }
 
 .toogler,
-.item.has-children > div > label {
+.item.labels-as-link > div > label {
     cursor: pointer;
+}
+
+.item > div > label {
+    padding: 0 4px;
+}
+.item.labels-as-link > div > label:hover {
+    background-color: #666;
+    color: #FFF;
+    border-radius: 4px;
 }
 
 .no-selection::selection { 

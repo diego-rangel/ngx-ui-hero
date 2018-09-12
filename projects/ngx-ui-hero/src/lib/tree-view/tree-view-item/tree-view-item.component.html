@@ -3,6 +3,7 @@
     'has-many-children': row[collectionProperty]?.length > 1,
     'has-no-columns': !columns || columns.length == 0,
     'has-no-icons': !showIcons,
+    'labels-as-link': enableLabelLinkStyle,
     'first': first,
     'last': last
   }">
@@ -21,7 +22,7 @@
     <i class="mx-1 folder-item fa {{collapsableOpennedItemIconClass}}" *ngIf="row[collectionProperty]?.length > 0 && openned && showIcons"></i>
     <i class="mx-1 normal-item fa {{normalItemIconClass}}" *ngIf="(!row[collectionProperty] || row[collectionProperty].length == 0) && showIcons"></i>
   
-    <label class="mb-0 mr-auto no-selection" (dblclick)="Toogle()">{{row[labelProperty]}}</label>
+    <label class="mb-0 mr-auto d-inline-block text-truncate" (click)="OnClick()">{{row[labelProperty]}}</label>
   
     <div class="columns d-flex align-items-center justify-content-between h-100" *ngIf="columns?.length > 0">
       <div class="column {{column.dataClasses}}" 
@@ -57,6 +58,7 @@
       [labelProperty]="labelProperty"
       [collectionProperty]="collectionProperty"
       [showIcons]="showIcons"
+      [enableLabelLinkStyle]="enableLabelLinkStyle"
       [normalItemIconClass]="normalItemIconClass"
       [collapsableClosedItemIconClass]="collapsableClosedItemIconClass"
       [collapsableOpennedItemIconClass]="collapsableOpennedItemIconClass"
@@ -64,7 +66,9 @@
       [last]="last"
       [expandedOnInit]="expandedOnInit"
       [showIcons]="showIcons"
-      (OnItemExpanded)="HandleSubItemExpanded($event)">
+      (OnItemExpanded)="HandleSubItemExpanded($event)"
+      (OnItemClicked)="HandleSubItemClicked($event)"
+      >
     </li>
   </ul>
 </div>
