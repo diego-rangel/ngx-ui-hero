@@ -17,6 +17,7 @@
         [labelProperty]="labelProperty"
         [collectionProperty]="collectionProperty"
         [showIcons]="showIcons"
+        [enableLabelLinkStyle]="enableLabelLinkStyle"
         [normalItemIconClass]="normalItemIconClass"
         [collapsableClosedItemIconClass]="collapsableClosedItemIconClass"
         [collapsableOpennedItemIconClass]="collapsableOpennedItemIconClass"
@@ -24,8 +25,8 @@
         [last]="last"
         [expandedOnInit]="expandAllOnInit"
         [rootItem]="true"
-        [showIcons]="showIcons"
         (OnItemExpanded)="OnItemExpanded.emit($event)"
+        (OnItemClicked)="OnItemClicked.emit($event)"
         >
       </li>
     </ul>

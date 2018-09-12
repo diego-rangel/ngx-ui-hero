@@ -13,6 +13,7 @@ export class TreeViewItemComponent implements OnInit {
   @Input() collectionProperty: string;
   @Input() columns: Array<TreeViewColumnModel>;
   @Input() showIcons: boolean = true;
+  @Input() enableLabelLinkStyle: boolean = false;
   @Input() normalItemIconClass: string;
   @Input() collapsableClosedItemIconClass: string;
   @Input() collapsableOpennedItemIconClass: string;
@@ -22,6 +23,7 @@ export class TreeViewItemComponent implements OnInit {
   @Input() expandedOnInit: boolean = false;
   @Input() rootItem: boolean = false;
   @Output() OnItemExpanded = new EventEmitter<any>();
+  @Output() OnItemClicked = new EventEmitter<any>();
 
   summarizedStyle: boolean;
   equalHeightStyle: boolean;
@@ -48,12 +50,21 @@ export class TreeViewItemComponent implements OnInit {
       this.emitItemExpandedEvent(this.row);
     }
   }
+  OnClick(): void {
+    this.emitItemClickedEvent(this.row);
+  }
 
   HandleSubItemExpanded(data: any): void {
     this.emitItemExpandedEvent(data);
   }
+  HandleSubItemClicked(data: any): void {
+    this.emitItemClickedEvent(data);
+  }
 
   private emitItemExpandedEvent(data: any): void {
       this.OnItemExpanded.emit(data);
+  }
+  private emitItemClickedEvent(data: any): void {
+      this.OnItemClicked.emit(data);
   }
 }

@@ -6,6 +6,7 @@ export interface TreeViewConfig {
 }
 
 export class TreeViewStylesConfig {
+    enableLabelLinkStyle?: boolean;
     normalItemIconClass?: string;
     collapsableClosedItemIconClass?: string;
     collapsableOpennedItemIconClass?: string;
