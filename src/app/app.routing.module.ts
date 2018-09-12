@@ -5,6 +5,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { ComponentsComponent } from './components/components.component';
 import { DatagridComponent } from './datagrid/datagrid.component';
 import { GetStartedComponent } from './get-started/get-started.component';
+import { PrintingComponent } from './printing/printing.component';
 import { ServicesComponent } from './services/services.component';
 import { TreeviewComponent } from './treeview/treeview.component';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'buttons', component: ButtonsComponent },
   { path: 'treeview', component: TreeviewComponent },
+  { path: 'printing', component: PrintingComponent },
 ];
 
 @NgModule({

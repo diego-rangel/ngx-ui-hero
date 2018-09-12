@@ -1,0 +1,14 @@
+.report-container {
+    background-color: #666;
+    width: 100%;
+    padding: 40px;
+    overflow-y: scroll;
+    max-height: 600px;
+
+    .report-content {
+        background-color: #FFF;
+        padding: 15px;
+        box-shadow: 0px 0px 20px 0px #000;
+        border-radius: 10px;
+    }
+}
