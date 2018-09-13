@@ -38,10 +38,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_lib": "ng build --prod ngx-ui-hero",
-    "build_lib_serve": "ng build --prod ngx-ui-hero && ng serve",
-    "build_package": "npm run build_lib && npm run package",
-    "package": "ng build --prod --base-href /ngx-ui-hero/ --deploy-url /ngx-ui-hero/ && if exist docs RMDIR /S /Q docs && mkdir docs && xcopy dist\\ngx-ui-hero-app docs /E /C /H /R /K /Y"
+    "release": "ng build --prod ngx-ui-hero && npm run package && npm run generate_assets",
+    "package": "ng build --prod --base-href /ngx-ui-hero/ --deploy-url /ngx-ui-hero/ && npm run generate_docs",
+    "generate_docs": "if exist docs RMDIR /S /Q docs && mkdir docs && xcopy dist\\ngx-ui-hero-app docs /E /C /H /R /K /Y",
+    "generate_assets": "xcopy dist\\ngx-ui-hero-app\\assets\\css dist\\ngx-ui-hero /E /C /H /R /K /Y"
   },
   "private": true,
   "dependencies": {
@@ -67,6 +67,7 @@
     "ngx-bootstrap": "^3.0.1",
     "ngx-highlightjs": "^2.1.1",
     "popper.js": "^1.14.3",
+    "print-this": "^1.14.0",
     "rxjs": "^6.0.0",
     "sweetalert2": "^7.22.2",
     "xlsx": "^0.13.4",

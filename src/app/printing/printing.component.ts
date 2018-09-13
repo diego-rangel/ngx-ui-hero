@@ -1,6 +1,6 @@
-import { DataGridColumnModel, EnumAlignment } from 'ngx-ui-hero';
+import { DataGridColumnModel, EnumAlignment, ReportComponent } from 'ngx-ui-hero';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-printing',
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./printing.component.scss']
 })
 export class PrintingComponent implements OnInit {
+  @ViewChild('report') report: ReportComponent;
+
   now = new Date();
   data: Array<any> = [
     {
@@ -58,11 +60,66 @@ export class PrintingComponent implements OnInit {
     }
   ];
 
+  template = `
+<ui-report #report reportTitle="My report example title">
+  <div class="page-header">
+    <h2>My report example</h2>
+    <hr/>
+  </div>
+  <div class="report-body">
+    <p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+    officia deserunt mollit anim id est laborum.</p>
+    
+    <p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+    officia deserunt mollit anim id est laborum.</p>
+
+    <datagrid 
+      [data]="data" 
+      [columns]="columns" 
+      [showInfos]="false"
+      [itemsPerPage]="data.length"
+      [initialColumnToSort]="0">
+    </datagrid>
+
+    <p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+    officia deserunt mollit anim id est laborum.</p>
+    
+    <p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+    officia deserunt mollit anim id est laborum.</p>
+  </div>
+  <div class="page-footer">
+    <hr class="mb-1" />
+    <div class="text-center">
+      <small>{{now | date:'short'}}</small>
+    </div>
+  </div>
+</ui-report>
+  `;
+
+  code = `
+import { ReportComponent } from 'ngx-ui-hero';
+
+...
+
+@ViewChild('report') report: ReportComponent;
+
+Print(): void {
+  this.report.Print();
+}
+
+  `;
+
   constructor() { }
 
   ngOnInit() {
   }
-
-  
 
 }

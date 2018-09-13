@@ -14,8 +14,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { AlertService } from './services/alert.service';
 
 export { SpinnerComponent } from './components/spinner/spinner.component';
-
 export { ModalComponent } from './components/modal/modal.component';
+export { ReportComponent } from './components/report/report.component';
 
 export * from './services/alert.service';
 
