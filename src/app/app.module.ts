@@ -19,6 +19,7 @@ import { GetStartedComponent } from './get-started/get-started.component';
 import { HeaderComponent } from './header/header.component';
 import { ServicesComponent } from './services/services.component';
 import { TreeviewComponent } from './treeview/treeview.component';
+import { PrintingComponent } from './printing/printing.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -110,7 +111,8 @@ export const treeViewConfig: TreeViewConfig = {
     DatagridComponent,
     AnchorLinkDirective,
     ButtonsComponent,
-    TreeviewComponent
+    TreeviewComponent,
+    PrintingComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

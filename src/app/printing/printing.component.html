@@ -1,0 +1,81 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fluid">
+    <h1>Print HTML</h1>
+    <p>It's only a simple wrapper for <b>printThis.js</b>, which makes our lives easier when printing.</p>
+  </div>
+</div>
+
+<section>
+  <div class="main container-fluid">
+    <p>The <b>ReportComponent</b> belongs to the <b>NgxUiHeroModule</b> Core module, so in order to use it, just be sure to import it.</p>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <p class="mb-0">
+        In order to use the <b>ReportComponent</b>, you must include into your <b>angular.json</b> the following files:
+      </p>
+
+      <ul class="mb-0">
+        <li><strong>"node_modules/ngx-ui-hero/print.css"</strong></li>
+        <li><strong>"node_modules/print-this/printThis.js"</strong></li>
+      </ul>
+
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <button class="btn btn-primary" (click)="report.Print()"><i class="fa fa-print"></i> Print My Report Example!</button>
+    
+    <hr/>
+
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="report-container">
+          <div class="report-content">
+            <ui-report #report reportTitle="My report example title">
+              <div class="page-header">
+                <h2>My report example</h2>
+                <hr/>
+              </div>
+              <div class="report-body">
+                <p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    
+                <datagrid 
+                  [data]="data" 
+                  [columns]="columns" 
+                  [showInfos]="false"
+                  [itemsPerPage]="data.length"
+                  [initialColumnToSort]="0">
+                </datagrid>
+
+                <p>Lorem ipsum dolor sit amet, <b>consectetur adipiscing elit</b>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </div>
+              <div class="page-footer">
+                <hr class="mb-1" />
+                <div class="text-center">
+                  <small>{{now | date:'short'}}</small>
+                </div>
+              </div>
+            </ui-report>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <tabset class="custom-tab">
+          <tab heading="Template">
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="template"></code></pre>
+            </div>
+          </tab>
+          <tab heading="Component">
+            <div highlight="all" [language]="['Typescript']">
+              <pre><code [textContent]="code"></code></pre>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</section>

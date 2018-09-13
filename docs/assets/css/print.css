@@ -1,0 +1,19 @@
+@page {
+    margin-top: 2cm;
+    margin-bottom: 2cm;
+    margin-left: 1.3cm;
+    margin-right: 1.3cm;
+}
+
+@media print {
+    table.table-bordered {
+        border: 1px solid #000 !important;
+    }
+    .table-bordered td, .table-bordered th {
+        page-break-inside: avoid;
+        border: 1px solid #000 !important;
+    }
+    .table-bordered th i {
+        display: none !important;
+    }
+}

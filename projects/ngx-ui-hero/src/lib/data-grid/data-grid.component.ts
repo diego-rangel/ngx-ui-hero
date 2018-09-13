@@ -55,6 +55,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() directionLinks?: boolean = true;
     @Input() rotate?: boolean = true;
     @Input() showActionsColumn?: boolean = false;
+    @Input() showInfos?: boolean = true;
     @Input() actionsColumnCaption?: string = '#';
     @Input() actionsColumnWidth?: string = '100px';
     @Input() firstText: string = 'First';
