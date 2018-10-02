@@ -1,4 +1,6 @@
-import { Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+
+import { AfterViewInit, Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
@@ -18,12 +20,17 @@ let identifier = 0;
   }]
 })
 export class InputTextComponent extends ElementBase<string> implements OnInit {
+  myMask: string;
+
   @Input() public placeholder = '';
   @Input() public maxlength: number;
   @Input() public mask: string;
+ 
   @ViewChild(NgModel) model: NgModel;
+  
+  public identifier = `input-text-${identifier++}`;  
+ 
 
-  public identifier = `input-text-${identifier++}`;
 
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: ValidatorArray,
@@ -32,6 +39,10 @@ export class InputTextComponent extends ElementBase<string> implements OnInit {
   ) {
     super(validators, asyncValidators, config);
   }
+  ngOnInit() {    
+    //console.log(this.mask);
+  }
 
-  ngOnInit() {}
+ 
 }
+

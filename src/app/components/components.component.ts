@@ -1,5 +1,7 @@
 import { AlertService } from 'ngx-ui-hero';
+
 import { Component, OnInit } from '@angular/core';
+
 declare var $: any;
 
 @Component({
@@ -13,6 +15,7 @@ export class ComponentsComponent implements OnInit {
   [label]="'My Label here'"
   [placeholder]="'My placeholder...'" 
   [maxlength]="200"
+  [mask]="'(99) 0000-0000'"
   [disabled]="false"
   [showValidations]="true"
   [(ngModel)]="myModel"
