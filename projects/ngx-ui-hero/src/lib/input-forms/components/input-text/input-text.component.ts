@@ -20,8 +20,7 @@ let identifier = 0;
   }]
 })
 export class InputTextComponent extends ElementBase<string> implements OnInit {
-  myMask: string;
-
+  
   @Input() public placeholder = '';
   @Input() public maxlength: number;
   @Input() public mask: string;
@@ -30,8 +29,6 @@ export class InputTextComponent extends ElementBase<string> implements OnInit {
   
   public identifier = `input-text-${identifier++}`;  
  
-
-
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: ValidatorArray,
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: AsyncValidatorArray,
@@ -39,8 +36,7 @@ export class InputTextComponent extends ElementBase<string> implements OnInit {
   ) {
     super(validators, asyncValidators, config);
   }
-  ngOnInit() {    
-    //console.log(this.mask);
+  ngOnInit() {        
   }
 
  
