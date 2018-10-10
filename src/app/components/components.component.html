@@ -26,21 +26,42 @@
         <div id="card-input-text" class="card">
           <div class="card-header">Input Text</div>
           <div class="card-body">
-            <div class="form-group">
-              <input-text
-                [label]="'My Label here'"
-                [placeholder]="'My placeholder...'"
-                [maxlength]="200"
-                [disabled]="false"
-                [mask]="'(99) 0000-0000'"                
-                [showValidations]="true"
-                [(ngModel)]="myModel"
-                required>
-              </input-text>
-            </div>
-
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="inputTextCode"></code></pre>
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group">
+                  <input-text
+                    [label]="'My Label here'"
+                    [placeholder]="'My placeholder...'"
+                    [maxlength]="200"
+                    [disabled]="false"              
+                    [showValidations]="true"
+                    [(ngModel)]="myModel"
+                    required>
+                  </input-text>
+                </div>
+    
+                <div highlight="all" [language]="['Html']">
+                  <pre><code [textContent]="inputTextCode"></code></pre>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-group">
+                  <input-text
+                    [label]="'My Label here'"
+                    [placeholder]="'My placeholder...'"
+                    [maxlength]="200"
+                    [disabled]="false"
+                    [mask]="'(99) 0000-0000'"                
+                    [showValidations]="true"
+                    [(ngModel)]="myModelComMascara"
+                    required>
+                  </input-text>
+                </div>
+    
+                <div highlight="all" [language]="['Html']">
+                  <pre><code [textContent]="inputTextComMascaraCode"></code></pre>
+                </div>
+              </div>
             </div>
           </div>
         </div>
