@@ -1,65 +1,50 @@
-import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
-import { UiModule } from './../ui/ui.module';
-import { FileUploadModule } from 'ng2-file-upload';
-
-import { DebounceDirective } from './directives/debounce.directive';
-export { DebounceDirective } from './directives/debounce.directive';
-
-import { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
-export { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
-
-import { CurrencySymbolPipe } from './base/currency-symbol.pipe';
-export { CurrencySymbolPipe } from './base/currency-symbol.pipe';
-
-import { CurrencyMaskModule } from "ng2-currency-mask";
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
+import { FileUploadModule } from 'ng2-file-upload';
+import { NgxMaskModule } from 'ngx-mask';
 
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { UiModule } from '../ui/ui.module';
+import { CurrencySymbolPipe } from './base/currency-symbol.pipe';
+import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
+import { InputCurrencyComponent } from './components/input-currency/input-currency.component';
+import { InputDateComponent } from './components/input-date/input-date.component';
+import { InputEmailComponent } from './components/input-email/input-email.component';
+import { InputNumberComponent } from './components/input-number/input-number.component';
+import { InputPercentComponent } from './components/input-percent/input-percent.component';
+import { InputRadioComponent } from './components/input-radio/input-radio.component';
+import { InputSelectComponent } from './components/input-select/input-select.component';
+import { InputTextComponent } from './components/input-text/input-text.component';
+import { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
+import { InputUploadComponent } from './components/input-upload/input-upload.component';
+import { InputValidationsComponent } from './components/input-validations/input-validations.component';
+import { RadialButtonComponent } from './components/radial-button/radial-button.component';
+import { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
+import { DebounceDirective } from './directives/debounce.directive';
 import { InputFormsConfig } from './input-forms-config';
-export { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
 
-import { InputTextComponent } from './components/input-text/input-text.component';
+export { DebounceDirective } from './directives/debounce.directive';
+export { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
+export { CurrencySymbolPipe } from './base/currency-symbol.pipe';
+export { InputFormsConfig } from './input-forms-config';
 export { InputTextComponent } from './components/input-text/input-text.component';
-
-import { InputValidationsComponent } from './components/input-validations/input-validations.component';
 export { InputValidationsComponent } from './components/input-validations/input-validations.component';
-
-import { InputSelectComponent } from './components/input-select/input-select.component';
 export { InputSelectComponent } from './components/input-select/input-select.component';
-
-import { InputEmailComponent } from './components/input-email/input-email.component';
 export { InputEmailComponent } from './components/input-email/input-email.component';
-
-import { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
 export { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
-
-import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
 export { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
-
-import { InputRadioComponent } from './components/input-radio/input-radio.component';
 export { InputRadioComponent } from './components/input-radio/input-radio.component';
-
-import { InputCurrencyComponent } from './components/input-currency/input-currency.component';
 export { InputCurrencyComponent } from './components/input-currency/input-currency.component';
-
-import { InputPercentComponent } from './components/input-percent/input-percent.component';
 export { InputPercentComponent } from './components/input-percent/input-percent.component';
-
-import { InputNumberComponent } from './components/input-number/input-number.component';
 export { InputNumberComponent } from './components/input-number/input-number.component';
-
-import { InputDateComponent } from './components/input-date/input-date.component';
 export { InputDateComponent } from './components/input-date/input-date.component';
 export { InputDateConfig } from './components/input-date/input-date-config';
-
-import { InputUploadComponent } from './components/input-upload/input-upload.component';
 export { InputUploadComponent } from './components/input-upload/input-upload.component';
-
-import { RadialButtonComponent } from './components/radial-button/radial-button.component';
 export { RadialButtonComponent } from './components/radial-button/radial-button.component';
 
 @NgModule({
@@ -67,9 +52,10 @@ export { RadialButtonComponent } from './components/radial-button/radial-button.
     CommonModule,
     FormsModule,
     HttpClientModule,
-    CurrencyMaskModule,
+    CurrencyMaskModule,    
     FileUploadModule,
-    UiModule
+    UiModule,
+    NgxMaskModule.forRoot()
   ],
   declarations: [
     AutoSelectOnFocusDirective,
