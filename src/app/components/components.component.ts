@@ -27,7 +27,7 @@ export class ComponentsComponent implements OnInit {
   [label]="'My Label here'"
   [placeholder]="'My placeholder...'" 
   [maxlength]="200"
-  [mask]="'(99) 0000-0000'"
+  [masking]="'(99) 0000-0000'"
   [disabled]="false"
   [showValidations]="true"
   [(ngModel)]="myModel"
@@ -183,11 +183,22 @@ export class ComponentsComponent implements OnInit {
 </input-upload>
   `;
 
+  myMultiselectCode = `
+<input-multiselect 
+  label="My Multiselect"
+  [(ngModel)]="myMultiselectModel"
+  [options]="multiSelectOptions" 
+  displayTextProperty="text" 
+  valueProperty="value">
+</input-multiselect>
+  `;
+
   myModel: string;
   myModelComMascara: string;
   myEmailModel: string;
   myTextAreaModel: string;
   mySelectModel: any;
+  myMultiselectModel: any[] = [];
   myCheckboxModel: boolean;
   myRadioModel: any;
   myCurrencyModel: any;
@@ -198,6 +209,13 @@ export class ComponentsComponent implements OnInit {
   options = [
     { value: 1, text: 'Option 1' },
     { value: 2, text: 'Option 2' }
+  ];
+  multiSelectOptions = [
+    { value: 1, text: 'Option 1' },
+    { value: 2, text: 'Option 2' },
+    { value: 3, text: 'Option 3' },
+    { value: 4, text: 'Option 4' },
+    { value: 5, text: 'Option 5' }
   ];
 
   constructor(

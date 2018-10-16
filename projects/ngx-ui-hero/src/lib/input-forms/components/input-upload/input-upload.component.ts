@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, Inject, Optional } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload';
 import { Observable, zip } from 'rxjs';
 import { retry } from 'rxjs/operators';
 
-import { InputFormsConfig } from './../../input-forms-config';
-import { INPUT_FORMS_CONFIG } from './../../input-forms-config.constants';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
+
+import { InputFormsConfig } from '../../input-forms-config';
+import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
 let identifier = 0;
 
@@ -284,7 +285,7 @@ export class InputUploadComponent implements OnInit {
         }
 
         let extensionArray = file.name.split('.');
-        let extension = extensionArray[extensionArray.length - 1];
+        let extension: string = extensionArray[extensionArray.length - 1].toLowerCase();
         let result = this.allowedExtensions.find(x => x == extension);
 
         if (result == undefined || result == null) {

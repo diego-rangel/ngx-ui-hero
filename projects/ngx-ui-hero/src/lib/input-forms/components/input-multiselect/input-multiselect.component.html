@@ -1,0 +1,43 @@
+<div [id]="identifier" class="ui-multiselect" (clickOutside)="ToggleDropDown(false)">
+    <label *ngIf="label">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+
+    <div class="combobox d-flex align-items-center justify-content-between" 
+        [ngClass]="{'open': showOptions}"
+        (click)="ToggleDropDown()">
+
+        <span *ngIf="!value || value.length == 0">{{placeholder}}</span>
+
+        <div *ngIf="value?.length > 0" class="selected-items d-flex align-items-center">
+            <span class="badge" *ngFor="let item of value | slice:0:maxCountOfLabelsToShow" (click)="RemoveItem(item, $event)">
+                <span class="text-truncate">{{item[displayTextProperty]}}</span>
+                <i class="fa fa-times ml-2"></i>
+            </span>
+            <span *ngIf="value.length > maxCountOfLabelsToShow">...</span>
+        </div>
+
+        <i class="fa" [ngClass]="{'fa-caret-down': !showOptions, 'fa-caret-up': showOptions}"></i>
+    </div>
+
+    <div class="dropdown-options shadow fadeInDown" *ngIf="showOptions">
+        <div class="options-container" *ngIf="options?.length > 0">
+            <div class="toolbar d-flex align-items-center">
+                <input type="text" class="form-control" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" />
+                <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(true)"><i class="fa fa-check-square"></i> {{selectAllButtonLabel}}</button>
+                <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(false)"><i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}</button>
+            </div>
+
+            <ul>
+                <li class="d-flex align-items-center" *ngFor="let item of options | searchBy : 'text' : search" [ngClass]="{'selected': item.selected}">
+                    <div class="checkbox mr-3">
+                        <input type="checkbox" name="{{identifier}}-option" [(ngModel)]="item.selected" />
+                    </div>
+                    <span class="link" (click)="ToggleItemSelected(item)">{{item[displayTextProperty]}}</span>
+                </li>
+            </ul>
+
+            <small class="empty-results" *ngIf="(options | searchBy : 'text' : search).length == 0">{{emptyMessage}}</small>
+        </div>
+
+        <small class="empty-results" *ngIf="!options || options.length == 0">{{emptyMessage}}</small>
+    </div>
+</div>

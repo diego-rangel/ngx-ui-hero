@@ -5,6 +5,7 @@ export interface InputFormsConfig {
     validationMessages?: InputFormsValidationConfig;
     date?: InputDateConfig;
     upload?: InputFormsUploadConfig;
+    multiSelect?: MultiSelectConfig;
 }
 
 export interface InputFormsCurrencyConfig {
@@ -47,4 +48,15 @@ export interface InputFormsUploadConfig {
     fileSizeErrorMessage?: string;
     maxFileSizeLabel?: string;
     allowedExtensionsLabel?: string;
+}
+
+export interface MultiSelectConfig {
+    placeholder?: string;
+    searchPlaceholder?: string;
+    displayTextProperty?: string;
+    valueProperty?: string;
+    emptyMessage?: string;
+    selectAllButtonLabel?: string;
+    clearSelectionButtonLabel?: string;
+    maxCountOfLabelsToShow?: number;
 }

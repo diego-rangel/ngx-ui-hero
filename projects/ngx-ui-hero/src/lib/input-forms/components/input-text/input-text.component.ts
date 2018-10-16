@@ -1,6 +1,4 @@
-import { Subject } from 'rxjs';
-
-import { AfterViewInit, Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
@@ -23,7 +21,7 @@ export class InputTextComponent extends ElementBase<string> implements OnInit {
   
   @Input() public placeholder = '';
   @Input() public maxlength: number;
-  @Input() public mask: string;
+  @Input() public masking: string;
  
   @ViewChild(NgModel) model: NgModel;
   

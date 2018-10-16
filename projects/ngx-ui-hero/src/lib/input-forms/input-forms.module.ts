@@ -14,6 +14,7 @@ import { InputCheckboxComponent } from './components/input-checkbox/input-checkb
 import { InputCurrencyComponent } from './components/input-currency/input-currency.component';
 import { InputDateComponent } from './components/input-date/input-date.component';
 import { InputEmailComponent } from './components/input-email/input-email.component';
+import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 import { InputNumberComponent } from './components/input-number/input-number.component';
 import { InputPercentComponent } from './components/input-percent/input-percent.component';
 import { InputRadioComponent } from './components/input-radio/input-radio.component';
@@ -46,6 +47,7 @@ export { InputDateComponent } from './components/input-date/input-date.component
 export { InputDateConfig } from './components/input-date/input-date-config';
 export { InputUploadComponent } from './components/input-upload/input-upload.component';
 export { RadialButtonComponent } from './components/radial-button/radial-button.component';
+export { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 
 @NgModule({
   imports: [
@@ -73,7 +75,8 @@ export { RadialButtonComponent } from './components/radial-button/radial-button.
     InputNumberComponent,
     InputDateComponent,
     InputUploadComponent,
-    RadialButtonComponent
+    RadialButtonComponent,
+    InputMultiselectComponent
   ],
   exports: [
     AutoSelectOnFocusDirective,
@@ -92,7 +95,8 @@ export { RadialButtonComponent } from './components/radial-button/radial-button.
     InputNumberComponent,
     InputDateComponent,
     InputUploadComponent,
-    RadialButtonComponent
+    RadialButtonComponent,
+    InputMultiselectComponent
   ],
 })
 export class NgxUiHeroInputFormsModule {

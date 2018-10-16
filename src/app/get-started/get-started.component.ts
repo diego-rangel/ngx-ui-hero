@@ -90,6 +90,16 @@ export const inputFormsConfig: InputFormsConfig = {
     fileSizeErrorMessage: 'This file exceeds the max file size allowed of {maxFileSize}MB.',
     maxFileSizeLabel: 'Max file size:',
     allowedExtensionsLabel: 'Allowed extensions:'
+  },
+  multiSelect: {
+    placeholder: 'Select...',
+    searchPlaceholder: 'Search...',
+    displayTextProperty: 'text',
+    valueProperty: 'value',
+    emptyMessage: 'No results found.',
+    selectAllButtonLabel: 'Select all',
+    clearSelectionButtonLabel: 'Clear selection',
+    maxCountOfLabelsToShow: 3
   }
 };
 

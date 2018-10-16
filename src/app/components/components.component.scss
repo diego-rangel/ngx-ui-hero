@@ -6,3 +6,12 @@
         width: 25px;
     }
 }
+
+.long-content {
+    max-height: 300px;
+    overflow: scroll;
+
+    > pre {
+        margin-bottom: 0;
+    }
+}
