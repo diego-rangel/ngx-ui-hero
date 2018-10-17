@@ -29,7 +29,7 @@
             <ul>
                 <li class="d-flex align-items-center" *ngFor="let item of options | searchBy : 'text' : search" [ngClass]="{'selected': item.selected}">
                     <div class="checkbox mr-3">
-                        <input type="checkbox" name="{{identifier}}-option" [(ngModel)]="item.selected" />
+                        <input type="checkbox" name="{{identifier}}-option" [(ngModel)]="item.selected" (change)="ItemSelectedCheckChanged()" />
                     </div>
                     <span class="link" (click)="ToggleItemSelected(item)">{{item[displayTextProperty]}}</span>
                 </li>

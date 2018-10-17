@@ -110,6 +110,9 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     this.updateModel();
     this.clearSearch();
   }
+  ItemSelectedCheckChanged(): void {
+    this.updateModel();
+  }  
 
   RemoveItem(item: any, event: any) {
     let itemToRemove = this.options.find(x => x[this.valueProperty] == item[this.valueProperty]);
