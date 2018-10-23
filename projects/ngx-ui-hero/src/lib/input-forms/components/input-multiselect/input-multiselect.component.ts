@@ -88,6 +88,10 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   }
 
   ToggleDropDown(value?: boolean): void {
+    if (this.disabled) {
+      return;
+    }
+    
     if (value == undefined) {
       this.showOptions = !this.showOptions;
     } else {
@@ -115,6 +119,10 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   }  
 
   RemoveItem(item: any, event: any) {
+    if (this.disabled) {
+      return;
+    }
+    
     let itemToRemove = this.options.find(x => x[this.valueProperty] == item[this.valueProperty]);
 
     if (itemToRemove) {

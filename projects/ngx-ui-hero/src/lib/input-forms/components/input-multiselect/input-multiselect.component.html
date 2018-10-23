@@ -2,7 +2,7 @@
     <label *ngIf="label">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
 
     <div class="combobox d-flex align-items-center justify-content-between" 
-        [ngClass]="{'open': showOptions}"
+        [ngClass]="{'open': showOptions, 'disabled': disabled}"
         (click)="ToggleDropDown()">
 
         <span *ngIf="!value || value.length == 0">{{placeholder}}</span>
@@ -10,7 +10,7 @@
         <div *ngIf="value?.length > 0" class="selected-items d-flex align-items-center">
             <span class="badge" *ngFor="let item of value | slice:0:maxCountOfLabelsToShow" (click)="RemoveItem(item, $event)">
                 <span class="text-truncate">{{item[displayTextProperty]}}</span>
-                <i class="fa fa-times ml-2"></i>
+                <i class="fa fa-times ml-2" *ngIf="!disabled"></i>
             </span>
             <span *ngIf="value.length > maxCountOfLabelsToShow">...</span>
         </div>

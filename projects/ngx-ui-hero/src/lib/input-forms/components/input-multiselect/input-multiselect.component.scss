@@ -74,6 +74,10 @@
     > .combobox.open {
         border-radius: 6px 6px 0 0;
     }
+    > .combobox.disabled {
+        background-color: #E9ECEF;
+        border-color: #CED4DA;
+    }
 
     > .dropdown-options {
         background-color: #FFF;
