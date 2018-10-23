@@ -88,10 +88,6 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   }
 
   ToggleDropDown(value?: boolean): void {
-    if (this.disabled) {
-      return;
-    }
-    
     if (value == undefined) {
       this.showOptions = !this.showOptions;
     } else {
@@ -101,10 +97,18 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     this.clearSearch();
   }
   ToggleItemSelected(item: any): void {
+    if (this.disabled) {
+      return;
+    }
+    
     item.selected = !item.selected;
     this.updateModel();
   }
   ToggleAllItemsSelection(value: boolean): void {
+    if (this.disabled) {
+      return;
+    }
+    
     if (!this.options || this.options.length == 0) return;
 
     for (let i = 0; i < this.options.length; i++) {
@@ -115,10 +119,14 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     this.clearSearch();
   }
   ItemSelectedCheckChanged(): void {
+    if (this.disabled) {
+      return;
+    }
+    
     this.updateModel();
   }  
 
-  RemoveItem(item: any, event: any) {
+  RemoveItem(item: any, index: number, event: any) {
     if (this.disabled) {
       return;
     }
@@ -128,6 +136,8 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     if (itemToRemove) {
       this.ToggleItemSelected(itemToRemove);
       this.clearSearch();
+    } else {
+      this.value.splice(index, 1);
     }
 
     event.stopPropagation();
