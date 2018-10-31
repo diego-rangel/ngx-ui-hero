@@ -1,0 +1,101 @@
+@keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -5%, 0);
+      transform: translate3d(0, -5%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+}
+  
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    animation-duration: .35s;    
+    animation-fill-mode: both;
+}
+
+.ui-month-year {
+    position: relative;
+
+    * {        
+        user-select: none;
+    }
+
+    > .combobox {
+        background-color: #FFF;
+        padding: .375rem .40rem .375rem .75rem;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        
+        > span {
+            color: #6c757d;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        > i {
+            color: #495057;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+    }
+    > .combobox.open {
+        border-radius: 6px 6px 6px 0;
+    }
+    > .combobox.disabled {
+        background-color: #E9ECEF;
+        border-color: #CED4DA;
+    }
+
+    > .dropdown-options {
+        background-color: #FFF;
+        border: 1px solid #ced4da;
+        border-radius: 0 0 6px 6px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 250px;
+        z-index: 10;
+        margin-top: -1px;
+
+        .toolbar {
+            padding: 3px;
+            border-bottom: 1px solid #ced4da;
+            background-color: #F8F9FA;
+
+            
+        }
+
+        ul {
+            margin: 0;
+            padding: 5px 4px 5px 5px;
+
+            li {
+                list-style: none;
+                width: 33.33%;
+                height: 25%;
+                padding: 10px;
+                text-align: center;
+                border-radius: 4px;
+
+                > span {
+                    cursor: pointer;
+                }
+            }
+            li.selected {
+                color: #007BFF;
+                font-weight: 600;
+            }
+            li:hover {
+                background-color: #007BFF;
+                color: #FFF;
+                cursor: pointer;
+            }
+        }
+    }
+}

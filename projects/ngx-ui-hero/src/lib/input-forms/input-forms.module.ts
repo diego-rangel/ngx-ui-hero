@@ -14,6 +14,7 @@ import { InputCheckboxComponent } from './components/input-checkbox/input-checkb
 import { InputCurrencyComponent } from './components/input-currency/input-currency.component';
 import { InputDateComponent } from './components/input-date/input-date.component';
 import { InputEmailComponent } from './components/input-email/input-email.component';
+import { InputMonthYearComponent } from './components/input-month-year/input-month-year.component';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 import { InputNumberComponent } from './components/input-number/input-number.component';
 import { InputPercentComponent } from './components/input-percent/input-percent.component';
@@ -37,6 +38,7 @@ export { InputTextComponent } from './components/input-text/input-text.component
 export { InputValidationsComponent } from './components/input-validations/input-validations.component';
 export { InputSelectComponent } from './components/input-select/input-select.component';
 export { InputEmailComponent } from './components/input-email/input-email.component';
+export { InputMonthYearComponent } from './components/input-month-year/input-month-year.component';
 export { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
 export { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
 export { InputRadioComponent } from './components/input-radio/input-radio.component';
@@ -76,7 +78,8 @@ export { InputMultiselectComponent } from './components/input-multiselect/input-
     InputDateComponent,
     InputUploadComponent,
     RadialButtonComponent,
-    InputMultiselectComponent
+    InputMultiselectComponent,
+    InputMonthYearComponent
   ],
   exports: [
     AutoSelectOnFocusDirective,
@@ -96,7 +99,8 @@ export { InputMultiselectComponent } from './components/input-multiselect/input-
     InputDateComponent,
     InputUploadComponent,
     RadialButtonComponent,
-    InputMultiselectComponent
+    InputMultiselectComponent,
+    InputMonthYearComponent
   ],
 })
 export class NgxUiHeroInputFormsModule {

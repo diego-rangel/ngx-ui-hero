@@ -205,6 +205,7 @@ export class ComponentsComponent implements OnInit {
   myPercentModel: any;
   myNumberModel: any;
   myDateModel: Date;
+  myDateMonthYearModel: Date;
 
   options = [
     { value: 1, text: 'Option 1' },
@@ -224,6 +225,7 @@ export class ComponentsComponent implements OnInit {
 
   ngOnInit() {
     this.myDateModel = new Date();
+    this.myDateMonthYearModel = new Date();
 
     setTimeout(()=> {
       $('body').scrollspy({ 

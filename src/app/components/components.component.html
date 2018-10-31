@@ -20,6 +20,7 @@
           <a anchorLink="card-input-percent" href="#card-input-percent" class="list-group-item list-group-item-action"><i class="fa fa-percent"></i> Percent</a>
           <a anchorLink="card-input-number" href="#card-input-number" class="list-group-item list-group-item-action"><i class="fa fa-sort-numeric-asc"></i> Number</a>
           <a anchorLink="card-input-date" href="#card-input-date" class="list-group-item list-group-item-action"><i class="fa fa-calendar"></i> Date</a>
+          <a anchorLink="card-input-month-year" href="#card-input-month-year" class="list-group-item list-group-item-action"><i class="fa fa-calendar"></i> Month/Year</a>
           <a anchorLink="card-input-upload" href="#card-input-upload" class="list-group-item list-group-item-action"><i class="fa fa-cloud-upload"></i> Upload</a>
         </div>
       </div>
@@ -437,6 +438,58 @@
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+
+        <div id="card-input-month-year" class="card mt-4">
+          <div class="card-header">Input Month/Year</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-month-year
+                [label]="'My Label'"
+                [disabled]="false"
+                [(ngModel)]="myDateMonthYearModel" 
+                required>
+              </input-month-year>
+            </div>
+
+            <!-- <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="dateCode"></code></pre>
+            </div> -->
+
+            <!-- <h2>Inputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Outputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>onChange</b></td>
+                    <td>Emitted every time a date is changed with the new value as a parameter.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div> -->
           </div>
         </div>
 

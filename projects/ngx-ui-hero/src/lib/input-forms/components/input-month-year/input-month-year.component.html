@@ -1,0 +1,31 @@
+<div [id]="identifier" class="ui-month-year" (clickOutside)="ToggleDropDown(false)">
+  <label *ngIf="label">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+
+  <div class="combobox d-flex align-items-center justify-content-between" 
+      [ngClass]="{'open': showDropdown, 'disabled': disabled}"
+      (click)="ToggleDropDown()">
+
+      <span *ngIf="!value">{{placeholder}}</span>
+      <span *ngIf="value">{{value | date:format}}</span>
+
+      <i class="fa" [ngClass]="{'fa-caret-down': !showDropdown, 'fa-caret-up': showDropdown}"></i>
+  </div>
+
+  <div class="dropdown-options shadow fadeInDown" *ngIf="showDropdown">
+    <div class="months-container" *ngIf="displayMode == 0">
+      <div class="toolbar d-flex align-items-center justify-content-between">
+        <button class="btn btn-light" (click)="DecrementSelectedYear()"><i class="fa fa-chevron-left"></i></button>
+        <button class="btn btn-light">{{selectedYear}}</button>
+        <button class="btn btn-light" (click)="IncrementSelectedYear()"><i class="fa fa-chevron-right"></i></button>
+      </div>
+
+      <ul class="d-flex flex-wrap">
+        <li *ngFor="let item of languageDefinitions.months; let i = index;" 
+          (click)="SelectMonth(i)"
+          [ngClass]="{'selected': value?.getMonth() == i}">
+          {{item | slice:0:3}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
