@@ -127,7 +127,7 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   }  
 
   RemoveItem(item: any, index: number, event: any) {
-    if (this.disabled) {
+    if (this.disabled || !this.options || this.options.length == 0) {
       return;
     }
     
@@ -147,6 +147,11 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     this.search = '';
   }
   private updateModel(): void {
+    if (!this.options || this.options.length == 0) {
+      this.value = [];
+      return;
+    }
+    
     this.value = this.options.filter(x => x.selected);
   }
 

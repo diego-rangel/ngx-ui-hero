@@ -27,7 +27,7 @@
             </div>
 
             <ul>
-                <li class="d-flex align-items-center" *ngFor="let item of options | searchBy : 'text' : search" [ngClass]="{'selected': item.selected}">
+                <li class="d-flex align-items-center" *ngFor="let item of options | searchBy : displayTextProperty : search" [ngClass]="{'selected': item.selected}">
                     <div class="checkbox mr-3">
                         <input type="checkbox" name="{{identifier}}-option" [(ngModel)]="item.selected" (change)="ItemSelectedCheckChanged()" [disabled]="disabled" />
                     </div>
@@ -35,7 +35,7 @@
                 </li>
             </ul>
 
-            <small class="empty-results" *ngIf="(options | searchBy : 'text' : search).length == 0">{{emptyMessage}}</small>
+            <small class="empty-results" *ngIf="(options | searchBy : displayTextProperty : search).length == 0">{{emptyMessage}}</small>
         </div>
 
         <small class="empty-results" *ngIf="!options || options.length == 0">{{emptyMessage}}</small>
