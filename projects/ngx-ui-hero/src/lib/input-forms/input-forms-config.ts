@@ -6,6 +6,7 @@ export interface InputFormsConfig {
     date?: InputDateConfig;
     upload?: InputFormsUploadConfig;
     multiSelect?: MultiSelectConfig;
+    monthYear?: MonthYearConfig;
 }
 
 export interface InputFormsCurrencyConfig {
@@ -59,4 +60,10 @@ export interface MultiSelectConfig {
     selectAllButtonLabel?: string;
     clearSelectionButtonLabel?: string;
     maxCountOfLabelsToShow?: number;
+}
+
+export interface MonthYearConfig {
+    placeholder?: string;
+    language?: string;
+    format?: string;
 }

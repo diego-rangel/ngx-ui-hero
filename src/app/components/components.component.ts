@@ -193,6 +193,19 @@ export class ComponentsComponent implements OnInit {
 </input-multiselect>
   `;
 
+  myMonthYearCode = `
+<input-month-year
+  label="My Label"
+  placeholder="Select..."
+  format="MMM/yyyy"
+  language="en"
+  [disabled]="false"
+  [showValidations]="true"
+  [(ngModel)]="myDateMonthYearModel" 
+  required>
+</input-month-year>
+  `;
+
   myModel: string;
   myModelComMascara: string;
   myEmailModel: string;

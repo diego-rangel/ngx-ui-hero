@@ -100,6 +100,11 @@ export const inputFormsConfig: InputFormsConfig = {
     selectAllButtonLabel: 'Select all',
     clearSelectionButtonLabel: 'Clear selection',
     maxCountOfLabelsToShow: 3
+  },
+  monthYear: {
+    placeholder: 'Select...',
+    language: 'en',
+    format: 'MMM/yyyy'
   }
 };
 

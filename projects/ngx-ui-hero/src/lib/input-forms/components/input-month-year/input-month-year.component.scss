@@ -43,6 +43,10 @@
             font-size: 14px;
             margin-left: 10px;
         }
+        > i.fa-times {
+            color: rgb(155, 155, 155);
+            cursor: pointer;
+        }
     }
     > .combobox.open {
         border-radius: 6px 6px 6px 0;
@@ -51,13 +55,25 @@
         background-color: #E9ECEF;
         border-color: #CED4DA;
     }
+    > .combobox.is-invalid {
+        border-color: #dc3545;
+    }
+    > .combobox.is-invalid.open {
+        box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+    }
+    > .combobox.is-valid {
+        border-color: #28a745;
+    }
+    > .combobox.is-valid.open {
+        box-shadow: 0 0 0 0.2rem rgba(40,167,69,.25);
+    }
 
     > .dropdown-options {
         background-color: #FFF;
         border: 1px solid #ced4da;
         border-radius: 0 0 6px 6px;
         position: absolute;
-        top: 100%;
+        top: 71px;
         left: 0;
         width: 250px;
         z-index: 10;

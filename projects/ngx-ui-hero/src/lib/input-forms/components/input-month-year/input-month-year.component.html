@@ -1,13 +1,20 @@
 <div [id]="identifier" class="ui-month-year" (clickOutside)="ToggleDropDown(false)">
   <label *ngIf="label">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
 
+  <input type="date" class="d-none" [(ngModel)]="value" />
   <div class="combobox d-flex align-items-center justify-content-between" 
-      [ngClass]="{'open': showDropdown, 'disabled': disabled}"
+      [ngClass]="{
+        'open': showDropdown, 
+        'disabled': disabled,
+        'is-valid': comboTouched && !(invalid | async),
+        'is-invalid': comboTouched && (invalid | async)
+      }"
       (click)="ToggleDropDown()">
 
       <span *ngIf="!value">{{placeholder}}</span>
       <span *ngIf="value">{{value | date:format}}</span>
 
+      <i class="fa fa-times ml-auto mr-2" *ngIf="value" (click)="Clear($event)"></i>
       <i class="fa" [ngClass]="{'fa-caret-down': !showDropdown, 'fa-caret-up': showDropdown}"></i>
   </div>
 
@@ -28,4 +35,9 @@
       </ul>
     </div>
   </div>
+
+  <input-validations
+    *ngIf="showValidations && comboTouched && (invalid | async)"
+    [messages]="failures | async">
+  </input-validations>
 </div>

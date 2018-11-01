@@ -1,6 +1,5 @@
-import { Component, DoCheck, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { ElementBase } from '../../base/element-base';
 import { AsyncValidatorArray, ValidatorArray } from '../../base/validate';
@@ -22,14 +21,14 @@ let identifier = 0;
   }]
 })
 export class InputMonthYearComponent extends ElementBase<Date> implements OnInit, DoCheck {
-  @Input() placeholder = 'Select...';
+  @Input() placeholder: string = 'Select...';
   @Input() language: string = 'en';
   @Input() format?: string = 'MMM/yyyy';
-  @Input() showInputGroup?: boolean = true;
-  @Input() inputGroupText?: string | SafeHtml;
   @ViewChild(NgModel) model: NgModel;
+  @Output() onChange = new EventEmitter<Date>();
 
   languageDefinitions: InputMonthYearLanguage;
+  comboTouched: boolean;
   showDropdown: boolean;
   internalModel: Date;
   selectedYear: number;
@@ -41,9 +40,12 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     @Optional() @Inject(NG_VALIDATORS) validators: ValidatorArray,
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: AsyncValidatorArray,
     @Inject( INPUT_FORMS_CONFIG ) public config: InputFormsConfig,
-    private domSanitizer: DomSanitizer,
   ) {
     super(validators, asyncValidators, config);
+
+    if (config.monthYear) {
+      Object.assign(this, config.monthYear);
+    }
   }
 
   ngOnInit() {
@@ -57,6 +59,7 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     if (this.disabled) return;
 
     this.displayMode = EnumDisplayMode.Month;
+    this.comboTouched = true;
     this.handleSelectedYear();
 
     if (value == undefined) {
@@ -77,19 +80,23 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     let newDate = new Date(this.selectedYear, month, 1, 0, 0, 0, 0);
     this.value = newDate;
     this.showDropdown = false;
+
+    this.onChange.emit(this.value);
+  }
+  Clear(event: any): void {
+    this.value = null;
+    this.comboTouched = true;
+    this.showDropdown = false;
+    this.onChange.emit(this.value);
+
+    event.stopPropagation();
   }
 
   private init(): void {
     this.initLanguageDefinitions();
-    this.initInputGroup();
   }
   private initLanguageDefinitions(): void {
     this.languageDefinitions = INPUT_MONTH_YEAR_LANGUAGES.get(this.language);
-  }
-  private initInputGroup(): void {
-    if (!this.inputGroupText) {
-      this.inputGroupText = this.domSanitizer.bypassSecurityTrustHtml("<i class='fa fa-calendar' aria-hidden='true'></i>");
-    }
   }
 
   private handleSelectedYear(): void {
