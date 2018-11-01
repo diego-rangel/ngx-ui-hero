@@ -1,5 +1,9 @@
 <div [id]="identifier" class="ui-month-year" (clickOutside)="ToggleDropDown(false)">
-  <label *ngIf="label">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+  <label *ngIf="label">
+    {{label}}
+    <span class="required-symbol" *ngIf="isRequired"> *</span>
+    <i class="fa fa-question-circle ml-2" tooltip="{{help}}" *ngIf="help"></i>
+  </label>
 
   <input type="date" class="d-none" [(ngModel)]="value" />
   <div class="combobox d-flex align-items-center justify-content-between" 
@@ -41,3 +45,5 @@
     [messages]="failures | async">
   </input-validations>
 </div>
+
+<small class="text-muted" *ngIf="description">{{description}}</small>

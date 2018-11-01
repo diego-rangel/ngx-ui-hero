@@ -1,24 +1,20 @@
-import { Input, Inject } from '@angular/core';
-import { NgModel } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { INPUT_FORMS_CONFIG } from './../input-forms-config.constants';
-import { InputFormsConfig } from './../input-forms-config';
-import { ValueAccessorBase } from './value-accessor-base';
+import { Inject, Input } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
-import {
-  AsyncValidatorArray,
-  ValidatorArray,
-  ValidationResult,
-  message,
-  validate,
-} from './validate';
+import { InputFormsConfig } from '../input-forms-config';
+import { INPUT_FORMS_CONFIG } from '../input-forms-config.constants';
+import { AsyncValidatorArray, message, validate, ValidationResult, ValidatorArray } from './validate';
+import { ValueAccessorBase } from './value-accessor-base';
 
 export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   @Input() public label: string;
   @Input() public disabled: boolean;
   @Input() public showValidations = false;
+  @Input() public help: string;
+  @Input() public description: string;
 
   protected abstract model: NgModel;
 

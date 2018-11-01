@@ -1,4 +1,8 @@
-<label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+<label *ngIf="label" [attr.for]="identifier">
+  {{label}}
+  <span class="required-symbol" *ngIf="isRequired"> *</span>
+  <i class="fa fa-question-circle ml-2" tooltip="{{help}}" *ngIf="help"></i>
+</label>
 
 <textarea
   rows="5"
@@ -13,6 +17,8 @@
   }"
   [id]="identifier">
 </textarea>
+
+<small class="text-muted" *ngIf="description">{{description}}</small>
 
 <input-validations
   *ngIf="showValidations && touched && (invalid | async)"

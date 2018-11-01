@@ -1,4 +1,8 @@
-<label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+<label *ngIf="label" [attr.for]="identifier">
+  {{label}}
+  <span class="required-symbol" *ngIf="isRequired"> *</span>
+  <i class="fa fa-question-circle ml-2" tooltip="{{help}}" *ngIf="help"></i>
+</label>
 
 <select class="form-control" 
   [(ngModel)]="value"
@@ -12,6 +16,8 @@
   <option [value]="getOptionValue(option)" *ngFor="let option of options">{{getOptionDisplayText(option)}}</option>
   <ng-content></ng-content>
 </select>
+
+<small class="text-muted" *ngIf="description">{{description}}</small>
 
 <input-validations
   *ngIf="showValidations && touched && (invalid | async)"

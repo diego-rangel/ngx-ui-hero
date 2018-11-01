@@ -1,5 +1,9 @@
 <div [id]="identifier" class="ui-multiselect" (clickOutside)="ToggleDropDown(false)">
-    <label *ngIf="label">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+    <label *ngIf="label">
+        {{label}}
+        <span class="required-symbol" *ngIf="isRequired"> *</span>
+        <i class="fa fa-question-circle ml-2" tooltip="{{help}}" *ngIf="help"></i>
+    </label>
 
     <div class="combobox d-flex align-items-center justify-content-between" 
         [ngClass]="{'open': showOptions, 'disabled': disabled}"
@@ -41,3 +45,5 @@
         <small class="empty-results" *ngIf="!options || options.length == 0">{{emptyMessage}}</small>
     </div>
 </div>
+
+<small class="text-muted" *ngIf="description">{{description}}</small>

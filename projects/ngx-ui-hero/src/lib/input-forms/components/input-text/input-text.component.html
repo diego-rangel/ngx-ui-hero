@@ -1,4 +1,8 @@
-<label *ngIf="label" [attr.for]="identifier">{{label}}<span class="required-symbol" *ngIf="isRequired"> *</span></label>
+<label *ngIf="label" [attr.for]="identifier">
+  {{label}}
+  <span class="required-symbol" *ngIf="isRequired"> *</span>
+  <i class="fa fa-question-circle ml-2" tooltip="{{help}}" *ngIf="help"></i>
+</label>
 
 <input type="text" 
   class="form-control" 
@@ -12,6 +16,8 @@
     'is-valid': touched && !(invalid | async),
     'is-invalid': touched && (invalid | async)
   }" />
+
+<small class="text-muted" *ngIf="description">{{description}}</small>
 
 <input-validations
   *ngIf="showValidations && touched && (invalid | async)"
