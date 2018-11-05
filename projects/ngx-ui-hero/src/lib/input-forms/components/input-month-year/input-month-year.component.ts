@@ -61,12 +61,18 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     this.displayMode = EnumDisplayMode.Month;
     this.handleSelectedYear();
 
-    if (value == undefined) {
-      this.showDropdown = !this.showDropdown;
-      this.setComboTouched();
+    if (value == undefined) { 
+      if (this.showDropdown) {
+        this.setComboTouched();
+      }
+
+      this.showDropdown = !this.showDropdown;      
     } else {
+      if (!value && this.showDropdown) {
+        this.setComboTouched();
+      }
+
       this.showDropdown = value;
-      this.setComboTouched();
     }
   }
 
@@ -120,9 +126,7 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
   }
 
   private setComboTouched(): void {
-    if (!this.showDropdown) {
-      this.comboTouched = true;
-    }
+    this.comboTouched = true;
   }
 }
 
