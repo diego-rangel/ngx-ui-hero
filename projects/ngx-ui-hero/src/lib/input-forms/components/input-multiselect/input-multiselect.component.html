@@ -5,8 +5,14 @@
         <i class="fa fa-question-circle ml-2" tooltip="{{help}}" *ngIf="help"></i>
     </label>
 
+    <input type="hidden" [(ngModel)]="value" />
     <div class="combobox d-flex align-items-center justify-content-between" 
-        [ngClass]="{'open': showOptions, 'disabled': disabled}"
+        [ngClass]="{
+            'open': showOptions, 
+            'disabled': disabled,
+            'is-valid': comboTouched && (!isRequired || value?.length > 0),
+            'is-invalid': comboTouched && isRequired && (!value || value.length == 0)
+        }"
         (click)="ToggleDropDown()">
 
         <span *ngIf="!value || value.length == 0">{{placeholder}}</span>

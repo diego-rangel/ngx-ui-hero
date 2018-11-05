@@ -23,6 +23,7 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   private _differOptions: any;  
   private _options: Array<any>;
   showOptions: boolean;
+  comboTouched: boolean;
   modelInitialized: boolean;
   search: string;
 
@@ -88,9 +89,17 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   }
 
   ToggleDropDown(value?: boolean): void {
-    if (value == undefined) {
-      this.showOptions = !this.showOptions;
+    if (value == undefined) { 
+      if (this.showOptions) {
+        this.setComboTouched();
+      }
+
+      this.showOptions = !this.showOptions;      
     } else {
+      if (!value && this.showOptions) {
+        this.setComboTouched();
+      }
+
       this.showOptions = value;
     }
     
@@ -153,6 +162,9 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     }
     
     this.value = this.options.filter(x => x.selected);
+  }
+  private setComboTouched(): void {
+    this.comboTouched = true;
   }
 
 }

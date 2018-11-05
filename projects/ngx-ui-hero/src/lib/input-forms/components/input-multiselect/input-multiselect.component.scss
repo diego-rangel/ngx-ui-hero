@@ -78,6 +78,18 @@
         background-color: #E9ECEF;
         border-color: #CED4DA;
     }
+    > .combobox.is-invalid {
+        border-color: #dc3545;
+    }
+    > .combobox.is-invalid.open {
+        box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+    }
+    > .combobox.is-valid {
+        border-color: #28a745;
+    }
+    > .combobox.is-valid.open {
+        box-shadow: 0 0 0 0.2rem rgba(40,167,69,.25);
+    }
 
     > .dropdown-options {
         background-color: #FFF;
