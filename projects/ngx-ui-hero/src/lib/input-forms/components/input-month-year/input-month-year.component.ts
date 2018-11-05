@@ -87,6 +87,7 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     let newDate = new Date(this.selectedYear, month, 1, 0, 0, 0, 0);
     this.value = newDate;
     this.showDropdown = false;
+    this.setComboTouched();
 
     this.onChange.emit(this.value);
   }
