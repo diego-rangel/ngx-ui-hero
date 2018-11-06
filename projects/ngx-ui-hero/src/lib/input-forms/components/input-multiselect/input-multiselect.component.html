@@ -37,7 +37,7 @@
             </div>
 
             <ul>
-                <li class="d-flex align-items-center" *ngFor="let item of options | searchBy : displayTextProperty : search" [ngClass]="{'selected': item.selected}">
+                <li class="d-flex" *ngFor="let item of options | searchBy : displayTextProperty : search" [ngClass]="{'selected': item.selected}">
                     <div class="checkbox mr-3">
                         <input type="checkbox" name="{{identifier}}-option" [(ngModel)]="item.selected" (change)="ItemSelectedCheckChanged()" [disabled]="disabled" />
                     </div>
