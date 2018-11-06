@@ -50,7 +50,7 @@ export class TreeviewComponent implements OnInit {
       editable: true,
       dataAlignment: EnumAlignment.Right,
       captionAlignment: EnumAlignment.Center,
-      dataType: EnumTreeViewColumnDataType.Currency
+      dataType: EnumTreeViewColumnDataType.Currency     
     },
   ];
 
@@ -158,5 +158,6 @@ data: Array<any> = [
 
   ngOnInit() {
   }
+ 
 
 }

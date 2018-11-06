@@ -14,7 +14,10 @@
             <ui-tree-view
               [data]="data"
               labelProperty="name"
-              collectionProperty="children">
+              collectionProperty="children"
+              enableLabelLinkStyle="true"
+              (OnItemClicked)="teste($event)">
+              
             </ui-tree-view>
           </div>
         </div>
