@@ -1,7 +1,7 @@
 <label *ngIf="label" [attr.for]="identifier">
   {{label}}
   <span class="required-symbol" *ngIf="isRequired"> *</span>
-  <i class="fa fa-question-circle ml-2" tooltip="{{help}}" *ngIf="help"></i>
+  <i class="fa fa-question-circle ml-2" tooltip="{{help}}" container="body" *ngIf="help"></i>
 </label>
 
 <input type="text" 
