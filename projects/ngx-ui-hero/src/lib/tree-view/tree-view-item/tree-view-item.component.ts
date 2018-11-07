@@ -51,7 +51,7 @@ export class TreeViewItemComponent implements OnInit {
     }
   }
   OnClick(): void {
-    this.emitItemClickedEvent(this.row);
+    this.emitItemClickedEvent(this.row);    
   }
 
   HandleSubItemExpanded(data: any): void {
@@ -61,10 +61,17 @@ export class TreeViewItemComponent implements OnInit {
     this.emitItemClickedEvent(data);
   }
 
+  HandleColumnClick(column: TreeViewColumnModel, row: any, currentData: any, rowIndex: number): void {
+    if (column.onClick) {
+      column.onClick(row, currentData, rowIndex);
+    }
+  }
+
   private emitItemExpandedEvent(data: any): void {
       this.OnItemExpanded.emit(data);
   }
   private emitItemClickedEvent(data: any): void {
       this.OnItemClicked.emit(data);
   }
+
 }

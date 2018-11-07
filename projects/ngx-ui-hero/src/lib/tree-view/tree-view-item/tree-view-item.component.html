@@ -30,7 +30,7 @@
         [ngStyle]="{'width': column.width}"
         [ngClass]="{'text-center': column.dataAlignment == 1, 'text-right': column.dataAlignment == 2}">
   
-        <div *ngIf="!column.editable || row[collectionProperty]?.length > 0">          
+        <div *ngIf="!column.editable || row[collectionProperty]?.length > 0" (click)="HandleColumnClick(column, row, row[column.data], i)">          
           <div *ngIf="!column.render && column.data">
             <span *ngIf="!column.dataType || column.dataType == 0">{{row[column.data]}}</span>
             <span *ngIf="column.dataType == 1">{{row[column.data] | date:'short'}}</span>

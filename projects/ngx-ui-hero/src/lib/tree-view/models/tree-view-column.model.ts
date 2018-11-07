@@ -9,6 +9,7 @@ export class TreeViewColumnModel {
     editable?: boolean = false;
     dataType?: EnumTreeViewColumnDataType = EnumTreeViewColumnDataType.Text;
     render?(row: any, currentData: any, rowIndex: number): string;
+    onClick?(row: any, currentData: any, rowIndex: number): void;
 }
 
 export enum EnumAlignment {
