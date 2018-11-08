@@ -38,7 +38,7 @@
 
             <ul>
                 <li class="d-flex" *ngFor="let item of options | searchBy : displayTextProperty : search" [ngClass]="{'selected': item.selected}">
-                    <div class="checkbox mr-3">
+                    <div class="checkbox mr-3 flex-shrink-0">
                         <input type="checkbox" name="{{identifier}}-option" [(ngModel)]="item.selected" (change)="ItemSelectedCheckChanged()" [disabled]="disabled" />
                     </div>
                     <span class="link" (click)="ToggleItemSelected(item)">{{item[displayTextProperty]}}</span>

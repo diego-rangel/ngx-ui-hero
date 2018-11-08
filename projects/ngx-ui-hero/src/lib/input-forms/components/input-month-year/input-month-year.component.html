@@ -18,7 +18,7 @@
       <span *ngIf="!value">{{placeholder}}</span>
       <span *ngIf="value">{{value | date:format}}</span>
 
-      <i class="fa fa-times ml-auto mr-2" *ngIf="value" (click)="Clear($event)"></i>
+      <i class="fa fa-times ml-auto mr-2" *ngIf="value && !disabled" (click)="Clear($event)"></i>
       <i class="fa" [ngClass]="{'fa-caret-down': !showDropdown, 'fa-caret-up': showDropdown}"></i>
   </div>
 
