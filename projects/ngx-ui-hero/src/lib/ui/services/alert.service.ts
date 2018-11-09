@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
 import Swal, { SweetAlertType } from 'sweetalert2';
+
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AlertService {
@@ -31,7 +32,7 @@ export class AlertService {
     warning(title: string, text: string, confirmButtonText?: string, callback?: Function): any {
         this.show(title, text, 'warning', confirmButtonText, callback);
     }
-    question(title: string, text: string, callback: Function, confirmButtonText?: string, cancelButtonText?: string): any {
+    question(title: string, text: string, successCallback: Function, confirmButtonText?: string, cancelButtonText?: string, cancelCallback?: Function): any {
         Swal({
             title: title,
             text: text,
@@ -40,8 +41,10 @@ export class AlertService {
             cancelButtonText: cancelButtonText || 'Cancel',
             showCancelButton: true
         }).then((result) => {
-            if (result.value && callback !== null) {
-                callback();
+            if (result.value && successCallback) {
+                successCallback();
+            } else if (!result.value && cancelCallback) {
+                cancelCallback();
             }
           });
     }
