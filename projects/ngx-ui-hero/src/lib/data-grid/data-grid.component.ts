@@ -281,7 +281,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 dataAlignment: EnumAlignment.Left,
                 dataClasses: null,         
                 sortable: true,
-                sortDirection: EnumSortDirection.Ascending
             };
 
             Object.assign(target, this.columns[i]);
@@ -297,6 +296,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 } else {
                     this.columns[i].sort.sortDirection = this.initialSortDirection;
                 }
+
+                console.log(`sortando no grid ${this.identifier}, na coluna ${i}, na direção ${this.columns[i].sort.sortDirection}`);
             }
         }
     }
