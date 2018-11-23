@@ -296,8 +296,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 } else {
                     this.columns[i].sort.sortDirection = this.initialSortDirection;
                 }
-
-                console.log(`sortando no grid ${this.identifier}, na coluna ${i}, na direção ${this.columns[i].sort.sortDirection}`);
             }
         }
     }
