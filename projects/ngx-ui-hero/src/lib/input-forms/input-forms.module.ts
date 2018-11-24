@@ -30,6 +30,7 @@ import { DebounceDirective } from './directives/debounce.directive';
 import { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
 import { InputSwitchComponent } from './components/input-switch/input-switch.component';
+import { BlockUiComponent } from './components/block-ui/block-ui.component';
 
 export { DebounceDirective } from './directives/debounce.directive';
 export { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
@@ -52,6 +53,7 @@ export { InputUploadComponent } from './components/input-upload/input-upload.com
 export { RadialButtonComponent } from './components/radial-button/radial-button.component';
 export { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 export { InputSwitchComponent } from './components/input-switch/input-switch.component';
+export { BlockUiComponent } from './components/block-ui/block-ui.component';
 
 @NgModule({
   imports: [
@@ -82,7 +84,8 @@ export { InputSwitchComponent } from './components/input-switch/input-switch.com
     RadialButtonComponent,
     InputMultiselectComponent,
     InputMonthYearComponent,
-    InputSwitchComponent
+    InputSwitchComponent,
+    BlockUiComponent
   ],
   exports: [
     AutoSelectOnFocusDirective,
@@ -104,7 +107,8 @@ export { InputSwitchComponent } from './components/input-switch/input-switch.com
     RadialButtonComponent,
     InputMultiselectComponent,
     InputMonthYearComponent,
-    InputSwitchComponent
+    InputSwitchComponent,
+    BlockUiComponent
   ],
 })
 export class NgxUiHeroInputFormsModule {
