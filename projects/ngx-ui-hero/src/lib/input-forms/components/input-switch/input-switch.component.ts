@@ -14,19 +14,19 @@ import { InputFormsConfig } from '../../input-forms-config';
 let identifier = 0;
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'input-checkbox',
-  templateUrl: './input-checkbox.component.html',
+  selector: 'input-switch',
+  templateUrl: './input-switch.component.html',
+  styleUrls: ['./input-switch.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: InputCheckboxComponent,
+    useExisting: InputSwitchComponent,
     multi: true
   }]
 })
-export class InputCheckboxComponent extends ElementBase<boolean> {
+export class InputSwitchComponent extends ElementBase<boolean> {
   @ViewChild(NgModel) model: NgModel;
 
-  public identifier = `input-checkbox-${identifier++}`;
+  public identifier = `input-switch-${identifier++}`;
 
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: Array<any>,
@@ -34,5 +34,9 @@ export class InputCheckboxComponent extends ElementBase<boolean> {
     @Inject( INPUT_FORMS_CONFIG ) public config: InputFormsConfig
   ) {
     super(validators, asyncValidators, config);
+  }
+
+  Toggle(): void {
+    this.value = !this.value;
   }
 }

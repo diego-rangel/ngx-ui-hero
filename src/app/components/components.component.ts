@@ -94,6 +94,14 @@ export class ComponentsComponent implements OnInit {
 </input-checkbox>
   `;
 
+  switchCode = `
+<input-switch
+  [label]="'My switch Label'"
+  [disabled]="false"
+  [(ngModel)]="mySwitchModel">
+</input-switch>
+  `;
+
   radioCode = `
 <input-radio
   [label]="'My radio 1'"
@@ -213,6 +221,7 @@ export class ComponentsComponent implements OnInit {
   mySelectModel: any;
   myMultiselectModel: any[] = [];
   myCheckboxModel: boolean;
+  mySwitchModel: boolean;
   myRadioModel: any;
   myCurrencyModel: any;
   myPercentModel: any;

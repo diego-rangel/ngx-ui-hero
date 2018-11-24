@@ -1,0 +1,33 @@
+.ui-switch {
+    .switch {
+        position: relative;
+        background-color: #f9f9f9;
+        border: 1px solid #dfdfdf;
+        min-width: 50px;
+        height: 30px;
+        border-radius: 30px;
+        box-shadow: #dfdfdf 0 0 0 0 inset;
+        transition: .3s ease-out all;
+        cursor: pointer;
+
+        .switch-toggler {
+            position: absolute;
+            top: 0;
+            right: calc(100% - 30px);
+            background-color: #FFF;
+            border-radius: 100%;
+            box-shadow: 0 1px 3px rgba(0,0,0,.4);
+            width: 30px;
+            height: 28px;
+            transition: .3s ease-out all;
+        }
+    }
+    .switch.on {
+        background-color: #64bd63;
+
+        .switch-toggler {
+            left: auto;
+            right: 0;
+        }
+    }
+}

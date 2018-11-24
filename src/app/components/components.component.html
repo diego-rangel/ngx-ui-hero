@@ -15,6 +15,7 @@
           <a anchorLink="card-input-email" href="#card-input-email" class="list-group-item list-group-item-action"><i class="fa fa-envelope-o"></i> E-mail</a>
           <a anchorLink="card-input-textarea" href="#card-input-textarea" class="list-group-item list-group-item-action"><i class="fa fa-text-height"></i> Textarea</a>
           <a anchorLink="card-input-checkbox" href="#card-input-checkbox" class="list-group-item list-group-item-action"><i class="fa fa-check-square-o"></i> Checkbox</a>
+          <a anchorLink="card-input-switch" href="#card-input-switch" class="list-group-item list-group-item-action"><i class="fa fa-check-square-o"></i> Switch</a>
           <a anchorLink="card-input-radio" href="#card-input-radio" class="list-group-item list-group-item-action"><i class="fa fa-check-circle-o"></i> Radio</a>
           <a anchorLink="card-input-currency" href="#card-input-currency" class="list-group-item list-group-item-action"><i class="fa fa-money"></i> Currency</a>
           <a anchorLink="card-input-percent" href="#card-input-percent" class="list-group-item list-group-item-action"><i class="fa fa-percent"></i> Percent</a>
@@ -269,6 +270,23 @@
 
             <div highlight="all" [language]="['Html']">
               <pre><code [textContent]="checkboxCode"></code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-input-switch" class="card mt-4">
+          <div class="card-header">Input Switch</div>
+          <div class="card-body">
+            <div class="form-group">
+              <input-switch
+                [label]="'My switch Label'"
+                [disabled]="false"
+                [(ngModel)]="mySwitchModel">
+              </input-switch>
+            </div>
+
+            <div highlight="all" [language]="['Html']">
+              <pre><code [textContent]="switchCode"></code></pre>
             </div>
           </div>
         </div>
