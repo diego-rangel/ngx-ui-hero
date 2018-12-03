@@ -141,6 +141,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             }
     
             this.sortOnClient(column);
+            this.paginateOnClient(this.currentPage);
         } else {
             if (this.isUndefinedOrNull(this.OnSort)) {
                 console.error('The [OnSort] callback must be provided when DataGrid Server mode is enabled.');
@@ -314,10 +315,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
         if (this.isUndefinedOrNull(columnToSort)) {
             this.sortApplied = true;
-            return;
         }
 
-        this.sortOnClient(columnToSort);
+        this.paginateOnClient(this.currentPage);
         this.sortApplied = true;
     }
     private initializePaging(): void {
@@ -337,8 +337,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
     private sortOnClient(column: DataGridColumnModel): void {
         this._internalData = _.orderBy(this._internalData, [column.data], [column.sort.sortDirection]);
-
-        this.paginateOnClient(this.currentPage);
     }
     private paginateOnClient(page: number): void {
         const startItem = (page - 1) * this.itemsPerPage;
