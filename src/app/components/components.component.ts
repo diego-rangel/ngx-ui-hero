@@ -98,7 +98,8 @@ export class ComponentsComponent implements OnInit {
 <input-switch
   [label]="'My switch Label'"
   [disabled]="false"
-  [(ngModel)]="mySwitchModel">
+  [(ngModel)]="mySwitchModel"
+  (onChange)="onSwitchChanged($event)">
 </input-switch>
   `;
 

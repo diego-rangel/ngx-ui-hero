@@ -1,15 +1,9 @@
-import { Component, ViewChild, Optional, Inject } from '@angular/core';
-
-import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS,
-} from '@angular/forms';
+import { Component, EventEmitter, Inject, Optional, Output, ViewChild } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
-import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
+import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
 let identifier = 0;
 
@@ -25,6 +19,7 @@ let identifier = 0;
 })
 export class InputSwitchComponent extends ElementBase<boolean> {
   @ViewChild(NgModel) model: NgModel;
+  @Output() onChange = new EventEmitter<boolean>();
 
   public identifier = `input-switch-${identifier++}`;
 
@@ -38,5 +33,6 @@ export class InputSwitchComponent extends ElementBase<boolean> {
 
   Toggle(): void {
     this.value = !this.value;
+    this.onChange.emit(this.value);
   }
 }
