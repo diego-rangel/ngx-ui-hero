@@ -262,5 +262,4 @@ export class ComponentsComponent implements OnInit {
     this.alert.error('Oops =(', "It's only a test and does not have a test backend.");
   }
  
-
 }

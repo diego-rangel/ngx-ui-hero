@@ -237,8 +237,14 @@ export class InputUploadComponent implements OnInit {
             this.onUploadComplete.emit({item, response});
         };
         this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
-            this.Clear();
             this.onError.emit({item, response, status});
+
+            if (this.uploader.queue && this.uploader.queue.length > 0) {
+                for (let i = 0; i < this.uploader.queue.length; i++) {
+                    this.uploader.queue[i].isError = false;
+                    this.uploader.queue[i].isUploaded = false;
+                }
+            }
         };
     }
     private addSelectedFileForManualUploading(file: any): void {
