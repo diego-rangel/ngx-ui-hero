@@ -7,6 +7,7 @@ export interface InputFormsConfig {
     upload?: InputFormsUploadConfig;
     multiSelect?: MultiSelectConfig;
     monthYear?: MonthYearConfig;
+    dropDownGrid?: DropdownGridConfig;
 }
 
 export interface InputFormsCurrencyConfig {
@@ -66,4 +67,11 @@ export interface MonthYearConfig {
     placeholder?: string;
     language?: string;
     format?: string;
+}
+
+export interface DropdownGridConfig {
+    placeholder?: string;
+    searchPlaceholder?: string;
+    displayTextProperty?: string;
+    valueProperty?: string;
 }

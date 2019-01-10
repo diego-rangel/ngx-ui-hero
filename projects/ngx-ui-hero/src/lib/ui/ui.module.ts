@@ -11,12 +11,14 @@ import { NgModule } from '@angular/core';
 import { ModalComponent } from './components/modal/modal.component';
 import { ReportComponent } from './components/report/report.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { SearchByPipe } from './pipes/search-by.pipe';
 import { AlertService } from './services/alert.service';
 
 export { SearchByPipe } from './pipes/search-by.pipe';
 export { ClickOutsideDirective } from './directives/click-outside.directive';
+export { AutoFocusDirective } from './directives/auto-focus.directive';
 export { SpinnerComponent } from './components/spinner/spinner.component';
 export { ModalComponent } from './components/modal/modal.component';
 export { ReportComponent } from './components/report/report.component';
@@ -35,6 +37,7 @@ export * from './services/alert.service';
   ],
   declarations: [
     ClickOutsideDirective,
+    AutoFocusDirective,
     SearchByPipe,
     SpinnerComponent,
     ModalComponent,
@@ -42,6 +45,7 @@ export * from './services/alert.service';
   ],
   exports: [
     ClickOutsideDirective,
+    AutoFocusDirective,
     SearchByPipe,
     SpinnerComponent,
     ModalComponent,

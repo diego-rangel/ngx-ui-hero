@@ -105,6 +105,12 @@ export const inputFormsConfig: InputFormsConfig = {
     placeholder: 'Select...',
     language: 'en',
     format: 'MMM/yyyy'
+  },
+  dropDownGrid: {
+    placeholder: 'Select...',
+    searchPlaceholder: 'Search...',
+    displayTextProperty: 'text',
+    valueProperty: 'value'
   }
 };
 

@@ -1,6 +1,4 @@
 .ui-hero-datagrid {
-    margin-bottom: 20px;
-
     table {
         margin-bottom: 0;
 
@@ -76,5 +74,9 @@
         border: 1px solid #dee2e6;
         background-color: #f9f9f9;
         color: #666;
+    }
+
+    .pagination {
+        max-height: 40px;
     }
 }

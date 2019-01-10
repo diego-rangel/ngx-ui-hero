@@ -56,7 +56,7 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
   }
 
   ToggleDropDown(value?: boolean): void {
-    if (this.disabled) return;
+    if (value == false && !this.showDropdown || (this.disabled)) return;
 
     this.displayMode = EnumDisplayMode.Month;
     this.handleSelectedYear();

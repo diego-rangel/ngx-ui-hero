@@ -10,8 +10,8 @@
       [ngClass]="{
         'open': showDropdown, 
         'disabled': disabled,
-        'is-valid': comboTouched && !(invalid | async),
-        'is-invalid': comboTouched && (invalid | async)
+        'is-valid': !showDropdown && comboTouched && !(invalid | async),
+        'is-invalid': !showDropdown && comboTouched && (invalid | async)
       }"
       (click)="ToggleDropDown()">
 

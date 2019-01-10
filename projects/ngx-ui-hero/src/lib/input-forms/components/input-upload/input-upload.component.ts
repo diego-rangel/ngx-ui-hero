@@ -129,6 +129,16 @@ export class InputUploadComponent implements OnInit {
         return this.selectedFileBlob != null && this.selectedFileBlob != undefined;
     }
 
+    ResetState(): void {
+        if (this.uploader.queue && this.uploader.queue.length > 0) {
+            for (let i = 0; i < this.uploader.queue.length; i++) {
+                this.uploader.queue[i].isError = false;
+                this.uploader.queue[i].isUploaded = false;
+                this.uploader.queue[i].isSuccess = false;
+            }
+        }
+    }
+
     private startSingleUpload(): void {
       this.uploader.uploadAll();
     }
@@ -235,16 +245,11 @@ export class InputUploadComponent implements OnInit {
         this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
             this.chunkProgress = 100;
             this.onUploadComplete.emit({item, response});
+            this.ResetState();
         };
         this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
             this.onError.emit({item, response, status});
-
-            if (this.uploader.queue && this.uploader.queue.length > 0) {
-                for (let i = 0; i < this.uploader.queue.length; i++) {
-                    this.uploader.queue[i].isError = false;
-                    this.uploader.queue[i].isUploaded = false;
-                }
-            }
+            this.ResetState();
         };
     }
     private addSelectedFileForManualUploading(file: any): void {

@@ -1,15 +1,9 @@
-import { Component, Input, ViewChild, Optional, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
-import { INPUT_FORMS_CONFIG } from './../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
-
-import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS,
-} from '@angular/forms';
+import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
 let identifier = 0;
 
@@ -22,7 +16,9 @@ let identifier = 0;
     multi: true
   }]
 })
-export class InputPercentComponent extends ElementBase<string> implements OnInit {
+export class InputPercentComponent extends ElementBase<number> implements OnInit {
+  @Input() max?: number;
+  @Input() min?: number;
   @Input() showInputGroup?: boolean = true;
   @Input() inputGroupText?: string = '%';
   @ViewChild(NgModel) model: NgModel;

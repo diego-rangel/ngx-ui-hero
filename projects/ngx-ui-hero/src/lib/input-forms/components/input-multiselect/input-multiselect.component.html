@@ -10,8 +10,8 @@
         [ngClass]="{
             'open': showOptions, 
             'disabled': disabled,
-            'is-valid': comboTouched && (!isRequired || value?.length > 0),
-            'is-invalid': comboTouched && isRequired && (!value || value.length == 0)
+            'is-valid': !showOptions && comboTouched && (!isRequired || value?.length > 0),
+            'is-invalid': !showOptions && comboTouched && isRequired && (!value || value.length == 0)
         }"
         (click)="ToggleDropDown()">
 
@@ -31,7 +31,7 @@
     <div class="dropdown-options shadow fadeInDown" *ngIf="showOptions">
         <div class="options-container" *ngIf="options?.length > 0">
             <div class="toolbar d-flex align-items-center">
-                <input type="text" class="form-control" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" />
+                <input type="text" class="form-control" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" auto-focus />
                 <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(true)" [disabled]="disabled"><i class="fa fa-check-square"></i> {{selectAllButtonLabel}}</button>
                 <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(false)" [disabled]="disabled"><i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}</button>
             </div>

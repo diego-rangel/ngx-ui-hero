@@ -17,9 +17,9 @@ import { DatagridComponent } from './datagrid/datagrid.component';
 import { AnchorLinkDirective } from './directives/anchor.directive';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { HeaderComponent } from './header/header.component';
+import { PrintingComponent } from './printing/printing.component';
 import { ServicesComponent } from './services/services.component';
 import { TreeviewComponent } from './treeview/treeview.component';
-import { PrintingComponent } from './printing/printing.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -73,7 +73,7 @@ export const inputFormsConfig: InputFormsConfig = {
   date: {
     format: 'dd/MM/yyyy',
     locale: 'pt-br'
-  }
+  },
 };
 
 export const treeViewConfig: TreeViewConfig = {

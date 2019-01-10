@@ -8,11 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { NgxUiHeroDataGridModule } from '../data-grid';
 import { UiModule } from '../ui/ui.module';
 import { CurrencySymbolPipe } from './base/currency-symbol.pipe';
+import { BlockUiComponent } from './components/block-ui/block-ui.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
 import { InputCurrencyComponent } from './components/input-currency/input-currency.component';
 import { InputDateComponent } from './components/input-date/input-date.component';
+import { InputDropdownGridComponent } from './components/input-dropdown-grid/input-dropdown-grid.component';
 import { InputEmailComponent } from './components/input-email/input-email.component';
 import { InputMonthYearComponent } from './components/input-month-year/input-month-year.component';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
@@ -20,6 +23,7 @@ import { InputNumberComponent } from './components/input-number/input-number.com
 import { InputPercentComponent } from './components/input-percent/input-percent.component';
 import { InputRadioComponent } from './components/input-radio/input-radio.component';
 import { InputSelectComponent } from './components/input-select/input-select.component';
+import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InputTextComponent } from './components/input-text/input-text.component';
 import { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
 import { InputUploadComponent } from './components/input-upload/input-upload.component';
@@ -29,8 +33,6 @@ import { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.di
 import { DebounceDirective } from './directives/debounce.directive';
 import { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
-import { InputSwitchComponent } from './components/input-switch/input-switch.component';
-import { BlockUiComponent } from './components/block-ui/block-ui.component';
 
 export { DebounceDirective } from './directives/debounce.directive';
 export { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
@@ -54,6 +56,7 @@ export { RadialButtonComponent } from './components/radial-button/radial-button.
 export { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 export { InputSwitchComponent } from './components/input-switch/input-switch.component';
 export { BlockUiComponent } from './components/block-ui/block-ui.component';
+export { InputDropdownGridComponent } from './components/input-dropdown-grid/input-dropdown-grid.component';
 
 @NgModule({
   imports: [
@@ -63,6 +66,7 @@ export { BlockUiComponent } from './components/block-ui/block-ui.component';
     CurrencyMaskModule,    
     FileUploadModule,
     UiModule,
+    NgxUiHeroDataGridModule,
     NgxMaskModule.forRoot()
   ],
   declarations: [
@@ -85,7 +89,8 @@ export { BlockUiComponent } from './components/block-ui/block-ui.component';
     InputMultiselectComponent,
     InputMonthYearComponent,
     InputSwitchComponent,
-    BlockUiComponent
+    InputDropdownGridComponent,
+    BlockUiComponent,
   ],
   exports: [
     AutoSelectOnFocusDirective,
@@ -108,6 +113,7 @@ export { BlockUiComponent } from './components/block-ui/block-ui.component';
     InputMultiselectComponent,
     InputMonthYearComponent,
     InputSwitchComponent,
+    InputDropdownGridComponent,
     BlockUiComponent
   ],
 })

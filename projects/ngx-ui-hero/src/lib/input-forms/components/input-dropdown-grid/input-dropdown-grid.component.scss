@@ -19,7 +19,7 @@
     animation-fill-mode: both;
 }
 
-.ui-multiselect {
+.ui-dropdown-grid {
     position: relative;
 
     * {        
@@ -42,33 +42,6 @@
             color: #495057;
             font-size: 14px;
             margin-left: 10px;
-        }
-
-        .selected-items {
-            margin-left: -5px;
-            overflow: hidden;
-
-            .badge {
-                margin-right: 3px;
-                line-height: 1;
-                color: #888;
-                background-color: #e0e0e0;
-                border-bottom: 2px solid #CCC;
-                border-left: 2px solid #CCC;
-                padding: 5px 7px 4px 7px;
-                
-                > span {
-                    display: inline-block;
-                    max-width: 150px;
-                }
-            }
-            .badge:hover {
-                cursor: pointer;
-                color: #FFF;
-                background-color: #007BFF;
-                border-bottom: 2px solid #00559A;
-                border-left: 2px solid #00559A;
-            }
         }
     }
     > .combobox.open {
@@ -115,46 +88,6 @@
             }
         }
 
-        ul {
-            max-height: 300px;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            margin: 0;
-            padding: 0;
-
-            li {
-                list-style: none;
-                border-bottom: 1px solid #ced4da;
-
-                > .checkbox {
-                    background-color: #f0f0f0;
-                    border-right: 1px solid #ced4da;
-                    padding: 12px 15px;
-                    display: flex;
-                    align-items: center;
-
-                    input[type="checkbox"] {
-                        width: 17px;
-                        height: 17px;
-                    }
-                }                
-
-                > span {
-                    cursor: pointer;
-                    padding: 8px 0;
-                }
-            }
-            li.selected {
-                color: #007bff;
-            }
-            li:hover {
-                background-color: #f9f9f9;
-            }
-            li:last-child {
-                border-bottom: 0;
-            }
-        }
-
         .empty-results {
             font-style: italic;
             padding: 12px;
@@ -162,4 +95,14 @@
             color: #6b6b6b;
         }
     }
+}
+
+.btn-clear-selection {
+    cursor: pointer;
+    padding: 8px 10px;
+    margin: -5px 0 -5px -5px !important;
+    border-radius: 3px;
+}
+.btn-clear-selection:hover {
+    background-color: rgb(231, 231, 231);
 }

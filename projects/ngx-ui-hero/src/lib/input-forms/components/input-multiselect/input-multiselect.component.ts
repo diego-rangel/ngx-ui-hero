@@ -89,6 +89,8 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   }
 
   ToggleDropDown(value?: boolean): void {
+    if (value == false && !this.showOptions || (this.disabled)) return;
+
     if (value == undefined) { 
       if (this.showOptions) {
         this.setComboTouched();

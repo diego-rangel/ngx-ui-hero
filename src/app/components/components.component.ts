@@ -1,4 +1,4 @@
-import { AlertService } from 'ngx-ui-hero';
+import { AlertService, DataGridColumnModel } from 'ngx-ui-hero';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -215,6 +215,40 @@ export class ComponentsComponent implements OnInit {
 </input-month-year>
   `;
 
+  inputDropdownGridTemplate = `
+<input-dropdown-grid
+  label="My Dropdown Grid"
+  displayTextProperty="name"
+  valueProperty="id"
+  [(ngModel)]="myDropdownGridModel"
+  [disabled]="false"
+  [columns]="dropdownGridColumns"
+  [data]="dropdownGridData"
+  required>
+</input-dropdown-grid>
+  `;
+
+  inputDropdownGridCode = `
+import { DataGridColumnModel } from 'ngx-ui-hero';
+
+dropdownGridData = [
+  { id: 1, name: 'Person 1', email: 'person1@domain.com' },
+  { id: 2, name: 'Person 2', email: 'person2@domain.com' },
+  { id: 3, name: 'Person 3', email: 'person3@domain.com' },
+];
+
+dropdownGridColumns: Array<DataGridColumnModel> = [
+  {
+    caption: 'Name',
+    data: 'name',
+  },
+  {
+    caption: 'E-mail',
+    data: 'email'
+  }
+];
+  `;
+
   myModel: string;
   myModelComMascara: string;
   myEmailModel: string;
@@ -228,7 +262,24 @@ export class ComponentsComponent implements OnInit {
   myPercentModel: any;
   myNumberModel: any;
   myDateModel: Date;
+  myDropdownGridModel: any;
   myDateMonthYearModel: Date;
+
+  dropdownGridData = [
+    { id: 1, name: 'Person 1', email: 'person1@domain.com' },
+    { id: 2, name: 'Person 2', email: 'person2@domain.com' },
+    { id: 3, name: 'Person 3', email: 'person3@domain.com' },
+  ];
+  dropdownGridColumns: Array<DataGridColumnModel> = [
+    {
+      caption: 'Name',
+      data: 'name',
+    },
+    {
+      caption: 'E-mail',
+      data: 'email'
+    }
+  ];
 
   options = [
     { value: 1, text: 'Option 1' },
