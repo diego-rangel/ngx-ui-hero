@@ -314,10 +314,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         const columnToSort = _.find(this.columns, x => x.sortable && x.sort && x.sort.sorting);
 
         if (this.isUndefinedOrNull(columnToSort)) {
-            this.sortApplied = true;
+            this.paginateOnClient(this.currentPage);
+        } else {
+            this.sortOnClient(columnToSort);
+            this.paginateOnClient(this.currentPage);
         }
-
-        this.paginateOnClient(this.currentPage);
+        
         this.sortApplied = true;
     }
     private initializePaging(): void {

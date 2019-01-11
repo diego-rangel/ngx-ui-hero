@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { NgxUiHeroDataGridModule } from '../data-grid';
+import { NgxUiHeroDataGridModule } from '../data-grid/data-grid.module';
 import { UiModule } from '../ui/ui.module';
 import { CurrencySymbolPipe } from './base/currency-symbol.pipe';
 import { BlockUiComponent } from './components/block-ui/block-ui.component';
