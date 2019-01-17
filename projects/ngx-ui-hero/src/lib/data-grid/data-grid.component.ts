@@ -160,9 +160,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 console.error('The [OnPaginate] callback must be provided when DataGrid Server mode is enabled.');
                 return;
             }
-
-            this.OnPaginate.emit(event);
         }
+
+        this.OnPaginate.emit(event);
     }
 
     GetInfo(): string {

@@ -16,11 +16,9 @@
     [disabled]="disabled" 
     [(ngModel)]="value"
     [id]="identifier"
-    [min]="min" 
-    [max]="max"
     [ngClass]="{
-      'is-valid': touched && !((invalid | async) || ((min && value < min) || (max && value > max))),
-      'is-invalid': touched && ((invalid | async) || ((min && value < min) || (max && value > max)))
+      'is-valid': touched && !(invalid | async),
+      'is-invalid': touched && (invalid | async)
     }"
   />
 </div>

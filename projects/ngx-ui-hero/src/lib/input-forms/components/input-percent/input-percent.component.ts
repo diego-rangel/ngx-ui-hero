@@ -10,15 +10,11 @@ let identifier = 0;
 @Component({
   selector: 'input-percent',
   templateUrl: './input-percent.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: InputPercentComponent,
-    multi: true
-  }]
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: InputPercentComponent, multi: true },
+  ]
 })
 export class InputPercentComponent extends ElementBase<number> implements OnInit {
-  @Input() max?: number;
-  @Input() min?: number;
   @Input() showInputGroup?: boolean = true;
   @Input() inputGroupText?: string = '%';
   @ViewChild(NgModel) model: NgModel;

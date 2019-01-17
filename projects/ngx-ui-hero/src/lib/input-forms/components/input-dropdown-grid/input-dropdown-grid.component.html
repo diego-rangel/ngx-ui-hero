@@ -37,7 +37,8 @@
           [columns]="columns" 
           [showActionsColumn]="true"
           [initialColumnToSort]="0"          
-          actionsColumnWidth="60px">
+          actionsColumnWidth="60px"
+          (OnPaginate)="OnPaginate()">
           <ng-template actions-column let-row="row" let-rowIndex="rowIndex">
             <button class="btn btn-success btn-sm" (click)="Select(row)"><i class="fa fa-check"></i></button>
           </ng-template>

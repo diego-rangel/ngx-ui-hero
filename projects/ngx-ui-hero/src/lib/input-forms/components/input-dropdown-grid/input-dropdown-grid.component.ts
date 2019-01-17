@@ -26,6 +26,7 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
   showDropdown: boolean;
   comboTouched: boolean;
   modelInitialized: boolean;
+  clickOutsideEnabled: boolean = true;
   search: string;
   selectedDisplayText: string;
   internalData: Array<any>;
@@ -93,23 +94,27 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
   }
 
   ToggleDropDown(value?: boolean): void {
-    if (value == false && !this.showDropdown || (this.disabled)) return;
+    if (this.clickOutsideEnabled) {
+      if (value == false && !this.showDropdown || (this.disabled)) return;
     
-    if (value == undefined) {
-      if (this.showDropdown) {
-        this.setComboTouched();
-      }
-
-      this.showDropdown = !this.showDropdown;      
-    } else {
-      if (!value && this.showDropdown) {
-        this.setComboTouched();
+      if (value == undefined) {
+        if (this.showDropdown) {
+          this.setComboTouched();
+        }
+  
+        this.showDropdown = !this.showDropdown;      
+      } else {
+        if (!value && this.showDropdown) {
+          this.setComboTouched();
+        }
+        
+        this.showDropdown = value;
       }
       
-      this.showDropdown = value;
+      this.clearSearch();
+    } else {
+      this.clickOutsideEnabled = true;
     }
-    
-    this.clearSearch();
   }
   Select(row: any): void {
     this.value = this.renderPropertyValue(this.valueProperty, row);
@@ -124,6 +129,9 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
     }
 
     this.filterData();
+  }
+  OnPaginate(): void {
+    this.clickOutsideEnabled = false;
   }
   ClearSelection(e: any): void {
     this.value = null;
@@ -160,7 +168,7 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
           value = columnData;
         }
 
-        if (value && value.toUpperCase().indexOf(this.search.toUpperCase()) >= 0) {
+        if (value && value.toString().toUpperCase().indexOf(this.search.toUpperCase()) >= 0) {
           return true;
         }
       }

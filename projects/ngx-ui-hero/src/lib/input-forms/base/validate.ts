@@ -1,12 +1,6 @@
 import { of } from 'rxjs';
 
-import {
-    AbstractControl,
-    AsyncValidatorFn,
-    Validator,
-    Validators,
-    ValidatorFn,
-} from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, Validator, ValidatorFn, Validators } from '@angular/forms';
 
 // tslint:disable-next-line:interface-over-type-literal
 export type ValidationResult = {[validator: string]: string | boolean};

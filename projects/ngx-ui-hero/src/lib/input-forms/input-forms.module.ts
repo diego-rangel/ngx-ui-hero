@@ -33,6 +33,8 @@ import { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.di
 import { DebounceDirective } from './directives/debounce.directive';
 import { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
+import { MaxValueValidator } from './validators/max-value-validator';
+import { MinValueValidator } from './validators/min-value-validator';
 
 export { DebounceDirective } from './directives/debounce.directive';
 export { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
@@ -57,6 +59,8 @@ export { InputMultiselectComponent } from './components/input-multiselect/input-
 export { InputSwitchComponent } from './components/input-switch/input-switch.component';
 export { BlockUiComponent } from './components/block-ui/block-ui.component';
 export { InputDropdownGridComponent } from './components/input-dropdown-grid/input-dropdown-grid.component';
+export { MaxValueValidator } from './validators/max-value-validator';
+export { MinValueValidator } from './validators/min-value-validator';
 
 @NgModule({
   imports: [
@@ -72,6 +76,8 @@ export { InputDropdownGridComponent } from './components/input-dropdown-grid/inp
   declarations: [
     AutoSelectOnFocusDirective,
     DebounceDirective,
+    MaxValueValidator,
+    MinValueValidator,
     CurrencySymbolPipe,
     InputTextComponent,
     InputValidationsComponent,
@@ -95,6 +101,8 @@ export { InputDropdownGridComponent } from './components/input-dropdown-grid/inp
   exports: [
     AutoSelectOnFocusDirective,
     DebounceDirective,
+    MaxValueValidator,
+    MinValueValidator,
     CurrencySymbolPipe,
     FileUploadModule,
     InputTextComponent,
