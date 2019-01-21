@@ -37,6 +37,7 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
   @Input() public columns: Array<DataGridColumnModel>; 
+  @Input() itemsPerPage?: number = 5;
   @Output() public onChange = new EventEmitter<any>();
 
   get data(): Array<any> {

@@ -37,6 +37,7 @@
           [columns]="columns" 
           [showActionsColumn]="true"
           [initialColumnToSort]="0"          
+          [itemsPerPage]="itemsPerPage"          
           actionsColumnWidth="60px"
           (OnPaginate)="OnPaginate()">
           <ng-template actions-column let-row="row" let-rowIndex="rowIndex">
