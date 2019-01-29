@@ -72,6 +72,7 @@ export interface MonthYearConfig {
 export interface DropdownConfig {
     placeholder?: string;
     searchPlaceholder?: string;
+    emptyResultsMessage?: string;
     displayTextProperty?: string;
     valueProperty?: string;
 }

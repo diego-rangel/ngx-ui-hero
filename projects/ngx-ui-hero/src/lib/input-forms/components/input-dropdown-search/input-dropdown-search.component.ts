@@ -24,18 +24,23 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
   private _data: Array<any>;
   showDropdown: boolean;
   comboTouched: boolean;
+  loading: boolean;
   modelInitialized: boolean;
   clickOutsideEnabled: boolean = true;
   search: string;
   selectedDisplayText: string;
   internalData: Array<any>;
+  searchCounter: number = 0;
   
   @ViewChild(NgModel) model: NgModel;
   @Input() public placeholder = 'Select...';
   @Input() public searchPlaceholder = 'Search...';
+  @Input() public emptyResultsMessage?: string = 'No results found at this moment.';
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
+  @Input() public lazyLoadedData: boolean;
   @Output() public onChange = new EventEmitter<any>();
+  @Output() public onSearch = new EventEmitter<string>();
 
   get data(): Array<any> {
     return this._data;
@@ -109,7 +114,12 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
         this.showDropdown = value;
       }
       
-      this.clearSearch();
+      if (this.lazyLoadedData) {
+        this.search = '';
+        this.internalData = [];
+      } else {
+        this.clearSearch(true);
+      }      
     } else {
       this.clickOutsideEnabled = true;
     }
@@ -121,6 +131,12 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     this.ToggleDropDown(false);
   }
   OnSearch(): void {
+    if (this.lazyLoadedData) {
+      this.onSearch.emit(this.search);
+      this.searchCounter += 1;
+      return;
+    }
+
     if (!this.search || this.search.length < 3) {
       this.clearSearchResults();
       return;
@@ -136,6 +152,9 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     this.onChange.emit(this.value);
 
     if (e) e.stopPropagation();
+  }
+  SetLoading(value: boolean): void {
+    this.loading = value;
   }
 
   private setSelectedItemByTheCurrentModelValue(): void {
@@ -157,12 +176,15 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
       return false;
     });
   }
-  private clearSearch(): void {
-    this.search = '';
+  private clearSearch(clearSearchInput?: boolean): void {
+    if (clearSearchInput) {
+      this.search = '';
+    }
+    
     this.clearSearchResults();
   }
   private clearSearchResults(): void {
-    this.internalData = Object.assign([], this.data);
+    this.internalData = Object.assign([], this.data);  
   }
   private setComboTouched(): void {
     this.comboTouched = true;

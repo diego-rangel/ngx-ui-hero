@@ -1,6 +1,6 @@
-import { AlertService, DataGridColumnModel } from 'ngx-ui-hero';
+import { AlertService, DataGridColumnModel, InputDropdownSearchComponent } from 'ngx-ui-hero';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 declare var $: any;
 
@@ -313,6 +313,8 @@ dropdownSearchData = [
     { value: 4, text: 'Option 4' },
     { value: 5, text: 'Option 5' }
   ];
+
+  @ViewChild('drop') drop: InputDropdownSearchComponent;
 
   constructor(
     private alert: AlertService

@@ -31,11 +31,17 @@
           debounce (callback)="OnSearch()" />
       </div>
 
-      <div class="">
+      <div class="loading" *ngIf="loading">
+        <spinner></spinner>
+      </div>
+
+      <div *ngIf="!loading && internalData?.length > 0">
         <div class="result-list">
           <div class="list-item" *ngFor="let item of internalData" (click)="Select(item)" [ngClass]="{'active': value == item[valueProperty]}">{{item[displayTextProperty]}}</div>
         </div>
       </div>
+
+      <span class="empty-results" *ngIf="!loading && (!lazyLoadedData || searchCounter > 0) && (!internalData || internalData.length == 0)">{{emptyResultsMessage}}</span>
     </div>
   </div>
 </div>

@@ -109,6 +109,7 @@ export const inputFormsConfig: InputFormsConfig = {
   dropDownGrid: {
     placeholder: 'Select...',
     searchPlaceholder: 'Search...',
+    emptyResultsMessage: 'No results found at this moment.',
     displayTextProperty: 'text',
     valueProperty: 'value'
   }

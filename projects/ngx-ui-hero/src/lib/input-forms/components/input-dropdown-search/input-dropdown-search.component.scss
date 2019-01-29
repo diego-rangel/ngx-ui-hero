@@ -88,6 +88,12 @@
             }
         }
 
+        .loading {
+            background-color: #696969;
+            padding: 40px 30px;
+            border-radius: 0 0 .25rem .25rem;
+        }
+
         .result-list {
             overflow-y: auto;
             overflow-x: hidden;
