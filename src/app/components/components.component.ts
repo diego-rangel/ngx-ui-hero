@@ -249,6 +249,26 @@ dropdownGridColumns: Array<DataGridColumnModel> = [
 ];
   `;
 
+  inputDropdownSearchTemplate = `
+<input-dropdown-search
+  label="My Dropdown Search"
+  displayTextProperty="name"
+  valueProperty="id"
+  [(ngModel)]="myDropdownSearchModel"
+  [disabled]="false"
+  [data]="dropdownSearchData"
+  required>
+</input-dropdown-search>
+  `;
+
+  inputDropdownSearchCode = `
+dropdownSearchData = [
+  { id: 1, name: 'Person 1', email: 'person1@domain.com' },
+  { id: 2, name: 'Person 2', email: 'person2@domain.com' },
+  { id: 3, name: 'Person 3', email: 'person3@domain.com' },
+];
+  `;
+
   myModel: string;
   myModelComMascara: string;
   myEmailModel: string;
@@ -263,6 +283,7 @@ dropdownGridColumns: Array<DataGridColumnModel> = [
   myNumberModel: any;
   myDateModel: Date;
   myDropdownGridModel: any;
+  myDropdownSearchModel: any;
   myDateMonthYearModel: Date;
 
   dropdownGridData = [

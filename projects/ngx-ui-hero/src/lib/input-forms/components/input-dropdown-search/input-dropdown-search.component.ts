@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Inject, Input, IterableDiffers, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
-import { DataGridColumnModel } from '../../../data-grid/models/data-grid-column.model';
 import { ElementBase } from '../../base/element-base';
 import { AsyncValidatorArray, ValidatorArray } from '../../base/validate';
 import { InputFormsConfig } from '../../input-forms-config';
@@ -10,16 +9,16 @@ import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 let identifier = 0;
 
 @Component({
-  selector: 'input-dropdown-grid',
-  templateUrl: './input-dropdown-grid.component.html',
-  styleUrls: ['./input-dropdown-grid.component.scss'],
+  selector: 'input-dropdown-search',
+  templateUrl: './input-dropdown-search.component.html',
+  styleUrls: ['./input-dropdown-search.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: InputDropdownGridComponent,
+    useExisting: InputDropdownSearchComponent,
     multi: true
   }]
 })
-export class InputDropdownGridComponent extends ElementBase<any> implements OnInit { 
+export class InputDropdownSearchComponent extends ElementBase<any> implements OnInit { 
   private _lastModelInitialized: any;
   private _differData: any;
   private _data: Array<any>;
@@ -36,8 +35,6 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
   @Input() public searchPlaceholder = 'Search...';
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
-  @Input() public columns: Array<DataGridColumnModel>; 
-  @Input() itemsPerPage?: number = 5;
   @Output() public onChange = new EventEmitter<any>();
 
   get data(): Array<any> {
@@ -49,7 +46,7 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
     this.Init();
   }
   
-  public identifier = `input-dropdown-grid-${identifier++}`;  
+  public identifier = `input-dropdown-search-${identifier++}`;  
  
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: ValidatorArray,
@@ -131,9 +128,6 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
 
     this.filterData();
   }
-  OnPaginate(): void {
-    this.clickOutsideEnabled = false;
-  }
   ClearSelection(e?: any): void {
     this.value = null;
     this.selectedDisplayText = null;
@@ -154,24 +148,10 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
   }
   private filterData(): void {
     this.internalData = this.data.filter(x => {
-      
-      for (let i = 0; i < this.columns.length; i++) {
-        let columnData = '';
-        let value = '';
+      let value = this.renderPropertyValue(this.displayTextProperty, x);
 
-        if (this.columns[i].data) {
-          columnData = this.renderPropertyValue(this.columns[i].data, x);
-        }
-
-        if (this.columns[i].render != undefined) {
-          value = this.columns[i].render(x, columnData, i);
-        } else {
-          value = columnData;
-        }
-
-        if (value && value.toString().toUpperCase().indexOf(this.search.toUpperCase()) >= 0) {
-          return true;
-        }
+      if (value && value.toString().toUpperCase().indexOf(this.search.toUpperCase()) >= 0) {
+        return true;
       }
 
       return false;

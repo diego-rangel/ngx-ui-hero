@@ -5,6 +5,11 @@
     a i {
         width: 25px;
     }
+    .list-group-item {
+        border: 0 !important;
+        border-radius: 0 !important;
+        padding: 4px 10px;
+    }
 }
 
 .long-content {

@@ -8,11 +8,12 @@
   <div class="main container">
     <div class="row">
       <div class="col-xl-3 col-lg-4">
-        <div id="components-menu" class="list-group sticky-top" style="top: 20px;">
+        <div id="components-menu" class="sticky-top" style="top: 20px;">
           <a anchorLink="card-input-text" href="#card-input-text" class="list-group-item list-group-item-action"><i class="fa fa-keyboard-o"></i> Text</a>
           <a anchorLink="card-input-select" href="#card-input-select" class="list-group-item list-group-item-action"><i class="fa fa-chevron-down"></i> Select</a>
           <a anchorLink="card-input-multiselect" href="#card-input-multiselect" class="list-group-item list-group-item-action"><i class="fa fa-list-ul"></i> MultiSelect <span class="badge badge-danger">new</span></a>
           <a anchorLink="card-input-dropdown-grid" href="#card-input-dropdown-grid" class="list-group-item list-group-item-action"><i class="fa fa-table"></i> Dropdown Grid <span class="badge badge-danger">new</span></a>
+          <a anchorLink="card-input-dropdown-search" href="#card-input-dropdown-search" class="list-group-item list-group-item-action"><i class="fa fa-search"></i> Dropdown Search <span class="badge badge-danger">new</span></a>
           <a anchorLink="card-input-email" href="#card-input-email" class="list-group-item list-group-item-action"><i class="fa fa-envelope-o"></i> E-mail</a>
           <a anchorLink="card-input-textarea" href="#card-input-textarea" class="list-group-item list-group-item-action"><i class="fa fa-text-height"></i> Textarea</a>
           <a anchorLink="card-input-checkbox" href="#card-input-checkbox" class="list-group-item list-group-item-action"><i class="fa fa-check-square-o"></i> Checkbox</a>
@@ -305,6 +306,104 @@
                     </td>
                     <td>number</td>
                     <td>Maximum number of items per page into the Datagrid. If value is less than 1, it will display all items in a single page.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Outputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>onChange</b></td>
+                    <td>Emitted every time the <b>selected item</b> is changed with the new value as a parameter.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-input-dropdown-search" class="card mt-4">
+          <div class="card-header">Input Dropdown Search</div>
+          <div class="card-body">
+            <div class="form-group mb-4">
+              <input-dropdown-search
+                label="My Dropdown Search"
+                displayTextProperty="name"
+                valueProperty="id"
+                [(ngModel)]="myDropdownSearchModel"
+                [disabled]="false"
+                [data]="dropdownGridData"
+                required>
+              </input-dropdown-search>
+            </div>
+
+            <tabset class="custom-tab">
+              <tab heading="Template">
+                <div highlight="all" [language]="['Html']">
+                  <pre><code [textContent]="inputDropdownSearchTemplate"></code></pre>
+                </div>
+              </tab>
+              <tab heading="Component">
+                <div highlight="all" [language]="['Typescript']">
+                  <pre><code [textContent]="inputDropdownSearchCode"></code></pre>
+                </div>
+              </tab>
+            </tabset>
+
+            <h2 class="mt-4">Inputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>placeholder</b>
+                      <br/>Default: <small>Select...</small>
+                    </td>
+                    <td>string</td>
+                    <td>Input placeholder.</td>
+                  </tr>
+                  <tr>
+                    <td><b>searchPlaceholder</b><br/>
+                      Default: <small>Search...</small>
+                    </td>
+                    <td>string</td>
+                    <td>The Search input placeholder.</td>
+                  </tr>
+                  <tr>
+                    <td><b>displayTextProperty</b>
+                      <br/><small class="text-danger">required</small>
+                    </td>
+                    <td>string</td>
+                    <td>The property name to show for displaying the selected item.</td>
+                  </tr>
+                  <tr>
+                    <td><b>valueProperty</b>
+                      <br/><small class="text-danger">required</small>
+                    </td>
+                    <td>string</td>
+                    <td>The property name to handle as the ngModel. It's values must be unique.</td>
+                  </tr>
+                  <tr>
+                    <td><b>data</b>
+                      <br/><small class="text-danger">required</small>
+                    </td>
+                    <td>any[]</td>
+                    <td>The data to show into the Datagrid.</td>
                   </tr>
                 </tbody>
               </table>

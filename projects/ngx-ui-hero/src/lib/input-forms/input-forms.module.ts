@@ -16,6 +16,7 @@ import { InputCheckboxComponent } from './components/input-checkbox/input-checkb
 import { InputCurrencyComponent } from './components/input-currency/input-currency.component';
 import { InputDateComponent } from './components/input-date/input-date.component';
 import { InputDropdownGridComponent } from './components/input-dropdown-grid/input-dropdown-grid.component';
+import { InputDropdownSearchComponent } from './components/input-dropdown-search/input-dropdown-search.component';
 import { InputEmailComponent } from './components/input-email/input-email.component';
 import { InputMonthYearComponent } from './components/input-month-year/input-month-year.component';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
@@ -61,6 +62,7 @@ export { BlockUiComponent } from './components/block-ui/block-ui.component';
 export { InputDropdownGridComponent } from './components/input-dropdown-grid/input-dropdown-grid.component';
 export { MaxValueValidator } from './validators/max-value-validator';
 export { MinValueValidator } from './validators/min-value-validator';
+export { InputDropdownSearchComponent } from './components/input-dropdown-search/input-dropdown-search.component';
 
 @NgModule({
   imports: [
@@ -97,6 +99,7 @@ export { MinValueValidator } from './validators/min-value-validator';
     InputSwitchComponent,
     InputDropdownGridComponent,
     BlockUiComponent,
+    InputDropdownSearchComponent,
   ],
   exports: [
     AutoSelectOnFocusDirective,
@@ -122,6 +125,7 @@ export { MinValueValidator } from './validators/min-value-validator';
     InputMonthYearComponent,
     InputSwitchComponent,
     InputDropdownGridComponent,
+    InputDropdownSearchComponent,
     BlockUiComponent
   ],
 })

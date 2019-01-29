@@ -1,4 +1,4 @@
-<div [id]="identifier" class="ui-dropdown-grid" (clickOutside)="ToggleDropDown(false)">
+<div [id]="identifier" class="ui-dropdown-search" (clickOutside)="ToggleDropDown(false)">
   <label *ngIf="label">
     {{label}}
     <span class="required-symbol" *ngIf="isRequired"> *</span>
@@ -31,19 +31,10 @@
           debounce (callback)="OnSearch()" />
       </div>
 
-      <div class="p-2">
-        <datagrid 
-          [data]="internalData" 
-          [columns]="columns" 
-          [showActionsColumn]="true"
-          [initialColumnToSort]="0"          
-          [itemsPerPage]="itemsPerPage"          
-          actionsColumnWidth="60px"
-          (OnPaginate)="OnPaginate()">
-          <ng-template actions-column let-row="row" let-rowIndex="rowIndex">
-            <button class="btn btn-outline-primary btn-sm" (click)="Select(row)"><i class="fa fa-external-link"></i></button>
-          </ng-template>
-        </datagrid>
+      <div class="">
+        <div class="result-list">
+          <div class="list-item" *ngFor="let item of internalData" (click)="Select(item)" [ngClass]="{'active': value == item[valueProperty]}">{{item[displayTextProperty]}}</div>
+        </div>
       </div>
     </div>
   </div>
