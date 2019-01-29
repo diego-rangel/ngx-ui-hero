@@ -88,6 +88,7 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
       this.setSelectedItemByTheCurrentModelValue();
       this._lastModelInitialized = this.value;
     } else {
+      this.selectedDisplayText = '';
       this._lastModelInitialized = undefined;
     }
     

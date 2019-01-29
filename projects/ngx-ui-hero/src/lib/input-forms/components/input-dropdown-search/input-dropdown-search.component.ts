@@ -90,6 +90,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
       this.setSelectedItemByTheCurrentModelValue();
       this._lastModelInitialized = this.value;
     } else {
+      this.selectedDisplayText = '';
       this._lastModelInitialized = undefined;
     }
     
