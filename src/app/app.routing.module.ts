@@ -8,6 +8,7 @@ import { GetStartedComponent } from './get-started/get-started.component';
 import { PrintingComponent } from './printing/printing.component';
 import { ServicesComponent } from './services/services.component';
 import { TreeviewComponent } from './treeview/treeview.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'get-started', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'buttons', component: ButtonsComponent },
   { path: 'treeview', component: TreeviewComponent },
   { path: 'printing', component: PrintingComponent },
+  { path: 'tutorial', component: TutorialComponent },
 ];
 
 @NgModule({

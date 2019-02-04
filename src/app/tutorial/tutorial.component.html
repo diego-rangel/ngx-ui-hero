@@ -1,0 +1,134 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>Tutorials</h1>
+  </div>
+</div>
+
+<section>
+  <div class="main container">
+    <div class="mb-5">
+      <h2>Usage</h2>
+
+      <p>1) Inject the <b>TutorialService</b> in your appComponent or wherever you want.</p>
+
+      <div highlight="all" [language]="['Typescript']">
+        <pre><code [textContent]="constructorCode"></code></pre>
+      </div>
+
+      <p>2) Decorate as many elements you want with the <b>tutorial</b> directive.</p>
+
+      <div highlight="all" [language]="['Html']">
+        <pre><code [textContent]="demoHtmlCode"></code></pre>
+      </div>
+
+      <p>3) Tell the TutorialService to <b>PLAY</b>!</p>
+      <div highlight="all" [language]="['Typescript']">
+        <pre><code [textContent]="tutorialServicePlayCode"></code></pre>
+      </div>
+    </div>
+      
+    <hr/>
+
+    <div class="my-5">
+      <div class="d-flex align-items-center bg-light p-3 mb-3">
+        <h2 class="my-0 mr-3">Demo</h2>
+        <button class="btn btn-primary btn-sm" (click)="play()"><i class="fa fa-play"></i> Play</button>
+      </div>
+  
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-secondary" [tutorial]="{ title: 'Button 1', text: 'Hello World 1!' }">My helper 1</button>
+        <button class="btn btn-info" [tutorial]="{ title: 'Button 2', text: 'Hello World 2!' }">My helper 2</button>
+        <button class="btn btn-danger" [tutorial]="{ title: 'Button 3', text: 'Hello World 3!' }">My helper 3</button>
+        <button class="btn btn-warning" [tutorial]="{ title: 'Button 4', text: 'Hello World 4!' }">My helper 4</button>
+      </div>
+    </div>
+      
+    <hr/>
+    
+    <div class="my-5">
+      <h3><i class="fa fa-book mr-2"></i><mark [tutorial]="{ title: 'TutorialService', text: 'The service used to programmatically control any elements which has the TutorialDirective.' }">TutorialService</mark> Methods</h3>
+
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>addAction</b></td>
+            <td>Used for programmatically add a tutorial into any element.</td>
+          </tr>
+          <tr>
+            <td><b>playAll</b></td>
+            <td>It plays <b>all</b> tutorials that are being rendered with the <b>tutorialDirective</b> or <b>added manually</b> at that time.</td>
+          </tr>
+          <tr>
+            <td><b>playByKey</b></td>
+            <td>It's similar to the <b>playAll</b>, but it'll play <b>only</b> the tutorials which has the provided <b>key</b>.</td>
+          </tr>
+          <tr>
+            <td><b>moveNext</b></td>
+            <td>Programmatically moves to the next Tutorial.</td>
+          </tr>
+          <tr>
+            <td><b>movePrev</b></td>
+            <td>Programmatically moves to the previous Tutorial.</td>
+          </tr>
+          <tr>
+            <td><b>exit</b></td>
+            <td>Programmatically exits the Tutorial.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      
+    <hr/>
+    
+    <div class="my-5">
+      <h3><i class="fa fa-book mr-2"></i><mark [tutorial]="{ title: 'TutorialDirective', text: 'The directive used to defines an element which should display a tutorial.' }">TutorialDirective</mark> Options</h3>
+
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>key</b><br/>
+              <small>opcional</small>
+            </td>
+            <td>string</td>
+            <td>An identification used when you want to show a certain group of tutorals by key.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>title</b><br/>
+              <small>opcional</small>
+            </td>
+            <td>string</td>
+            <td>The tutorial's block title.</td>
+          </tr>
+          <tr>
+            <td><b>text</b></td>
+            <td>string</td>
+            <td>The tutorial's block text.</td>
+          </tr>
+          <tr>
+            <td>
+              <b>order</b><br/>
+              <small>opcional</small>
+            </td>
+            <td>number</td>
+            <td>Defines the ascendent order where each tutorial should be played.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

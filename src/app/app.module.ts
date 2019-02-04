@@ -20,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
 import { PrintingComponent } from './printing/printing.component';
 import { ServicesComponent } from './services/services.component';
 import { TreeviewComponent } from './treeview/treeview.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -112,7 +113,8 @@ export const treeViewConfig: TreeViewConfig = {
     AnchorLinkDirective,
     ButtonsComponent,
     TreeviewComponent,
-    PrintingComponent
+    PrintingComponent,
+    TutorialComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
