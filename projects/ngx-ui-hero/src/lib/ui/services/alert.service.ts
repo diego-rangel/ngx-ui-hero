@@ -10,7 +10,7 @@ export class AlertService {
     private show(title: string, text: string, type: SweetAlertType, confirmButtonText?: string, callback?: Function): any {
         Swal({
             title: title,
-            text: text,
+            html: text,
             type: type,
             confirmButtonText: confirmButtonText || 'Ok'
         }).then((result) => {
