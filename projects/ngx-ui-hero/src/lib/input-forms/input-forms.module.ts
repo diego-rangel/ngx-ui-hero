@@ -63,6 +63,7 @@ export { InputDropdownGridComponent } from './components/input-dropdown-grid/inp
 export { MaxValueValidator } from './validators/max-value-validator';
 export { MinValueValidator } from './validators/min-value-validator';
 export { InputDropdownSearchComponent } from './components/input-dropdown-search/input-dropdown-search.component';
+export { BlockUi } from './classes/block-ui';
 
 @NgModule({
   imports: [
