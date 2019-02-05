@@ -77,7 +77,11 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   }
 
   Init(): void {
-    if (!this.value || !this.options || this.value.length == 0 || this.options.length == 0) {
+    if (!this.value || !this.options || this.value.length == 0 || this.options.length == 0) {      
+      if ((!this.value || this.value.length == 0) && this.options) {
+        this.ToggleAllItemsSelection(false);
+      }
+
       return;
     }
 
