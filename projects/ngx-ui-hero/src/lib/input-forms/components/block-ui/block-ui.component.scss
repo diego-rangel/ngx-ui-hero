@@ -11,6 +11,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 30;
 
         .message {
             color: #FFF;
@@ -22,6 +23,7 @@
         .spinner {
             width: 70px;
             margin: 0 auto;
+            text-align: center;
         }
         
         .spinner > div {

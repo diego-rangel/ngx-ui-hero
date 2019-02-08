@@ -3,7 +3,10 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { HighlightModule } from 'ngx-highlightjs';
-import { ApiSettings, DataGridConfig, InputFormsConfig, NgxUiHeroApiModule, NgxUiHeroDataGridModule, NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, TreeViewConfig } from 'ngx-ui-hero';
+import {
+    ApiSettings, DataGridConfig, InputFormsConfig, NgxUiHeroApiModule, NgxUiHeroDataGridModule,
+    NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, TreeViewConfig
+} from 'ngx-ui-hero';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +14,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
-import { ButtonsComponent } from './buttons/buttons.component';
 import { ComponentsComponent } from './components/components.component';
 import { DatagridComponent } from './datagrid/datagrid.component';
 import { AnchorLinkDirective } from './directives/anchor.directive';
@@ -21,6 +23,8 @@ import { PrintingComponent } from './printing/printing.component';
 import { ServicesComponent } from './services/services.component';
 import { TreeviewComponent } from './treeview/treeview.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
+import { ModalExampleComponent } from './ui/modal-example/modal-example.component';
+import { UiComponent } from './ui/ui.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -111,10 +115,14 @@ export const treeViewConfig: TreeViewConfig = {
     ServicesComponent,
     DatagridComponent,
     AnchorLinkDirective,
-    ButtonsComponent,
+    UiComponent,
     TreeviewComponent,
     PrintingComponent,
-    TutorialComponent
+    TutorialComponent,
+    ModalExampleComponent
+  ],
+  entryComponents: [
+    ModalExampleComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

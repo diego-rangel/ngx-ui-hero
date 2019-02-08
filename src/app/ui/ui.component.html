@@ -1,0 +1,91 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>UI components</h1>
+  </div>
+</div>
+
+<section>
+  <div class="main container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4">
+        <div id="components-menu" class="list-group sticky-top" style="top: 20px;">
+          <a anchorLink="card-radial-button" href="#card-radial-button" class="list-group-item list-group-item-action"><i class="fa fa-dot-circle-o"></i> Radial Button</a>
+          <a anchorLink="card-blockUi" href="#card-blockUi" class="list-group-item list-group-item-action"><i class="fa fa-spinner"></i> Block-UI <span class="badge badge-danger">new</span></a>
+          <a anchorLink="card-modal" href="#card-modal" class="list-group-item list-group-item-action"><i class="fa fa-window-restore"></i> Modal <span class="badge badge-danger">new</span></a>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8">
+        <div id="card-radial-button" class="card">
+          <div class="card-header">Radial Button</div>
+          <div class="card-body">
+            <ui-radial-button class="mx-1" iconClass="fa fa-times" backgroundColorClass="btn-outline-secondary" label="Cancel"></ui-radial-button>
+            <ui-radial-button class="mx-1" iconClass="fa fa-plus" backgroundColorClass="btn-primary" label="Add"></ui-radial-button>
+            <ui-radial-button class="mx-1" iconClass="fa fa-save" backgroundColorClass="btn-success" label="Save"></ui-radial-button>
+            <ui-radial-button class="mx-1" iconClass="fa fa-trash" backgroundColorClass="btn-danger" label="Delete"></ui-radial-button>
+
+            <div class="mt-4" highlight="all" [language]="['Html']">
+              <pre><code [textContent]="buttonsCode"></code></pre>
+            </div>
+          </div>
+        </div>
+        <div id="card-blockUi" class="card mt-4">
+          <div class="card-header">Block-UI</div>
+          <div class="card-body">            
+            <div class="alert alert-primary" role="alert" [block-ui]="blockUi">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere minus ea quibusdam ipsum, culpa voluptatem blanditiis veniam maxime, suscipit in velit ipsa voluptatibus itaque est, quasi vel saepe quod. Maxime?
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere minus ea quibusdam ipsum, culpa voluptatem blanditiis veniam maxime, suscipit in velit ipsa voluptatibus itaque est, quasi vel saepe quod. Maxime?
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-xl-6">
+                <input type="text" class="form-control" placeholder="Enter some text to show on loading..." [(ngModel)]="blockUi.message" />
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-primary" (click)="blockUi.start(blockUi.message)" *ngIf="!blockUi.loading"><i class="fa fa-play"></i> Start</button>
+                <button type="button" class="btn btn-primary" (click)="blockUi.stop()" *ngIf="blockUi.loading"><i class="fa fa-stop"></i> Stop</button>
+              </div>
+            </div>
+
+            <tabset class="custom-tab">
+              <tab heading="Template">
+                <div highlight="all" [language]="['Html']">
+                  <pre><code [textContent]="blockUiTemplate"></code></pre>
+                </div>
+              </tab>
+              <tab heading="Component">
+                <div highlight="all" [language]="['Typescript']">
+                  <pre><code [textContent]="blockUiCode"></code></pre>
+                </div>
+              </tab>
+            </tabset>
+          </div>
+        </div>
+        <div id="card-modal" class="card mt-4">
+          <div class="card-header">Modal</div>
+          <div class="card-body">
+            <p>It's just a component which simplifies the basic structure of any bootstrap modal. <b>Don't forget</b> to add your <b>MyModalExampleComponent</b> to the Module's entryComponents metadata.</p>
+
+            <div class="row mb-4">
+              <div class="col">
+                <button type="button" class="btn btn-primary" (click)="showModalExample()"><i class="fa fa-window-restore"></i> Show my example Modal</button>
+              </div>
+            </div>
+
+            <tabset class="custom-tab">
+              <tab heading="Template">
+                <div highlight="all" [language]="['Html']">
+                  <pre><code [textContent]="modalTemplate"></code></pre>
+                </div>
+              </tab>
+              <tab heading="Component">
+                <div highlight="all" [language]="['Typescript']">
+                  <pre><code [textContent]="modalCode"></code></pre>
+                </div>
+              </tab>
+            </tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

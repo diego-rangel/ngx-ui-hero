@@ -8,6 +8,6 @@
     <ng-content select=".body"></ng-content>
 </div>
 <div class="modal-footer" *ngIf="!hideActions">
-  <button type="button" class="btn btn-outline-secondary" (click)="Fechar()"><i class="fa fa-times"></i> Cancelar</button>
+  <button type="button" class="btn btn-outline-secondary" (click)="Fechar()"><i class="fa fa-times"></i> {{cancelButtonLabel}}</button>
   <ng-content select=".actions"></ng-content>
 </div>
