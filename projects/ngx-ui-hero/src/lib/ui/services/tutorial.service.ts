@@ -427,26 +427,26 @@ export class TutorialService {
         return value + 'px';
     }
     private scrollToCurrentElementBlock() { 
-        let block = document.getElementById(this.BLOCK_ID);
-        let el = this._runningTasks[this._currentTaskIndex].element;
-        let offsetTopFromBody: number = $(el.nativeElement).offset().top;
-        let elementY: number = offsetTopFromBody - 150;
+        setTimeout(() => {
+            let block = document.getElementById(this.BLOCK_ID);
+            let el = this._runningTasks[this._currentTaskIndex].element;
+            let offsetTopFromBody: number = $(el.nativeElement).offset().top;
+            let elementY: number = offsetTopFromBody - 150;
 
-        $('html').animate({
-            scrollTop: elementY,
-            duration: 0
-        }, () => {
-            this.setTutorialBlockPosition(block, el);
-            this.fadeInTutorialBlockElement(block);
+            $('html').animate({
+                scrollTop: elementY,
+                duration: 0
+            }, () => {
+                this.setTutorialBlockPosition(block, el);
+                this.fadeInTutorialBlockElement(block);
+            });
         });
     }
     private hideTutorialBlockElement(block: any): void {
         this._render.setStyle(block, 'opacity', '0');
     }
     private fadeInTutorialBlockElement(block: any): void {
-        setTimeout(()=>{
-            this._render.setStyle(block, 'opacity', '1');
-        });
+        this._render.setStyle(block, 'opacity', '1');
     }
     private isCurrentBlockOnBottomOfScreen(): boolean {
         let el = this._runningTasks[this._currentTaskIndex].element;
