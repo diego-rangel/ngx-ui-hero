@@ -429,8 +429,8 @@ export class TutorialService {
     private scrollToCurrentElementBlock() { 
         let block = document.getElementById(this.BLOCK_ID);
         let el = this._runningTasks[this._currentTaskIndex].element;
-        let offsetTopFromBody: number = el.nativeElement.offsetTop;
-        let elementY: number = offsetTopFromBody - 150;        
+        let offsetTopFromBody: number = $(el.nativeElement).offset().top;
+        let elementY: number = offsetTopFromBody - 150;
 
         $('html').animate({
             scrollTop: elementY,
@@ -452,13 +452,13 @@ export class TutorialService {
         let el = this._runningTasks[this._currentTaskIndex].element;
         let elementRect = el.nativeElement.getBoundingClientRect();
         let top: number = elementRect.top;
-        let offsetTopFromBody: number = el.nativeElement.offsetTop;
+        let offsetTopFromBody: number = $(el.nativeElement).offset().top;
 
         return top > document.body.scrollHeight - offsetTopFromBody;
     }
     private isCurrentBlockOnRightOfScreen(): boolean {
         let el = this._runningTasks[this._currentTaskIndex].element;
-        let offsetLeftFromBody: number = el.nativeElement.offsetLeft;
+        let offsetLeftFromBody: number = $(el.nativeElement).offset().left;
 
         return offsetLeftFromBody >= document.body.clientWidth / 2;
     }
