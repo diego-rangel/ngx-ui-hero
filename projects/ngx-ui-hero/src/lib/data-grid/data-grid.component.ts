@@ -477,7 +477,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                     this.columns[columnIndex].width = `auto`;
 
                     if (widths[columnIndex] >= this._maxWidth) {
-                        this.columns[columnIndex].dataClasses = 'td-break-word';
+                        if (!this.columns[columnIndex].dataClasses) {
+                            this.columns[columnIndex].dataClasses = '';
+                        }
+
+                        this.columns[columnIndex].dataClasses += ' td-break-word';
                     }
                 } else {
                     this.columns[columnIndex].width = `${widths[columnIndex]}px`;
@@ -486,7 +490,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         } else {
             for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
                 if (widths[columnIndex] >= this._maxWidth) {
-                    this.columns[columnIndex].dataClasses = 'td-break-word';
+                    if (!this.columns[columnIndex].dataClasses) {
+                        this.columns[columnIndex].dataClasses = '';
+                    }
+                    
+                    this.columns[columnIndex].dataClasses += ' td-break-word';
                 }
 
                 this.columns[columnIndex].width = `${widths[columnIndex]}px`;             
