@@ -15,7 +15,7 @@
     }"
     (click)="ToggleDropDown()">
 
-    <span class="mr-auto">{{selectedDisplayText || placeholder}}</span>
+    <span class="mr-auto text-truncate">{{selectedDisplayText || placeholder}}</span>
     <i class="fa fa-times btn-clear-selection" *ngIf="value && !disabled" (click)="ClearSelection($event)"></i>
     <i class="fa" [ngClass]="{'fa-caret-down': !showDropdown, 'fa-caret-up': showDropdown}"></i>
   </div>
