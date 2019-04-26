@@ -8,6 +8,7 @@
     <input type="hidden" [(ngModel)]="value" />
     <div class="combobox d-flex align-items-center justify-content-between" 
         [ngClass]="{
+            'has-validations': showValidations,
             'open': showOptions, 
             'disabled': disabled,
             'is-valid': !showOptions && comboTouched && (!isRequired || value?.length > 0),

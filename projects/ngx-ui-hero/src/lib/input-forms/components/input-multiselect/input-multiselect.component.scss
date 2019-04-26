@@ -78,16 +78,16 @@
         background-color: #E9ECEF;
         border-color: #CED4DA;
     }
-    > .combobox.is-invalid {
+    > .combobox.has-validations.is-invalid {
         border-color: #dc3545;
     }
-    > .combobox.is-invalid.open {
+    > .combobox.has-validations.is-invalid.open {
         box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
     }
-    > .combobox.is-valid {
+    > .combobox.has-validations.is-valid {
         border-color: #28a745;
     }
-    > .combobox.is-valid.open {
+    > .combobox.has-validations.is-valid.open {
         box-shadow: 0 0 0 0.2rem rgba(40,167,69,.25);
     }
 

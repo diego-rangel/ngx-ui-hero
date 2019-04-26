@@ -8,6 +8,7 @@
   <input type="hidden" [(ngModel)]="value" />
   <div class="combobox d-flex align-items-center" 
     [ngClass]="{
+      'has-validations': showValidations,
       'open': showDropdown, 
       'disabled': disabled,
       'is-valid': !showDropdown && comboTouched && (!isRequired || value),
@@ -48,5 +49,10 @@
     </div>
   </div>
 </div>
+
+<input-validations
+  *ngIf="showValidations && comboTouched && (invalid | async)"
+  [messages]="failures | async">
+</input-validations>
 
 <small class="text-muted" *ngIf="description">{{description}}</small>

@@ -9,8 +9,8 @@
   [id]="identifier" 
   [disabled]="disabled" 
   [ngClass]="{
-    'is-valid': touched && !(invalid | async),
-    'is-invalid': touched && (invalid | async)
+    'is-valid': showValidations && touched && !(invalid | async),
+    'is-invalid': showValidations && touched && (invalid | async)
   }">
   <option value="" *ngIf="defaultOption">{{defaultOption}}</option>
   <option [value]="getOptionValue(option)" *ngFor="let option of options">{{getOptionDisplayText(option)}}</option>

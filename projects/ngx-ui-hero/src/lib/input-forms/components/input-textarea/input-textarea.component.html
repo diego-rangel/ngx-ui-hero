@@ -12,8 +12,8 @@
   [placeholder]="placeholder"
   [(ngModel)]="value"
   [ngClass]="{
-    'is-valid': touched && !(invalid | async),
-    'is-invalid': touched && (invalid | async)
+    'is-valid': showValidations && touched && !(invalid | async),
+    'is-invalid': showValidations && touched && (invalid | async)
   }"
   [id]="identifier">
 </textarea>

@@ -8,6 +8,7 @@
   <input type="date" class="d-none" [(ngModel)]="value" />
   <div class="combobox d-flex align-items-center justify-content-between" 
       [ngClass]="{
+        'has-validations': showValidations,
         'open': showDropdown, 
         'disabled': disabled,
         'is-valid': !showDropdown && comboTouched && !(invalid | async),
@@ -39,11 +40,11 @@
       </ul>
     </div>
   </div>
-
-  <input-validations
-    *ngIf="showValidations && comboTouched && (invalid | async)"
-    [messages]="failures | async">
-  </input-validations>
 </div>
+
+<input-validations
+  *ngIf="showValidations && comboTouched && (invalid | async)"
+  [messages]="failures | async">
+</input-validations>
 
 <small class="text-muted" *ngIf="description">{{description}}</small>

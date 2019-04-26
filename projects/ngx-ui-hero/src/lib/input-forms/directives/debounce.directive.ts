@@ -1,27 +1,37 @@
-import { Directive, Input, Output, Renderer2, ElementRef, OnInit, EventEmitter } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 @Directive({
-  // tslint:disable-next-line:directive-selector
   selector: '[debounce]'
 })
 export class DebounceDirective implements OnInit {
-
   @Input() delay = 500;
   @Output() callback = new EventEmitter();
+  @Output() arrowsCallback = new EventEmitter<any>();
 
   constructor(
-    private elementRef: ElementRef,
-    private renderer: Renderer2
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit() {
-    const event = fromEvent(this.elementRef.nativeElement, 'keyup')
+    const event1 = fromEvent(this.elementRef.nativeElement, 'keyup')
       .pipe(
-        debounceTime(this.delay)
+        debounceTime(this.delay),
       )
-      .subscribe((input: any) => this.callback.emit());
+      .subscribe((input: any) => {
+        if (input.keyCode < 37 || input.keyCode > 40) {
+          this.callback.emit(input);
+        }        
+      });
+
+    const event2 = fromEvent(this.elementRef.nativeElement, 'keyup')
+      .subscribe((input: any) => {
+        if (input.keyCode == 13 || (input.keyCode >= 37 && input.keyCode <= 40)) {
+          this.arrowsCallback.emit(input.keyCode);
+        } 
+      });
   }
 
 }

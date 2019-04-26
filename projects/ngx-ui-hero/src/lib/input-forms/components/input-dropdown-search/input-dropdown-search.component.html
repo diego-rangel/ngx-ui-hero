@@ -8,6 +8,7 @@
   <input type="hidden" [(ngModel)]="value" />
   <div class="combobox d-flex align-items-center" 
     [ngClass]="{
+      'has-validations': showValidations,
       'open': showDropdown, 
       'disabled': disabled,
       'is-valid': !showDropdown && comboTouched && (!isRequired || value),
@@ -28,7 +29,8 @@
           name="{{identifier}}-search" 
           [(ngModel)]="search" 
           placeholder="{{searchPlaceholder}}"
-          debounce (callback)="OnSearch()" />
+          debounce 
+          (callback)="OnSearch()" (arrowsCallback)="OnArrowsPressed($event)" />
       </div>
 
       <div class="loading" *ngIf="loading">
@@ -37,7 +39,15 @@
 
       <div *ngIf="!loading && internalData?.length > 0">
         <div class="result-list">
-          <div class="list-item" *ngFor="let item of internalData" (click)="Select(item)" [ngClass]="{'active': value == item[valueProperty]}">{{item[displayTextProperty]}}</div>
+          <div class="list-item" 
+            *ngFor="let item of internalData; let i = index;" 
+            (click)="Select(item)" 
+            [ngClass]="{
+              'active': value == item[valueProperty],
+              'focused': selectedItemIndex == i
+            }">
+            {{item[displayTextProperty]}}
+          </div>
         </div>
       </div>
 
@@ -45,5 +55,10 @@
     </div>
   </div>
 </div>
+
+<input-validations
+  *ngIf="showValidations && comboTouched && (invalid | async)"
+  [messages]="failures | async">
+</input-validations>
 
 <small class="text-muted" *ngIf="description">{{description}}</small>

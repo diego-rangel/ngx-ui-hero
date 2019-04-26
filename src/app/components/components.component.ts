@@ -223,7 +223,8 @@ export class ComponentsComponent implements OnInit {
   [(ngModel)]="myDropdownGridModel"
   [disabled]="false"
   [columns]="dropdownGridColumns"
-  [data]="dropdownGridData"
+  [data]="dropdownGridData"        
+  [showValidations]="true"
   required>
 </input-dropdown-grid>
   `;
@@ -256,7 +257,8 @@ dropdownGridColumns: Array<DataGridColumnModel> = [
   valueProperty="id"
   [(ngModel)]="myDropdownSearchModel"
   [disabled]="false"
-  [data]="dropdownSearchData"
+  [data]="dropdownSearchData"        
+  [showValidations]="true"
   required>
 </input-dropdown-search>
   `;

@@ -228,7 +228,8 @@
                 [(ngModel)]="myDropdownGridModel"
                 [disabled]="false"
                 [columns]="dropdownGridColumns"
-                [data]="dropdownGridData"
+                [data]="dropdownGridData"        
+                [showValidations]="true"
                 required>
               </input-dropdown-grid>
             </div>
@@ -340,7 +341,8 @@
                 displayTextProperty="name"
                 valueProperty="id"
                 [(ngModel)]="myDropdownSearchModel"
-                [data]="dropdownGridData"
+                [data]="dropdownGridData"        
+                [showValidations]="true"
                 required>
               </input-dropdown-search>
             </div>

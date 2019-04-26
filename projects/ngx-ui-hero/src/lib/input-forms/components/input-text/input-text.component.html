@@ -13,8 +13,8 @@
   [(ngModel)]="value"
   [id]="identifier"
   [ngClass]="{
-    'is-valid': touched && !(invalid | async),
-    'is-invalid': touched && (invalid | async)
+    'is-valid': showValidations && touched && !(invalid | async),
+    'is-invalid': showValidations && touched && (invalid | async)
   }" />
 
 <small class="text-muted" *ngIf="description">{{description}}</small>

@@ -31,6 +31,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
   selectedDisplayText: string;
   internalData: Array<any>;
   searchCounter: number = 0;
+  selectedItemIndex: number = -1;
   
   @ViewChild(NgModel) model: NgModel;
   @Input() public placeholder = 'Select...';
@@ -99,7 +100,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
 
   ToggleDropDown(value?: boolean): void {
     if (this.clickOutsideEnabled) {
-      if (value == false && !this.showDropdown || (this.disabled)) return;
+      if (value == false && !this.showDropdown || this.disabled) return;
     
       if (value == undefined) {
         if (this.showDropdown) {
@@ -157,7 +158,32 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
   SetLoading(value: boolean): void {
     this.loading = value;
   }
+  OnArrowsPressed(keyCode: number): void {
+    if (keyCode == 13) {
+      this.Select(this.internalData[this.selectedItemIndex]);
+      return;
+    }
 
+    if (keyCode >= 37 && keyCode <= 40) {
+      this.tratarSetasNaBusca(keyCode);
+      return;
+    }
+  }
+
+  private tratarSetasNaBusca(keyCode: number): void {
+    switch (keyCode) {
+      case 38: //ArrouUp
+        if (this.selectedItemIndex > 0) {
+          this.selectedItemIndex -= 1;
+        }
+        break;
+      case 40: //ArrouDown
+        if (this.selectedItemIndex < (this.internalData.length - 1)) {
+          this.selectedItemIndex += 1;
+        }      
+        break;
+    }
+  }
   private setSelectedItemByTheCurrentModelValue(): void {
     if (!this.value) return;
 
@@ -185,6 +211,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     this.clearSearchResults();
   }
   private clearSearchResults(): void {
+    this.selectedItemIndex = -1;
     this.internalData = Object.assign([], this.data);  
   }
   private setComboTouched(): void {
