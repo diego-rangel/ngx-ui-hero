@@ -4,9 +4,10 @@
             'table-striped': striped,
             'table-bordered': bordered,
             'table-hover': hoverEffect,
-            'table-animated': animated && initialRenderApplied,
+            'table-animated': animated && initialRenderApplied && !resizing,
             'table-animating': animating && initialRenderApplied,
-            'table-fixed': autoFitMode == 1 || autoFitMode == 2
+            'table-fixed': autoFitMode == 1 || autoFitMode == 2,
+            'table-not-resizing': !resizing
         }">
             <thead>
                 <tr>
@@ -14,20 +15,26 @@
                         <input type="checkbox" [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" *ngIf="showSelectAllCheckbox" />
                     </th>
                     <th class="action text-center" *ngIf="showActionsColumn" [ngStyle]="{'width': actionsColumnWidth}">{{actionsColumnCaption}}</th>
-                    <th *ngFor="let column of columns; let i = index;" (click)="ToogleSorting(column)" class="{{column.captionClasses}}" [ngStyle]="{'width': column.width}" [ngClass]="{
-                        'sortable': column.sortable,
-                        'sorting': column.sort?.sorting,
-                        'asc': column.sort?.sortDirection == 'asc',
-                        'desc': column.sort?.sortDirection == 'desc'
-                    }">
+                    <th *ngFor="let column of columns; let i = index;" 
+                        (click)="ToogleSorting(column)" 
+                        class="column {{column.captionClasses}}" 
+                        [draggable]="false"
+                        [ngStyle]="{'width': column.width}" 
+                        [ngClass]="{
+                            'sortable': column.sortable,
+                            'sorting': column.sort?.sorting,
+                            'asc': column.sort?.sortDirection == 'asc',
+                            'desc': column.sort?.sortDirection == 'desc'
+                        }">
                         <div class="d-flex justify-content-between align-items-center">                            
-                            <div class="flex-grow-1" [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}">
+                            <div class="flex-grow-1" [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}" [draggable]="allowColumnReorder && !resizing">
                                 {{column.caption}}
                             </div>
                             <i class="fa fa-sort ml-1" *ngIf="column.sortable && !column.sort?.sorting"></i>
                             <i class="fa fa-sort-amount-asc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'asc'"></i>
                             <i class="fa fa-sort-amount-desc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc'"></i>
                         </div>
+                        <div class="resizer" *ngIf="allowColumnResize"></div>
                     </th>
                 </tr>
             </thead>
@@ -80,7 +87,7 @@
     </div>
 
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-3"  *ngIf="showInfos && gridData?.length > 0">
-        <div class="export-actions mr-3 mb-3" *ngIf="allowExports">
+        <div class="export-actions mr-3 mb-0" *ngIf="allowExports">
             <div class="btn-group" dropdown>
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
                     <i class="fa fa-external-link"></i> {{exportButtonLabel}} <span class="caret"></span>

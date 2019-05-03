@@ -2,13 +2,20 @@ import * as _ from 'lodash';
 import { BsModalService } from 'ngx-bootstrap';
 import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 
-import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, IterableDiffers, OnInit, Optional, Output, TemplateRef, ViewChild } from '@angular/core';
+import {
+    Component, ContentChild, DoCheck, EventEmitter, Inject, Input, IterableDiffers, OnInit,
+    Optional, Output, Renderer2, TemplateRef, ViewChild
+} from '@angular/core';
 
 import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data-grid-config';
 import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
-import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
+import {
+    DatagridExportingModalComponent
+} from './datagrid-exporting-modal/datagrid-exporting-modal.component';
 import { ActionsColumnDirective } from './directives/data-grid-templates.directive';
-import { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
+import {
+    DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection
+} from './models/data-grid-column.model';
 
 declare var $: any;
 let identifier = 0;
@@ -24,6 +31,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     sortApplied: boolean = false;
     animating: boolean = false;
     selectAll: boolean = false;
+    resizing: boolean = false;
+    reordering: boolean = false;
+    currentElementBeingReorderedFromIndex: number = -1;
+    currentElementBeingReorderedToIndex: number = -1;
     currentPage: number;
     gridData: Array<any>;
 
@@ -63,6 +74,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() nextText: string = 'Next';
     @Input() lastText: string = 'Last';
     @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
+    @Input() allowColumnResize?: boolean = true;
+    @Input() allowColumnReorder?: boolean = true;
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnPaginate = new EventEmitter<any>();
@@ -91,7 +104,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     constructor(
         @Inject(DATAGRID_CONFIG) @Optional() defaultOptions: DataGridConfig,
         private iterableDiffers: IterableDiffers,
-        private modalService: BsModalService
+        private modalService: BsModalService,
+        private renderer: Renderer2
     ) {
         Object.assign(this, defaultOptions);
 
@@ -120,7 +134,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     ToogleSorting(column: DataGridColumnModel): void {
-        if (!column.sortable || !column.sort) {
+        if (!column.sortable || !column.sort || this.resizing) {
             return;
         }
 
@@ -299,6 +313,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 }
             }
         }
+
+        this.initializeColumnResizers();
+        this.initializeColumnsDragAndDrop();
     }
     private initializeSorting(): void {
         if (this.isUndefinedOrNull(this._internalData) || this._internalData.length == 0 || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
@@ -333,6 +350,113 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             this.paginator.page = this.currentPage;
             this.paginator.totalItems = this.totalItems;
         }        
+    }
+    private initializeColumnsDragAndDrop(): void {
+        if (!this.allowColumnReorder) return;
+
+        setTimeout(() => {
+            $(`#${this.identifier} th.column`).each((index, el) => {
+                this.setColumnDragAndDropListeners(index, el);
+            });
+        }, 0);
+    }
+    private setColumnDragAndDropListeners(index: number, el: any): void {
+        this.renderer.listen(el, 'dragstart', (e: DragEvent) => {
+            var img = document.createElement("img");
+            e.dataTransfer.setDragImage(img, 0, 0);
+            
+            this.reordering = true;
+            this.currentElementBeingReorderedFromIndex = index;
+            this.renderer.addClass(el, 'dragging');
+        });
+        this.renderer.listen(el, 'dragend', (e: DragEvent) => {
+            if (this.currentElementBeingReorderedFromIndex != this.currentElementBeingReorderedToIndex) {
+                var columnFromCopy = Object.assign({}, this.columns[this.currentElementBeingReorderedFromIndex]);
+                var columnsCopy = Object.assign([], this.columns);
+
+                columnsCopy.splice(this.currentElementBeingReorderedFromIndex, 1);
+                columnsCopy.splice(this.currentElementBeingReorderedToIndex, 0, columnFromCopy);
+
+                this.columns = columnsCopy;
+                this.initializeColumnsDragAndDrop();
+
+                if (this.allowColumnResize)
+                    this.initializeColumnResizers();
+            }
+
+            this.reordering = false;
+            this.currentElementBeingReorderedFromIndex = -1;
+            this.currentElementBeingReorderedToIndex = -1;
+
+            this.renderer.removeClass(el, 'dragging');
+        });
+        this.renderer.listen(el, 'dragenter', (e: DragEvent) => {
+            this.currentElementBeingReorderedToIndex = index;
+        });
+        this.renderer.listen(el, 'dragover', (e: any) => {
+            e.preventDefault();
+        });
+    }
+    private initializeColumnResizers(): void {
+        if (!this.allowColumnResize) return;
+
+        setTimeout(() => {
+            $(`#${this.identifier} th .resizer`).each((index, el) => {
+                this.setColumnResizerListeners(el);
+            });
+        }, 0);
+    }
+    private setColumnResizerListeners(el: any): void {
+        var pageX,curCol,nxtCol,curColWidth,nxtColWidth;
+
+        this.renderer.listen(el, 'mousedown', (e) => {
+            this.resizing = true;
+
+            curCol = e.target.parentElement;
+            nxtCol = curCol.nextElementSibling;
+            pageX = e.pageX; 
+            
+            var padding = this.paddingDiff(curCol);
+            
+            curColWidth = curCol.offsetWidth - padding;
+            if (nxtCol)
+                nxtColWidth = nxtCol.offsetWidth - padding;
+        });
+
+        this.renderer.listen(document, 'mousemove', (e) => {
+            if (curCol) {
+                var diffX = e.pageX - pageX;
+            
+                if (nxtCol)
+                    nxtCol.style.width = (nxtColWidth - (diffX))+'px';
+
+                curCol.style.width = (curColWidth + diffX)+'px';
+            }
+        });
+
+        this.renderer.listen(document, 'mouseup', (e) => {
+            curCol = undefined;
+            nxtCol = undefined;
+            pageX = undefined;
+            nxtColWidth = undefined;
+            curColWidth = undefined;
+
+            setTimeout(() => {
+                this.resizing = false;
+            });
+        });
+    }
+    private paddingDiff(col: any): number { 
+        if (this.getStyleVal(col,'box-sizing') == 'border-box') {
+            return 0;
+        }
+       
+        var padLeft = this.getStyleVal(col, 'padding-left');
+        var padRight = this.getStyleVal(col, 'padding-right');
+        return (parseInt(padLeft) + parseInt(padRight));      
+    }      
+    private getStyleVal(elm: any, css: any): string {
+        return window.getComputedStyle(elm, null).getPropertyValue(css);
     }
     private isUndefinedOrNull(value: any): boolean {
         return value == undefined || value == null;

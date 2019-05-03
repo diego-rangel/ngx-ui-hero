@@ -3,10 +3,27 @@
         margin-bottom: 0;
 
         th {
+            position: relative;
+
             > div > div {
                 flex-shrink: 0;
+                user-select: none;
             }
-        }    
+            .resizer {
+                position: absolute;
+                cursor: col-resize;
+                top: 0;
+                right: 0px;
+                width: 6px;
+                height: 100%;
+                background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 0, 0, 0.05) 2px, rgba(0, 0, 0, 0.05) 4px);
+            }
+        }
+        th:hover {
+            .resizer {
+                background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 0, 0, 0.2) 2px, rgba(0, 0, 0, 0.2) 4px);
+            }
+        }
         td, th {
             overflow: hidden;
             vertical-align: middle;
@@ -16,11 +33,7 @@
         }
         th.sortable {
             cursor: pointer;
-        }
-        th.sortable:hover {
-            background-color: #dee2e6;
-            color: #666;
-        }
+        }        
         th.checkbox-column {
             input[type="checkbox"] {
                 margin: 0;
@@ -45,6 +58,16 @@
             }
         }
     }
+    table.table-not-resizing {
+        th.sortable:hover {
+            background-color: #dee2e6;
+            color: #666;
+        }
+        th.dragging {
+            background-color: #007BFF !important;
+            color: #FFF !important;
+        }
+    }
     table.table-fixed {
         table-layout: fixed;
 
@@ -67,7 +90,7 @@
         background-color: #f9f9f9;
     }
     table.table-animated * {
-        transition: all .35s ease-in-out;
+        transition: all .15s ease-in-out;
     }
 
     .empty-results {
