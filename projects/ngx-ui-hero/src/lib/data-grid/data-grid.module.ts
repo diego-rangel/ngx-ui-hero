@@ -3,6 +3,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { UiModule } from '../ui/ui.module';
+import { ColumnFilterComponent } from './components/column-filter/column-filter.component';
 import { DataGridConfig } from './config/data-grid-config';
 import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
 import { DataGridComponent } from './data-grid.component';
@@ -13,6 +14,7 @@ import { ExcelService } from './services/excel.service';
 export { DataGridConfig, DataGridStylesConfig, DataGridPagingConfig, DataGridExportingConfig, EnumDataGridMode, EnumAutoFitMode } from './config/data-grid-config';
 export { DataGridComponent } from './data-grid.component';
 export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
+export { ColumnFilterModel } from './models/column-filter.model';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirec
   declarations: [
     DataGridComponent,
     ActionsColumnDirective,
-    DatagridExportingModalComponent
+    DatagridExportingModalComponent,
+    ColumnFilterComponent
   ],  
   exports: [
     DataGridComponent,

@@ -1,0 +1,32 @@
+.filters-container {
+    margin: -8px -12px;
+
+    .search {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: .3rem .3rem 0 0;
+        border-bottom: 1px solid #CCC;
+    }
+    .options {
+        background-color: #fff;
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 0 0 .3rem .3rem;
+
+        .option {
+            cursor: pointer;
+            padding: 7px 10px;
+            font-size: 14px;
+            max-width: 300px;
+        }
+        .option:hover {
+            background-color: #f9f9f9;
+        }
+    }
+    .filters {
+        background-color: #d4e9ff;
+        padding: 10px;
+        border-bottom: 1px solid #aed5ff;
+    }
+}

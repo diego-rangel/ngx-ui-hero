@@ -8,6 +8,9 @@ export interface DataGridConfig {
     styles?: DataGridStylesConfig;
     autoFitMode?: EnumAutoFitMode;
     exporting?: DataGridExportingConfig;
+    allowColumnResize?: boolean;
+    allowColumnReorder?: boolean;
+    allowColumnFilters?: boolean;
 }
 
 export interface DataGridPagingConfig {

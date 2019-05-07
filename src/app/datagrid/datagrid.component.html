@@ -345,6 +345,14 @@
                 <td>boolean</td>
                 <td>Allows the columns to be reordered.</td>
               </tr>
+              <tr>
+                <td>
+                  <b>allowColumnFilters</b><br/>
+                  Default: <small>true</small>
+                </td>
+                <td>boolean</td>
+                <td>Allows the columns to be filtered.</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -379,6 +387,11 @@
                 <td><b>OnSelectionChanged</b></td>
                 <td>EventEmitter&lt;void&gt;</td>
                 <td>An event emitted when <b>showCheckboxColumn</b> is defined to <b>true</b> and any selection is changed.</td>
+              </tr>
+              <tr>
+                <td><b>OnColumnFiltered</b></td>
+                <td>EventEmitter&lt;DataGridColumnModel&gt;</td>
+                <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling filtering operations. This callback will receive as a parameter an object with the filtered column.</td>
               </tr>
             </tbody>
           </table>

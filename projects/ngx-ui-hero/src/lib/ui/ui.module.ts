@@ -2,7 +2,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { CommonModule } from '@angular/common';
@@ -12,7 +14,9 @@ import { ModalComponent } from './components/modal/modal.component';
 import { ReportComponent } from './components/report/report.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
+import { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { DebounceDirective } from './directives/debounce.directive';
 import { TutorialDirective } from './directives/tutorial.directive';
 import { SearchByPipe } from './pipes/search-by.pipe';
 import { AlertService } from './services/alert.service';
@@ -27,6 +31,8 @@ export { ReportComponent } from './components/report/report.component';
 export { TutorialDirective } from './directives/tutorial.directive';
 export { TutorialService } from './services/tutorial.service';
 export { TutorialAction } from './classes/tutorial-action';
+export { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
+export { DebounceDirective } from './directives/debounce.directive';
 
 export * from './services/alert.service';
 
@@ -39,8 +45,12 @@ export * from './services/alert.service';
     BsDatepickerModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
+    PopoverModule.forRoot(),
+    TabsModule.forRoot(),
   ],
   declarations: [
+    AutoSelectOnFocusDirective,
+    DebounceDirective,
     ClickOutsideDirective,
     AutoFocusDirective,
     TutorialDirective,
@@ -50,6 +60,8 @@ export * from './services/alert.service';
     ReportComponent,
   ],
   exports: [
+    AutoSelectOnFocusDirective,
+    DebounceDirective,
     ClickOutsideDirective,
     AutoFocusDirective,
     TutorialDirective,
@@ -62,7 +74,9 @@ export * from './services/alert.service';
     ModalModule,
     BsDatepickerModule,
     ProgressbarModule,
-    TooltipModule
+    TooltipModule,
+    PopoverModule,
+    TabsModule
   ],
   entryComponents: [
     ModalComponent

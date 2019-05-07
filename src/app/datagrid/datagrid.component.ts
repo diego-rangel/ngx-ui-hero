@@ -42,7 +42,6 @@ export class DatagridComponent implements OnInit {
       captionAlignment: EnumAlignment.Center,
       dataAlignment: EnumAlignment.Center,
       data: 'active',
-      width: '100px',
       sortable: false,
       render: (row, currentData, index) => {
         return currentData ? `<span class='badge badge-success'>Active</span>` : `<span class='badge badge-danger'>Inactive</span>`;
@@ -78,7 +77,6 @@ myBasicDatagridColumns: Array<DataGridColumnModel> = [
     captionAlignment: EnumAlignment.Center,
     data: 'active',
     dataAlignment: EnumAlignment.Center,
-    width: '100px',
     sortable: false
   }
 ];
@@ -120,7 +118,6 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
       return currentData ? "<span class='badge badge-success'>Ativo</span>" : "<span class='badge badge-danger'>Inativo</span>";
     },
     dataAlignment: EnumAlignment.Center,
-    width: '100px',
     sortable: false
   }
 ];

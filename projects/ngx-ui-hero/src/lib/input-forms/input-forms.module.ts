@@ -30,15 +30,11 @@ import { InputTextareaComponent } from './components/input-textarea/input-textar
 import { InputUploadComponent } from './components/input-upload/input-upload.component';
 import { InputValidationsComponent } from './components/input-validations/input-validations.component';
 import { RadialButtonComponent } from './components/radial-button/radial-button.component';
-import { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
-import { DebounceDirective } from './directives/debounce.directive';
 import { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
 import { MaxValueValidator } from './validators/max-value-validator';
 import { MinValueValidator } from './validators/min-value-validator';
 
-export { DebounceDirective } from './directives/debounce.directive';
-export { AutoSelectOnFocusDirective } from './directives/auto-select-on-focus.directive';
 export { CurrencySymbolPipe } from './base/currency-symbol.pipe';
 export { InputFormsConfig } from './input-forms-config';
 export { InputTextComponent } from './components/input-text/input-text.component';
@@ -77,8 +73,6 @@ export { BlockUi } from './classes/block-ui';
     NgxMaskModule.forRoot()
   ],
   declarations: [
-    AutoSelectOnFocusDirective,
-    DebounceDirective,
     MaxValueValidator,
     MinValueValidator,
     CurrencySymbolPipe,
@@ -103,8 +97,6 @@ export { BlockUi } from './classes/block-ui';
     InputDropdownSearchComponent,
   ],
   exports: [
-    AutoSelectOnFocusDirective,
-    DebounceDirective,
     MaxValueValidator,
     MinValueValidator,
     CurrencySymbolPipe,

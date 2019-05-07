@@ -62,6 +62,10 @@
         th.sortable:hover {
             background-color: #dee2e6;
             color: #666;
+
+            .btn-filter:not(.btn-primary) {
+                background-color: #fff;
+            }
         }
         th.dragging {
             background-color: #007BFF !important;

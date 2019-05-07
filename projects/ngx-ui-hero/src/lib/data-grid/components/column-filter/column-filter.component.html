@@ -1,0 +1,19 @@
+<div class="filters-container">
+    <div class="search">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-search"></i></span>
+        </div>
+        <input type="text" class="form-control form-control-sm" placeholder="Filter..." [(ngModel)]="search" debounce (callback)="onSearch()" />
+      </div>
+    </div>
+    <div class="filters d-flex flex-wrap" *ngIf="column.simpleFilter || column.customFilters?.length > 0">
+      <button class="btn btn-primary btn-sm text-truncate" *ngIf="column.simpleFilter" (click)="removeSimpleFilter()">
+        <i class="fa fa-times"></i>
+        <span class="ml-1" [innerHtml]="column.simpleFilter.filter"></span>
+      </button>
+    </div>
+    <div class="options">
+      <div class="option text-truncate" *ngFor="let item of filteredOptions" [title]="item" (click)="select(item)" [innerHtml]="item"></div>
+    </div>
+</div>

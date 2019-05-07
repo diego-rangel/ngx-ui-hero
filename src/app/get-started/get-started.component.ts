@@ -143,6 +143,9 @@ export const dataGridSettings: DataGridConfig = {
   actionsColumnCaption: '#',
   mode: EnumDataGridMode.OnClient,
   autoFitMode: EnumAutoFitMode.ByContent,
+  allowColumnResize: true,
+  allowColumnReorder: true,
+  allowColumnFilters: true,
   paging: {
     firstText: 'First',
     previousText: 'Previous',

@@ -8,6 +8,7 @@ import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data
 import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
 import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
 import { ActionsColumnDirective } from './directives/data-grid-templates.directive';
+import { ColumnFilterModel } from './models/column-filter.model';
 import { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
 
 declare var $: any;
@@ -69,10 +70,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
     @Input() allowColumnResize?: boolean = true;
     @Input() allowColumnReorder?: boolean = true;
+    @Input() allowColumnFilters?: boolean = true;
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
+    @Output() OnColumnFiltered = new EventEmitter<DataGridColumnModel>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef}) actionsColumnTemplate: ActionsColumnDirective;
     @ViewChild('paginator') paginator: PaginationComponent;
 
@@ -191,6 +194,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     Rerender(): void {
         setTimeout(() => {
             this.initializeGridData();
+			this.initializeFilters();
 			this.initializePaging();
 			this.initializeSorting();
             this.handleAutoFit();
@@ -367,6 +371,18 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         e.target.addEventListener("mouseup", onMouseUpCallback);
     }
 
+    OnColumnFilterClick(e: Event) {
+        e.stopPropagation();
+    }
+
+    OnFiltersChange(column: DataGridColumnModel) {
+        if (this.mode == EnumDataGridMode.OnServer) {
+            this.OnColumnFiltered.emit(column);
+        } else {
+            this.Rerender();
+        }
+    }
+
     private initializeGridData(): void {
         if (this._externalData) {
             this._internalData = Object.assign([], this._externalData);
@@ -393,6 +409,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 dataAlignment: EnumAlignment.Left,
                 dataClasses: null,         
                 sortable: true,
+                filterable: true,
             };
 
             Object.assign(target, this.columns[i]);
@@ -412,7 +429,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
     }
     private initializeSorting(): void {
-        if (this.isUndefinedOrNull(this._internalData) || this._internalData.length == 0 || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
+        if (this.isUndefinedOrNull(this._internalData) || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
             this.sortApplied = true;
             return;
         }
@@ -520,6 +537,13 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
                         if (widthByCaption > width) {
                             width = widthByCaption;
+                            
+                            if (this.allowColumnResize) {
+                                width += 20;
+                            }
+                            if (this.allowColumnFilters && this.columns[columnIndex].filterable && this.isUndefinedOrNull(widths[columnIndex]) || width > widths[columnIndex]) {
+                                width += 30;
+                            }
                         }
                     }
     
@@ -545,6 +569,14 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
                 if (this.isUndefinedOrNull(this.columns[columnIndex].width)) {
                     let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 40;
+
+                    if (this.allowColumnResize) {
+                        widthByCaption += 10;
+                    }
+                    if (this.allowColumnFilters && this.columns[columnIndex].filterable) {
+                        widthByCaption += 30;
+                    }
+
                     this.columns[columnIndex].width = `${widthByCaption}px`;
                 }
             }            
@@ -632,9 +664,42 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
     private handleInitialRenderingFlag(): void {
         if (!this.initialRenderApplied) {
-            setTimeout(()=> {
+            //setTimeout(()=> {
                 this.initialRenderApplied = true;
-            }, 1500);
+            //}, 1500);
         }
+    }
+    private initializeFilters() {
+        if (!this.columns || this.columns.length == 0 || !this.data || this.data.length == 0 || this.mode == EnumDataGridMode.OnServer) return;
+
+        let filters: ColumnFilterModel[] = [];
+
+        for (let i = 0; i < this.columns.length; i++) {
+            if (this.columns[i].simpleFilter) {
+                filters.push(this.columns[i].simpleFilter);
+            }
+            if (this.columns[i].customFilters && this.columns[i].customFilters.length > 0) {
+                filters.push(...this.columns[i].customFilters);
+            }
+        }
+
+        if (!filters || filters.length == 0) return;
+
+        this._internalData = this.data.filter((row: any, rowIndex: number) => {
+            for (let i = 0; i < filters.length; i++) {
+                let value: any = null;
+
+                if (filters[i].column.render)
+                    value = filters[i].column.render(row, this.RenderPropertyValue(filters[i].column.data, row), rowIndex);
+                else      
+                    value = this.RenderPropertyValue(filters[i].column.data, row);
+
+                if (!filters[i].operator.validate(filters[i].filter, value)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
     }
 }

@@ -1,3 +1,5 @@
+import { ColumnFilterModel } from './column-filter.model';
+
 export class DataGridColumnModel {
     caption?: string = '';
     captionAlignment?: EnumAlignment = EnumAlignment.Left;
@@ -10,6 +12,7 @@ export class DataGridColumnModel {
     sortDirection?: EnumSortDirection = EnumSortDirection.Ascending;
     sort?: DataGridSortingModel;
     enableTooltip?: boolean = false;
+    filterable?: boolean = true;
     render?(row: any, currentData: any, rowIndex: number): string;
     renderOnPrint?(row: any, currentData: any, rowIndex: number): string;
 
@@ -19,6 +22,9 @@ export class DataGridColumnModel {
      */
     summarizable?: boolean = false;
     summaryPrefix?: string = '';
+
+    simpleFilter?: ColumnFilterModel;
+    customFilters?: ColumnFilterModel[];
 }
 
 export class DataGridSortingModel {
