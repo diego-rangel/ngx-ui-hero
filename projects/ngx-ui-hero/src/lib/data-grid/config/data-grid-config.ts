@@ -8,9 +8,9 @@ export interface DataGridConfig {
     styles?: DataGridStylesConfig;
     autoFitMode?: EnumAutoFitMode;
     exporting?: DataGridExportingConfig;
+    filtering?: DataGridFilteringConfig;
     allowColumnResize?: boolean;
     allowColumnReorder?: boolean;
-    allowColumnFilters?: boolean;
 }
 
 export interface DataGridPagingConfig {
@@ -58,6 +58,11 @@ export interface DataGridExportingConfig {
     exportButtonLabel?: string;
     exportedFileName?: string;
     exportedExcelSheetName?: string;
+}
+
+export interface DataGridFilteringConfig {
+    allowColumnFilters?: boolean;
+    filterPlaceholder?: string;
 }
 
 export enum EnumDataGridMode {

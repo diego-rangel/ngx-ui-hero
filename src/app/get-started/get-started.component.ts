@@ -145,7 +145,6 @@ export const dataGridSettings: DataGridConfig = {
   autoFitMode: EnumAutoFitMode.ByContent,
   allowColumnResize: true,
   allowColumnReorder: true,
-  allowColumnFilters: true,
   paging: {
     firstText: 'First',
     previousText: 'Previous',
@@ -169,6 +168,10 @@ export const dataGridSettings: DataGridConfig = {
     exportButtonLabel: 'Export',
     exportedFileName: 'Export',
     exportedExcelSheetName: 'Sheet'
+  },
+  filtering: {
+    allowColumnFilters: true,
+    filterPlaceholder: 'Filter...'
   }
 };
 

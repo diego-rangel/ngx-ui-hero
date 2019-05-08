@@ -36,14 +36,14 @@
                             <i class="fa fa-sort-amount-desc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc' && gridData?.length > 0"></i>
 
                             <button type="button" class="btn btn-sm btn-filter ml-2 mr-1" *ngIf="allowColumnFilters && column.filterable && data?.length > 0"
-                                [popover]="popFilters" [outsideClick]="true" container="body" (click)="OnColumnFilterClick($event)" [ngClass]="{
+                                [popover]="popFilters" triggers="" [isOpen]="column.isFiltersOpenned" container="body" (click)="OnColumnFilterClick($event, column)" [ngClass]="{
                                     'btn-primary': column.simpleFilter || column.customFilters?.length > 0
                                 }">
                                 <i class="fa fa-filter"></i>
                             </button>
 
                             <ng-template #popFilters>
-                                <ui-column-filter [column]="column" [data]="data" (onChange)="OnFiltersChange($event)"></ui-column-filter>
+                                <ui-column-filter [column]="column" [data]="data" [filterPlaceholder]="filterPlaceholder" (onChange)="OnFiltersChange($event)"></ui-column-filter>
                             </ng-template>
                         </div>
                         <div class="resizer" *ngIf="allowColumnResize" (mousedown)="OnResizerMouseDown($event)"></div>

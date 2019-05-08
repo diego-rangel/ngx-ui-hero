@@ -63,14 +63,15 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() showInfos?: boolean = true;
     @Input() actionsColumnCaption?: string = '#';
     @Input() actionsColumnWidth?: string = '100px';
-    @Input() firstText: string = 'First';
-    @Input() previousText: string = 'Previous';
-    @Input() nextText: string = 'Next';
-    @Input() lastText: string = 'Last';
+    @Input() firstText?: string = 'First';
+    @Input() previousText?: string = 'Previous';
+    @Input() nextText?: string = 'Next';
+    @Input() lastText?: string = 'Last';
     @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
     @Input() allowColumnResize?: boolean = true;
     @Input() allowColumnReorder?: boolean = true;
     @Input() allowColumnFilters?: boolean = true;
+    @Input() filterPlaceholder?: string = 'Filter...';
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnPaginate = new EventEmitter<any>();
@@ -113,6 +114,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
         if (defaultOptions.exporting) {
             Object.assign(this, defaultOptions.exporting);
+        }
+        if (defaultOptions.filtering) {
+            Object.assign(this, defaultOptions.filtering);
         }
 
         this._differ = this.iterableDiffers.find([]).create(null);
@@ -371,7 +375,14 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         e.target.addEventListener("mouseup", onMouseUpCallback);
     }
 
-    OnColumnFilterClick(e: Event) {
+    OnColumnFilterClick(e: Event, column: DataGridColumnModel) {
+        if (!column.isFiltersOpenned) {
+            this.closeAllColumnsFilters();
+            column.isFiltersOpenned = true;
+        } else {
+            this.closeAllColumnsFilters();
+        }
+        
         e.stopPropagation();
     }
 
@@ -701,5 +712,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
             return true;
         });
+    }
+    private closeAllColumnsFilters() {
+        if (!this.columns || this.columns.length == 0) return;
+
+        for (let i = 0; i < this.columns.length; i++) {
+            this.columns[i].isFiltersOpenned = false;
+        }
     }
 }

@@ -3,10 +3,7 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { HighlightModule } from 'ngx-highlightjs';
-import {
-    ApiSettings, DataGridConfig, InputFormsConfig, NgxUiHeroApiModule, NgxUiHeroDataGridModule,
-    NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, TreeViewConfig
-} from 'ngx-ui-hero';
+import { ApiSettings, DataGridConfig, InputFormsConfig, NgxUiHeroApiModule, NgxUiHeroDataGridModule, NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, TreeViewConfig } from 'ngx-ui-hero';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';

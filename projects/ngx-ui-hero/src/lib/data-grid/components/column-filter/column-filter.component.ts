@@ -14,6 +14,7 @@ export class ColumnFilterComponent implements OnInit {
   @Output() onChange = new EventEmitter<DataGridColumnModel>();
   @Input() data: Array<any>;
   @Input() column: DataGridColumnModel;
+  @Input() filterPlaceholder: string = 'Filter...';
 
   search = '';
   options: Array<any>;
@@ -32,6 +33,9 @@ export class ColumnFilterComponent implements OnInit {
     }
 
     this.filteredOptions = this.options.filter(x => x.toString().toUpperCase().indexOf(this.search.toUpperCase()) >= 0);
+  }
+  onClickOutside() {
+    this.column.isFiltersOpenned = false;
   }
 
   select(item: any) {

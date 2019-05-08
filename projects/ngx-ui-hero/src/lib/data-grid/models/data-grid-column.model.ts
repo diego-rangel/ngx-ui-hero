@@ -12,6 +12,7 @@ export class DataGridColumnModel {
     sortDirection?: EnumSortDirection = EnumSortDirection.Ascending;
     sort?: DataGridSortingModel;
     enableTooltip?: boolean = false;
+    isFiltersOpenned?: boolean = false;
     filterable?: boolean = true;
     render?(row: any, currentData: any, rowIndex: number): string;
     renderOnPrint?(row: any, currentData: any, rowIndex: number): string;
