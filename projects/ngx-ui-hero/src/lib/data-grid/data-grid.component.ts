@@ -326,7 +326,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             e.target.addEventListener("dragenter", (e: any) => onDragEnterCallback(e, index));
             e.target.addEventListener("dragend", onDragEndCallback);
 
-            $(`#${this.identifier} thead tr th`).each((i, el) => {
+            $(`#${this.identifier} thead tr th.column`).each((i, el) => {
                 if (i != index) {
                     el.addEventListener("dragenter", (e: any) => onDragEnterCallback(e, i));
                     el.addEventListener("dragover", onDragOverCallback);
@@ -349,11 +349,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             e.target.removeEventListener("dragenter", (e: any) => onDragEnterCallback(e, index));
             e.target.removeEventListener("dragend", onDragEndCallback);
 
-            $(`#${this.identifier} thead tr th`).each((i, el) => {
+            $(`#${this.identifier} thead tr th.column`).each((i, el) => {
                 if (i != index) {
                     el.removeEventListener("dragenter", (e: any) => onDragEnterCallback(e, i));
                     el.removeEventListener("dragover", onDragOverCallback);
-                }
+                }              
             });
         };
         var onDragEnterCallback = (e: any, i: number) => {

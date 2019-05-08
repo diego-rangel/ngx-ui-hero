@@ -31,11 +31,11 @@
                             <div class="flex-grow-1" [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}" [draggable]="allowColumnReorder && !resizing" (mousedown)="OnColumnMouseDown($event, i)">
                                 {{column.caption}}
                             </div>
-                            <i class="fa fa-sort ml-1" *ngIf="column.sortable && !column.sort?.sorting"></i>
-                            <i class="fa fa-sort-amount-asc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'asc'"></i>
-                            <i class="fa fa-sort-amount-desc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc'"></i>
+                            <i class="fa fa-sort ml-1" *ngIf="column.sortable && !column.sort?.sorting && gridData?.length > 0"></i>
+                            <i class="fa fa-sort-amount-asc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'asc' && gridData?.length > 0"></i>
+                            <i class="fa fa-sort-amount-desc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc' && gridData?.length > 0"></i>
 
-                            <button type="button" class="btn btn-sm btn-filter ml-2 mr-1" *ngIf="allowColumnFilters && column.filterable"
+                            <button type="button" class="btn btn-sm btn-filter ml-2 mr-1" *ngIf="allowColumnFilters && column.filterable && data?.length > 0"
                                 [popover]="popFilters" [outsideClick]="true" container="body" (click)="OnColumnFilterClick($event)" [ngClass]="{
                                     'btn-primary': column.simpleFilter || column.customFilters?.length > 0
                                 }">
