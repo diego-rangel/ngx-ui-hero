@@ -63,6 +63,7 @@ export interface DataGridExportingConfig {
 export interface DataGridFilteringConfig {
     allowColumnFilters?: boolean;
     filterPlaceholder?: string;
+    filterPlacement?: string;
 }
 
 export enum EnumDataGridMode {

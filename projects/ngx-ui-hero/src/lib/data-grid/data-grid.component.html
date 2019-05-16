@@ -36,7 +36,7 @@
                             <i class="fa fa-sort-amount-desc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc' && gridData?.length > 0"></i>
 
                             <button type="button" class="btn btn-sm btn-filter ml-2 mr-1" *ngIf="allowColumnFilters && column.filterable && data?.length > 0"
-                                [popover]="popFilters" triggers="" [isOpen]="column.isFiltersOpenned" container="body" (click)="OnColumnFilterClick($event, column)" [ngClass]="{
+                                [popover]="popFilters" triggers="" [isOpen]="column.isFiltersOpenned" [placement]="filterPlacement" container="body" (click)="OnColumnFilterClick($event, column)" [ngClass]="{
                                     'btn-primary': column.simpleFilter || column.customFilters?.length > 0
                                 }">
                                 <i class="fa fa-filter"></i>

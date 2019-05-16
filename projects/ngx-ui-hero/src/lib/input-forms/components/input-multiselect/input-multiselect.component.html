@@ -14,7 +14,7 @@
             'is-valid': !showOptions && comboTouched && (!isRequired || value?.length > 0),
             'is-invalid': !showOptions && comboTouched && isRequired && (!value || value.length == 0)
         }"
-        (click)="ToggleDropDown()">
+        (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
 
         <span *ngIf="!value || value.length == 0">{{placeholder}}</span>
 

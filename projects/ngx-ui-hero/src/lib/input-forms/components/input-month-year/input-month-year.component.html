@@ -14,7 +14,7 @@
         'is-valid': !showDropdown && comboTouched && !(invalid | async),
         'is-invalid': !showDropdown && comboTouched && (invalid | async)
       }"
-      (click)="ToggleDropDown()">
+      (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
 
       <span *ngIf="!value">{{placeholder}}</span>
       <span *ngIf="value">{{value | date:format}}</span>

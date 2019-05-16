@@ -6,6 +6,8 @@ import { AsyncValidatorArray, ValidatorArray } from '../../base/validate';
 import { InputFormsConfig } from '../../input-forms-config';
 import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
+declare var $: any;
+
 let identifier = 0;
 
 @Component({
@@ -100,7 +102,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
 
   ToggleDropDown(value?: boolean): void {
     if (this.clickOutsideEnabled) {
-      if (value == false && !this.showDropdown || this.disabled) return;
+      if ((value == false && !this.showDropdown) || (value == undefined && this.disabled)) return;
     
       if (value == undefined) {
         if (this.showDropdown) {
@@ -127,9 +129,13 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     }
   }
   Select(row: any): void {
+    if (this.disabled) {
+      this.ToggleDropDown(false);
+      return;
+    }
+
     this.value = this.renderPropertyValue(this.valueProperty, row);
-    this.onChange.emit(this.value);
-    
+    this.onChange.emit(this.value);    
     this.ToggleDropDown(false);
   }
   OnSearch(): void {
@@ -165,22 +171,60 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     }
 
     if (keyCode >= 37 && keyCode <= 40) {
-      this.tratarSetasNaBusca(keyCode);
+      this.handleArrows(keyCode);
       return;
     }
   }
+  OnComboPressed(e: KeyboardEvent): void {
+    if (e.keyCode == 13) {
+      this.ToggleDropDown();
+      e.preventDefault();
+    }
+  }
 
-  private tratarSetasNaBusca(keyCode: number): void {
+  private handleOptionsScrollerDown(): void {
+    var scroll = 0;
+    var scrollPositionStart = $(`#${this.identifier} .result-list`).scrollTop();
+    var scrollPositionEnd = scrollPositionStart + (38 * 6);
+    var currentPosition = this.selectedItemIndex * 38;
+
+    if (currentPosition >= scrollPositionStart && currentPosition < scrollPositionEnd) {
+      scroll = scrollPositionStart;
+    } else {
+      scroll = (this.selectedItemIndex - 6) * 38;
+    }
+    
+    $(`#${this.identifier} .result-list`).scrollTop(scroll);
+  }
+  private handleOptionsScrollerUp(): void {
+    var scroll = 0;
+    var scrollPositionStart = $(`#${this.identifier} .result-list`).scrollTop();
+    var scrollPositionEnd = scrollPositionStart + (38 * 6);
+    var currentPosition = this.selectedItemIndex * 38;
+
+    if (currentPosition > scrollPositionStart && currentPosition <= scrollPositionEnd) {
+      scroll = scrollPositionStart;
+    } else {
+      scroll = (this.selectedItemIndex - 1) * 38;
+    }
+    
+    $(`#${this.identifier} .result-list`).scrollTop(scroll);
+  }
+  private handleArrows(keyCode: number): void {
     switch (keyCode) {
       case 38: //ArrouUp
         if (this.selectedItemIndex > 0) {
           this.selectedItemIndex -= 1;
         }
+
+        this.handleOptionsScrollerUp();
         break;
       case 40: //ArrouDown
         if (this.selectedItemIndex < (this.internalData.length - 1)) {
           this.selectedItemIndex += 1;
-        }      
+        }   
+        
+        this.handleOptionsScrollerDown();   
         break;
     }
   }

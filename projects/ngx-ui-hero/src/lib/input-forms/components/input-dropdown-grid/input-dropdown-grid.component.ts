@@ -97,7 +97,7 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
 
   ToggleDropDown(value?: boolean): void {
     if (this.clickOutsideEnabled) {
-      if (value == false && !this.showDropdown || (this.disabled)) return;
+      if ((value == false && !this.showDropdown) || (value == undefined && this.disabled)) return;
     
       if (value == undefined) {
         if (this.showDropdown) {
@@ -119,9 +119,13 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
     }
   }
   Select(row: any): void {
+    if (this.disabled) {
+      this.ToggleDropDown(false);
+      return;
+    }
+
     this.value = this.renderPropertyValue(this.valueProperty, row);
-    this.onChange.emit(this.value);
-    
+    this.onChange.emit(this.value);    
     this.ToggleDropDown(false);
   }
   OnSearch(): void {
@@ -143,6 +147,12 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
     this.onChange.emit(this.value);
 
     if (e) e.stopPropagation();
+  }
+  OnComboPressed(e: KeyboardEvent): void {
+    if (e.keyCode == 13) {
+      this.ToggleDropDown();
+      e.preventDefault();
+    }
   }
 
   private setSelectedItemByTheCurrentModelValue(): void {

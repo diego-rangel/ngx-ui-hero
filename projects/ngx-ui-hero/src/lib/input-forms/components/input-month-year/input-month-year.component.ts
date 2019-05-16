@@ -56,7 +56,7 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
   }
 
   ToggleDropDown(value?: boolean): void {
-    if (value == false && !this.showDropdown || (this.disabled)) return;
+    if ((value == false && !this.showDropdown) || (value == undefined && this.disabled)) return;
 
     this.displayMode = EnumDisplayMode.Month;
     this.handleSelectedYear();
@@ -77,13 +77,20 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
   }
 
   IncrementSelectedYear(): void {
+    if (this.disabled) return;
     this.selectedYear++;
   }
   DecrementSelectedYear(): void {
+    if (this.disabled) return;
     this.selectedYear--;
   }
 
   SelectMonth(month: number): void {
+    if (this.disabled) {
+      this.showDropdown = false;
+      return;
+    }
+    
     let newDate = new Date(this.selectedYear, month, 1, 0, 0, 0, 0);
     this.value = newDate;
     this.showDropdown = false;
@@ -98,6 +105,12 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     this.onChange.emit(this.value);
 
     event.stopPropagation();
+  }
+  OnComboPressed(e: KeyboardEvent): void {
+    if (e.keyCode == 13) {
+      this.ToggleDropDown();
+      e.preventDefault();
+    }
   }
 
   private init(): void {

@@ -93,7 +93,7 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   }
 
   ToggleDropDown(value?: boolean): void {
-    if (value == false && !this.showOptions || (this.disabled)) return;
+    if ((value == false && !this.showOptions) || (value == undefined && this.disabled)) return;
 
     if (value == undefined) { 
       if (this.showOptions) {
@@ -156,6 +156,13 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     }
 
     event.stopPropagation();
+  }
+  
+  OnComboPressed(e: KeyboardEvent): void {
+    if (e.keyCode == 13) {
+      this.ToggleDropDown();
+      e.preventDefault();
+    }
   }
 
   private clearSearch(): void {

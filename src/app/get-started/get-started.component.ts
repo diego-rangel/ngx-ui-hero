@@ -171,7 +171,8 @@ export const dataGridSettings: DataGridConfig = {
   },
   filtering: {
     allowColumnFilters: true,
-    filterPlaceholder: 'Filter...'
+    filterPlaceholder: 'Filter...',
+    filterPlacement: 'top'
   }
 };
 

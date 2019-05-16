@@ -14,7 +14,7 @@
       'is-valid': !showDropdown && comboTouched && (!isRequired || value),
       'is-invalid': !showDropdown && comboTouched && isRequired && !value
     }"
-    (click)="ToggleDropDown()">
+    (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
 
     <span class="mr-auto text-truncate">{{selectedDisplayText || placeholder}}</span>
     <i class="fa fa-times btn-clear-selection" *ngIf="value && !disabled" (click)="ClearSelection($event)"></i>
