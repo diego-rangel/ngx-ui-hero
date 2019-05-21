@@ -11,13 +11,13 @@
       'has-validations': showValidations,
       'open': showDropdown, 
       'disabled': disabled,
-      'is-valid': !showDropdown && comboTouched && (!isRequired || value),
-      'is-invalid': !showDropdown && comboTouched && isRequired && !value
+      'is-valid': !showDropdown && comboTouched && (!isRequired || (value != null && value != undefined)),
+      'is-invalid': !showDropdown && comboTouched && isRequired && (value == null || value == undefined)
     }"
     (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
 
     <span class="mr-auto text-truncate">{{selectedDisplayText || placeholder}}</span>
-    <i class="fa fa-times btn-clear-selection" *ngIf="value && !disabled" (click)="ClearSelection($event)"></i>
+    <i class="fa fa-times btn-clear-selection" *ngIf="(value != null && value != undefined) && !disabled" (click)="ClearSelection($event)"></i>
     <i class="fa" [ngClass]="{'fa-caret-down': !showDropdown, 'fa-caret-up': showDropdown}"></i>
   </div>
 

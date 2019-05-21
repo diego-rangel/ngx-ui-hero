@@ -89,7 +89,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
       return;
     }
 
-    if (this.value) {
+    if (this.value != null && this.value != undefined) {
       this.setSelectedItemByTheCurrentModelValue();
       this._lastModelInitialized = this.value;
     } else {
@@ -229,7 +229,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     }
   }
   private setSelectedItemByTheCurrentModelValue(): void {
-    if (!this.value) return;
+    if (this.value == null || this.value == undefined) return;
 
     let row = this.data.find(x => this.value == this.renderPropertyValue(this.valueProperty, x));
     if (row) {
