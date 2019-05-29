@@ -184,7 +184,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         let result = this.infoMessage;
         let recordsFrom: number = this.currentPage * this.itemsPerPage - (this.itemsPerPage - 1);
         let recordsTo: number = this.currentPage * this.itemsPerPage;
-        let totalRecords: number = this._internalData ? this._internalData.length : 0;
+        let totalRecords: number = this.totalItems;
 
         if (recordsTo > totalRecords) {
             recordsTo = recordsTo - (recordsTo - totalRecords);
@@ -463,7 +463,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.sortApplied = true;
     }
     private initializePaging(): void {
-        this.currentPage = 1;
+        if (!this.currentPage) {
+            this.currentPage = 1;
+        }
 
         if (this._internalData && this.mode == EnumDataGridMode.OnClient) {
             this.totalItems = this._internalData.length;
