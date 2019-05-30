@@ -1,6 +1,6 @@
 {
   "name": "ngx-ui-hero",
-  "version": "4.3.5",
+  "version": "4.3.6",
   "homepage": "https://github.com/diego-rangel/ngx-ui-hero",
   "description": "Simple, fast and reliable utilities for Angular.",
   "author": {
@@ -32,8 +32,8 @@
     "url": "https://github.com/diego-rangel/ngx-ui-hero/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0",
     "@angular/forms":"^6.0.0",
     "@angular/platform-browser":"^6.0.0",
     "bootstrap": "^4.1.1",
