@@ -29,7 +29,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     reordering: boolean = false;
     currentElementBeingReorderedFromIndex: number = -1;
     currentElementBeingReorderedToIndex: number = -1;
-    currentPage: number;
+    currentPage: number = 1;
     gridData: Array<any>;
 
     public identifier = `datagrid-${identifier++}`;
@@ -184,7 +184,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         let result = this.infoMessage;
         let recordsFrom: number = this.currentPage * this.itemsPerPage - (this.itemsPerPage - 1);
         let recordsTo: number = this.currentPage * this.itemsPerPage;
-        let totalRecords: number = this._internalData ? this._internalData.length : 0;
+        let totalRecords: number = this.totalItems;
 
         if (recordsTo > totalRecords) {
             recordsTo = recordsTo - (recordsTo - totalRecords);
@@ -463,8 +463,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.sortApplied = true;
     }
     private initializePaging(): void {
-        this.currentPage = 1;
-
         if (this._internalData && this.mode == EnumDataGridMode.OnClient) {
             this.totalItems = this._internalData.length;
         }
@@ -472,7 +470,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         if (this.paginator) {
             this.paginator.page = this.currentPage;
             this.paginator.totalItems = this.totalItems;
-        }        
+        }
     }
     private paddingDiff(col: any): number { 
         if (this.getStyleVal(col,'box-sizing') == 'border-box') {
