@@ -251,6 +251,9 @@ export class InputUploadComponent implements OnInit {
             this.onError.emit({item, response, status});
             this.ResetState();
         };
+        this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any) => {
+            this.onError.emit({item, filter, options});
+        }; 
     }
     private addSelectedFileForManualUploading(file: any): void {
       this.selectedFileBlob = null;
