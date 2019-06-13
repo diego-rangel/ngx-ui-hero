@@ -76,6 +76,11 @@ export const inputFormsConfig: InputFormsConfig = {
     format: 'dd/MM/yyyy',
     locale: 'pt-br'
   },
+  monthYear: {
+    placeholder: 'Select...',
+    language: 'en',
+    format: 'MMM/yyyy'
+  },
 };
 
 export const treeViewConfig: TreeViewConfig = {

@@ -1,4 +1,4 @@
-import { Component, DoCheck, EventEmitter, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, EventEmitter, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
@@ -21,8 +21,8 @@ let identifier = 0;
   }]
 })
 export class InputMonthYearComponent extends ElementBase<Date> implements OnInit, DoCheck {
-  @Input() placeholder: string = 'Select...';
-  @Input() language: string = 'en';
+  @Input() placeholder?: string = 'Select...';
+  @Input() language?: string = 'en';
   @Input() format?: string = 'MMM/yyyy';
   @ViewChild(NgModel) model: NgModel;
   @Output() onChange = new EventEmitter<Date>();
@@ -42,13 +42,13 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     @Inject( INPUT_FORMS_CONFIG ) public config: InputFormsConfig,
   ) {
     super(validators, asyncValidators, config);
-
-    if (config.monthYear) {
-      Object.assign(this, config.monthYear);
-    }
   }
 
   ngOnInit() {
+    if (this.config.monthYear) {
+      Object.assign(this, this.config.monthYear);
+    }
+
     this.init();
   }
   ngDoCheck(): void {
