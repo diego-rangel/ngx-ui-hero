@@ -52,7 +52,7 @@
               <div class="col-xl-6">
                 <div class="form-group">
                   <input-text
-                    [label]="'My Label here'"
+                    [label]="'My Text with Mask'"
                     [placeholder]="'My placeholder...'"
                     [maxlength]="200"
                     [disabled]="false"
@@ -65,6 +65,23 @@
     
                 <div highlight="all" [language]="['Html']">
                   <pre><code [textContent]="inputTextComMascaraCode"></code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p><b>The following built-in mask rules should be supported:</b></p>
+
+                <div class="well">
+                  <p class="my-0">0: requires a digit (0-9).</p>
+                  <p class="my-0">9: requires a digit (0-9) or a space.</p>
+                  <p class="my-0">#: requires a digit (0-9), plus (+), or minus (-) sign.</p>
+                  <p class="my-0">L: requires a letter (a-Z).</p>
+                  <p class="my-0">?: Requires a letter (a-Z) or a space.</p>
+                  <p class="my-0">A: requires an alphanumeric (0-9, a-Z).</p>
+                  <p class="my-0">a: requires an alphanumeric (0-9, a-Z) or a space.</p>
+                  <p class="my-0">&: any keyboard character (excluding space).</p>
+                  <p class="my-0">C: any keyboard character.</p>
                 </div>
               </div>
             </div>

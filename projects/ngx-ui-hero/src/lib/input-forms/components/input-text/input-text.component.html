@@ -4,14 +4,29 @@
   <i class="fa fa-question-circle ml-2" tooltip="{{help}}" container="body" *ngIf="help"></i>
 </label>
 
-<input type="text" 
+<input *ngIf="!masking || masking.length == 0"
+  type="text" 
   class="form-control" 
   [maxlength]="maxlength"
   [disabled]="disabled" 
-  [placeholder]="placeholder"
+  [placeholder]="placeholder"  
+  [(ngModel)]="value"
+  [id]="identifier"
+  [ngClass]="{
+    'is-valid': showValidations && touched && !(invalid | async),
+    'is-invalid': showValidations && touched && (invalid | async)
+  }" />
+
+<input *ngIf="masking?.length > 0"
+  type="text" 
+  class="form-control" 
+  [maxlength]="maxlength"
+  [disabled]="disabled" 
+  [placeholder]="placeholder"  
   [mask]="masking"
   [(ngModel)]="value"
   [id]="identifier"
+  autoSelectOnFocus
   [ngClass]="{
     'is-valid': showValidations && touched && !(invalid | async),
     'is-invalid': showValidations && touched && (invalid | async)

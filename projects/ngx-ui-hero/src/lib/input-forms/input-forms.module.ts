@@ -1,7 +1,6 @@
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
 import { FileUploadModule } from 'ng2-file-upload';
-import { NgxMaskModule } from 'ngx-mask';
 
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,6 +31,7 @@ import { InputValidationsComponent } from './components/input-validations/input-
 import { RadialButtonComponent } from './components/radial-button/radial-button.component';
 import { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
+import { MaskDirective } from './masking/mask.directive';
 import { MaxValueValidator } from './validators/max-value-validator';
 import { MinValueValidator } from './validators/min-value-validator';
 
@@ -69,8 +69,7 @@ export { BlockUi } from './classes/block-ui';
     CurrencyMaskModule,    
     FileUploadModule,
     UiModule,
-    NgxUiHeroDataGridModule,
-    NgxMaskModule.forRoot()
+    NgxUiHeroDataGridModule
   ],
   declarations: [
     MaxValueValidator,
@@ -95,6 +94,7 @@ export { BlockUi } from './classes/block-ui';
     InputDropdownGridComponent,
     BlockUiComponent,
     InputDropdownSearchComponent,
+    MaskDirective
   ],
   exports: [
     MaxValueValidator,
@@ -119,7 +119,8 @@ export { BlockUi } from './classes/block-ui';
     InputSwitchComponent,
     InputDropdownGridComponent,
     InputDropdownSearchComponent,
-    BlockUiComponent
+    BlockUiComponent,
+    MaskDirective
   ],
 })
 export class NgxUiHeroInputFormsModule {

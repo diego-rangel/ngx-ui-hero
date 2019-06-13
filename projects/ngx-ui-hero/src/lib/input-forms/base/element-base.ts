@@ -51,7 +51,7 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   }
 
   get touched(): boolean {
-    return this.model.touched;
+    return this.model != null && this.model != undefined && this.model.touched;
   }
 
   get invalidPattern(): boolean {
