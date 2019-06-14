@@ -33,8 +33,8 @@
         <div class="options-container" *ngIf="options?.length > 0">
             <div class="toolbar d-flex align-items-center">
                 <input type="text" class="form-control" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" auto-focus />
-                <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(true)" [disabled]="disabled"><i class="fa fa-check-square"></i> {{selectAllButtonLabel}}</button>
-                <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(false)" [disabled]="disabled"><i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}</button>
+                <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(true, true)" [disabled]="disabled"><i class="fa fa-check-square"></i> {{selectAllButtonLabel}}</button>
+                <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(false, true)" [disabled]="disabled"><i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}</button>
             </div>
 
             <ul>

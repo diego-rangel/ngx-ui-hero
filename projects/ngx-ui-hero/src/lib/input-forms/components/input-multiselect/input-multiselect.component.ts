@@ -1,4 +1,4 @@
-import { Component, DoCheck, Inject, Input, IterableDiffers, OnInit, Optional, ViewChild } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Inject, Input, IterableDiffers, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
@@ -35,6 +35,7 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   @Input() public selectAllButtonLabel: string = 'Select all';
   @Input() public clearSelectionButtonLabel: string = 'Clear selection';
   @Input() public maxCountOfLabelsToShow: number = 3;
+  @Output() public onChange = new EventEmitter<any>();
   @ViewChild(NgModel) model: NgModel;
 
   get options(): Array<any> {
@@ -79,7 +80,7 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   Init(): void {
     if (!this.value || !this.options || this.value.length == 0 || this.options.length == 0) {      
       if ((!this.value || this.value.length == 0) && this.options) {
-        this.ToggleAllItemsSelection(false);
+        this.ToggleAllItemsSelection(false, false);
       }
 
       return;
@@ -118,8 +119,9 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     
     item.selected = !item.selected;
     this.updateModel();
+    this.onChange.emit();
   }
-  ToggleAllItemsSelection(value: boolean): void {
+  ToggleAllItemsSelection(value: boolean, emitChanges: boolean): void {
     if (this.disabled) {
       return;
     }
@@ -132,6 +134,8 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
 
     this.updateModel();
     this.clearSearch();
+
+    if (emitChanges) this.onChange.emit();
   }
   ItemSelectedCheckChanged(): void {
     if (this.disabled) {
@@ -139,6 +143,7 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     }
     
     this.updateModel();
+    this.onChange.emit();
   }  
 
   RemoveItem(item: any, index: number, event: any) {
