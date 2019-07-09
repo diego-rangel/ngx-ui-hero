@@ -75,6 +75,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() filterPlacement?: string = 'top';
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
+    @Output() OnRowRendered = new EventEmitter<any>();
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @Output() OnColumnFiltered = new EventEmitter<DataGridColumnModel>();
@@ -129,7 +130,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
     ngDoCheck(): void {
         let changes = this._differ.diff(this._externalData);
-        if (changes) {
+        if (changes && this.initialRenderApplied) {
             this.Rerender();
         }
     }
@@ -402,7 +403,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             this._internalData = [];
         }
 
-        this.gridData = Object.assign([], this._internalData);
+        if (this.mode == EnumDataGridMode.OnServer) {
+            this.gridData = Object.assign([], this._internalData);
+            this.handleRowRenders();
+        }        
     }
     private initializeColumns(): void {
         if (!this.columns || this.columns.length == 0) {
@@ -495,6 +499,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         const endItem = page * this.itemsPerPage;
         this.gridData = this._internalData.slice(startItem, endItem);
         
+        this.handleRowRenders();
         this.handleSelectAllCheckboxState();
         this.handleAutoFit();
     }
@@ -717,6 +722,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
         for (let i = 0; i < this.columns.length; i++) {
             this.columns[i].isFiltersOpenned = false;
+        }
+    }
+    private handleRowRenders() {
+        if (!this.gridData || this.gridData.length == 0) return;
+        for (let i = 0; i < this.gridData.length; i++) {
+            this.OnRowRendered.emit(this.gridData[i]);
         }
     }
 }
