@@ -209,6 +209,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     RenderPropertyValue(propertyPath: string, object: any): any {
+        if (!propertyPath) return null;
         let parts: string[] = propertyPath.split( "." );
         let property: any = object || {};
       
