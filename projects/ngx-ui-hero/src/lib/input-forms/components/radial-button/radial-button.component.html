@@ -1,4 +1,4 @@
 <button class="btn-radial btn" [ngClass]="backgroundColorClass" type="button"
-  [tooltip]="label" [placement]="labelPlacement" [disabled]="disabled" (click)="onClick.emit($event)">
+  [tooltip]="label" [placement]="labelPlacement" container="body" [disabled]="disabled" (click)="onClick.emit($event)">
   <i [ngClass]="iconClass"></i>
 </button>
