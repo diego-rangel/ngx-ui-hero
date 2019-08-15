@@ -50,7 +50,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() exportButtonLabel?: string = 'Export';
     @Input() exportedFileName?: string = 'Export';
     @Input() exportedExcelSheetName?: string = 'Sheet';
-    @Input() initialColumnToSort?: number;
+    @Input() initialColumnToSort?: number = 0;
     @Input() initialSortDirection?: EnumSortDirection = EnumSortDirection.Ascending;
     @Input() mode?: EnumDataGridMode = EnumDataGridMode.OnClient;
     @Input() totalItems?: number;
