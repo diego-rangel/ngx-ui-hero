@@ -1,0 +1,34 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+        <h1>Gantt chart</h1>
+        <p>A high customizable and pure HTML+CSS Gantt chart implementation Component.</p>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Attention!</strong> You must import the <b>NgxUiHeroChartsModule</b> module in order to use this component. Check the <a routerLink="/get-started">Get started</a> section.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <h2>Demo</h2>
+
+    <gantt-chart [data]="data" caption="My Caption title" (onSelect)="onSelect($event)" [maxHeight]="400"></gantt-chart>
+    
+    <h2 class="mt-5">Usage</h2>
+    <tabset class="custom-tab">
+        <tab heading="Template">
+            <div>
+                <p>The <b>maxHeight</b> parameter is optional. If greater than <b>zero</b>, the timeline should handle a scrollbar on the <b>Y</b> axis.</p>
+                <pre><code [highlight]="template"></code></pre>
+            </div>
+        </tab>
+        <tab heading="Component">
+            <div>
+                <pre><code [highlight]="code"></code></pre>
+            </div>
+        </tab>
+    </tabset>
+</div>

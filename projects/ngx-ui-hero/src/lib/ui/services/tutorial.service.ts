@@ -449,6 +449,8 @@ export class TutorialService {
         this._render.setStyle(block, 'opacity', '1');
     }
     private isCurrentBlockOnBottomOfScreen(): boolean {
+        if (this._currentTaskIndex < 0) return false;
+
         let el = this._runningTasks[this._currentTaskIndex].element;
         let elementRect = el.nativeElement.getBoundingClientRect();
         let top: number = elementRect.top;
@@ -457,12 +459,16 @@ export class TutorialService {
         return top > document.body.scrollHeight - offsetTopFromBody;
     }
     private isCurrentBlockOnRightOfScreen(): boolean {
+        if (this._currentTaskIndex < 0) return false;
+        
         let el = this._runningTasks[this._currentTaskIndex].element;
         let offsetLeftFromBody: number = $(el.nativeElement).offset().left;
 
         return offsetLeftFromBody >= document.body.clientWidth / 2;
     }
     private isCurrentElementText(): boolean {
+        if (this._currentTaskIndex < 0) return false;
+        
         const allowedTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'span', 'small', 'p'];
         let el = this._runningTasks[this._currentTaskIndex].element;
         

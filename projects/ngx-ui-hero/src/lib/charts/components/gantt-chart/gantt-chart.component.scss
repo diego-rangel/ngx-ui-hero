@@ -1,0 +1,133 @@
+.ui-gantt-chart {
+    width: 100%;
+    border: 1px solid #eeeeee;
+
+    .gantt-container {
+        display: flex;
+        overflow-y: auto;
+        
+        .gantt-labels,
+        .gantt-timeline {
+            .header, .footer {
+                display: flex;
+                height: 70px;
+                box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+            }
+        }
+
+        .gantt-labels {
+            width: 300px;
+            flex-shrink: 0;
+            position: relative;
+
+            .header, .footer {
+                justify-content: space-between;
+                align-items: center;
+                border-right: 2px solid #eeeeee;
+                padding: 0 20px;
+                background-color: #FFF;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+
+                .title {
+                    color: #717274;
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+                
+                .legends span {
+                    color: #717274;
+                    display: block;
+                    font-size: 13px;
+                    font-weight: bold;
+                    padding: 4px 0;
+                    text-transform: capitalize;
+                }
+            }
+            .labels {
+                .label {
+                    display: flex;
+                    align-items: center;
+                    font-weight: 600;
+                    background-color: #f1f5f8;
+                    border-bottom: 1px solid #dfe8ef;
+                    border-right: 2px solid #dfe8ef;
+                    padding: 0 20px;
+                    height: 50px;
+                }
+            }
+        }
+        .gantt-timeline {
+            flex-grow: 1;
+            position: relative;
+            
+            .header, .footer {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-width: 700px;
+                background-color: #FFF;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+
+                .year {
+                    text-align: center;
+                    color: #717274;
+                    font-size: 13px;
+                    font-weight: bold;
+                    padding: 4px 0;
+                }
+                .months {
+                    display: flex;
+                    padding: 4px 0;
+
+                    .month {
+                        color: #717274;
+                        text-align: center;
+                        flex-grow: 1;
+                        font-size: 13px;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .timeline {
+                min-width: 700px;
+
+                .item {
+                    display: flex;
+                    position: relative;
+    
+                    .box {
+                        flex-grow: 1;
+                        border-bottom: 1px solid #eeeeee;
+                        border-right: 2px solid #eeeeee;
+                        height: 50px;
+                    }
+                    .box:last-child {
+                        border-right: 0;
+                    }
+
+                    .serie {
+                        cursor: pointer;
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        color: #FFF;
+                        font-size: 13px;
+                        font-weight: 600;
+                        top: 5px;
+                        bottom: 6px;
+                        padding: 0 5px;
+                        transition: opacity .3s ease-in-out, width .8s ease-out;
+                    }
+                    .serie:hover {
+                        opacity: .8;
+                    }
+                }
+            }            
+        }
+    }
+}

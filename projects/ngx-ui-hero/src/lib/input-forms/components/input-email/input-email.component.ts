@@ -1,18 +1,12 @@
-import { Component, Input, ViewChild, Optional, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { ElementBase } from '../../base/element-base';
-import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
+import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
 let identifier = 0;
-
-import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS
-} from '@angular/forms';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -30,7 +24,7 @@ export class InputEmailComponent extends ElementBase<string> implements OnInit {
   @Input() showInputGroup?: boolean = true;
   @Input() inputGroupText?: string | SafeHtml;
 
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
 
   public identifier = `input-email-${identifier++}`;
 

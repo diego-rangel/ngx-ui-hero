@@ -1,0 +1,28 @@
+<label *ngIf="label" [attr.for]="identifier">
+    {{label}}
+    <span class="required-symbol" *ngIf="isRequired"> *</span>
+    <i class="fa fa-question-circle ml-2" tooltip="{{help}}" container="body" *ngIf="help"></i>
+</label>
+
+<input 
+    type="text" 
+    class="form-control" 
+    [disabled]="disabled" 
+    [placeholder]="placeholder"  
+    [mask]="masking"
+    [(ngModel)]="value"
+    [id]="identifier"
+    autoSelectOnFocus
+    [ngClass]="{
+        'is-valid': showValidations && wasTouched && !(invalid | async),
+        'is-invalid': showValidations && wasTouched && (invalid | async)
+    }"
+    (blur)="onTouch()" />
+
+<small class="text-muted" *ngIf="description">{{description}}</small>
+
+<input-validations
+    *ngIf="showValidations && wasTouched && (invalid | async)"
+    [messages]="failures | async">
+</input-validations>
+  

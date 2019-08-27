@@ -1,19 +1,23 @@
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import typescript from 'highlight.js/lib/languages/typescript';
+import xml from 'highlight.js/lib/languages/xml';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { HighlightModule } from 'ngx-highlightjs';
-import { ApiSettings, DataGridConfig, InputFormsConfig, NgxUiHeroApiModule, NgxUiHeroDataGridModule, NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, TreeViewConfig } from 'ngx-ui-hero';
+import { ApiSettings, ChartsConfig, DataGridConfig, InputFormsConfig, NgxUiHeroApiModule, NgxUiHeroChartsModule, NgxUiHeroDataGridModule, NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, TreeViewConfig } from 'ngx-ui-hero';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { ComponentsComponent } from './components/components.component';
 import { DatagridComponent } from './datagrid/datagrid.component';
 import { AnchorLinkDirective } from './directives/anchor.directive';
+import { GanttComponent } from './gantt/gantt.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { HeaderComponent } from './header/header.component';
 import { PrintingComponent } from './printing/printing.component';
@@ -95,19 +99,35 @@ export const treeViewConfig: TreeViewConfig = {
   }
 };
 
+export const chartsConfig: ChartsConfig = {
+  locale: 'en-us',
+  emptyMessage: 'No results found at this moment.'
+};
+
+export function hljsLanguages() {
+  return [
+    {name: 'typescript', func: typescript},
+    {name: 'xml', func: xml}
+  ];
+}
+
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
     NgxUiHeroModule,
+    NgxUiHeroChartsModule.forRoot(chartsConfig),
     NgxUiHeroApiModule.forRoot(apiSettings),
     NgxUiHeroDataGridModule.forRoot(dataGridSettings),
     NgxUiHeroInputFormsModule.forRoot(inputFormsConfig),
     NgxUiHeroTreeViewModule.forRoot(treeViewConfig),
     TabsModule.forRoot(),
-    HighlightModule.forRoot({theme: 'github'}),
+    HighlightModule.forRoot({
+      languages: hljsLanguages
+    }),
   ],
   declarations: [
     AppComponent,
@@ -121,7 +141,8 @@ export const treeViewConfig: TreeViewConfig = {
     TreeviewComponent,
     PrintingComponent,
     TutorialComponent,
-    ModalExampleComponent
+    ModalExampleComponent,
+    GanttComponent
   ],
   entryComponents: [
     ModalExampleComponent

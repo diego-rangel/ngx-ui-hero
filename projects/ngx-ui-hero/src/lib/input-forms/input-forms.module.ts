@@ -24,6 +24,7 @@ import { InputPercentComponent } from './components/input-percent/input-percent.
 import { InputRadioComponent } from './components/input-radio/input-radio.component';
 import { InputSelectComponent } from './components/input-select/input-select.component';
 import { InputSwitchComponent } from './components/input-switch/input-switch.component';
+import { InputTextMaskComponent } from './components/input-text-mask/input-text-mask.component';
 import { InputTextComponent } from './components/input-text/input-text.component';
 import { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
 import { InputUploadComponent } from './components/input-upload/input-upload.component';
@@ -59,6 +60,7 @@ export { InputDropdownGridComponent } from './components/input-dropdown-grid/inp
 export { MaxValueValidator } from './validators/max-value-validator';
 export { MinValueValidator } from './validators/min-value-validator';
 export { InputDropdownSearchComponent } from './components/input-dropdown-search/input-dropdown-search.component';
+export { InputTextMaskComponent } from './components/input-text-mask/input-text-mask.component';
 export { BlockUi } from './classes/block-ui';
 
 @NgModule({
@@ -94,7 +96,8 @@ export { BlockUi } from './classes/block-ui';
     InputDropdownGridComponent,
     BlockUiComponent,
     InputDropdownSearchComponent,
-    MaskDirective
+    InputTextMaskComponent,
+    MaskDirective,
   ],
   exports: [
     MaxValueValidator,
@@ -119,6 +122,7 @@ export { BlockUi } from './classes/block-ui';
     InputSwitchComponent,
     InputDropdownGridComponent,
     InputDropdownSearchComponent,
+    InputTextMaskComponent,
     BlockUiComponent,
     MaskDirective
   ],

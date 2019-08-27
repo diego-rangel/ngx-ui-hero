@@ -1,0 +1,4 @@
+.form-control.is-invalid, .was-validated .form-control:invalid,
+.form-control.is-valid, .was-validated .form-control:valid {
+    background-position: center right calc(.875em + .1875rem);
+}

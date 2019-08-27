@@ -19,7 +19,7 @@ let identifier = 0;
 export class InputCurrencyComponent extends ElementBase<string> implements OnInit {
   @Input() showInputGroup?: boolean = true;
   @Input() public placeholder = '';
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
   
   currencyCode: string;
 

@@ -24,7 +24,7 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
   @Input() placeholder?: string = 'Select...';
   @Input() language?: string = 'en';
   @Input() format?: string = 'MMM/yyyy';
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
   @Output() onChange = new EventEmitter<Date>();
 
   languageDefinitions: InputMonthYearLanguage;

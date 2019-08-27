@@ -36,7 +36,7 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
   @Input() public clearSelectionButtonLabel: string = 'Clear selection';
   @Input() public maxCountOfLabelsToShow: number = 3;
   @Output() public onChange = new EventEmitter<any>();
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
 
   get options(): Array<any> {
     return this._options;

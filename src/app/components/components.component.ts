@@ -23,16 +23,15 @@ export class ComponentsComponent implements OnInit {
   `;
 
   inputTextComMascaraCode = `
-<input-text
+<input-text-mask
   [label]="'My Label here'"
   [placeholder]="'My placeholder...'" 
-  [maxlength]="200"
   [masking]="'(99) 0000-0000'"
   [disabled]="false"
   [showValidations]="true"
   [(ngModel)]="myModel"
   required>
-</input-text>
+</input-text-mask>
   `;
 
   inputEmailCode = `
@@ -112,11 +111,11 @@ export class ComponentsComponent implements OnInit {
   [(ngModel)]="myRadioModel">
 </input-radio>
 <input-radio
-    [label]="'My radio 2'"
-    [disabled]="false"
-    [name]="'radioOptions'"
-    [radioValue]="2"
-    [(ngModel)]="myRadioModel">
+  [label]="'My radio 2'"
+  [disabled]="false"
+  [name]="'radioOptions'"
+  [radioValue]="2"
+  [(ngModel)]="myRadioModel">
 </input-radio>
   `;
 

@@ -1,15 +1,9 @@
-import { Component, Input, ViewChild, Optional, Inject } from '@angular/core';
+import { Component, Inject, Input, Optional, ViewChild } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
-import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
-
-import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS,
-} from '@angular/forms';
+import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
 let identifier = 0;
 
@@ -26,7 +20,7 @@ let identifier = 0;
 export class InputRadioComponent extends ElementBase<string> {
   @Input() public name: string;
   @Input() public radioValue: string;
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
 
   public identifier = `input-radio-${identifier++}`;
 

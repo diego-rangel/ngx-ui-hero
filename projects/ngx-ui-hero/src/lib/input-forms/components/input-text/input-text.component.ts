@@ -20,9 +20,8 @@ let identifier = 0;
 export class InputTextComponent extends ElementBase<string> implements OnInit {
   @Input() public placeholder = '';
   @Input() public maxlength: number;
-  @Input() public masking: string;
  
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
   
   public identifier = `input-text-${identifier++}`;  
  

@@ -35,7 +35,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
   searchCounter: number = 0;
   selectedItemIndex: number = -1;
   
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
   @Input() public placeholder = 'Select...';
   @Input() public searchPlaceholder = 'Search...';
   @Input() public emptyResultsMessage?: string = 'No results found at this moment.';

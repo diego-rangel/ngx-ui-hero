@@ -18,7 +18,7 @@ let identifier = 0;
   }]
 })
 export class InputSwitchComponent extends ElementBase<boolean> {
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
   @Output() onChange = new EventEmitter<boolean>();
 
   public identifier = `input-switch-${identifier++}`;

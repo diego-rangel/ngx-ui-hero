@@ -8,3 +8,4 @@ export * from './lib/api/index';
 export * from './lib/input-forms/index';
 export * from './lib/data-grid/index';
 export * from './lib/tree-view/index';
+export * from './lib/charts/index';

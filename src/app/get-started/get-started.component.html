@@ -6,7 +6,7 @@
       </div>
       <div class="col-sm-8 text-center text-md-left">
         <h1>ngx-ui-hero</h1>
-        <p>An <b>Angular v6</b> awesome library for easily build really nice apps based on bootstrap v4.</p>
+        <p>An <b>Angular v8</b> awesome library for easily build really nice apps based on bootstrap v4.</p>
         <a class="btn btn-light btn-lg mr-1 my-1" href="https://github.com/diego-rangel" target="_blank"><fa name="github"></fa>  Powered by Diego Rangel</a>
         <a class="btn btn-light btn-lg mr-1 my-1" href="https://github.com/diego-rangel/ngx-ui-hero" target="_blank"><fa name="github"></fa>  Code on Github</a>
       </div>
@@ -16,30 +16,9 @@
 
 <section>
   <div class="main container">
-    <div class="alert alert-warning" role="alert">
-      <h4 class="alert-heading">Dependencies</h4>
-      <p>You must install all the following dependencies in order to get all <b>ngx-ui-hero</b> functionalities working.</p>
-      <hr>
-      <div class="d-flex justify-content-start flex-wrap">
-        <span class="badge badge-warning-dark m-1">angular@<b>^6.0.3</b></span>
-        <span class="badge badge-warning-dark m-1">bootstrap@<b>^4.1.1</b></span>
-        <span class="badge badge-warning-dark m-1">file-saver@<b>^1.3.8</b></span>
-        <span class="badge badge-warning-dark m-1">font-awesome@<b>^4.7.0</b></span>
-        <span class="badge badge-warning-dark m-1">jquery@<b>^3.3.1</b></span>
-        <span class="badge badge-warning-dark m-1">lodash@<b>^4.17.10</b></span>
-        <span class="badge badge-warning-dark m-1">ng2-currency-mask@<b>^5.3.1</b></span>
-        <span class="badge badge-warning-dark m-1">ng2-file-upload@<b>^1.3.0</b></span>
-        <span class="badge badge-warning-dark m-1">ngx-bootstrap@<b>^3.0.1</b></span>
-        <span class="badge badge-warning-dark m-1">popper.js@<b>^1.14.3</b></span>
-        <span class="badge badge-warning-dark m-1">sweetalert2@<b>^7.22.2</b></span>
-        <span class="badge badge-warning-dark m-1">xlsx@<b>^0.13.4</b></span>
-        <span class="badge badge-warning-dark m-1">print-this@<b>^1.14.0</b></span>
-      </div>
-    </div>
-
     <h2>Installation</h2>
-    <div highlight="all">
-      <pre><code [textContent]="installationCode"></code></pre>
+    <div>
+      <pre><code [highlight]="installationCode"></code></pre>
     </div>
 
     <h2>Modules</h2>
@@ -47,37 +26,29 @@
       <tab heading="Core">
         <h3>NgxUiHeroModule</h3>
         <p>Import this module to access the <b>ngx-ui-hero</b> Core functionalities.</p>
-        <div highlight="all" [language]="['Typescript']">
-          <pre><code [textContent]="mainModuleSetupCode"></code></pre>
+        <div>
+          <pre><code [highlight]="mainModuleSetupCode"></code></pre>
         </div>
       </tab>
-      <tab>
-        <ng-template tabHeading>
-          <i class="fa fa-star"></i> DataGrid <span class="badge badge-danger">new</span>
-        </ng-template>
-        
+      <tab heading="DataGrid">
         <h3>NgxUiHero<mark>DataGrid</mark>Module</h3>
         <p>In order to use the ui-hero DataGrid, you must import this module with a bit of configurations.</p>
-        <div highlight="all" [language]="['Typescript']">
-          <pre><code [textContent]="dataGridModuleSetupCode"></code></pre>
+        <div>
+          <pre><code [highlight]="dataGridModuleSetupCode"></code></pre>
         </div>
       </tab>
-      <tab>
-        <ng-template tabHeading>
-          <i class="fa fa-star"></i> TreeView <span class="badge badge-danger">new</span>
-        </ng-template>
-
+      <tab heading="TreeView">
         <h3>NgxUiHero<mark>TreeView</mark>Module</h3>
         <p>In order to use the ui-hero TreeView, you must import this module with a bit of configurations.</p>
-        <div highlight="all" [language]="['Typescript']">
-          <pre><code [textContent]="treeViewModuleSetupCode"></code></pre>
+        <div>
+          <pre><code [highlight]="treeViewModuleSetupCode"></code></pre>
         </div>
       </tab>
       <tab heading="API's">
         <h3>NgxUiHero<mark>Api</mark>Module</h3>
         <p>In order to use the ui-hero Api functionalities like <b>Base Http Services, Base Crud Services, Local Storage Services and JWT Authentication</b>, you must import this module providing some configurations.</p>
-        <div highlight="all" [language]="['Typescript']">
-          <pre><code [textContent]="apiModuleSetupCode"></code></pre>
+        <div>
+          <pre><code [highlight]="apiModuleSetupCode"></code></pre>
         </div>
       </tab>
       <tab heading="InputForms">
@@ -93,8 +64,19 @@
           </button>
         </div>
     
-        <div highlight="all" [language]="['Typescript']">
-          <pre><code [textContent]="inputFormsModuleSetupCode"></code></pre>
+        <div>
+          <pre><code [highlight]="inputFormsModuleSetupCode"></code></pre>
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          <i class="fa fa-star"></i> Charts <span class="badge badge-danger">new</span>
+        </ng-template>
+
+        <h3>NgxUiHero<mark>Charts</mark>Module</h3>
+        <p>In order to use the ui-hero chart components, you must import this module with a bit of configurations.</p>
+        <div>
+          <pre><code [highlight]="chartsModuleSetupCode"></code></pre>
         </div>
       </tab>
     </tabset>

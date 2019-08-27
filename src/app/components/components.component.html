@@ -45,26 +45,25 @@
                   </input-text>
                 </div>
     
-                <div highlight="all" [language]="['Html']">
-                  <pre><code [textContent]="inputTextCode"></code></pre>
+                <div>
+                  <pre><code [highlight]="inputTextCode"></code></pre>
                 </div>
               </div>
               <div class="col-xl-6">
                 <div class="form-group">
-                  <input-text
+                  <input-text-mask
                     [label]="'My Text with Mask'"
                     [placeholder]="'My placeholder...'"
-                    [maxlength]="200"
                     [disabled]="false"
                     [masking]="'(99) 0000-0000'"                
                     [showValidations]="true"
                     [(ngModel)]="myModelComMascara"
                     required>
-                  </input-text>
+                  </input-text-mask>
                 </div>
     
-                <div highlight="all" [language]="['Html']">
-                  <pre><code [textContent]="inputTextComMascaraCode"></code></pre>
+                <div>
+                  <pre><code [highlight]="inputTextComMascaraCode"></code></pre>
                 </div>
               </div>
             </div>
@@ -111,8 +110,8 @@
                   </input-select>
                 </div>
 
-                <div highlight="all" [language]="['Html']">
-                  <pre><code [textContent]="inputSelectCode"></code></pre>
+                <div>
+                  <pre><code [highlight]="inputSelectCode"></code></pre>
                 </div>
               </div>
               <div class="col">
@@ -127,8 +126,8 @@
                   </input-select>
                 </div>
 
-                <div highlight="all" [language]="['Html']">
-                  <pre><code [textContent]="inputSelectCode2"></code></pre>
+                <div>
+                  <pre><code [highlight]="inputSelectCode2"></code></pre>
                 </div>
               </div>
             </div>
@@ -149,14 +148,14 @@
             <div class="row mt-4">
               <div class="col-lg-6">
                 <h5>Example</h5>
-                <div highlight="all" [language]="['html']">
-                  <pre><code [textContent]="myMultiselectCode"></code></pre>
+                <div>
+                  <pre><code [highlight]="myMultiselectCode"></code></pre>
                 </div>
               </div>
               <div class="col-lg-6">
                 <h5>Model</h5>
-                <div class="long-content" highlight="all" [language]="['json']">
-                  <pre><code [textContent]="myMultiselectModel | json"></code></pre>
+                <div class="long-content">
+                  <pre><code [highlight]="myMultiselectModel | json"></code></pre>
                 </div>
               </div>
             </div>
@@ -271,13 +270,13 @@
 
             <tabset class="custom-tab">
               <tab heading="Template">
-                <div highlight="all" [language]="['Html']">
-                  <pre><code [textContent]="inputDropdownGridTemplate"></code></pre>
+                <div>
+                  <pre><code [highlight]="inputDropdownGridTemplate"></code></pre>
                 </div>
               </tab>
               <tab heading="Component">
-                <div highlight="all" [language]="['Typescript']">
-                  <pre><code [textContent]="inputDropdownGridCode"></code></pre>
+                <div>
+                  <pre><code [highlight]="inputDropdownGridCode"></code></pre>
                 </div>
               </tab>
             </tabset>
@@ -384,13 +383,13 @@
 
             <tabset class="custom-tab">
               <tab heading="Template">
-                <div highlight="all" [language]="['Html']">
-                  <pre><code [textContent]="inputDropdownSearchTemplate"></code></pre>
+                <div>
+                  <pre><code [highlight]="inputDropdownSearchTemplate"></code></pre>
                 </div>
               </tab>
               <tab heading="Component">
-                <div highlight="all" [language]="['Typescript']">
-                  <pre><code [textContent]="inputDropdownSearchCode"></code></pre>
+                <div>
+                  <pre><code [highlight]="inputDropdownSearchCode"></code></pre>
                 </div>
               </tab>
             </tabset>
@@ -500,8 +499,8 @@
               </input-email>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="inputEmailCode"></code></pre>
+            <div>
+              <pre><code [highlight]="inputEmailCode"></code></pre>
             </div>
           </div>
         </div>
@@ -521,8 +520,8 @@
               </input-textarea>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="inputTextAreaCode"></code></pre>
+            <div>
+              <pre><code [highlight]="inputTextAreaCode"></code></pre>
             </div>
           </div>
         </div>
@@ -538,8 +537,8 @@
               </input-checkbox>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="checkboxCode"></code></pre>
+            <div>
+              <pre><code [highlight]="checkboxCode"></code></pre>
             </div>
           </div>
         </div>
@@ -555,8 +554,8 @@
               </input-switch>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="switchCode"></code></pre>
+            <div>
+              <pre><code [highlight]="switchCode"></code></pre>
             </div>
           </div>
         </div>
@@ -573,16 +572,16 @@
                 [(ngModel)]="myRadioModel">
               </input-radio>
               <input-radio
-                  [label]="'My radio 2'"
-                  [disabled]="false"
-                  [name]="'radioOptions'"
-                  [radioValue]="2"
-                  [(ngModel)]="myRadioModel">
+                [label]="'My radio 2'"
+                [disabled]="false"
+                [name]="'radioOptions'"
+                [radioValue]="2"
+                [(ngModel)]="myRadioModel">
               </input-radio>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="radioCode"></code></pre>
+            <div>
+              <pre><code [highlight]="radioCode"></code></pre>
             </div>
           </div>
         </div>
@@ -600,8 +599,8 @@
               </input-currency>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="currencyCode"></code></pre>
+            <div>
+              <pre><code [highlight]="currencyCode"></code></pre>
             </div>
           </div>
         </div>
@@ -619,8 +618,8 @@
               </input-percent>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="percentCode"></code></pre>
+            <div>
+              <pre><code [highlight]="percentCode"></code></pre>
             </div>
           </div>
         </div>
@@ -640,8 +639,8 @@
               </input-number>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="numberCode"></code></pre>
+            <div>
+              <pre><code [highlight]="numberCode"></code></pre>
             </div>
           </div>
         </div>
@@ -663,8 +662,8 @@
               </input-date>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="dateCode"></code></pre>
+            <div>
+              <pre><code [highlight]="dateCode"></code></pre>
             </div>
 
             <h2>Inputs</h2>
@@ -745,8 +744,8 @@
               </input-month-year>
             </div>
 
-            <div highlight="all" [language]="['Html']">
-              <pre><code [textContent]="myMonthYearCode"></code></pre>
+            <div>
+              <pre><code [highlight]="myMonthYearCode"></code></pre>
             </div>
 
             <p><b>Available languages:</b> cs, da, de, en, es, fi, fr, hu, it, jp, nl, pl, pt, ro, sk, zh.</p>
@@ -788,8 +787,8 @@
                     (onError)="OnUploadError($event)">
                   </input-upload>
 
-                  <div highlight="all" [language]="['Html']">
-                    <pre><code [textContent]="uploadCode"></code></pre>
+                  <div>
+                    <pre><code [highlight]="uploadCode"></code></pre>
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -806,8 +805,8 @@
                     (onError)="OnUploadError($event)">
                   </input-upload>
 
-                  <div highlight="all" [language]="['Html']">
-                    <pre><code [textContent]="uploadCodeChunked"></code></pre>
+                  <div>
+                    <pre><code [highlight]="uploadCodeChunked"></code></pre>
                   </div>
                 </div>
               </div>

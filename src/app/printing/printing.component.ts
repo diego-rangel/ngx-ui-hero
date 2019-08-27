@@ -8,7 +8,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./printing.component.scss']
 })
 export class PrintingComponent implements OnInit {
-  @ViewChild('report') report: ReportComponent;
+  @ViewChild('report', {static: true}) report: ReportComponent;
 
   now = new Date();
   data: Array<any> = [

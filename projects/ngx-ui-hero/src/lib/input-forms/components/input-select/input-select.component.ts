@@ -1,21 +1,16 @@
-import { Component, Input, ViewChild, Optional, Inject, OnInit, DoCheck } from '@angular/core';
-
-import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS,
-} from '@angular/forms';
+import { Component, DoCheck, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
-import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
+import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
 let identifier = 0;
 
 @Component({
   selector: 'input-select',
   templateUrl: './input-select.component.html',
+  styleUrls: ['./input-select.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: InputSelectComponent,
@@ -28,7 +23,7 @@ export class InputSelectComponent extends ElementBase<any> implements OnInit, Do
   @Input() public defaultOption: string;
   @Input() public options: Array<any>;
 
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
 
   public identifier = `input-select-${identifier++}`;
 

@@ -207,4 +207,20 @@ export const treeViewConfig: TreeViewConfig = {
 export class MyModule { }
   `;
 
+  chartsModuleSetupCode = `
+import { NgxUiHeroChartsModule, ChartsConfig } from 'ngx-ui-hero';
+
+export const chartsConfig: ChartsConfig = {
+  locale: 'en-us',
+  emptyMessage: 'No results found at this moment.'
+};
+
+@NgModule({
+  imports: [
+    NgxUiHeroChartsModule.forRoot(chartsConfig),
+  ],
+})
+export class MyModule { }
+  `;
+
 }

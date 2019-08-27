@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ComponentsComponent } from './components/components.component';
 import { DatagridComponent } from './datagrid/datagrid.component';
+import { GanttComponent } from './gantt/gantt.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { PrintingComponent } from './printing/printing.component';
 import { ServicesComponent } from './services/services.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'treeview', component: TreeviewComponent },
   { path: 'printing', component: PrintingComponent },
   { path: 'tutorial', component: TutorialComponent },
+  { path: 'gantt', component: GanttComponent },
 ];
 
 @NgModule({

@@ -18,7 +18,7 @@ export class InputPercentComponent extends ElementBase<number> implements OnInit
   @Input() showInputGroup?: boolean = true;
   @Input() inputGroupText?: string = '%';
   @Input() public placeholder = '';
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
 
   public identifier = `input-percent-${identifier++}`;
 

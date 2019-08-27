@@ -1,17 +1,11 @@
-import { Component, Input, ViewChild, Optional, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 
 import { ElementBase } from '../../base/element-base';
-import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 import { InputFormsConfig } from '../../input-forms-config';
+import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
 let identifier = 0;
-
-import {
-  NgModel,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  NG_ASYNC_VALIDATORS,
-} from '@angular/forms';
 
 @Component({
   selector: 'input-textarea',
@@ -26,7 +20,7 @@ export class InputTextareaComponent extends ElementBase<string> implements OnIni
   @Input() public placeholder = '';
   @Input() public maxlength: number;
 
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
 
   public identifier = `input-textarea-${identifier++}`;
 

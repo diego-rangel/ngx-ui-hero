@@ -8,7 +8,7 @@ export class AlertService {
     constructor() { }
 
     private show(title: string, text: string, type: SweetAlertType, confirmButtonText?: string, callback?: Function): any {
-        Swal({
+        Swal.fire({
             title: title,
             html: text,
             type: type,
@@ -33,7 +33,7 @@ export class AlertService {
         this.show(title, text, 'warning', confirmButtonText, callback);
     }
     question(title: string, text: string, successCallback: Function, confirmButtonText?: string, cancelButtonText?: string, cancelCallback?: Function): any {
-        Swal({
+        Swal.fire({
             title: title,
             text: text,
             type: 'question',

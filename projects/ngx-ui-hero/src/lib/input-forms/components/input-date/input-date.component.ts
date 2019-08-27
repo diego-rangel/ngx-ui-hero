@@ -1,13 +1,14 @@
-import { Component, Input, ViewChild, Optional, Inject, OnInit, Output, EventEmitter, DoCheck } from '@angular/core';
-import { NgModel, NG_VALUE_ACCESSOR, NG_VALIDATORS, NG_ASYNC_VALIDATORS } from '@angular/forms';
-import { BsDatepickerConfig, BsLocaleService, BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig, BsDatepickerDirective, BsLocaleService } from 'ngx-bootstrap/datepicker';
+
+import { Component, DoCheck, EventEmitter, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgModel } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { InputDateConfig } from './input-date-config';
 import { ElementBase } from '../../base/element-base';
-import { INPUT_FORMS_CONFIG } from './../../input-forms-config.constants';
-import { InputFormsConfig } from '../../input-forms-config';
 import { AsyncValidatorArray, ValidatorArray } from '../../base/validate';
+import { InputFormsConfig } from '../../input-forms-config';
+import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
+import { InputDateConfig } from './input-date-config';
 
 let identifier = 0;
 
@@ -30,8 +31,8 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, DoC
   @Input() placement?: string = 'bottom';
   @Input() theme?: string = 'theme-dark-blue';
   @Output() onChange = new EventEmitter<Date>();
-  @ViewChild('dp') datepicker: BsDatepickerDirective;
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild('dp', {static: true}) datepicker: BsDatepickerDirective;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
 
   locale?: string = 'en-gb';
   bsConfig: Partial<BsDatepickerConfig> = {

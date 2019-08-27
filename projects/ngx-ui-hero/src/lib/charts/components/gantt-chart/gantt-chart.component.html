@@ -1,0 +1,44 @@
+<div id="{{identifier}}" class="ui-gantt-chart">
+    <div class="gantt-container" *ngIf="internalData?.length > 0" [ngStyle]="{'maxHeight.px': maxHeight > 0 ? maxHeight : 'auto'}">
+        <div class="gantt-labels">
+            <div class="header">
+                <div class="title">{{caption}}</div>
+                <div class="legends">
+                    <span class="year">{{yearLabel}}</span>
+                    <span class="month">{{monthLabel}}</span>
+                </div>
+            </div>
+            <div class="labels">
+                <div class="label" *ngFor="let item of internalData">
+                    {{item.label}}
+                </div>
+            </div>
+        </div>
+        <div class="gantt-timeline">
+            <div class="header">
+                <div class="year">{{currentYear}}</div>
+                <div class="months">
+                    <div class="month" *ngFor="let item of months">{{item | uppercase}}</div>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="item" *ngFor="let item of internalData">
+                    <div class="box" *ngFor="let month of months"></div>
+                    <div class="serie" *ngFor="let serie of item.series" 
+                        tooltip="{{serie.daysDiff}} {{dayLabel}}s"
+                        container="body"
+                        (click)="onSerieSelected(item, serie)"
+                        [ngStyle]="{
+                            'backgroundColor': serie.color,
+                            'left.px': serie.left,
+                            'width.px': serie.width
+                        }">
+                        <span class="text-truncate">{{serie.daysDiff}} {{dayLabel}}s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p *ngIf="!internalData || internalData.length == 0">{{emptyMessage}}</p>
+</div>

@@ -23,8 +23,8 @@
             <ui-radial-button class="mx-1" iconClass="fa fa-save" backgroundColorClass="btn-success" label="Save"></ui-radial-button>
             <ui-radial-button class="mx-1" iconClass="fa fa-trash" backgroundColorClass="btn-danger" label="Delete"></ui-radial-button>
 
-            <div class="mt-4" highlight="all" [language]="['Html']">
-              <pre><code [textContent]="buttonsCode"></code></pre>
+            <div class="mt-4">
+              <pre><code [highlight]="buttonsCode"></code></pre>
             </div>
           </div>
         </div>
@@ -48,13 +48,13 @@
 
             <tabset class="custom-tab">
               <tab heading="Template">
-                <div highlight="all" [language]="['Html']">
-                  <pre><code [textContent]="blockUiTemplate"></code></pre>
+                <div>
+                  <pre><code [highlight]="blockUiTemplate"></code></pre>
                 </div>
               </tab>
               <tab heading="Component">
-                <div highlight="all" [language]="['Typescript']">
-                  <pre><code [textContent]="blockUiCode"></code></pre>
+                <div>
+                  <pre><code [highlight]="blockUiCode"></code></pre>
                 </div>
               </tab>
             </tabset>
@@ -73,13 +73,13 @@
 
             <tabset class="custom-tab">
               <tab heading="Template">
-                <div highlight="all" [language]="['Html']">
-                  <pre><code [textContent]="modalTemplate"></code></pre>
+                <div>
+                  <pre><code [highlight]="modalTemplate"></code></pre>
                 </div>
               </tab>
               <tab heading="Component">
-                <div highlight="all" [language]="['Typescript']">
-                  <pre><code [textContent]="modalCode"></code></pre>
+                <div>
+                  <pre><code [highlight]="modalCode"></code></pre>
                 </div>
               </tab>
             </tabset>

@@ -32,9 +32,9 @@
     <div class="dropdown-options shadow fadeInDown" *ngIf="showOptions">
         <div class="options-container" *ngIf="options?.length > 0">
             <div class="toolbar d-flex align-items-center">
-                <input type="text" class="form-control" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" auto-focus />
-                <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(true, true)" [disabled]="disabled"><i class="fa fa-check-square"></i> {{selectAllButtonLabel}}</button>
-                <button type="button" class="btn btn-light ml-1" (click)="ToggleAllItemsSelection(false, true)" [disabled]="disabled"><i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}</button>
+                <input type="text" class="form-control flex-grow-1" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" auto-focus />
+                <button type="button" class="btn btn-light ml-1 flex-shrink-0" (click)="ToggleAllItemsSelection(true, true)" [disabled]="disabled"><i class="fa fa-check-square"></i> {{selectAllButtonLabel}}</button>
+                <button type="button" class="btn btn-light ml-1 flex-shrink-0" (click)="ToggleAllItemsSelection(false, true)" [disabled]="disabled"><i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}</button>
             </div>
 
             <ul>

@@ -31,7 +31,7 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
   selectedDisplayText: string;
   internalData: Array<any>;
   
-  @ViewChild(NgModel) model: NgModel;
+  @ViewChild(NgModel, {static: true}) model: NgModel;
   @Input() public placeholder = 'Select...';
   @Input() public searchPlaceholder = 'Search...';
   @Input() public displayTextProperty: string;
