@@ -1,6 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
-import { API_SETTINGS } from '../../api.settings.constants';
+import { Inject, Injectable } from '@angular/core';
+
 import { ApiSettings } from '../../api.settings';
+import { API_SETTINGS } from '../../api.settings.constants';
 
 declare var localStorage: any;
 
@@ -11,8 +12,8 @@ export class LocalStorageService {
     constructor(
         @Inject(API_SETTINGS) public settings: ApiSettings,
     ) {
-        if (this.settings.jwtAuthSettings.localStoragePrefix) {
-            this._prefix = this.settings.jwtAuthSettings.localStoragePrefix
+        if (this.settings.localStoragePrefix) {
+            this._prefix = this.settings.localStoragePrefix
         }
     }
 

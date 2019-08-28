@@ -12,21 +12,21 @@ export class GanttComponent implements OnInit {
     {
       label: 'Diego Rangel',
       series: [
-        { startDate: new Date(2019, 3, 1, 0, 0, 0), endDate: new Date(2019, 3, 15, 0, 0, 0) },
+        { startDate: new Date(2019, 3, 1, 0, 0, 0), endDate: new Date(2019, 3, 20, 0, 0, 0) },
         { startDate: new Date(2019, 6, 20, 0, 0, 0), endDate: new Date(2019, 7, 3, 0, 0, 0) },
       ]
     },
     {
       label: 'Foo',
       series: [
-        { color: '#3F51B5', startDate: new Date(2019, 8, 25, 0, 0, 0), endDate: new Date(2019, 9, 14, 0, 0, 0) },
+        { color: '#3F51B5', startDate: new Date(2019, 1, 1, 0, 0, 0), endDate: new Date(2019, 2, 2, 0, 0, 0) },
       ]
     },   
     {
       label: 'Bar',
       series: [
         { startDate: new Date(2019, 5, 10, 0, 0, 0), endDate: new Date(2019, 5, 29, 0, 0, 0) },
-        { startDate: new Date(2019, 10, 10, 0, 0, 0), endDate: new Date(2019, 10, 19, 0, 0, 0) },
+        { startDate: new Date(2019, 10, 10, 0, 0, 0), endDate: new Date(2019, 10, 24, 0, 0, 0) },
       ]
     },   
   ];
@@ -42,21 +42,21 @@ data: Array<GanttItemModel> = [
   {
     label: 'Diego Rangel',
     series: [
-      { startDate: new Date(2019, 3, 1, 0, 0, 0), endDate: new Date(2019, 3, 15, 0, 0, 0) },
+      { startDate: new Date(2019, 3, 1, 0, 0, 0), endDate: new Date(2019, 3, 20, 0, 0, 0) },
       { startDate: new Date(2019, 6, 20, 0, 0, 0), endDate: new Date(2019, 7, 3, 0, 0, 0) },
     ]
   },
   {
     label: 'Foo',
     series: [
-      { color: '#3F51B5', startDate: new Date(2019, 8, 25, 0, 0, 0), endDate: new Date(2019, 9, 14, 0, 0, 0) },
+      { color: '#3F51B5', startDate: new Date(2019, 1, 1, 0, 0, 0), endDate: new Date(2019, 2, 2, 0, 0, 0) },
     ]
   },   
   {
     label: 'Bar',
     series: [
       { startDate: new Date(2019, 5, 10, 0, 0, 0), endDate: new Date(2019, 5, 29, 0, 0, 0) },
-      { startDate: new Date(2019, 10, 10, 0, 0, 0), endDate: new Date(2019, 10, 19, 0, 0, 0) },
+      { startDate: new Date(2019, 10, 10, 0, 0, 0), endDate: new Date(2019, 10, 24, 0, 0, 0) },
     ]
   },   
 ];

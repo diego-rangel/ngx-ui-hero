@@ -34,23 +34,39 @@ constructor(
 ) {}
 `;
 
-  authConstructorCode = `
-constructor(
-  private authService: AuthService
-) {}
-`;
+  httpClientInterceptorsUsageCode = `
+import {
+  BaseApiUrlInterceptor, 
+  CommonHeadersInterceptor, 
+  JwtAuthInterceptor, 
+  WinAuthInterceptor,
+  ResponseDataInterceptor,
+  ErrorHandlerInterceptor 
+} from 'ngx-ui-hero';
 
-  apiConstructorCode = `
-constructor(
-  private apiService: ApiService
-) {}
-`;
+@NgModule({
+  imports: [
+    BrowserModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CommonHeadersInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseDataInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: WinAuthInterceptor, multi: true },
+  ],
+})
+export class AppModule { }
+  `;
 
   constructor(
-    private alertService: AlertService
+    private alertService: AlertService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   testSweetAlertSuccess(): void {
     this.alertService.success('Yeahhh', 'Some success text here =)');

@@ -5,8 +5,12 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { HighlightModule } from 'ngx-highlightjs';
-import { ApiSettings, ChartsConfig, DataGridConfig, InputFormsConfig, NgxUiHeroApiModule, NgxUiHeroChartsModule, NgxUiHeroDataGridModule, NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, TreeViewConfig } from 'ngx-ui-hero';
+import {
+    ApiSettings, BaseApiUrlInterceptor, ChartsConfig, CommonHeadersInterceptor, DataGridConfig, ErrorHandlerInterceptor, InputFormsConfig, JwtAuthInterceptor, NgxUiHeroApiModule, NgxUiHeroChartsModule, NgxUiHeroDataGridModule,
+    NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, ResponseDataInterceptor, TreeViewConfig
+} from 'ngx-ui-hero';
 
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,22 +34,9 @@ import { UiComponent } from './ui/ui.component';
 defineLocale('pt-br', ptBrLocale);
 
 export const apiSettings: ApiSettings = {
-  apiBaseUrl: 'http://localhost:50467/api',
-  jwtAuthSettings: {
-    jwtEndpointPath: '/token',
-    localStoragePrefix: 'myDemoAppPrefix_',
-    requestProperties: {
-      usernameAuthProperty: 'emailAddress',
-      passwordAuthProperty: 'password'
-    },
-    responseProperties: {
-      accessTokenAuthProperty: 'token'
-    }
-  },
-  errorHandlingSettings: {
-    unhandledErrorTitle: 'Oops!',
-    unhandledErrorMessage: 'We encountered an internal fault while performing this operation.'
-  }
+  apiBaseUrl: 'https://jsonplaceholder.typicode.com',
+  localStoragePrefix: 'myDemoAppPrefix_',
+  jwtLocalStorageSuffix: 'access_token',
 };
 
 export const dataGridSettings: DataGridConfig = {
@@ -116,6 +107,7 @@ export function hljsLanguages() {
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
     NgxUiHeroModule,
@@ -147,7 +139,13 @@ export function hljsLanguages() {
   entryComponents: [
     ModalExampleComponent
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CommonHeadersInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseDataInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

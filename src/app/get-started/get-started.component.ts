@@ -13,22 +13,9 @@ export class GetStartedComponent {
 import { NgxUiHeroApiModule, ApiSettings } from 'ngx-ui-hero';
 
 export const apiSettings: ApiSettings = {
-  apiBaseUrl: 'http://localhost:50467/api',
-  jwtAuthSettings: {
-    jwtEndpointPath: '/token',
-    localStoragePrefix: 'myDemoAppPrefix_',
-    requestProperties: {
-      usernameAuthProperty: 'emailAddress',
-      passwordAuthProperty: 'password'
-    },
-    responseProperties: {
-      accessTokenAuthProperty: 'token'
-    }
-  },
-  errorHandlingSettings: {
-    unhandledErrorTitle: 'Oops!',
-    unhandledErrorMessage: 'We encountered an internal fault while performing this operation.'
-  }
+  apiBaseUrl: 'http://yourdomain/api',
+  localStoragePrefix: 'myDemoAppPrefix_',
+  jwtLocalStorageSuffix: 'access_token'
 };
 
 @NgModule({

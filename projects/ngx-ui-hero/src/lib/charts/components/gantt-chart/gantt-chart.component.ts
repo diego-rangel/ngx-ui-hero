@@ -88,6 +88,7 @@ export class GanttChartComponent implements OnInit {
             color: s.color || this.colors[colorIndex],
             startDate: s.startDate,
             endDate: s.endDate,
+            data: s.data,
             left: 0,
             width: 0,
             daysDiff: this.daysDiffFromSerie(s)
@@ -122,15 +123,15 @@ export class GanttChartComponent implements OnInit {
   private handleTimelineSizes(): void {
     if (!this.internalData || this.internalData.length == 0) return;
     
-    let monthWidth: number = $(`#${this.identifier} .gantt-timeline .timeline .item`).eq(0).children('.box').width();
-    let dayWidth: number = monthWidth / 30;
+    let monthWidth: number = $(`#${this.identifier} .gantt-timeline .timeline .item:first-child`).children('.box:first-child').width();    
     
     for (let i = 0; i < this.internalData.length; i++) {
       if (!this.internalData[i].series || this.internalData[i].series.length == 0) continue;
 
       for (let s = 0; s < this.internalData[i].series.length; s++) {
         let day = this.internalData[i].series[s].startDate.getDate();
-        let month = this.internalData[i].series[s].startDate.getMonth();
+        let month = this.internalData[i].series[s].startDate.getMonth() + 1;
+        let dayWidth: number = monthWidth / moment(this.internalData[i].series[s].startDate).daysInMonth();
 
         this.internalData[i].series[s].left = ((month - 1) * monthWidth) + ((day - 1) * dayWidth) + ((month - 1) * 2);
         this.internalData[i].series[s].width = this.internalData[i].series[s].daysDiff * dayWidth;

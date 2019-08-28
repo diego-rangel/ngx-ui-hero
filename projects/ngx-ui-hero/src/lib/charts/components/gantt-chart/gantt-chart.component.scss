@@ -36,13 +36,17 @@
                     font-size: 18px;
                 }
                 
-                .legends span {
-                    color: #717274;
-                    display: block;
-                    font-size: 13px;
-                    font-weight: bold;
-                    padding: 4px 0;
-                    text-transform: capitalize;
+                .legends {
+                    text-align: right;
+
+                    span {
+                        color: #717274;
+                        display: block;
+                        font-size: 13px;
+                        font-weight: bold;
+                        padding: 4px 0;
+                        text-transform: capitalize;
+                    }
                 }
             }
             .labels {
@@ -50,6 +54,7 @@
                     display: flex;
                     align-items: center;
                     font-weight: 600;
+                    line-height: 1.2;
                     background-color: #f1f5f8;
                     border-bottom: 1px solid #dfe8ef;
                     border-right: 2px solid #dfe8ef;

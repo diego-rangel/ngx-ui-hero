@@ -15,7 +15,7 @@
           <button type="button" class="btn btn-info mr-1" (click)="testSweetAlertInfo()">Info</button>
           <button type="button" class="btn btn-danger mr-1" (click)="testSweetAlertError()">Error</button>
           <button type="button" class="btn btn-warning mr-1" (click)="testSweetAlertWarning()">Warning</button>
-          <button type="button" class="btn btn-default" (click)="testSweetAlertQuestion()">Question</button>
+          <button type="button" class="btn btn-secondary" (click)="testSweetAlertQuestion()">Question</button>
         </div>
       </div>
     </div>
@@ -29,6 +29,47 @@
     <div>
       <pre><code [highlight]="alertExamplesCode"></code></pre>
     </div>
+
+    <h2>HttpClientInterceptors</h2>
+    <p>Usage</p>
+    <div>
+      <pre><code [highlight]="httpClientInterceptorsUsageCode"></code></pre>
+    </div>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Interceptor</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>BaseApiUrlInterceptor</td>
+          <td>Automatically add a base api url that you've provided into the <b>apiSettings</b>.</td>
+        </tr>
+        <tr>
+          <td>CommonHeadersInterceptor</td>
+          <td>Automatically add common http headers like <b>Content-Type</b>, <b>Cache-Control</b>, <b>Pragma</b> and <b>Expires</b>.</td>
+        </tr>
+        <tr>
+          <td>JwtAuthInterceptor</td>
+          <td>Automatically add an <b>Authorization</b> http header with a JWT according to your <b>apiSettings</b>.</td>
+        </tr>
+        <tr>
+          <td>WinAuthInterceptor</td>
+          <td>Automatically set all your requests to be <b>withCredentials</b>.</td>
+        </tr>
+        <tr>
+          <td>ResponseDataInterceptor</td>
+          <td>Modifies all response bodies according to the provided <b>apiSettings</b>.</td>
+        </tr>
+        <tr>
+          <td>ErrorHandlerInterceptor</td>
+          <td>Provides a useful and unique contract for errors.</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h2>LocalStorageService</h2>
     <p>Provides methods for localstorage management. Yout just need to inject the service wherever you want:</p>
@@ -57,108 +98,6 @@
         <tr>
           <td>Remove(key: string): void</td>
           <td>Removes the stored value for the provided <b>key</b>.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>AuthService</h2>
-    <p>Provides methods for JWT authentication management. Yout just need to inject the service wherever you want:</p>
-
-    <div>
-      <pre><code [highlight]="authConstructorCode"></code></pre>
-    </div>
-
-    <p>Functionalities:</p>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Autheticate(username: string, password: string): Observable&lt;any&gt;</td>
-          <td>Sends an http POST for the configured enpoint into the ApiModule's settings and stores the access token into the local storage in case of success.</td>
-        </tr>
-        <tr>
-          <td>Logout(): void</td>
-          <td>Removes the access token from the local storage.</td>
-        </tr>
-        <tr>
-          <td>IsAuthenticated(): boolean</td>
-          <td>Checks if the access token keeps stored into the local storage.</td>
-        </tr>
-        <tr>
-          <td>GetToken(): string</td>
-          <td>Returns the local stored access token.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>ApiService</h2>
-    <p>
-      Provides methods for Api Http requests that encapsulates many Angular native complexities. 
-      All the following functionalities automatically handles JWT auth, including an "Authorization" header with the stored <b>Access Token</b>. 
-      Yout just need to inject the service wherever you want:
-    </p>
-
-    <div>
-      <pre><code [highlight]="apiConstructorCode"></code></pre>
-    </div>
-
-    <p>Functionalities:</p>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>get(url: string, query?: KeyValuePair[], options?: <b>ApiRequestOptions</b>): Observable&lt;any&gt;</td>
-          <td>Http GET request.</td>
-        </tr>
-        <tr>
-          <td>post(url: string, data: any, options?: <b>ApiRequestOptions</b>): Observable&lt;any&gt;</td>
-          <td>Http POST request.</td>
-        </tr>
-        <tr>
-          <td>put(url: string, data: any, options?: <b>ApiRequestOptions</b>): Observable&lt;any&gt;</td>
-          <td>Http PUT request.</td>
-        </tr>
-        <tr>
-          <td>delete(url: string, options?: <b>ApiRequestOptions</b>): Observable&lt;any&gt;</td>
-          <td>Http DELETE request.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p><b>ApiRequestOptions</b> object properties</p>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>fullUrl</td>
-          <td>When false, it will use the configured <b>base path + url</b>. Default: false.</td>
-        </tr>
-        <tr>
-          <td>headers</td>
-          <td>Http custom Headers.</td>
-        </tr>
-        <tr>
-          <td>responseType</td>
-          <td>ResponseContentType; Default: JSON.</td>
-        </tr>
-        <tr>
-          <td>autoMapResponse</td>
-          <td>When true, it's going to automatically map the response based on the responseType.</td>
         </tr>
       </tbody>
     </table>

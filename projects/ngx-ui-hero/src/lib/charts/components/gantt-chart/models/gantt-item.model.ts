@@ -7,6 +7,7 @@ export interface GanttSerieModel {
     color?: string;
     startDate: Date;
     endDate: Date;
+    data?: any;
 }
 
 export interface GanttInternalItemModel {
@@ -21,4 +22,5 @@ export interface GanttInternalSerieModel {
     left: number;
     width: number;
     daysDiff: number;
+    data?: any;
 }
