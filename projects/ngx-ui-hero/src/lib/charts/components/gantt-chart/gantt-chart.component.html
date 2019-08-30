@@ -20,7 +20,7 @@
                 <div class="months">
                     <div class="month" *ngFor="let item of months">{{item | uppercase}}</div>
                 </div>
-                <div class="date-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{'left.px': mouseIndicatorCoordinateX - 60}">
+                <div class="date-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{'left.px': mouseIndicatorCoordinateX - 75}">
                     <i class="fa fa-calendar"></i> {{dateIndicator | date}}
                 </div>
             </div>

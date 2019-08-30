@@ -111,7 +111,8 @@
                     border-radius: 10px;
                     border: 1px solid #CCC;
                     font-size: 13px;
-                    width: 120px;
+                    width: 150px;
+                    text-align: center;
                 }
             }
 
@@ -150,7 +151,7 @@
                         bottom: 6px;
                         padding: 0 5px;
                         transition: opacity .3s ease-in-out, width .8s ease-out;
-                        z-index: 10;
+                        z-index: 9;
                     }
                     .serie:hover {
                         opacity: .8;
@@ -202,7 +203,7 @@
                     bottom: 0;
                     width: 0;
                     border-right: 1px dashed #327ACE;
-                    z-index: 9;
+                    z-index: 8;
                     user-select: none;
                     outline: none;
                 }
@@ -213,7 +214,7 @@
                     left: -4.5px;
                     width: 0;
                     height: 0;
-                    z-index: 9;
+                    z-index: 8;
                     border-top: 5px solid #327ACE;
                     border-right: 5px solid transparent;
                     border-left: 5px solid transparent;
@@ -225,7 +226,7 @@
                     left: -4.5px;
                     width: 0;
                     height: 0;
-                    z-index: 9;
+                    z-index: 8;
                     border-bottom: 5px solid #327ACE;
                     border-right: 5px solid transparent;
                     border-left: 5px solid transparent;

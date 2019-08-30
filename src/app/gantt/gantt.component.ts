@@ -37,7 +37,7 @@ export class GanttComponent implements OnInit {
     <div class="text-left">
       <p class="mb-0"><b>Period:</b> {{serie.daysDiff}} days</p>
       <p class="mb-0"><b>From:</b> {{serie.startDate | date}}</p>
-      <p class="mb-0"><b>To:</b> {{serie.endDate | date}} ({{serie.daysDiff}} days)</p>
+      <p class="mb-0"><b>To:</b> {{serie.endDate | date}}</p>
     </div>
   </ng-template>
 </gantt-chart>
