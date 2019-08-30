@@ -20,29 +20,50 @@
                 <div class="months">
                     <div class="month" *ngFor="let item of months">{{item | uppercase}}</div>
                 </div>
+                <div class="date-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{'left.px': mouseIndicatorCoordinateX - 60}">
+                    <i class="fa fa-calendar"></i> {{dateIndicator | date}}
+                </div>
             </div>
-            <div class="timeline">
+            <div class="timeline" (mouseenter)="onTimelineMouseEnter()" (mouseleave)="onTimelineMouseLeave()" (mousemove)="onTimelineMouseMove($event)">
                 <div class="item" *ngFor="let item of internalData">
                     <div class="box" *ngFor="let month of months"></div>
-                    <div class="serie" *ngFor="let serie of item.series" 
-                        tooltip="{{serie.daysDiff}} {{dayLabel}}s"
-                        container="body"
-                        (click)="onSerieSelected(item, serie)"
-                        [ngStyle]="{
-                            'backgroundColor': serie.color,
-                            'left.px': serie.left,
-                            'width.px': serie.width
-                        }">
-                        <span class="text-truncate">{{serie.daysDiff}}</span>
-                        <div class="left-border"></div>
-                        <div class="top-border"></div>
-                        <div class="right-border"></div>
-                        <div class="bottom-border"></div>
+
+                    <div class="serie-container"  *ngFor="let serie of item.series">
+                        <ng-template #tooltipTemplate>
+                            <ng-container 
+                                [ngTemplateOutlet]="seriesTooltipTemplate"
+                                [ngTemplateOutletContext]="{
+                                    serie: serie,
+                                    item: item
+                                }">
+                            </ng-container>
+                        </ng-template>
+
+                        <div class="serie" 
+                            [tooltip]="seriesTooltipTemplate ? tooltipTemplate : null"
+                            container="body"
+                            (click)="onSerieSelected(item, serie)"
+                            [ngClass]="{
+                                'highlighted': mouseIndicatorCoordinateX >= serie.left && mouseIndicatorCoordinateX <= (serie.left + serie.width)
+                            }"
+                            [ngStyle]="{
+                                'backgroundColor': serie.color,
+                                'left.px': serie.left,
+                                'width.px': serie.width
+                            }">
+                            <span class="text-truncate">{{serie.daysDiff}}</span>
+                            <div class="left-border"></div>
+                            <div class="top-border"></div>
+                            <div class="right-border"></div>
+                            <div class="bottom-border"></div>
+                        </div>
                     </div>
                 </div>
+                <div class="mouse-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{'left.px': mouseIndicatorCoordinateX}"></div>
             </div>
         </div>
     </div>
 
     <p *ngIf="!internalData || internalData.length == 0">{{emptyMessage}}</p>
 </div>
+{{mouseIndicatorCoordinateX}}

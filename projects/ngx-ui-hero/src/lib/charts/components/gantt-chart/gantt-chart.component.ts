@@ -1,9 +1,10 @@
 import * as momentImported from 'moment';
 
-import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Inject, Input, OnInit, Optional, Output, TemplateRef } from '@angular/core';
 
 import { ChartsConfig } from '../../config/charts-config';
 import { CHARTS_CONFIG } from '../../config/charts-config.contants';
+import { GanttSeriesTooltipTemplateDirective } from '../../directives/gantt-templates.directive';
 import { GanttInternalItemModel, GanttInternalSerieModel, GanttItemModel, GanttSerieModel } from './models/gantt-item.model';
 
 declare var $: any;
@@ -24,6 +25,7 @@ export class GanttChartComponent implements OnInit {
   @Input() caption: string;
   @Input() maxHeight: number = 0;
   @Output() onSelect = new EventEmitter<any>();
+  @ContentChild(GanttSeriesTooltipTemplateDirective, {read: TemplateRef, static: true}) seriesTooltipTemplate: GanttSeriesTooltipTemplateDirective;
 
   public identifier = `gantt-chart-${identifier++}`;  
   
@@ -36,6 +38,9 @@ export class GanttChartComponent implements OnInit {
   yearLabel: string;
   currentYear: number;
   currentMonth: number;
+  showingMouseIndicator: boolean = false;
+  mouseIndicatorCoordinateX: number;
+  dateIndicator: Date;
   colors: Array<string> = [
     '#8270fa', 
     '#4d5b66', 
@@ -72,6 +77,31 @@ export class GanttChartComponent implements OnInit {
       item,
       serie
     });
+  }
+  onTimelineMouseMove(event: MouseEvent): void {
+    if (!this.showingMouseIndicator) return;
+
+    let offset = $(`#${this.identifier} .gantt-timeline .timeline`).offset();
+    this.mouseIndicatorCoordinateX = event.pageX - offset.left;
+
+    let monthWidth: number = $(`#${this.identifier} .gantt-timeline .timeline .item:first-child`).children('.box:first-child').width();
+    let monthIndexBeingHovered: number = Math.floor(this.mouseIndicatorCoordinateX / (monthWidth + 2));
+
+    let today = new Date();
+    let date = new Date(today.getFullYear(), monthIndexBeingHovered, 1);
+    let daysInMonth: number = moment(date).daysInMonth();
+    let dayWidth: number = monthWidth / daysInMonth;
+    let dayBeignHovered: number = Math.floor((this.mouseIndicatorCoordinateX - ((monthWidth + 2) * monthIndexBeingHovered)) / dayWidth) + 1;
+
+    if (dayBeignHovered <= 0 || dayBeignHovered > daysInMonth) return;
+    
+    this.dateIndicator = new Date(today.getFullYear(), monthIndexBeingHovered, dayBeignHovered);
+  }
+  onTimelineMouseEnter(): void {
+    this.showingMouseIndicator = true;
+  }
+  onTimelineMouseLeave(): void {
+    this.showingMouseIndicator = false;
   }
 
   private initData(): void {
@@ -123,7 +153,7 @@ export class GanttChartComponent implements OnInit {
   private handleTimelineSizes(): void {
     if (!this.internalData || this.internalData.length == 0) return;
     
-    let monthWidth: number = $(`#${this.identifier} .gantt-timeline .timeline .item:first-child`).children('.box:first-child').width();    
+    let monthWidth: number = $(`#${this.identifier} .gantt-timeline .timeline .item:first-child`).children('.box:first-child').width();
     
     for (let i = 0; i < this.internalData.length; i++) {
       if (!this.internalData[i].series || this.internalData[i].series.length == 0) continue;

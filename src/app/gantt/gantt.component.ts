@@ -13,7 +13,7 @@ export class GanttComponent implements OnInit {
       label: 'Diego Rangel',
       series: [
         { startDate: new Date(2019, 3, 1, 0, 0, 0), endDate: new Date(2019, 3, 20, 0, 0, 0) },
-        { startDate: new Date(2019, 6, 20, 0, 0, 0), endDate: new Date(2019, 7, 3, 0, 0, 0) },
+        { startDate: new Date(2019, 5, 15, 0, 0, 0), endDate: new Date(2019, 6, 9, 0, 0, 0) },
       ]
     },
     {
@@ -32,7 +32,15 @@ export class GanttComponent implements OnInit {
   ];
 
   template: string = `
-<gantt-chart [data]="data" caption="My Caption title" [maxHeight]="400" (onSelect)="onSelect($event)"></gantt-chart>
+<gantt-chart [data]="data" caption="My Caption title" [maxHeight]="400" (onSelect)="onSelect($event)">
+  <ng-template serie-tooltip-template let-serie="serie" let-item="item">
+    <div class="text-left">
+      <p class="mb-0"><b>Period:</b> {{serie.daysDiff}} days</p>
+      <p class="mb-0"><b>From:</b> {{serie.startDate | date}}</p>
+      <p class="mb-0"><b>To:</b> {{serie.endDate | date}} ({{serie.daysDiff}} days)</p>
+    </div>
+  </ng-template>
+</gantt-chart>
   `;
   code: string = `
 import { GanttItemModel } from 'ngx-ui-hero';
