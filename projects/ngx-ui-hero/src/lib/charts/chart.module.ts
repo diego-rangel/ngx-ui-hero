@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { UiModule } from '../ui';
+import { UiModule } from '../ui/ui.module';
 import { GanttChartComponent } from './components/gantt-chart/gantt-chart.component';
 import { ChartsConfig } from './config/charts-config';
 import { CHARTS_CONFIG } from './config/charts-config.contants';
