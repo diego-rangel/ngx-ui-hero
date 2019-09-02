@@ -13,6 +13,13 @@
                     {{item.label}}
                 </div>
             </div>
+            <div class="footer" *ngIf="showFooter">
+                <div class="title">{{caption}}</div>
+                <div class="legends">
+                    <span class="month">{{monthLabel}}</span>
+                    <span class="year">{{yearLabel}}</span>
+                </div>
+            </div>
         </div>
         <div class="gantt-timeline">
             <div class="header">
@@ -20,7 +27,9 @@
                 <div class="months">
                     <div class="month" *ngFor="let item of months">{{item | uppercase}}</div>
                 </div>
-                <div class="date-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{'left.px': mouseIndicatorCoordinateX - 75}">
+                <div class="date-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{
+                    'left.px': mouseIndicatorCoordinateX - (mouseMovingLastMonth ? 150 : 75)
+                }">
                     <i class="fa fa-calendar"></i> {{dateIndicator | date}}
                 </div>
             </div>
@@ -44,7 +53,7 @@
                             container="body"
                             (click)="onSerieSelected(item, serie)"
                             [ngClass]="{
-                                'highlighted': mouseIndicatorCoordinateX >= serie.left && mouseIndicatorCoordinateX <= (serie.left + serie.width)
+                                'highlighted': showingMouseIndicator && mouseIndicatorCoordinateX >= serie.left && mouseIndicatorCoordinateX <= (serie.left + serie.width)
                             }"
                             [ngStyle]="{
                                 'backgroundColor': serie.color,
@@ -60,6 +69,17 @@
                     </div>
                 </div>
                 <div class="mouse-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{'left.px': mouseIndicatorCoordinateX}"></div>
+            </div>
+            <div class="footer" *ngIf="showFooter">
+                <div class="months">
+                    <div class="month" *ngFor="let item of months">{{item | uppercase}}</div>
+                </div>
+                <div class="year">{{currentYear}}</div>
+                <div class="date-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{
+                    'left.px': mouseIndicatorCoordinateX - (mouseMovingLastMonth ? 150 : 75)
+                }">
+                    <i class="fa fa-calendar"></i> {{dateIndicator | date}}
+                </div>
             </div>
         </div>
     </div>

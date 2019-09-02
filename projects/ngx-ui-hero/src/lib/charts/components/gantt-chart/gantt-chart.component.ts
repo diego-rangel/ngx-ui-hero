@@ -24,6 +24,7 @@ export class GanttChartComponent implements OnInit {
   @Input('data') externalData: Array<GanttItemModel>;
   @Input() caption: string;
   @Input() maxHeight: number = 0;
+  @Input() showFooter: boolean = false;
   @Output() onSelect = new EventEmitter<any>();
   @ContentChild(GanttSeriesTooltipTemplateDirective, {read: TemplateRef, static: true}) seriesTooltipTemplate: GanttSeriesTooltipTemplateDirective;
 
@@ -39,6 +40,7 @@ export class GanttChartComponent implements OnInit {
   currentYear: number;
   currentMonth: number;
   showingMouseIndicator: boolean = false;
+  mouseMovingLastMonth: boolean = false;
   mouseIndicatorCoordinateX: number;
   dateIndicator: Date;
   colors: Array<string> = [
@@ -96,6 +98,7 @@ export class GanttChartComponent implements OnInit {
     if (dayBeignHovered <= 0 || dayBeignHovered > daysInMonth) return;
     
     this.dateIndicator = new Date(today.getFullYear(), monthIndexBeingHovered, dayBeignHovered);
+    this.mouseMovingLastMonth = monthIndexBeingHovered == 11;
   }
   onTimelineMouseEnter(): void {
     this.showingMouseIndicator = true;
