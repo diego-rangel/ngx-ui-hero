@@ -23,6 +23,7 @@ let identifier = 0;
 export class GanttChartComponent implements OnInit {
   @Input('data') externalData: Array<GanttItemModel>;
   @Input() caption: string;
+  @Input() tooltipPlacement: string = 'left';
   @Input() maxHeight: number = 0;
   @Input() showFooter: boolean = false;
   @Output() onSelect = new EventEmitter<any>();

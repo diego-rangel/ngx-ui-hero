@@ -15,7 +15,7 @@
 
     <h2>Demo</h2>
 
-    <gantt-chart [data]="data" caption="My Caption title" (onSelect)="onSelect($event)" [maxHeight]="400" [showFooter]="true">
+    <gantt-chart [data]="data" caption="My Caption title" (onSelect)="onSelect($event)" [maxHeight]="400" [showFooter]="true" tooltipPlacement="left">
         <ng-template serie-tooltip-template let-serie="serie" let-item="item">
             <div class="text-left">
                 <p class="mb-0"><b>Period:</b> {{serie.daysDiff}} days</p>

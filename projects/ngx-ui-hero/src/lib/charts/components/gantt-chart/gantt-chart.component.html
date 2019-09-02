@@ -49,6 +49,7 @@
                         </ng-template>
 
                         <div class="serie" 
+                            [placement]="tooltipPlacement"
                             [tooltip]="seriesTooltipTemplate ? tooltipTemplate : null"
                             container="body"
                             (click)="onSerieSelected(item, serie)"

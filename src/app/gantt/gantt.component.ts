@@ -32,7 +32,7 @@ export class GanttComponent implements OnInit {
   ];
 
   template: string = `
-<gantt-chart [data]="data" caption="My Caption title" [maxHeight]="400" [showFooter]="true" (onSelect)="onSelect($event)">
+<gantt-chart [data]="data" caption="My Caption title" [maxHeight]="400" [showFooter]="true" tooltipPlacement="left" (onSelect)="onSelect($event)">
   <ng-template serie-tooltip-template let-serie="serie" let-item="item">
     <div class="text-left">
       <p class="mb-0"><b>Period:</b> {{serie.daysDiff}} days</p>
