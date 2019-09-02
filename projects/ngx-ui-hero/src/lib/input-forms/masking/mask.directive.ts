@@ -215,7 +215,7 @@ export class MaskDirective implements OnInit, ControlValueAccessor {
         }
 
         this.dataValue = this.includeLiterals ? this.value : value;
-        this._onChangeCallback(this.dataValue);
+        //this._onChangeCallback(this.dataValue);
 
         this.onValueChange.emit({ rawValue: value, formattedValue: this.value });
     }
@@ -223,6 +223,10 @@ export class MaskDirective implements OnInit, ControlValueAccessor {
     public registerOnChange(fn: (_: any) => void) { this._onChangeCallback = fn; }
 
     public registerOnTouched(fn: () => void) { this._onTouchedCallback = fn; }
+
+    public setDisabledState(isDisabled: boolean): void {
+        this.nativeElement.setAttribute('disabled', isDisabled);
+    }
 }
 
 export interface IMaskEventArgs {
