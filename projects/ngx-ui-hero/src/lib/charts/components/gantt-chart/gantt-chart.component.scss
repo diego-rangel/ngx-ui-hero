@@ -19,6 +19,9 @@
                 height: 70px;
                 box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
             }
+            .footer {
+                box-shadow: 0 -.125rem .25rem rgba(0,0,0,.075);
+            }
         }
 
         .gantt-labels {
@@ -54,6 +57,10 @@
                         text-transform: capitalize;
                     }
                 }
+            }
+            .footer {
+                top: inherit;
+                bottom: 0;
             }
             .labels {
                 .label {
@@ -116,6 +123,10 @@
                     text-align: center;
                     transition: left .2s ease-out;
                 }
+            }
+            .footer {
+                top: inherit;
+                bottom: 0;
             }
             .footer .date-indicator {
                 bottom: 35px;
