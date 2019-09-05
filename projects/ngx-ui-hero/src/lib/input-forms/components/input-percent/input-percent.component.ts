@@ -17,7 +17,8 @@ let identifier = 0;
 export class InputPercentComponent extends ElementBase<number> implements OnInit {
   @Input() showInputGroup?: boolean = true;
   @Input() inputGroupText?: string = '%';
-  @Input() public placeholder = '';
+  @Input() placeholder: string = '';
+  @Input() precision: number = 1;
   @ViewChild(NgModel, {static: true}) model: NgModel;
 
   public identifier = `input-percent-${identifier++}`;
