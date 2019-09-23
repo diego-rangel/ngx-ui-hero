@@ -1,6 +1,6 @@
 <div class="ui-switch">
   <div class="d-flex align-items-center">
-    <div class="switch" (click)="Toggle()" [ngClass]="{'on': value}">
+    <div class="switch" (click)="Toggle()" [ngClass]="{'on': value, 'disabled': disabled}">
       <div class="switch-toggler"></div>
     </div>
     <label class="ml-2 mb-0" *ngIf="label">

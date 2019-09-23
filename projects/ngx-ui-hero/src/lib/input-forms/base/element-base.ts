@@ -33,7 +33,7 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   }
 
   get invalid(): Observable<boolean> {
-    return this.validate().pipe(map((v: any) => this.invalidPattern || Object.keys(v || {}).length > 0));
+    return this.validate().pipe(map((v: any) => this.invalidPattern || this.invalidMaxValue || this.invalidMinValue || Object.keys(v || {}).length > 0));
   }
 
   get failures(): Observable<Array<string>> {
@@ -41,7 +41,7 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
       map((v: any) => {
         const fails = Object.keys(v || {}).map(k => message(v, k, this.label, this.config.validationMessages));
   
-        if (this.invalidPattern) {
+        if (this.invalidPattern || this.invalidMaxValue || this.invalidMinValue) {
           fails.push(message(v, 'pattern', this.label, this.config.validationMessages));
         }
   
@@ -57,8 +57,13 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   get invalidPattern(): boolean {
     return this.model.control.hasError('pattern');
   }
-
-  public get isRequired(): boolean {
+  get invalidMaxValue(): boolean {
+    return this.model.control.hasError('max');
+  }
+  get invalidMinValue(): boolean {
+    return this.model.control.hasError('min');
+  }
+  get isRequired(): boolean {
     if (!this.validators || this.validators.length === 0) {
       return;
     }

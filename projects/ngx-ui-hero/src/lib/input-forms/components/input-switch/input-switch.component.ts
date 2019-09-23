@@ -32,6 +32,7 @@ export class InputSwitchComponent extends ElementBase<boolean> {
   }
 
   Toggle(): void {
+    if (this.disabled) return;
     this.value = !this.value;
     this.onChange.emit(this.value);
   }

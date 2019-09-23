@@ -28,18 +28,18 @@ export const validate = (validators: ValidatorArray, asyncValidators: AsyncValid
         const synchronousValid = () => composeValidators(validators)(control);
 
         if (asyncValidators) {
-        const asyncValidator = composeValidators(asyncValidators);
+            const asyncValidator = composeValidators(asyncValidators);
 
-        return asyncValidator(control).map((v: any) => {
-            const secondary = synchronousValid();
-            if (secondary || v) { // compose async and sync validator results
-            return Object.assign({}, secondary, v);
-            }
-        });
+            return asyncValidator(control).map((v: any) => {
+                const secondary = synchronousValid();
+                if (secondary || v) { // compose async and sync validator results
+                    return Object.assign({}, secondary, v);
+                }
+            });
         }
 
         if (validators) {
-        return of(synchronousValid());
+            return of(synchronousValid());
         }
 
         return of(null);

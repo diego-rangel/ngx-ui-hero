@@ -30,4 +30,9 @@
             right: 0;
         }
     }
+    .switch.disabled {
+        .switch-toggler {
+            background-color: #eee;
+        }
+    }
 }

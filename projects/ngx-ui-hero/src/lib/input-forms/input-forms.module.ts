@@ -30,11 +30,11 @@ import { InputTextareaComponent } from './components/input-textarea/input-textar
 import { InputUploadComponent } from './components/input-upload/input-upload.component';
 import { InputValidationsComponent } from './components/input-validations/input-validations.component';
 import { RadialButtonComponent } from './components/radial-button/radial-button.component';
+import { MaxValueDirective } from './directives/max-value-validator.directive';
+import { MinValueDirective } from './directives/min-value-validator.directive';
 import { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
 import { MaskDirective } from './masking/mask.directive';
-import { MaxValueValidator } from './validators/max-value-validator';
-import { MinValueValidator } from './validators/min-value-validator';
 
 export { CurrencySymbolPipe } from './base/currency-symbol.pipe';
 export { InputFormsConfig } from './input-forms-config';
@@ -57,10 +57,10 @@ export { InputMultiselectComponent } from './components/input-multiselect/input-
 export { InputSwitchComponent } from './components/input-switch/input-switch.component';
 export { BlockUiComponent } from './components/block-ui/block-ui.component';
 export { InputDropdownGridComponent } from './components/input-dropdown-grid/input-dropdown-grid.component';
-export { MaxValueValidator } from './validators/max-value-validator';
-export { MinValueValidator } from './validators/min-value-validator';
 export { InputDropdownSearchComponent } from './components/input-dropdown-search/input-dropdown-search.component';
 export { InputTextMaskComponent } from './components/input-text-mask/input-text-mask.component';
+export { MaxValueDirective } from './directives/max-value-validator.directive';
+export { MinValueDirective } from './directives/min-value-validator.directive';
 export { BlockUi } from './classes/block-ui';
 
 @NgModule({
@@ -74,8 +74,8 @@ export { BlockUi } from './classes/block-ui';
     NgxUiHeroDataGridModule
   ],
   declarations: [
-    MaxValueValidator,
-    MinValueValidator,
+    MaxValueDirective,
+    MinValueDirective,
     CurrencySymbolPipe,
     InputTextComponent,
     InputValidationsComponent,
@@ -100,8 +100,8 @@ export { BlockUi } from './classes/block-ui';
     MaskDirective,
   ],
   exports: [
-    MaxValueValidator,
-    MinValueValidator,
+    MaxValueDirective,
+    MinValueDirective,
     CurrencySymbolPipe,
     FileUploadModule,
     InputTextComponent,
