@@ -13,9 +13,11 @@ export class GetStartedComponent {
 import { NgxUiHeroApiModule, ApiSettings } from 'ngx-ui-hero';
 
 export const apiSettings: ApiSettings = {
-  apiBaseUrl: 'http://yourdomain/api',
+  apiBaseUrl: 'http://yourdomain.com',
+  apiAlias: 'api',
   localStoragePrefix: 'myDemoAppPrefix_',
-  jwtLocalStorageSuffix: 'access_token'
+  jwtLocalStorageSuffix: 'access_token',
+  responseDataPropertyName: 'data'
 };
 
 @NgModule({
