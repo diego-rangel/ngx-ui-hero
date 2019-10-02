@@ -4,18 +4,28 @@
   <i class="fa fa-question-circle ml-2" tooltip="{{help}}" container="body" *ngIf="help"></i>
 </label>
 
-<input 
-  type="text" 
-  class="form-control" 
-  [maxlength]="maxlength"
-  [disabled]="disabled" 
-  [placeholder]="placeholder"  
-  [(ngModel)]="value"
-  [id]="identifier"
-  [ngClass]="{
-    'is-valid': showValidations && touched && !(invalid | async),
-    'is-invalid': showValidations && touched && (invalid | async)
-  }" />
+<div class="input-group">
+  <div class="input-group-prepend" *ngIf="inputGroupPrepend">
+    <span class="input-group-text" [innerHtml]="inputGroupPrepend"></span>
+  </div>
+
+  <input 
+    type="text" 
+    class="form-control" 
+    [maxlength]="maxlength"
+    [disabled]="disabled" 
+    [placeholder]="placeholder"  
+    [(ngModel)]="value"
+    [id]="identifier"
+    [ngClass]="{
+      'is-valid': showValidations && touched && !(invalid | async),
+      'is-invalid': showValidations && touched && (invalid | async)
+    }" />
+
+    <div class="input-group-append" *ngIf="inputGroupAppend">
+      <span class="input-group-text" [innerHtml]="inputGroupAppend"></span>
+    </div>
+</div>
 
 <small class="text-muted" *ngIf="description">{{description}}</small>
 

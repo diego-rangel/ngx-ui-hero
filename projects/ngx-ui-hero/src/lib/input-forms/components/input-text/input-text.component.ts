@@ -19,6 +19,8 @@ let identifier = 0;
 })
 export class InputTextComponent extends ElementBase<string> implements OnInit {
   @Input() public placeholder = '';
+  @Input() public inputGroupPrepend: string;
+  @Input() public inputGroupAppend: string;
   @Input() public maxlength: number;
  
   @ViewChild(NgModel, {static: true}) model: NgModel;
