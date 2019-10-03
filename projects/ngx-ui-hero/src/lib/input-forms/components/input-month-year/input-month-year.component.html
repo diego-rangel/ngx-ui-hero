@@ -11,8 +11,8 @@
         'has-validations': showValidations,
         'open': showDropdown, 
         'disabled': disabled,
-        'is-valid': !showDropdown && comboTouched && !(invalid | async),
-        'is-invalid': !showDropdown && comboTouched && (invalid | async)
+        'is-valid': !showDropdown && !disabled && comboTouched && !(invalid | async),
+        'is-invalid': !showDropdown && !disabled && comboTouched && (invalid | async)
       }"
       (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
 
@@ -43,7 +43,7 @@
 </div>
 
 <input-validations
-  *ngIf="showValidations && comboTouched && (invalid | async)"
+  *ngIf="showValidations && !disabled && comboTouched && (invalid | async)"
   [messages]="failures | async">
 </input-validations>
 

@@ -9,8 +9,8 @@
   [id]="identifier" 
   [disabled]="disabled" 
   [ngClass]="{
-    'is-valid': showValidations && touched && !(invalid | async),
-    'is-invalid': showValidations && touched && (invalid | async)
+    'is-valid': showValidations && !disabled && touched && !(invalid | async),
+    'is-invalid': showValidations && !disabled && touched && (invalid | async)
   }">
   <option value="" *ngIf="defaultOption">{{defaultOption}}</option>
   <option [value]="getOptionValue(option)" *ngFor="let option of options">{{getOptionDisplayText(option)}}</option>
@@ -20,6 +20,6 @@
 <small class="text-muted" *ngIf="description">{{description}}</small>
 
 <input-validations
-  *ngIf="showValidations && touched && (invalid | async)"
+  *ngIf="showValidations && !disabled && touched && (invalid | async)"
   [messages]="failures | async">
 </input-validations>

@@ -14,15 +14,15 @@
     [id]="identifier"
     autoSelectOnFocus
     [ngClass]="{
-        'is-valid': showValidations && wasTouched && !(invalid | async),
-        'is-invalid': showValidations && wasTouched && (invalid | async)
+        'is-valid': showValidations && !disabled && wasTouched && !(invalid | async),
+        'is-invalid': showValidations && !disabled && wasTouched && (invalid | async)
     }"
     (blur)="onTouch()" />
 
 <small class="text-muted" *ngIf="description">{{description}}</small>
 
 <input-validations
-    *ngIf="showValidations && wasTouched && (invalid | async)"
+    *ngIf="showValidations && !disabled && wasTouched && (invalid | async)"
     [messages]="failures | async">
 </input-validations>
   

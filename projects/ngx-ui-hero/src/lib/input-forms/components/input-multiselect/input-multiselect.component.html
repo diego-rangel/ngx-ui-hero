@@ -11,8 +11,8 @@
             'has-validations': showValidations,
             'open': showOptions, 
             'disabled': disabled,
-            'is-valid': !showOptions && comboTouched && (!isRequired || value?.length > 0),
-            'is-invalid': !showOptions && comboTouched && isRequired && (!value || value.length == 0)
+            'is-valid': !showOptions && !disabled && comboTouched && (!isRequired || value?.length > 0),
+            'is-invalid': !showOptions && !disabled && comboTouched && isRequired && (!value || value.length == 0)
         }"
         (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
 

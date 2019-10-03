@@ -21,14 +21,14 @@
     [(ngModel)]="value"
     (bsValueChange)="onValueChange($event)"
     [ngClass]="{
-      'is-valid': showValidations && touched && !(invalid | async),
-      'is-invalid': showValidations && touched && (invalid | async)
+      'is-valid': showValidations && !disabled && touched && !(invalid | async),
+      'is-invalid': showValidations && !disabled && touched && (invalid | async)
     }">
 </div>
 
 <small class="text-muted" *ngIf="description">{{description}}</small>
 
 <input-validations
-  *ngIf="showValidations && touched && (invalid | async)"
+  *ngIf="showValidations && !disabled && touched && (invalid | async)"
   [messages]="failures | async">
 </input-validations>
