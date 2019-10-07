@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 
 import { ElementRef, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 
 import { TutorialAction } from '../classes/tutorial-action';
 import { TutorialTask } from '../classes/tutorial-task';
@@ -29,9 +30,16 @@ export class TutorialService {
     private BLOCK_CONTROL_EXIT_ID = 'element-tutorial-block-exit-control';
 
     constructor(
-        private rendererFactory: RendererFactory2
+        private rendererFactory: RendererFactory2,
+        private router: Router
     ) {
         this._render = rendererFactory.createRenderer(null, null);
+
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationStart) {
+                this._tasks = new Array<TutorialTask>();
+            }
+        });
     }
 
     addAction(action: TutorialAction, element: ElementRef): void {
