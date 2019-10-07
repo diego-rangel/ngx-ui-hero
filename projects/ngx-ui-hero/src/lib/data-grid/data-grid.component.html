@@ -43,7 +43,13 @@
                             </button>
 
                             <ng-template #popFilters>
-                                <ui-column-filter [column]="column" [data]="data" [filterPlaceholder]="filterPlaceholder" (onChange)="OnFiltersChange($event)"></ui-column-filter>
+                                <ui-column-filter 
+                                    [column]="column" 
+                                    [data]="data" 
+                                    [filterPlaceholder]="filterPlaceholder" 
+                                    [emptyResultsMessage]="emptyResultsMessage" 
+                                    (onChange)="OnFiltersChange($event)">
+                                </ui-column-filter>
                             </ng-template>
                         </div>
                         <div class="resizer" *ngIf="allowColumnResize" (mousedown)="OnResizerMouseDown($event)"></div>

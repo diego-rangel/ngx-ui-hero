@@ -15,6 +15,7 @@ export class ColumnFilterComponent implements OnInit {
   @Input() data: Array<any>;
   @Input() column: DataGridColumnModel;
   @Input() filterPlaceholder: string = 'Filter...';
+  @Input() emptyResultsMessage?: string = 'No results found at this moment.';
 
   search = '';
   options: Array<any>;
@@ -59,6 +60,7 @@ export class ColumnFilterComponent implements OnInit {
     });
 
     this.options = _.uniqBy(this.options, x => x);
+    this.options = _.filter(this.options, x => x != undefined && x != null);
     this.clearFilters();
   }
   private renderPropertyValue(propertyPath: string, object: any): any {

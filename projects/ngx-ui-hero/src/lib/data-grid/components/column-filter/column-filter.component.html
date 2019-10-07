@@ -15,5 +15,6 @@
     </div>
     <div class="options">
       <div class="option text-truncate" *ngFor="let item of filteredOptions" [title]="item" (click)="select(item)" [innerHtml]="item"></div>
+      <p class="mb-0 p-3" *ngIf="!filteredOptions || filteredOptions.length == 0">{{emptyResultsMessage}}</p>
     </div>
 </div>
