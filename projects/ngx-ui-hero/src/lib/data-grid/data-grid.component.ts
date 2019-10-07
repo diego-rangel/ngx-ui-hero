@@ -72,7 +72,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() allowColumnReorder?: boolean = true;
     @Input() allowColumnFilters?: boolean = true;
     @Input() filterPlaceholder?: string = 'Filter...';
-    @Input() filterPlacement?: string = 'top';
+    @Input() filterPlacement?: string = 'bottom';
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnRowRendered = new EventEmitter<any>();
