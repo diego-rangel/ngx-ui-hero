@@ -387,7 +387,9 @@ export class TutorialService {
 
     //aux
     private handleTutorialBlockPosition(block: any, el: ElementRef): void {
-        this.setTutorialBlockPosition(block, el);
+        setTimeout(() => {
+            this.setTutorialBlockPosition(block, el);
+        }, 0);
 
         this._render.listen(window, 'resize', () => {
             this.setTutorialBlockPosition(block, el);
