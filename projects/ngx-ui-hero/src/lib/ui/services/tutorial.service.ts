@@ -20,6 +20,7 @@ export class TutorialService {
     private _currentTaskIndex: number = -1;
     private _render: Renderer2;
     private colorPlaceholder: string;
+    private unlistenKeyboardArrows: Function;
 
     private OVERLAY_ID = 'tutorial-orverlay';
     private BLOCKER_ID = 'element-blocker';
@@ -76,6 +77,8 @@ export class TutorialService {
     }
 
     playAll(): void {
+        if (this._currentTaskIndex >= 0) return;
+
         setTimeout(() => {
             let tasks = _.orderBy(this._tasks, ['action.order'], ['asc']);
             if (!tasks || tasks.length == 0) return;
@@ -84,6 +87,8 @@ export class TutorialService {
         });
     }
     playByKey(key: string, onlyOnce?: boolean): void {
+        if (this._currentTaskIndex >= 0) return;
+        
         setTimeout(() => {
             if (onlyOnce && this.getLocalStorage(key)) return;
 
@@ -121,6 +126,8 @@ export class TutorialService {
     exit(): void {
         this.destroyCurrentTask();
         this.destroyOverlay();
+        this.stopListeningKeyboardArrows();
+
         this._currentTaskIndex = -1;
         this._runningTasks = null;
 
@@ -135,6 +142,7 @@ export class TutorialService {
         this.renderOverlay();
         this.renderCurrentTask();
         this.notifyStepHasChanged();
+        this.startListeningKeyboardArrows();
     }
 
     //rendering
@@ -195,6 +203,7 @@ export class TutorialService {
     private createElementBlocker(): any {
         let blocker = this._render.createElement('div');
         this._render.setAttribute(blocker, 'id', this.BLOCKER_ID);
+        this._render.setStyle(blocker, 'background-color', '#00000024');
         this._render.setStyle(blocker, 'position', 'fixed');
         this._render.setStyle(blocker, 'top', '0');
         this._render.setStyle(blocker, 'left', '0');
@@ -435,6 +444,10 @@ export class TutorialService {
             left -= blockWidth + elementRect.width + 45;          
         }
 
+        if ((left + blockWidth) >= document.body.clientWidth) {
+            left -= blockWidth + 45;  
+        }
+
         if (arrow) {
             this._render.setStyle(arrow, arrowBorder, `15px solid ${arrowColor}`);
             this._render.setStyle(arrow, arrowPositionX, `-17px`);
@@ -497,6 +510,27 @@ export class TutorialService {
     }
     private notifyStepHasChanged(): void {
         this.onStepChanged.emit(this._runningTasks[this._currentTaskIndex]);
+    }
+    private startListeningKeyboardArrows(): void {
+        this.unlistenKeyboardArrows = this._render.listen(document.body, 'keyup', (event: KeyboardEvent) => {
+            switch (event.keyCode) {
+                case 27:
+                    this.exit();
+                    break;
+                case 37:
+                    this.movePrev();
+                    break;
+                case 13:
+                case 39:
+                    this.moveNext();
+                    break;
+            }
+
+            event.stopImmediatePropagation();
+        });
+    }
+    private stopListeningKeyboardArrows(): void {
+        this.unlistenKeyboardArrows();
     }
 
     //localstorage
