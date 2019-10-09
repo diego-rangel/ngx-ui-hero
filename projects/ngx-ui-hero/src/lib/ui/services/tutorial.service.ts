@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { ElementRef, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { ElementRef, EventEmitter, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
 import { TutorialAction } from '../classes/tutorial-action';
@@ -11,6 +11,10 @@ declare var localStorage: any;
 
 @Injectable()
 export class TutorialService {
+    onStepChanged = new EventEmitter<TutorialTask>();
+    onStart = new EventEmitter();
+    onExit = new EventEmitter();
+
     private _tasks: Array<TutorialTask>;
     private _runningTasks: Array<TutorialTask>;
     private _currentTaskIndex: number = -1;
@@ -104,6 +108,7 @@ export class TutorialService {
         this.destroyCurrentTask();
         this._currentTaskIndex += 1;
         this.renderCurrentTask();
+        this.notifyStepHasChanged();
     }
     movePrev(): void {
         if (this._currentTaskIndex == 0) return;
@@ -111,19 +116,25 @@ export class TutorialService {
         this.destroyCurrentTask();
         this._currentTaskIndex -= 1;
         this.renderCurrentTask();
+        this.notifyStepHasChanged();
     }
     exit(): void {
         this.destroyCurrentTask();
         this.destroyOverlay();
         this._currentTaskIndex = -1;
         this._runningTasks = null;
+
+        this.onExit.emit();
     }
 
     private play(tasks: Array<TutorialTask>): void {
+        this.onStart.emit();
+
         this._currentTaskIndex = 0;
         this._runningTasks = tasks;
         this.renderOverlay();
         this.renderCurrentTask();
+        this.notifyStepHasChanged();
     }
 
     //rendering
@@ -483,6 +494,9 @@ export class TutorialService {
         let el = this._runningTasks[this._currentTaskIndex].element;
         
         return allowedTags.filter(x => x.toUpperCase() == el.nativeElement.tagName).length == 1;
+    }
+    private notifyStepHasChanged(): void {
+        this.onStepChanged.emit(this._runningTasks[this._currentTaskIndex]);
     }
 
     //localstorage
