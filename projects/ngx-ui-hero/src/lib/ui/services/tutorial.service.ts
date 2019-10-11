@@ -42,7 +42,7 @@ export class TutorialService {
 
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationStart) {
-                this._tasks = new Array<TutorialTask>();
+                this.resetTasks();
             }
         });
     }
@@ -80,8 +80,10 @@ export class TutorialService {
         if (this._currentTaskIndex >= 0) return;
 
         setTimeout(() => {
-            let tasks = _.orderBy(this._tasks, ['action.order'], ['asc']);
+            let tasks = this._tasks.filter(x => x.element && x.element.nativeElement && x.element.nativeElement.isConnected);
             if (!tasks || tasks.length == 0) return;
+
+            tasks = _.orderBy(tasks, ['action.order'], ['asc']);
 
             this.play(tasks);
         });
@@ -92,7 +94,7 @@ export class TutorialService {
         setTimeout(() => {
             if (onlyOnce && this.getLocalStorage(key)) return;
 
-            let tasks = this._tasks.filter(x => x.action.key == key);
+            let tasks = this._tasks.filter(x => x.element && x.element.nativeElement && x.element.nativeElement.isConnected && x.action.key == key);
             if (!tasks || tasks.length == 0) return;
 
             tasks = _.orderBy(tasks, ['action.order'], ['asc']);
@@ -132,6 +134,9 @@ export class TutorialService {
         this._runningTasks = null;
 
         this.onExit.emit();
+    }
+    resetTasks(): void {
+        this._tasks = new Array<TutorialTask>();
     }
 
     private play(tasks: Array<TutorialTask>): void {
