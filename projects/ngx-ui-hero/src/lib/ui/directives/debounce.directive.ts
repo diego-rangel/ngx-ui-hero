@@ -29,7 +29,7 @@ export class DebounceDirective implements OnInit {
     const event2 = fromEvent(this.elementRef.nativeElement, 'keyup')
       .subscribe((input: any) => {
         if (input.keyCode == 13 || (input.keyCode >= 37 && input.keyCode <= 40)) {
-          this.arrowsCallback.emit(input.keyCode);
+          this.arrowsCallback.emit(input);
         } 
       });
   }

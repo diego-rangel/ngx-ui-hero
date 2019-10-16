@@ -55,7 +55,7 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     this.handleInitialValue();
   }
 
-  ToggleDropDown(value?: boolean): void {
+  ToggleDropDown(event: MouseEvent, value?: boolean): void {
     if ((value == false && !this.showDropdown) || (value == undefined && this.disabled)) return;
 
     this.displayMode = EnumDisplayMode.Month;
@@ -73,6 +73,10 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
       }
 
       this.showDropdown = value;
+    }
+
+    if (event) {
+      event.stopImmediatePropagation();
     }
   }
 
@@ -106,10 +110,10 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
 
     event.stopPropagation();
   }
-  OnComboPressed(e: KeyboardEvent): void {
-    if (e.keyCode == 13) {
-      this.ToggleDropDown();
-      e.preventDefault();
+  OnComboPressed(event: KeyboardEvent): void {
+    if (event.keyCode == 13) {
+      this.ToggleDropDown(null);
+      event.preventDefault();
     }
   }
 

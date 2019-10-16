@@ -100,7 +100,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     this.modelInitialized = true;
   }
 
-  ToggleDropDown(value?: boolean): void {
+  ToggleDropDown(event: MouseEvent, value?: boolean): void {
     if (this.clickOutsideEnabled) {
       if ((value == false && !this.showDropdown) || (value == undefined && this.disabled)) return;
     
@@ -127,16 +127,20 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     } else {
       this.clickOutsideEnabled = true;
     }
+
+    if (event) {
+      event.stopImmediatePropagation();
+    }
   }
   Select(row: any): void {
     if (this.disabled) {
-      this.ToggleDropDown(false);
+      this.ToggleDropDown(null, false);
       return;
     }
 
     this.value = this.renderPropertyValue(this.valueProperty, row);
     this.onChange.emit(this.value);    
-    this.ToggleDropDown(false);
+    this.ToggleDropDown(null, false);
   }
   OnSearch(): void {
     if (this.lazyLoadedData) {
@@ -164,21 +168,17 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
   SetLoading(value: boolean): void {
     this.loading = value;
   }
-  OnArrowsPressed(keyCode: number): void {
-    if (keyCode == 13) {
+  OnArrowsPressed(event: KeyboardEvent): void {
+    if (event.keyCode == 13) {
       this.Select(this.internalData[this.selectedItemIndex]);
-      return;
-    }
-
-    if (keyCode >= 37 && keyCode <= 40) {
-      this.handleArrows(keyCode);
-      return;
+    } else if (event.keyCode >= 37 && event.keyCode <= 40) {
+      this.handleArrows(event.keyCode);
     }
   }
-  OnComboPressed(e: KeyboardEvent): void {
-    if (e.keyCode == 13) {
-      this.ToggleDropDown();
-      e.preventDefault();
+  OnComboPressed(event: KeyboardEvent): void {
+    if (event.keyCode == 13) {
+      this.ToggleDropDown(null);
+      event.preventDefault();
     }
   }
 

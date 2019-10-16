@@ -93,7 +93,7 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     this.modelInitialized = true;
   }
 
-  ToggleDropDown(value?: boolean): void {
+  ToggleDropDown(event: MouseEvent, value?: boolean): void {
     if ((value == false && !this.showOptions) || (value == undefined && this.disabled)) return;
 
     if (value == undefined) { 
@@ -111,6 +111,10 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     }
     
     this.clearSearch();
+
+    if (event) {
+      event.stopImmediatePropagation();
+    }
   }
   ToggleItemSelected(item: any): void {
     if (this.disabled) {
@@ -163,10 +167,10 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     event.stopPropagation();
   }
   
-  OnComboPressed(e: KeyboardEvent): void {
-    if (e.keyCode == 13) {
-      this.ToggleDropDown();
-      e.preventDefault();
+  OnComboPressed(event: KeyboardEvent): void {
+    if (event.keyCode == 13) {
+      this.ToggleDropDown(null);
+      event.preventDefault();
     }
   }
 

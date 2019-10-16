@@ -1,4 +1,4 @@
-<div [id]="identifier" class="ui-dropdown-search" (clickOutside)="ToggleDropDown(false)">
+<div [id]="identifier" class="ui-dropdown-search">
   <label *ngIf="label">
     {{label}}
     <span class="required-symbol" *ngIf="isRequired"> *</span>
@@ -14,14 +14,14 @@
       'is-valid': !showDropdown && !disabled && comboTouched && (!isRequired || (value != null && value != undefined)),
       'is-invalid': !showDropdown && !disabled && comboTouched && isRequired && (value == null || value == undefined)
     }"
-    (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
+    (click)="ToggleDropDown($event)" (keyup)="OnComboPressed($event)" tabindex="0">
 
     <span class="mr-auto text-truncate">{{value != null && value != undefined && selectedDisplayText ? selectedDisplayText : placeholder}}</span>
     <i class="fa fa-times btn-clear-selection" *ngIf="(value != null && value != undefined) && !disabled" (click)="ClearSelection($event)"></i>
     <i class="fa" [ngClass]="{'fa-caret-down': !showDropdown, 'fa-caret-up': showDropdown}"></i>
   </div>
 
-  <div class="dropdown-options shadow fadeInDown" *ngIf="showDropdown">
+  <div class="dropdown-options shadow fadeInDown" *ngIf="showDropdown" (clickOutside)="ToggleDropDown($event, false)">
     <div class="options-container">
       <div class="toolbar d-flex align-items-center">
         <input type="text" auto-focus

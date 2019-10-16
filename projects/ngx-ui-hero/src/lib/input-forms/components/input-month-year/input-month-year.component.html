@@ -1,4 +1,4 @@
-<div [id]="identifier" class="ui-month-year" (clickOutside)="ToggleDropDown(false)">
+<div [id]="identifier" class="ui-month-year">
   <label *ngIf="label">
     {{label}}
     <span class="required-symbol" *ngIf="isRequired"> *</span>
@@ -14,7 +14,7 @@
         'is-valid': !showDropdown && !disabled && comboTouched && !(invalid | async),
         'is-invalid': !showDropdown && !disabled && comboTouched && (invalid | async)
       }"
-      (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
+      (click)="ToggleDropDown($event)" (keyup)="OnComboPressed($event)" tabindex="0">
 
       <span *ngIf="!value">{{placeholder}}</span>
       <span *ngIf="value">{{value | date:format}}</span>
@@ -23,7 +23,7 @@
       <i class="fa" [ngClass]="{'fa-caret-down': !showDropdown, 'fa-caret-up': showDropdown}"></i>
   </div>
 
-  <div class="dropdown-options shadow fadeInDown" *ngIf="showDropdown">
+  <div class="dropdown-options shadow fadeInDown" *ngIf="showDropdown" (clickOutside)="ToggleDropDown($event, false)">
     <div class="months-container" *ngIf="displayMode == 0">
       <div class="toolbar d-flex align-items-center justify-content-between">
         <button class="btn btn-light" (click)="DecrementSelectedYear()"><i class="fa fa-chevron-left"></i></button>

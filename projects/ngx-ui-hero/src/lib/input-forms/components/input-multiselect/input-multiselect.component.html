@@ -1,4 +1,4 @@
-<div [id]="identifier" class="ui-multiselect" (clickOutside)="ToggleDropDown(false)">
+<div [id]="identifier" class="ui-multiselect">
     <label *ngIf="label">
         {{label}}
         <span class="required-symbol" *ngIf="isRequired"> *</span>
@@ -14,7 +14,7 @@
             'is-valid': !showOptions && !disabled && comboTouched && (!isRequired || value?.length > 0),
             'is-invalid': !showOptions && !disabled && comboTouched && isRequired && (!value || value.length == 0)
         }"
-        (click)="ToggleDropDown()" (keyup)="OnComboPressed($event)" tabindex="0">
+        (click)="ToggleDropDown($event)" (keyup)="OnComboPressed($event)" tabindex="0">
 
         <span *ngIf="!value || value.length == 0">{{placeholder}}</span>
 
@@ -29,7 +29,7 @@
         <i class="fa" [ngClass]="{'fa-caret-down': !showOptions, 'fa-caret-up': showOptions}"></i>
     </div>
 
-    <div class="dropdown-options shadow fadeInDown" *ngIf="showOptions">
+    <div class="dropdown-options shadow fadeInDown" *ngIf="showOptions" (clickOutside)="ToggleDropDown($event, false)">
         <div class="options-container" *ngIf="options?.length > 0">
             <div class="toolbar d-flex align-items-center">
                 <input type="text" class="form-control flex-grow-1" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" auto-focus />
