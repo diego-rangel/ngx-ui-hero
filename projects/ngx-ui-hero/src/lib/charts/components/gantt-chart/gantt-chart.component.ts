@@ -26,6 +26,7 @@ export class GanttChartComponent implements OnInit {
   @Input() tooltipPlacement: string = 'left';
   @Input() maxHeight: number = 0;
   @Input() showFooter: boolean = false;
+  @Input() currentYear: number;
   @Output() onSelect = new EventEmitter<any>();
   @ContentChild(GanttSeriesTooltipTemplateDirective, {read: TemplateRef, static: true}) seriesTooltipTemplate: GanttSeriesTooltipTemplateDirective;
 
@@ -37,8 +38,7 @@ export class GanttChartComponent implements OnInit {
   months: Array<string>;
   dayLabel: string;
   monthLabel: string;
-  yearLabel: string;
-  currentYear: number;
+  yearLabel: string;  
   currentMonth: number;
   showingMouseIndicator: boolean = false;
   mouseMovingLastMonth: boolean = false;
@@ -139,13 +139,19 @@ export class GanttChartComponent implements OnInit {
   }
   private initMonths(): void {
     moment.locale(this.locale);
-    let today = new Date();    
+
+    let today = new Date();
+
+    if (!this.currentYear) {
+      this.currentYear = today.getFullYear();
+    }
+
+    let referenceDate = new Date(this.currentYear, today.getMonth(), today.getDay());
     
     this.dayLabel = moment.localeData().relativeTime(1, false, 'd', false).split(' ')[1];
     this.monthLabel = moment.localeData().relativeTime(1, false, 'M', false).split(' ')[1];
-    this.yearLabel = moment.localeData().relativeTime(1, false, 'y', false).split(' ')[1];
-    this.currentYear = today.getFullYear();
-    this.currentMonth = today.getMonth();    
+    this.yearLabel = moment.localeData().relativeTime(1, false, 'y', false).split(' ')[1];    
+    this.currentMonth = referenceDate.getMonth();
 
     this.months = moment.monthsShort('-MMM-');
   }
