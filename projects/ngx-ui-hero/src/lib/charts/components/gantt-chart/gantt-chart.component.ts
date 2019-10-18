@@ -90,15 +90,14 @@ export class GanttChartComponent implements OnInit {
     let monthWidth: number = $(`#${this.identifier} .gantt-timeline .timeline .item:first-child`).children('.box:first-child').width();
     let monthIndexBeingHovered: number = Math.floor(this.mouseIndicatorCoordinateX / (monthWidth + 2));
 
-    let today = new Date();
-    let date = new Date(today.getFullYear(), monthIndexBeingHovered, 1);
+    let date = new Date(this.currentYear, monthIndexBeingHovered, 1);
     let daysInMonth: number = moment(date).daysInMonth();
     let dayWidth: number = monthWidth / daysInMonth;
     let dayBeignHovered: number = Math.floor((this.mouseIndicatorCoordinateX - ((monthWidth + 2) * monthIndexBeingHovered)) / dayWidth) + 1;
 
     if (dayBeignHovered <= 0 || dayBeignHovered > daysInMonth) return;
     
-    this.dateIndicator = new Date(today.getFullYear(), monthIndexBeingHovered, dayBeignHovered);
+    this.dateIndicator = new Date(this.currentYear, monthIndexBeingHovered, dayBeignHovered);
     this.mouseMovingLastMonth = monthIndexBeingHovered == 11;
   }
   onTimelineMouseEnter(): void {
