@@ -12,8 +12,8 @@ export class GanttComponent implements OnInit {
     {
       label: 'Diego Rangel',
       series: [
-        { startDate: new Date(2019, 3, 1, 0, 0, 0), endDate: new Date(2019, 3, 20, 0, 0, 0) },
-        { startDate: new Date(2019, 5, 15, 0, 0, 0), endDate: new Date(2019, 6, 9, 0, 0, 0) },
+        { startDate: new Date(2019, 1, 15, 0, 0, 0), endDate: new Date(2019, 7, 1, 0, 0, 0) },
+        { startDate: new Date(2019, 8, 15, 0, 0, 0), endDate: new Date(2019, 9, 9, 0, 0, 0) },
       ]
     },
     {

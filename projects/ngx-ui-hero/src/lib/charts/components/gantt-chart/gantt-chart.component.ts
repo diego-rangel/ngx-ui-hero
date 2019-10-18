@@ -136,6 +136,12 @@ export class GanttChartComponent implements OnInit {
 
     return end.diff(start, 'days') + 1;
   }
+  private monthsDiffFromSerie(serie: GanttSerieModel): number {
+    var start = moment(serie.startDate);
+    var end = moment(serie.endDate);
+
+    return end.diff(start, 'months');
+  }
   private initMonths(): void {
     moment.locale(this.locale);
 
@@ -168,12 +174,24 @@ export class GanttChartComponent implements OnInit {
       if (!this.internalData[i].series || this.internalData[i].series.length == 0) continue;
 
       for (let s = 0; s < this.internalData[i].series.length; s++) {
+        let serieTotalWidth = 0;
         let day = this.internalData[i].series[s].startDate.getDate();
         let month = this.internalData[i].series[s].startDate.getMonth() + 1;
-        let dayWidth: number = monthWidth / moment(this.internalData[i].series[s].startDate).daysInMonth();
+        let daysDiff = this.internalData[i].series[s].daysDiff;
+        let startDate = this.internalData[i].series[s].startDate;
+        let firstDayWidth: number = monthWidth / moment(startDate).daysInMonth();
+        let monthsDiff = this.monthsDiffFromSerie(this.internalData[i].series[s]);
 
-        this.internalData[i].series[s].left = ((month - 1) * monthWidth) + ((day - 1) * dayWidth) + ((month - 1) * 2);
-        this.internalData[i].series[s].width = this.internalData[i].series[s].daysDiff * dayWidth;
+        for (let d = 0; d < daysDiff; d++) {
+          let date = moment(startDate).add({days: d}).toDate();
+          let daysInMonth = moment(date).daysInMonth();
+          let dayWidth: number = monthWidth / daysInMonth;
+
+          serieTotalWidth += dayWidth;
+        }
+
+        this.internalData[i].series[s].left = ((month - 1) * monthWidth) + ((day - 1) * firstDayWidth) + ((month - 1) * 2);
+        this.internalData[i].series[s].width = serieTotalWidth + (monthsDiff * 2);
       }
     }
   }
