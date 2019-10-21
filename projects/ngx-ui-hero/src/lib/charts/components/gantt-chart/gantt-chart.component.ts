@@ -124,7 +124,8 @@ export class GanttChartComponent implements OnInit {
             data: s.data,
             left: 0,
             width: 0,
-            daysDiff: this.daysDiffFromSerie(s)
+            daysDiff: this.daysDiffFromSerie(s),
+            label: s.label
           };
         })
       });

@@ -8,6 +8,7 @@ export interface GanttSerieModel {
     startDate: Date;
     endDate: Date;
     data?: any;
+    label?: string;
 }
 
 export interface GanttInternalItemModel {
@@ -23,4 +24,5 @@ export interface GanttInternalSerieModel {
     width: number;
     daysDiff: number;
     data?: any;
+    label?: string;
 }
