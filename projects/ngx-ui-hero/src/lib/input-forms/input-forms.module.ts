@@ -35,6 +35,8 @@ import { MinValueDirective } from './directives/min-value-validator.directive';
 import { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
 import { MaskDirective } from './masking/mask.directive';
+import { FilterDropdownSearchComponent } from './components/filter-dropdown-search/filter-dropdown-search.component';
+import { FilterMultiselectComponent } from './components/filter-multiselect/filter-multiselect.component';
 
 export { CurrencySymbolPipe } from './base/currency-symbol.pipe';
 export { InputFormsConfig } from './input-forms-config';
@@ -61,6 +63,8 @@ export { InputDropdownSearchComponent } from './components/input-dropdown-search
 export { InputTextMaskComponent } from './components/input-text-mask/input-text-mask.component';
 export { MaxValueDirective } from './directives/max-value-validator.directive';
 export { MinValueDirective } from './directives/min-value-validator.directive';
+export { FilterDropdownSearchComponent } from './components/filter-dropdown-search/filter-dropdown-search.component';
+export { FilterMultiselectComponent } from './components/filter-multiselect/filter-multiselect.component';
 export { BlockUi } from './classes/block-ui';
 
 @NgModule({
@@ -97,6 +101,8 @@ export { BlockUi } from './classes/block-ui';
     BlockUiComponent,
     InputDropdownSearchComponent,
     InputTextMaskComponent,
+    FilterDropdownSearchComponent,
+    FilterMultiselectComponent,
     MaskDirective,
   ],
   exports: [
@@ -124,6 +130,8 @@ export { BlockUi } from './classes/block-ui';
     InputDropdownSearchComponent,
     InputTextMaskComponent,
     BlockUiComponent,
+    FilterDropdownSearchComponent,
+    FilterMultiselectComponent,
     MaskDirective
   ],
 })

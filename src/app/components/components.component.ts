@@ -262,6 +262,16 @@ dropdownGridColumns: Array<DataGridColumnModel> = [
 </input-dropdown-search>
   `;
 
+  filterDropdownSearchTemplate = `
+<filter-dropdown-search
+  label="My Filter"
+  displayTextProperty="name"
+  valueProperty="id"
+  [(ngModel)]="myDropdownSearchModel"
+  [data]="dropdownGridData">
+</filter-dropdown-search>
+  `;
+
   inputDropdownSearchCode = `
 dropdownSearchData = [
   { id: 1, name: 'Person 1', email: 'person1@domain.com' },

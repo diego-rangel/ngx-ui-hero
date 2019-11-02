@@ -11,9 +11,9 @@
         <div id="components-menu" class="sticky-top" style="top: 20px;">
           <a anchorLink="card-input-text" href="#card-input-text" class="list-group-item list-group-item-action"><i class="fa fa-keyboard-o"></i> Text</a>
           <a anchorLink="card-input-select" href="#card-input-select" class="list-group-item list-group-item-action"><i class="fa fa-chevron-down"></i> Select</a>
-          <a anchorLink="card-input-multiselect" href="#card-input-multiselect" class="list-group-item list-group-item-action"><i class="fa fa-list-ul"></i> MultiSelect <span class="badge badge-danger">new</span></a>
-          <a anchorLink="card-input-dropdown-grid" href="#card-input-dropdown-grid" class="list-group-item list-group-item-action"><i class="fa fa-table"></i> Dropdown Grid <span class="badge badge-danger">new</span></a>
-          <a anchorLink="card-input-dropdown-search" href="#card-input-dropdown-search" class="list-group-item list-group-item-action"><i class="fa fa-search"></i> Dropdown Search <span class="badge badge-danger">new</span></a>
+          <a anchorLink="card-input-multiselect" href="#card-input-multiselect" class="list-group-item list-group-item-action"><i class="fa fa-list-ul"></i> MultiSelect</a>
+          <a anchorLink="card-input-dropdown-grid" href="#card-input-dropdown-grid" class="list-group-item list-group-item-action"><i class="fa fa-table"></i> Dropdown Grid</a>
+          <a anchorLink="card-input-dropdown-search" href="#card-input-dropdown-search" class="list-group-item list-group-item-action"><i class="fa fa-search"></i> Dropdown Search</a>
           <a anchorLink="card-input-email" href="#card-input-email" class="list-group-item list-group-item-action"><i class="fa fa-envelope-o"></i> E-mail</a>
           <a anchorLink="card-input-textarea" href="#card-input-textarea" class="list-group-item list-group-item-action"><i class="fa fa-text-height"></i> Textarea</a>
           <a anchorLink="card-input-checkbox" href="#card-input-checkbox" class="list-group-item list-group-item-action"><i class="fa fa-check-square-o"></i> Checkbox</a>
@@ -23,8 +23,9 @@
           <a anchorLink="card-input-percent" href="#card-input-percent" class="list-group-item list-group-item-action"><i class="fa fa-percent"></i> Percent</a>
           <a anchorLink="card-input-number" href="#card-input-number" class="list-group-item list-group-item-action"><i class="fa fa-sort-numeric-asc"></i> Number</a>
           <a anchorLink="card-input-date" href="#card-input-date" class="list-group-item list-group-item-action"><i class="fa fa-calendar"></i> Date</a>
-          <a anchorLink="card-input-month-year" href="#card-input-month-year" class="list-group-item list-group-item-action"><i class="fa fa-calendar"></i> Month/Year <span class="badge badge-danger">new</span></a>
+          <a anchorLink="card-input-month-year" href="#card-input-month-year" class="list-group-item list-group-item-action"><i class="fa fa-calendar"></i> Month/Year</a>
           <a anchorLink="card-input-upload" href="#card-input-upload" class="list-group-item list-group-item-action"><i class="fa fa-cloud-upload"></i> Upload</a>
+          <a anchorLink="card-filter-dropdown-search" href="#card-filter-dropdown-search" class="list-group-item list-group-item-action"><i class="fa fa-filter"></i> Filter Dropdown Search <span class="badge badge-danger">new</span></a>
         </div>
       </div>
       <div class="col-xl-9 col-lg-8">
@@ -1008,6 +1009,129 @@
                   </tbody>
                 </table>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-filter-dropdown-search" class="card mt-4">
+          <div class="card-header">Filter Dropdown Search</div>
+          <div class="card-body">
+            <div class="form-group mb-4">
+              <filter-dropdown-search
+                label="My Filter"
+                displayTextProperty="name"
+                valueProperty="id"
+                [(ngModel)]="myDropdownSearchModel"
+                [data]="dropdownGridData">
+              </filter-dropdown-search>
+            </div>
+
+            <tabset class="custom-tab">
+              <tab heading="Template">
+                <div>
+                  <pre><code [highlight]="filterDropdownSearchTemplate"></code></pre>
+                </div>
+              </tab>
+              <tab heading="Component">
+                <div>
+                  <pre><code [highlight]="inputDropdownSearchCode"></code></pre>
+                </div>
+              </tab>
+            </tabset>
+
+            <h2 class="mt-4">Inputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>placeholder</b>
+                      <br/>Default: <small>Select...</small>
+                    </td>
+                    <td>string</td>
+                    <td>Input placeholder.</td>
+                  </tr>
+                  <tr>
+                    <td><b>searchPlaceholder</b><br/>
+                      Default: <small>Search...</small>
+                    </td>
+                    <td>string</td>
+                    <td>The Search input placeholder.</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <b>emptyResultsMessage</b><br/>
+                      Default: <small>No results found at this moment.</small>
+                    </td>
+                    <td>string</td>
+                    <td>The message to show when no items were found by the search.</td>
+                  </tr>
+                  <tr>
+                    <td><b>clearSelectionButtonLabel</b><br/>
+                      Default: <small>Clear selection</small>
+                    </td>
+                    <td>string</td>
+                    <td>The Clear selection button's label.</td>
+                  </tr>
+                  <tr>
+                    <td><b>displayTextProperty</b>
+                      <br/><small class="text-danger">required</small>
+                    </td>
+                    <td>string</td>
+                    <td>The property name to show for displaying the selected item.</td>
+                  </tr>
+                  <tr>
+                    <td><b>valueProperty</b>
+                      <br/><small class="text-danger">required</small>
+                    </td>
+                    <td>string</td>
+                    <td>The property name to handle as the ngModel. It's values must be unique.</td>
+                  </tr>
+                  <tr>
+                    <td><b>data</b>
+                      <br/><small class="text-danger">required</small>
+                    </td>
+                    <td>any[]</td>
+                    <td>The data to show into the Datagrid.</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <b>lazyLoadedData</b><br/>
+                      Default: <small>false</small>
+                    </td>
+                    <td>boolean</td>
+                    <td>If <b>true</b>, the component will emit the <b>onSearch</b> and <b>you</b> are responsible to do the search and reset the <b>data</b> property.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Outputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>onChange</b></td>
+                    <td>Emitted every time the <b>selected item</b> is changed with the new value as a parameter.</td>
+                  </tr>
+                  <tr>
+                    <td><b>onSearch</b></td>
+                    <td>Emitted when <b>lazyLoadedData</b> is <b>true</b> and the user type in some search.</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

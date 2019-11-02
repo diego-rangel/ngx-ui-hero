@@ -1,24 +1,16 @@
 <div [id]="identifier" class="ui-dropdown-search">
-    <label *ngIf="label">
-        {{label}}
-        <span class="required-symbol" *ngIf="isRequired"> *</span>
-        <i class="fa fa-question-circle ml-2" tooltip="{{help}}" container="body" *ngIf="help"></i>
-    </label>
-
     <input type="hidden" [(ngModel)]="value" />
+
     <div class="combobox d-flex align-items-center" [ngClass]="{
-        'has-validations': showValidations,
         'open': showDropdown, 
-        'disabled': disabled,
-        'is-valid': !showDropdown && !disabled && comboTouched && (!isRequired || (value != null && value != undefined)),
-        'is-invalid': !showDropdown && !disabled && comboTouched && isRequired && (value == null || value == undefined)
+        'disabled': disabled
       }" (click)="ToggleDropDown($event)" (keyup)="OnComboPressed($event)" tabindex="0">
 
-        <span
-            class="mr-auto text-truncate">{{value != null && value != undefined && selectedDisplayText ? selectedDisplayText : placeholder}}</span>
-        <i class="fa fa-times btn-clear-selection" *ngIf="(value != null && value != undefined) && !disabled"
-            (click)="ClearSelection($event)"></i>
-        <i class="fa" [ngClass]="{'fa-caret-down': !showDropdown, 'fa-caret-up': showDropdown}"></i>
+        <span class="mr-2" *ngIf="value"><b>{{label}}</b>:</span>
+        <span class="mr-auto text-truncate">
+            {{value && selectedDisplayText ? selectedDisplayText : label}}
+        </span>
+        <i class="fa" [ngClass]="{'fa-angle-down': !showDropdown, 'fa-angle-up': showDropdown}"></i>
     </div>
 
     <div class="dropdown-options shadow fadeInDown" *ngIf="showDropdown" (clickOutside)="ToggleDropDown($event, false)">
@@ -27,6 +19,10 @@
                 <input type="text" auto-focus class="form-control" name="{{identifier}}-search" [(ngModel)]="search"
                     placeholder="{{searchPlaceholder}}" debounce (callback)="OnSearch()"
                     (arrowsCallback)="OnArrowsPressed($event)" />
+                    
+                <button type="button" class="btn btn-light ml-1 flex-shrink-0" (click)="ClearSelection($event)" *ngIf="value && !disabled">
+                    <i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}
+                </button>
             </div>
 
             <div class="loading" *ngIf="loading">
@@ -45,14 +41,9 @@
                 </div>
             </div>
 
-            <span class="empty-results"
-                *ngIf="!loading && (!lazyLoadedData || searchCounter > 0) && (!internalData || internalData.length == 0)">{{emptyResultsMessage}}</span>
+            <span class="empty-results" *ngIf="!loading && (!lazyLoadedData || searchCounter > 0) && (!internalData || internalData.length == 0)">{{emptyResultsMessage}}</span>
         </div>
     </div>
 </div>
-
-<input-validations *ngIf="showValidations && !disabled && comboTouched && (invalid | async)"
-    [messages]="failures | async">
-</input-validations>
 
 <small class="text-muted" *ngIf="description">{{description}}</small>
