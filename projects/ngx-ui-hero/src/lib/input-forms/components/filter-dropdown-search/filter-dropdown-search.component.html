@@ -6,10 +6,13 @@
         'disabled': disabled
       }" (click)="ToggleDropDown($event)" (keyup)="OnComboPressed($event)" tabindex="0">
 
-        <span class="mr-2" *ngIf="value"><b>{{label}}</b>:</span>
-        <span class="mr-auto text-truncate">
-            {{value && selectedDisplayText ? selectedDisplayText : label}}
+        <span *ngIf="!value">{{label}}</span>
+
+        <span *ngIf="value && selectedDisplayText">
+            <b>{{label}}</b>:
+            <small class="text-muted text-truncate ml-1">{{selectedDisplayText}}</small>
         </span>
+        
         <i class="fa" [ngClass]="{'fa-angle-down': !showDropdown, 'fa-angle-up': showDropdown}"></i>
     </div>
 

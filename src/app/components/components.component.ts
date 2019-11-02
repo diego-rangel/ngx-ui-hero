@@ -201,6 +201,16 @@ export class ComponentsComponent implements OnInit {
 </input-multiselect>
   `;
 
+  myFilterMultiselectCode = `
+<filter-multiselect 
+  label="My Multiselect"
+  [(ngModel)]="myMultiselectModel"
+  [options]="multiSelectOptions" 
+  displayTextProperty="text" 
+  valueProperty="value">
+</filter-multiselect>
+  `;
+
   myMonthYearCode = `
 <input-month-year
   label="My Label"

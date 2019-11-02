@@ -1,1 +1,50 @@
-<p>filter-multiselect works!</p>
+<div [id]="identifier" class="ui-multiselect">
+    <input type="hidden" [(ngModel)]="value" />
+
+    <div class="combobox d-flex align-items-center justify-content-between" 
+        [ngClass]="{
+            'open': showOptions, 
+            'disabled': disabled
+        }"
+        (click)="ToggleDropDown($event)" (keyup)="OnComboPressed($event)" tabindex="0">
+
+        <span class="mr-2" *ngIf="value?.length > 0"><b>{{label}}</b>: </span>
+
+        <span *ngIf="!value || value.length == 0">{{label}}</span>
+
+        <div *ngIf="value?.length > 0" class="selected-items d-flex align-items-center">
+            <span *ngFor="let item of value | slice:0:maxCountOfLabelsToShow; let i = index;">
+                <small class="text-muted text-truncate ml-1">{{item[displayTextProperty]}}</small>
+            </span>
+            <span *ngIf="value.length > maxCountOfLabelsToShow">...</span>
+        </div>
+
+        <i class="fa" [ngClass]="{'fa-angle-down': !showOptions, 'fa-angle-up': showOptions}"></i>
+    </div>
+
+    <div class="dropdown-options shadow fadeInDown" *ngIf="showOptions" (clickOutside)="ToggleDropDown($event, false)">
+        <div class="options-container" *ngIf="options?.length > 0">
+            <div class="toolbar d-flex align-items-center">
+                <input type="text" class="form-control flex-grow-1" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" auto-focus />
+                <button type="button" class="btn btn-light ml-1 flex-shrink-0" (click)="ToggleAllItemsSelection(true, true)" [disabled]="disabled"><i class="fa fa-check-square"></i> {{selectAllButtonLabel}}</button>
+                <button type="button" class="btn btn-light ml-1 flex-shrink-0" (click)="ToggleAllItemsSelection(false, true)" [disabled]="disabled"><i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}</button>
+            </div>
+
+            <ul>
+                <li class="d-flex" *ngFor="let item of options | searchBy : displayTextProperty : search" [ngClass]="{'selected': item.selected}">
+                    <div class="checkbox mr-3 flex-shrink-0">
+                        <input type="checkbox" name="{{identifier}}-option" [(ngModel)]="item.selected" (change)="ItemSelectedCheckChanged()" [disabled]="disabled" />
+                    </div>
+                    <span class="link" (click)="ToggleItemSelected(item)">{{item[displayTextProperty]}}</span>
+                </li>
+            </ul>
+
+            <small class="empty-results" *ngIf="(options | searchBy : displayTextProperty : search).length == 0">{{emptyMessage}}</small>
+        </div>
+
+        <small class="empty-results" *ngIf="!options || options.length == 0">{{emptyMessage}}</small>
+    </div>
+</div>
+
+<small class="text-muted" *ngIf="description">{{description}}</small>
+    

@@ -26,6 +26,7 @@
           <a anchorLink="card-input-month-year" href="#card-input-month-year" class="list-group-item list-group-item-action"><i class="fa fa-calendar"></i> Month/Year</a>
           <a anchorLink="card-input-upload" href="#card-input-upload" class="list-group-item list-group-item-action"><i class="fa fa-cloud-upload"></i> Upload</a>
           <a anchorLink="card-filter-dropdown-search" href="#card-filter-dropdown-search" class="list-group-item list-group-item-action"><i class="fa fa-filter"></i> Filter Dropdown Search <span class="badge badge-danger">new</span></a>
+          <a anchorLink="card-filter-multiselect" href="#card-filter-multiselect" class="list-group-item list-group-item-action"><i class="fa fa-filter"></i> Filter MultiSelect <span class="badge badge-danger">new</span></a>
         </div>
       </div>
       <div class="col-xl-9 col-lg-8">
@@ -1129,6 +1130,123 @@
                   <tr>
                     <td><b>onSearch</b></td>
                     <td>Emitted when <b>lazyLoadedData</b> is <b>true</b> and the user type in some search.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-filter-multiselect" class="card mt-4">
+          <div class="card-header">Filter MultiSelect</div>
+          <div class="card-body">
+            <filter-multiselect 
+              label="My Multiselect"
+              [(ngModel)]="myMultiselectModel"
+              [options]="multiSelectOptions" 
+              displayTextProperty="text" 
+              valueProperty="value">
+            </filter-multiselect>
+
+            <div class="row mt-4">
+              <div class="col-lg-6">
+                <h5>Example</h5>
+                <div>
+                  <pre><code [highlight]="myFilterMultiselectCode"></code></pre>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <h5>Model</h5>
+                <div class="long-content">
+                  <pre><code [highlight]="myMultiselectModel | json"></code></pre>
+                </div>
+              </div>
+            </div>
+
+            <h2>Inputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>placeholder</b><br/>
+                      Default: <small>Select...</small>
+                    </td>
+                    <td>string</td>
+                    <td>Input placeholder.</td>
+                  </tr>
+                  <tr>
+                    <td><b>searchPlaceholder</b><br/>
+                      Default: <small>Search...</small>
+                    </td>
+                    <td>string</td>
+                    <td>The search input placeholder.</td>
+                  </tr>
+                  <tr>
+                    <td><b>displayTextProperty</b><br/>
+                      Default: <small>text</small>
+                    </td>
+                    <td>string</td>
+                    <td>The property name of your object's model to show as the option <b>display text</b>.</td>
+                  </tr>
+                  <tr>
+                    <td><b>valueProperty</b><br/>
+                      Default: <small>value</small>
+                    </td>
+                    <td>string</td>
+                    <td>The property name of your object's model to show as the option <b>identifier</b>.</td>
+                  </tr>
+                  <tr>
+                    <td><b>emptyMessage</b><br/>
+                      Default: <small>No results found.</small>
+                    </td>
+                    <td>string</td>
+                    <td>The message to show for empty results.</td>
+                  </tr>
+                  <tr>
+                    <td><b>selectAllButtonLabel</b><br/>
+                      Default: <small>Select all</small>
+                    </td>
+                    <td>string</td>
+                    <td>The Select all button's label.</td>
+                  </tr>
+                  <tr>
+                    <td><b>clearSelectionButtonLabel</b><br/>
+                      Default: <small>Clear selection</small>
+                    </td>
+                    <td>string</td>
+                    <td>The Clear selection button's label.</td>
+                  </tr>
+                  <tr>
+                    <td><b>maxCountOfLabelsToShow</b><br/>
+                      Default: <small>1</small>
+                    </td>
+                    <td>number</td>
+                    <td>The maximum number of labels to show for the selected items.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Outputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>onChange</b></td>
+                    <td>Emitted every time the <b>selected items</b> are changed.</td>
                   </tr>
                 </tbody>
               </table>
