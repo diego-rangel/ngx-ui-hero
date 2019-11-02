@@ -204,7 +204,7 @@ export class ComponentsComponent implements OnInit {
   myFilterMultiselectCode = `
 <filter-multiselect 
   label="My Multiselect"
-  [(ngModel)]="myMultiselectModel"
+  [(ngModel)]="myFilterMultiselectModel"
   [options]="multiSelectOptions" 
   displayTextProperty="text" 
   valueProperty="value">
@@ -277,7 +277,7 @@ dropdownGridColumns: Array<DataGridColumnModel> = [
   label="My Filter"
   displayTextProperty="name"
   valueProperty="id"
-  [(ngModel)]="myDropdownSearchModel"
+  [(ngModel)]="myFilterDropdownSearchModel"
   [data]="dropdownGridData">
 </filter-dropdown-search>
   `;
@@ -296,6 +296,7 @@ dropdownSearchData = [
   myTextAreaModel: string;
   mySelectModel: any;
   myMultiselectModel: any[] = [];
+  myFilterMultiselectModel: any[] = [];
   myCheckboxModel: boolean;
   mySwitchModel: boolean;
   myRadioModel: any;
@@ -305,6 +306,7 @@ dropdownSearchData = [
   myDateModel: Date;
   myDropdownGridModel: any;
   myDropdownSearchModel: any;
+  myFilterDropdownSearchModel: any;
   myDateMonthYearModel: Date;
 
   dropdownGridData = [
