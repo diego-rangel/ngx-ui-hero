@@ -28,7 +28,7 @@
 
     > .combobox {
         outline: none;
-        padding: .375rem 0 .375rem 0;
+        padding: .375rem .475rem;
         width: fit-content;
         
         > span {
@@ -73,6 +73,7 @@
         width: 100%;
         z-index: 20;
         margin-top: -1px;
+        min-width: 300px;
 
         .toolbar {
             padding: 3px;
