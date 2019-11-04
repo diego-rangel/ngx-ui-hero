@@ -22,7 +22,11 @@
         <i class="fa" [ngClass]="{'fa-angle-down': !showOptions, 'fa-angle-up': showOptions}"></i>
     </div>
 
-    <div class="dropdown-options shadow fadeInDown" *ngIf="showOptions" (clickOutside)="ToggleDropDown($event, false)">
+    <div class="dropdown-options shadow fadeInDown" *ngIf="showOptions" (clickOutside)="ToggleDropDown($event, false)" 
+        [ngClass]="{
+            'drop-right': dropRight
+        }">
+        
         <div class="options-container" *ngIf="options?.length > 0">
             <div class="toolbar d-flex align-items-center">
                 <input type="text" class="form-control flex-grow-1" name="{{identifier}}-search" [(ngModel)]="search" placeholder="{{searchPlaceholder}}" auto-focus />

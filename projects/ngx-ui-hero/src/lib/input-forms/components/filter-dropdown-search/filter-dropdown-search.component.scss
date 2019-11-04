@@ -121,4 +121,8 @@
             color: #6b6b6b;
         }
     }
+    > .dropdown-options.drop-right {
+        left: inherit;
+        right: 0;
+    }
 }

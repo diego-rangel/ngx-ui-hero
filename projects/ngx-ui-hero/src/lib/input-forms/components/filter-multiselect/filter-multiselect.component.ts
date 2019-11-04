@@ -33,8 +33,9 @@ export class FilterMultiselectComponent extends ElementBase<any> implements OnIn
   @Input() public valueProperty: string = 'value';
   @Input() public emptyMessage: string = 'No results found.';
   @Input() public selectAllButtonLabel: string = 'Select all';
-  @Input() public clearSelectionButtonLabel: string = 'Clear selection';
+  @Input() public clearSelectionButtonLabel: string = 'Clear';
   @Input() public maxCountOfLabelsToShow: number = 1;
+  @Input() public dropRight: boolean = false;
   @Output() public onChange = new EventEmitter<any>();
   @ViewChild(NgModel, {static: true}) model: NgModel;
 

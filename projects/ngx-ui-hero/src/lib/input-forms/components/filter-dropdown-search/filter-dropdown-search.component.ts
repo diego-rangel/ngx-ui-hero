@@ -39,10 +39,11 @@ export class FilterDropdownSearchComponent extends ElementBase<any> implements O
   @Input() public placeholder = 'Select...';
   @Input() public searchPlaceholder = 'Search...';
   @Input() public emptyResultsMessage?: string = 'No results found at this moment.';
-  @Input() public clearSelectionButtonLabel: string = 'Clear selection';
+  @Input() public clearSelectionButtonLabel: string = 'Clear';
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
   @Input() public lazyLoadedData: boolean;
+  @Input() public dropRight: boolean = false;
   @Output() public onChange = new EventEmitter<any>();
   @Output() public onSearch = new EventEmitter<string>();
 
