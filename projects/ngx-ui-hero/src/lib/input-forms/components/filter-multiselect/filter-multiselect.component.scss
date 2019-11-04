@@ -89,6 +89,9 @@
     > .combobox.has-validations.is-valid.open {
         box-shadow: 0 0 0 0.2rem rgba(40,167,69,.25);
     }
+    .combobox:hover {
+        cursor: pointer;
+    }
 
     > .dropdown-options {
         background-color: #FFF;

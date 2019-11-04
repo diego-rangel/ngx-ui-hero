@@ -13,10 +13,10 @@
         <span *ngIf="!value || value.length == 0">{{label}}</span>
 
         <div *ngIf="value?.length > 0" class="selected-items d-flex align-items-center">
-            <span *ngFor="let item of value | slice:0:maxCountOfLabelsToShow; let i = index;">
+            <span *ngFor="let item of value | slice:0:1; let i = index;">
                 <small class="text-muted text-truncate ml-1">{{item[displayTextProperty]}}</small>
             </span>
-            <span *ngIf="value.length > maxCountOfLabelsToShow">...</span>
+            <small class="text-muted" *ngIf="value.length > 1">... (+{{value.length - 1}})</small>
         </div>
 
         <i class="fa" [ngClass]="{'fa-angle-down': !showOptions, 'fa-angle-up': showOptions}"></i>
