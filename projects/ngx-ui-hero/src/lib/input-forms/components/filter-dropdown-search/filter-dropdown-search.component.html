@@ -3,7 +3,8 @@
 
     <div class="combobox d-flex align-items-center" [ngClass]="{
         'open': showDropdown, 
-        'disabled': disabled
+        'disabled': disabled,
+        'has-value': value
       }" (click)="ToggleDropDown($event)" (keyup)="OnComboPressed($event)" tabindex="0">
 
         <span *ngIf="!value">{{label}}</span>

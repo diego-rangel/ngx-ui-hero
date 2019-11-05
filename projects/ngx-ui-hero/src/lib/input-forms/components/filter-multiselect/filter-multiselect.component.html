@@ -4,7 +4,8 @@
     <div class="combobox d-flex align-items-center justify-content-between" 
         [ngClass]="{
             'open': showOptions, 
-            'disabled': disabled
+            'disabled': disabled,
+            'has-value': value?.length > 0
         }"
         (click)="ToggleDropDown($event)" (keyup)="OnComboPressed($event)" tabindex="0">
 
