@@ -95,12 +95,13 @@ export const inputFormsConfig: InputFormsConfig = {
     language: 'en',
     format: 'MMM/yyyy'
   },
-  dropDownGrid: {
+  dropDown: {
     placeholder: 'Select...',
     searchPlaceholder: 'Search...',
     emptyResultsMessage: 'No results found at this moment.',
     displayTextProperty: 'text',
-    valueProperty: 'value'
+    valueProperty: 'value',
+    clearSelectionButtonLabel: 'Clear',
   }
 };
 

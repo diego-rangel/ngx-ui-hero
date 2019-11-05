@@ -129,10 +129,6 @@ export class FilterDropdownSearchComponent extends ElementBase<any> implements O
     } else {
       this.clickOutsideEnabled = true;
     }
-
-    if (event) {
-      event.stopImmediatePropagation();
-    }
   }
   Select(row: any): void {
     if (this.disabled) {

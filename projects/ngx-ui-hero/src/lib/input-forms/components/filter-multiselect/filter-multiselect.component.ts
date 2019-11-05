@@ -111,10 +111,6 @@ export class FilterMultiselectComponent extends ElementBase<any> implements OnIn
     }
     
     this.clearSearch();
-
-    if (event) {
-      event.stopImmediatePropagation();
-    }
   }
   ToggleItemSelected(item: any): void {
     if (this.disabled) {
