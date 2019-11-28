@@ -74,10 +74,6 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
 
       this.showDropdown = value;
     }
-
-    if (event) {
-      event.stopImmediatePropagation();
-    }
   }
 
   IncrementSelectedYear(): void {

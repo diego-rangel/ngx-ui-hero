@@ -117,10 +117,6 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
     } else {
       this.clickOutsideEnabled = true;
     }
-
-    if (event) {
-      event.stopImmediatePropagation();
-    }
   }
   Select(row: any): void {
     if (this.disabled) {

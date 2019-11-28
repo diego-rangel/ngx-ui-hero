@@ -20,6 +20,7 @@ let identifier = 0;
 export class InputTextMaskComponent extends ElementBase<string> implements OnInit {
   @Input() public placeholder = '';
   @Input() public masking: string;
+  @Input() public includeLiterals: boolean = false;
 
   wasTouched: boolean = false;
  

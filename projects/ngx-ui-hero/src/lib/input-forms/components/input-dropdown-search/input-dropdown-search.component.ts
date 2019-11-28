@@ -127,10 +127,6 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
     } else {
       this.clickOutsideEnabled = true;
     }
-
-    if (event) {
-      event.stopImmediatePropagation();
-    }
   }
   Select(row: any): void {
     if (this.disabled) {

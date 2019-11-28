@@ -111,10 +111,6 @@ export class InputMultiselectComponent extends ElementBase<any> implements OnIni
     }
     
     this.clearSearch();
-
-    if (event) {
-      event.stopImmediatePropagation();
-    }
   }
   ToggleItemSelected(item: any): void {
     if (this.disabled) {
