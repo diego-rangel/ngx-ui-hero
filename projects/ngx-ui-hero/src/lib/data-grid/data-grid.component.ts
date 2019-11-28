@@ -468,6 +468,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.sortApplied = true;
     }
     private initializePaging(): void {
+        if (!this.currentPage || this.mode == EnumDataGridMode.OnClient) {
+            this.currentPage = 1;
+        }
+
         if (this._internalData && this.mode == EnumDataGridMode.OnClient) {
             this.totalItems = this._internalData.length;
         }
