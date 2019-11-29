@@ -18,6 +18,8 @@ let identifier = 0;
 export class InputUploadComponent implements OnInit {
     @Input() url: string;
     @Input() label?: string;
+    @Input() help: string;
+    @Input() description: string;
     @Input() placeholder?: string = 'Select a file to upload...';
     @Input() dropZonePlaceholder?: string = 'Drag & drop a file to import.';
     @Input() disabled?: boolean = false;

@@ -1,4 +1,7 @@
-<label *ngIf="label">{{label}}</label>
+<label *ngIf="label">
+  {{label}}
+  <i class="fa fa-question-circle ml-2" tooltip="{{help}}" container="body" *ngIf="help"></i>
+</label>
 
 <input type="file" class="d-none" 
   [(ngModel)]="selectedFileModel"
@@ -19,6 +22,10 @@
     </div>
 </div>
 
+<p class="mb-0" *ngIf="description">
+  <small class="text-muted">{{description}}</small>
+</p>
+
 <small class="text-muted" *ngIf="maxFileSize > 0">
     {{maxFileSizeLabel}} <b>{{maxFileSize}}MB</b>.
 </small>
@@ -32,7 +39,7 @@
 </small>
 
 <div *ngIf="errorMessage">
-    <small class="text-danger">{{errorMessage}}</small>
+  <small class="text-danger">{{errorMessage}}</small>
 </div>
 
 <div class="chunks-queue" *ngIf="chunk && chunks?.length > 0 && showQueue">
