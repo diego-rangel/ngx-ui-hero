@@ -43,6 +43,7 @@ export class FilterDropdownSearchComponent extends ElementBase<any> implements O
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
   @Input() public lazyLoadedData: boolean;
+  @Input() public minCharsToSearch: number = 3;
   @Input() public dropRight: boolean = false;
   @Output() public onChange = new EventEmitter<any>();
   @Output() public onSearch = new EventEmitter<string>();
@@ -147,7 +148,7 @@ export class FilterDropdownSearchComponent extends ElementBase<any> implements O
       return;
     }
 
-    if (!this.search || this.search.length < 3) {
+    if (!this.search || this.search.length < this.minCharsToSearch) {
       this.clearSearchResults();
       return;
     }

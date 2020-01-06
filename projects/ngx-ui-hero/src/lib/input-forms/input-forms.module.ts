@@ -11,6 +11,9 @@ import { NgxUiHeroDataGridModule } from '../data-grid/data-grid.module';
 import { UiModule } from '../ui/ui.module';
 import { CurrencySymbolPipe } from './base/currency-symbol.pipe';
 import { BlockUiComponent } from './components/block-ui/block-ui.component';
+import { FilterDateComponent } from './components/filter-date/filter-date.component';
+import { FilterDropdownSearchComponent } from './components/filter-dropdown-search/filter-dropdown-search.component';
+import { FilterMultiselectComponent } from './components/filter-multiselect/filter-multiselect.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
 import { InputCurrencyComponent } from './components/input-currency/input-currency.component';
 import { InputDateComponent } from './components/input-date/input-date.component';
@@ -35,8 +38,6 @@ import { MinValueDirective } from './directives/min-value-validator.directive';
 import { InputFormsConfig } from './input-forms-config';
 import { INPUT_FORMS_CONFIG } from './input-forms-config.constants';
 import { MaskDirective } from './masking/mask.directive';
-import { FilterDropdownSearchComponent } from './components/filter-dropdown-search/filter-dropdown-search.component';
-import { FilterMultiselectComponent } from './components/filter-multiselect/filter-multiselect.component';
 
 export { CurrencySymbolPipe } from './base/currency-symbol.pipe';
 export { InputFormsConfig } from './input-forms-config';
@@ -65,6 +66,7 @@ export { MaxValueDirective } from './directives/max-value-validator.directive';
 export { MinValueDirective } from './directives/min-value-validator.directive';
 export { FilterDropdownSearchComponent } from './components/filter-dropdown-search/filter-dropdown-search.component';
 export { FilterMultiselectComponent } from './components/filter-multiselect/filter-multiselect.component';
+export { FilterDateComponent } from './components/filter-date/filter-date.component';
 export { BlockUi } from './classes/block-ui';
 
 @NgModule({
@@ -103,6 +105,7 @@ export { BlockUi } from './classes/block-ui';
     InputTextMaskComponent,
     FilterDropdownSearchComponent,
     FilterMultiselectComponent,
+    FilterDateComponent,
     MaskDirective,
   ],
   exports: [
@@ -132,6 +135,7 @@ export { BlockUi } from './classes/block-ui';
     BlockUiComponent,
     FilterDropdownSearchComponent,
     FilterMultiselectComponent,
+    FilterDateComponent,
     MaskDirective
   ],
 })

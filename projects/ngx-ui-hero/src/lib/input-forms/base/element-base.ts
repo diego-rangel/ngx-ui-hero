@@ -13,6 +13,7 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   @Input() public label: string;
   @Input() public disabled: boolean;
   @Input() public showValidations = false;
+  @Input() public autocomplete: string = 'on';
   @Input() public help: string;
   @Input() public description: string;
 

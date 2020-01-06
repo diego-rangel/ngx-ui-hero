@@ -1,0 +1,35 @@
+<div [id]="identifier" class="ui-filter-date">
+    <input type="hidden" [(ngModel)]="value" />
+
+    <div class="combobox d-flex align-items-center" [ngClass]="{
+        'open': showDropdown, 
+        'disabled': disabled,
+        'has-value': value
+      }" (click)="toggleDropDown($event)" (keyup)="onComboPressed($event)" tabindex="0">
+        <span *ngIf="!value">{{label}}</span>
+
+        <span *ngIf="value">
+            <b>{{label}}</b>:
+            <small class="text-muted text-truncate ml-1">{{value | date:format}}</small>
+        </span>
+        
+        <i class="fa" [ngClass]="{'fa-angle-down': !showDropdown, 'fa-angle-up': showDropdown}"></i>
+    </div>
+
+    <div class="dropdown-options fadeInDown" *ngIf="showDropdown" (clickOutside)="toggleDropDown($event, false)">
+        <div class="options-container">
+            <bs-datepicker-inline 
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                [bsConfig]="bsConfig"
+                [bsValue]="value"
+                (bsValueChange)="onValueChange($event)">
+            </bs-datepicker-inline>
+            <div class="toolbar" *ngIf="value && !disabled">
+                <button type="button" class="btn btn-light ml-1 flex-shrink-0" (click)="clearSelection($event)">
+                    <i class="fa fa-eraser"></i> {{clearSelectionButtonLabel}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

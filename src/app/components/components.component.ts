@@ -290,6 +290,13 @@ dropdownSearchData = [
 ];
   `;
 
+  filterDateCode = `
+<filter-date
+  label="My Date Filter"
+  [(ngModel)]="myFilterDateModel">
+</filter-date>
+  `;
+
   myModel: string;
   myModelComMascara: string;
   myEmailModel: string;
@@ -308,6 +315,7 @@ dropdownSearchData = [
   myDropdownSearchModel: any;
   myFilterDropdownSearchModel: any;
   myDateMonthYearModel: Date;
+  myFilterDateModel: Date;
 
   dropdownGridData = [
     { id: 1, name: 'Person 1', email: 'person1@domain.com' },

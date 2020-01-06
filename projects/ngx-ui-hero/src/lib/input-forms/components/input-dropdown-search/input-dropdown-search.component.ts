@@ -42,6 +42,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
   @Input() public lazyLoadedData: boolean;
+  @Input() public minCharsToSearch: number = 3;
   @Output() public onChange = new EventEmitter<any>();
   @Output() public onSearch = new EventEmitter<string>();
 
@@ -145,7 +146,7 @@ export class InputDropdownSearchComponent extends ElementBase<any> implements On
       return;
     }
 
-    if (!this.search || this.search.length < 3) {
+    if (!this.search || this.search.length < this.minCharsToSearch) {
       this.clearSearchResults();
       return;
     }

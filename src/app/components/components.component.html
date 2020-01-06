@@ -25,6 +25,7 @@
           <a anchorLink="card-input-date" href="#card-input-date" class="list-group-item list-group-item-action"><i class="fa fa-calendar"></i> Date</a>
           <a anchorLink="card-input-month-year" href="#card-input-month-year" class="list-group-item list-group-item-action"><i class="fa fa-calendar"></i> Month/Year</a>
           <a anchorLink="card-input-upload" href="#card-input-upload" class="list-group-item list-group-item-action"><i class="fa fa-cloud-upload"></i> Upload</a>
+          <a anchorLink="card-filter-date" href="#card-filter-date" class="list-group-item list-group-item-action"><i class="fa fa-filter"></i> Filter Date <span class="badge badge-danger">new</span></a>
           <a anchorLink="card-filter-dropdown-search" href="#card-filter-dropdown-search" class="list-group-item list-group-item-action"><i class="fa fa-filter"></i> Filter Dropdown Search <span class="badge badge-danger">new</span></a>
           <a anchorLink="card-filter-multiselect" href="#card-filter-multiselect" class="list-group-item list-group-item-action"><i class="fa fa-filter"></i> Filter MultiSelect <span class="badge badge-danger">new</span></a>
         </div>
@@ -1010,6 +1011,77 @@
                   </tbody>
                 </table>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-filter-date" class="card mt-4">
+          <div class="card-header">Filter date</div>
+          <div class="card-body">
+            <div class="form-group mb-4">
+              <filter-date
+                label="My Date Filter"
+                [(ngModel)]="myFilterDateModel">
+              </filter-date>
+            </div>
+
+            <div>
+              <pre><code [highlight]="filterDateCode"></code></pre>
+            </div>
+
+            <h2>Inputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>minDate</b></td>
+                    <td>Date</td>
+                    <td>Minimum date allowed.</td>
+                  </tr>
+                  <tr>
+                    <td><b>maxDate</b></td>
+                    <td>Date</td>
+                    <td>Maximum date allowed.</td>
+                  </tr>
+                  <tr>
+                    <td><b>format</b></td>
+                    <td>string</td>
+                    <td>The date format to show.</td>
+                  </tr>
+                  <tr>
+                    <td><b>theme</b><br/>
+                      Default: <small>theme-dark-blue</small>
+                    </td>
+                    <td>string</td>
+                    <td>Defines the layout colors of the picker.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Outputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>onChange</b></td>
+                    <td>Emitted every time a date is changed with the new value as a parameter.</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
