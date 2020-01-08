@@ -14,6 +14,7 @@ export class DataGridColumnModel {
     enableTooltip?: boolean = false;
     isFiltersOpenned?: boolean = false;
     filterable?: boolean = true;
+    renderCaption?(): string;
     render?(row: any, currentData: any, rowIndex: number): string;
     renderOnPrint?(row: any, currentData: any, rowIndex: number): string;
 
