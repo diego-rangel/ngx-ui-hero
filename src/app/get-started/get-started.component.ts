@@ -134,7 +134,6 @@ export const dataGridSettings: DataGridConfig = {
   mode: EnumDataGridMode.OnClient,
   autoFitMode: EnumAutoFitMode.ByContent,
   allowColumnResize: true,
-  allowColumnReorder: true,
   paging: {
     firstText: 'First',
     previousText: 'Previous',
@@ -144,7 +143,8 @@ export const dataGridSettings: DataGridConfig = {
     directionLinks: true,
     rotate: true,
     maxSize: 10,
-    itemsPerPage: 10
+    itemsPerPage: 10,
+    allowPageSizeChanges: true
   },
   styles: {
     animated: true,
@@ -163,6 +163,9 @@ export const dataGridSettings: DataGridConfig = {
     allowColumnFilters: true,
     filterPlaceholder: 'Filter...',
     filterPlacement: 'top'
+  },
+  reordering: {
+    allowColumnReorder: true;
   }
 };
 

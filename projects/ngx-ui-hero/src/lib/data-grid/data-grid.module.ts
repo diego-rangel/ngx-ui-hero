@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { NgxUiHeroApiModule } from '../api';
 import { UiModule } from '../ui/ui.module';
 import { ColumnFilterComponent } from './components/column-filter/column-filter.component';
 import { DataGridConfig } from './config/data-grid-config';
@@ -15,12 +16,14 @@ export { DataGridConfig, DataGridStylesConfig, DataGridPagingConfig, DataGridExp
 export { DataGridComponent } from './data-grid.component';
 export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
 export { ColumnFilterModel } from './models/column-filter.model';
+export { ColumnReorderingDefinitionsModel, ColumnReorderingDefinitionsItemModel } from './models/column-reordering-definitions.model';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     UiModule,
+    NgxUiHeroApiModule
   ],
   declarations: [
     DataGridComponent,

@@ -3,17 +3,18 @@ export interface DataGridConfig {
     infoMessage?: string;
     actionsColumnCaption?: string;
     showInfos?: boolean;
+    allowColumnResize?: boolean; 
     mode?: EnumDataGridMode;
     paging?: DataGridPagingConfig;
     styles?: DataGridStylesConfig;
     autoFitMode?: EnumAutoFitMode;
     exporting?: DataGridExportingConfig;
     filtering?: DataGridFilteringConfig;
-    allowColumnResize?: boolean;
-    allowColumnReorder?: boolean;
+    reordering?: DataGridReorderingConfig;   
 }
 
 export interface DataGridPagingConfig {
+    allowPageSizeChanges?: boolean;
     firstText?: string;
     previousText?: string;
     nextText?: string;
@@ -64,6 +65,10 @@ export interface DataGridFilteringConfig {
     allowColumnFilters?: boolean;
     filterPlaceholder?: string;
     filterPlacement?: string;
+}
+
+export interface DataGridReorderingConfig {
+    allowColumnReorder?: boolean;
 }
 
 export enum EnumDataGridMode {

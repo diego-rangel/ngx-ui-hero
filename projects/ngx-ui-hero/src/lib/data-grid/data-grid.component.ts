@@ -2,13 +2,15 @@ import * as _ from 'lodash';
 import { BsModalService } from 'ngx-bootstrap';
 import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 
-import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, IterableDiffers, OnInit, Optional, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, isDevMode, IterableDiffers, OnInit, Optional, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 
+import { LocalStorageService } from '../api';
 import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data-grid-config';
 import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
 import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
 import { ActionsColumnDirective } from './directives/data-grid-templates.directive';
 import { ColumnFilterModel } from './models/column-filter.model';
+import { ColumnReorderingDefinitionsItemModel, ColumnReorderingDefinitionsModel } from './models/column-reordering-definitions.model';
 import { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
 
 declare var $: any;
@@ -25,12 +27,13 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     sortApplied: boolean = false;
     animating: boolean = false;
     selectAll: boolean = false;
-    resizing: boolean = false;
-    reordering: boolean = false;
+    isResizing: boolean = false;
+    isReordering: boolean = false;
     currentElementBeingReorderedFromIndex: number = -1;
     currentElementBeingReorderedToIndex: number = -1;
     currentPage: number = 1;
     gridData: Array<any>;
+    pageSizes: Array<number> = [10, 20, 30, 40, 50, 100];
 
     public identifier = `datagrid-${identifier++}`;
 
@@ -47,6 +50,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() showSelectAllCheckbox?: boolean = true;
     @Input() showSummaries?: boolean = false;
     @Input() allowExports?: boolean = false;
+    @Input() allowPageSizeChanges?: boolean = true;
     @Input() exportButtonLabel?: string = 'Export';
     @Input() exportedFileName?: string = 'Export';
     @Input() exportedExcelSheetName?: string = 'Sheet';
@@ -69,8 +73,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() lastText?: string = 'Last';
     @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
     @Input() allowColumnResize?: boolean = true;
-    @Input() allowColumnReorder?: boolean = true;
     @Input() allowColumnFilters?: boolean = true;
+    @Input() allowColumnReorder?: boolean = true;
+    @Input() columnReorderPersistenceKey?: string;
     @Input() filterPlaceholder?: string = 'Filter...';
     @Input() filterPlacement?: string = 'bottom';
     @Output() OnSelectionChanged = new EventEmitter();
@@ -79,6 +84,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @Output() OnColumnFiltered = new EventEmitter<DataGridColumnModel>();
+    @Output() OnPageSizeChanged = new EventEmitter<number>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef, static: true}) actionsColumnTemplate: ActionsColumnDirective;
     @ViewChild('paginator', {static: true}) paginator: PaginationComponent;
 
@@ -104,7 +110,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         @Inject(DATAGRID_CONFIG) @Optional() defaultOptions: DataGridConfig,
         private iterableDiffers: IterableDiffers,
         private modalService: BsModalService,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private localStorage: LocalStorageService
     ) {
         Object.assign(this, defaultOptions);
 
@@ -119,6 +126,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
         if (defaultOptions.filtering) {
             Object.assign(this, defaultOptions.filtering);
+        }
+        if (defaultOptions.reordering) {
+            Object.assign(this, defaultOptions.reordering);
         }
 
         this._differ = this.iterableDiffers.find([]).create(null);
@@ -136,7 +146,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     ToogleSorting(column: DataGridColumnModel): void {
-        if (!column.sortable || !column.sort || this.resizing) {
+        if (!column.sortable || !column.sort || this.isResizing) {
             return;
         }
 
@@ -203,6 +213,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 			this.initializeFilters();
 			this.initializePaging();
 			this.initializeSorting();
+			this.initializePageSizes();
             this.handleAutoFit();
             this.handleInitialRenderingFlag();
         },0);
@@ -277,7 +288,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     OnResizerMouseDown(e: any) {
         if (!this.allowColumnResize) return;
         
-        this.resizing = true;
+        this.isResizing = true;
         
         var pageX, curCol, nxtCol, curColWidth, nxtColWidth;
         
@@ -309,7 +320,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             curColWidth = undefined;
 
             setTimeout(() => {
-                this.resizing = false;
+                this.isResizing = false;
             });
             
             document.removeEventListener("mousemove", onMouseMoveCallback);
@@ -326,7 +337,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         var onDragStartCallback = (e: any) => {
             var img = document.createElement("img");
             e.dataTransfer.setDragImage(img, 0, 0);            
-            this.reordering = true;
+            this.isReordering = true;
             this.currentElementBeingReorderedFromIndex = index;
             this.renderer.addClass(e.target.parentElement.parentElement, 'dragging');
             
@@ -342,13 +353,18 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         };
         var onDragEndCallback = (e: any) => {
             if (this.currentElementBeingReorderedFromIndex != this.currentElementBeingReorderedToIndex) {
+                this.debug('From', this.currentElementBeingReorderedFromIndex, 'To', this.currentElementBeingReorderedToIndex);
+                
                 var columnFromCopy = Object.assign({}, this.columns[this.currentElementBeingReorderedFromIndex]);
                 var columnsCopy = Object.assign([], this.columns);
                 columnsCopy.splice(this.currentElementBeingReorderedFromIndex, 1);
                 columnsCopy.splice(this.currentElementBeingReorderedToIndex, 0, columnFromCopy);
                 this.columns = columnsCopy;
+
+                this.updateColumnReorderingDefinition();
             }
-            this.reordering = false;
+
+            this.isReordering = false;
             this.currentElementBeingReorderedFromIndex = -1;
             this.currentElementBeingReorderedToIndex = -1;
             this.renderer.removeClass(e.target.parentElement.parentElement, 'dragging');
@@ -397,6 +413,13 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
     }
 
+    HandlePageSizeChange(): void {
+        if (this.mode == EnumDataGridMode.OnClient)
+            this.Rerender();
+            
+        this.OnPageSizeChanged.emit(this.itemsPerPage);
+    }
+
     private initializeGridData(): void {
         if (this._externalData) {
             this._internalData = Object.assign([], this._externalData);
@@ -427,6 +450,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 dataClasses: null,         
                 sortable: true,
                 filterable: true,
+                index: i
             };
 
             Object.assign(target, this.columns[i]);
@@ -442,8 +466,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 } else {
                     this.columns[i].sort.sortDirection = this.initialSortDirection;
                 }
-            }
+            }            
         }
+
+        this.verifyColumnIndexPersistences();
     }
     private initializeSorting(): void {
         if (this.isUndefinedOrNull(this._internalData) || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
@@ -480,6 +506,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             this.paginator.page = this.currentPage;
             this.paginator.totalItems = this.totalItems;
         }
+    }
+    private initializePageSizes(): void {
+        if (this.pageSizes.filter(x => x == this.itemsPerPage).length > 0) return;
+        this.pageSizes.push(this.itemsPerPage);
+        this.pageSizes = _.orderBy(this.pageSizes, x => x);
     }
     private paddingDiff(col: any): number { 
         if (this.getStyleVal(col,'box-sizing') == 'border-box') {
@@ -734,5 +765,84 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         for (let i = 0; i < this.gridData.length; i++) {
             this.OnRowRendered.emit(this.gridData[i]);
         }
+    }
+
+    private verifyColumnIndexPersistences(): void {
+        if (!this.columnReorderPersistenceKey) return;
+        let definition = this.getOrCreateColumnReorderingDefinition();
+        this.applyColumnReorderingDefinition(definition);
+    }
+    private getColumnReorderingDefinition(): ColumnReorderingDefinitionsModel {
+        let json: string = this.localStorage.Get(this.columnReorderPersistenceKey);
+        return json ? JSON.parse(json) : null;
+    }
+    private getOrCreateColumnReorderingDefinition(): ColumnReorderingDefinitionsModel {
+        let definition = this.getColumnReorderingDefinition();
+        
+        if (!definition || this.definitionIsNotCompatibleAnymore(definition)) {
+            return this.buildColumnReorderingDefinition();
+        }
+
+        return definition;
+    }
+    private buildColumnReorderingDefinition(): ColumnReorderingDefinitionsModel {
+        let definition: ColumnReorderingDefinitionsModel = {
+            key: this.columnReorderPersistenceKey,
+            data: this.columns.map(c => {
+                let item: ColumnReorderingDefinitionsItemModel = {
+                    caption: c.caption,
+                    originalIndex: c.index,
+                    userIndex: c.index
+                }
+                return item;
+            })
+        }; 
+        
+        this.localStorage.Set(this.columnReorderPersistenceKey, definition);
+        this.debug('Rebuilded ColumnReorderingDefinition');
+
+        return definition;
+    }
+    private definitionIsNotCompatibleAnymore(definition: ColumnReorderingDefinitionsModel): boolean {
+        this.debug('Compatibility checking on:', definition);
+
+        let hasDifferentNumberOfColumns = this.columns.length != definition.data.length;
+
+        let hasDifferencesByCaption = _.filter(definition.data, def => 
+            this.columns[def.originalIndex].caption != def.caption
+        ).length > 0;
+
+        this.debug('hasDifferentNumberOfColumns', hasDifferentNumberOfColumns);
+        this.debug('hasDifferencesByCaption', hasDifferencesByCaption);
+
+        return hasDifferentNumberOfColumns || hasDifferencesByCaption;
+    }
+    private applyColumnReorderingDefinition(definition: ColumnReorderingDefinitionsModel): void {
+        for (let i = 0; i < this.columns.length; i++) {
+            let def = _.find(definition.data, x => x.caption == this.columns[i].caption);
+            if (!def) continue;
+            this.columns[i].index = def.userIndex;
+            this.debug(this.columns[i].caption, this.columns[i].index);
+        }
+
+        this.columns = _.orderBy(this.columns, x => x.index);
+    }
+    private updateColumnReorderingDefinition(): void {
+        if (!this.columnReorderPersistenceKey) return;
+
+        let definition = this.getColumnReorderingDefinition();
+        for (let i = 0; i < this.columns.length; i++) {
+            this.columns[i].index = i;
+            let def = definition.data.find(x => x.caption == this.columns[i].caption);
+            if (!def) continue;
+            def.userIndex = i;
+        }
+
+        this.localStorage.Set(this.columnReorderPersistenceKey, definition);
+    }
+
+    private debug(message: any, ...params: any[]): void {
+        if (!isDevMode()) return;
+        console.log(message, ...params);
     }
 }

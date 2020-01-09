@@ -4,10 +4,10 @@
             'table-striped': striped,
             'table-bordered': bordered,
             'table-hover': hoverEffect,
-            'table-animated': animated && initialRenderApplied && !resizing,
+            'table-animated': animated && initialRenderApplied && !isResizing,
             'table-animating': animating && initialRenderApplied,
             'table-fixed': autoFitMode == 1 || autoFitMode == 2,
-            'table-not-resizing': !resizing,
+            'table-not-resizing': !isResizing,
             'd-none': !initialRenderApplied
         }">
             <thead>
@@ -30,7 +30,7 @@
                         <div class="d-flex justify-content-between align-items-center">                            
                             <div class="flex-grow-1" 
                                 [ngClass]="{'text-center': column.captionAlignment == 1, 'text-right': column.captionAlignment == 2}" 
-                                [draggable]="allowColumnReorder && !resizing" 
+                                [draggable]="allowColumnReorder && !isResizing" 
                                 (mousedown)="OnColumnMouseDown($event, i)"
                                 [innerHtml]="column.renderCaption ? column.renderCaption() : column.caption">                                
                             </div>
@@ -107,20 +107,30 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-between align-items-center flex-wrap mt-3"  *ngIf="showInfos && gridData?.length > 0">
-        <div class="export-actions mr-3 mb-0" *ngIf="allowExports">
-            <div class="btn-group" dropdown>
-                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                    <i class="fa fa-external-link"></i> {{exportButtonLabel}} <span class="caret"></span>
-                </button>
-                <ul *dropdownMenu class="dropdown-menu" role="menu">
-                    <li role="menuitem"><a class="dropdown-item" href="#" (click)="ExportToExcel()"><i class="fa fa-file-excel-o"></i> Excel</a></li>
-                </ul>
+    <div class="d-flex align-items-center flex-wrap-reverse mt-3"  *ngIf="showInfos && gridData?.length > 0">
+        <div class="d-flex align-items-center flex-wrap-reverse justify-content-center">
+            <div class="d-flex align-items-center flex-wrap">
+                <div class="export-actions mr-3 my-1" *ngIf="allowExports">
+                    <div class="btn-group" dropdown>
+                        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                            <i class="fa fa-external-link"></i> {{exportButtonLabel}} <span class="caret"></span>
+                        </button>
+                        <ul *dropdownMenu class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a class="dropdown-item" href="#" (click)="ExportToExcel()"><i class="fa fa-file-excel-o"></i> Excel</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-sizes mr-3 my-1" *ngIf="allowPageSizeChanges">
+                    <select class="form-control" [(ngModel)]="itemsPerPage" (change)="HandlePageSizeChange()">
+                        <option value="{{item}}" *ngFor="let item of pageSizes">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="info mr-3 my-1">
+                <span>{{GetInfo()}}</span>
             </div>
         </div>
-        <div class="info">
-            <span>{{GetInfo()}}</span>
-        </div>
+        
         <div class="pagination ml-auto">
             <pagination #paginator
                 [(ngModel)]="currentPage"

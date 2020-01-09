@@ -347,6 +347,13 @@
               </tr>
               <tr>
                 <td>
+                  <b>columnReorderPersistenceKey</b>
+                </td>
+                <td>string</td>
+                <td>When defined, the <b>key</b> is going to be used to store the user's preferences on localstorage.</td>
+              </tr>
+              <tr>
+                <td>
                   <b>allowColumnFilters</b><br/>
                   Default: <small>true</small>
                 </td>
@@ -380,6 +387,11 @@
                 <td><b>OnPaginate</b></td>
                 <td>EventEmitter&lt;any&gt;</td>
                 <td>An event emitted when the Datadrig mode is defined to operate <b>OnServer</b> mode for handling paging operations. This callback will receive as a parameter an object with the current page number.</td>
+              </tr>
+              <tr>
+                <td><b>OnPageSizeChanged</b></td>
+                <td>EventEmitter&lt;number&gt;</td>
+                <td>An event emitted every time the user changes the pagesizes dropdown. This callback will receive as a parameter the new pagesize.</td>
               </tr>
               <tr>
                 <td><b>OnSort</b></td>
