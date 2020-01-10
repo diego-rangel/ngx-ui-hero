@@ -4,7 +4,7 @@ import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination'
 
 import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, isDevMode, IterableDiffers, OnInit, Optional, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 
-import { LocalStorageService } from '../api';
+import { LocalStorageService } from '../api/services/storage/local-storage.service';
 import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data-grid-config';
 import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
 import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
