@@ -37,6 +37,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
     public identifier = `datagrid-${identifier++}`;
 
+    @Input() debugMode: boolean = false;
     @Input() tableId?: string = this.identifier;
     @Input() columns: Array<DataGridColumnModel>;
     @Input() emptyResultsMessage?: string = 'No results found at this moment.';
@@ -93,6 +94,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     private _externalData: Array<any>;
     private _externalColumns: Array<DataGridColumnModel>;
     private _maxWidth = 400;
+    private _minColumnWidth = 150;
+    private _columnDefinitions: ColumnReorderingDefinitionsModel;
 
     get data(): Array<any> {
         return this._externalData;
@@ -570,7 +573,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
             for (let rowIndex = 0; rowIndex < this.gridData.length; rowIndex++) {
                 for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
-                    let width: number = 150;
+                    let width: number = this._minColumnWidth;
                     let currentData: string;
     
                     if (!this.isUndefinedOrNull(this.columns[columnIndex].data)) {                        
@@ -664,7 +667,22 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.selectAll = true;
     }
     private setDataGridWidths(widths: number[], gridWidth: number): void {
-        let initialColumnsWidths = _.map(this._externalColumns, 'width');
+        let initialColumnsWidths = new Array<string>(this.columns.length);
+
+        for (let i = 0; i < this._externalColumns.length; i++) {
+            let columnDefaultWidth = this._externalColumns[i].width;
+            
+            let def = this.getColumnReorderingDefinitionFrom(this._externalColumns[i]);
+            if (!def) {
+                initialColumnsWidths[i] = columnDefaultWidth;
+                continue;
+            }
+
+            initialColumnsWidths[def.userIndex] = columnDefaultWidth;
+        }
+
+        this.debug('initialColumnsWidths', initialColumnsWidths);
+
         let totalColumnsWidth = _.sum(widths);
         let totalColumnsWidthGreaterThanGrid = totalColumnsWidth > gridWidth;
 
@@ -715,9 +733,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
     private handleInitialRenderingFlag(): void {
         if (!this.initialRenderApplied) {
-            //setTimeout(()=> {
-                this.initialRenderApplied = true;
-            //}, 1500);
+            this.initialRenderApplied = true;
         }
     }
     private initializeFilters() {
@@ -773,8 +789,13 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.applyColumnReorderingDefinition(definition);
     }
     private getColumnReorderingDefinition(): ColumnReorderingDefinitionsModel {
+        if (this._columnDefinitions) return this._columnDefinitions;
+
+        this.debug('Readed from localstorage');
         let json: string = this.localStorage.Get(this.userPerferencesKey);
-        return json ? JSON.parse(json) : null;
+        this._columnDefinitions = json ? JSON.parse(json) : null;
+
+        return this._columnDefinitions;
     }
     private getOrCreateColumnReorderingDefinition(): ColumnReorderingDefinitionsModel {
         let definition = this.getColumnReorderingDefinition();
@@ -798,6 +819,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             })
         }; 
         
+        this._columnDefinitions = definition;
         this.localStorage.Set(this.userPerferencesKey, definition);
         this.debug('Rebuilded ColumnReorderingDefinition');
 
@@ -807,15 +829,16 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.debug('Compatibility checking on:', definition);
 
         let hasDifferentNumberOfColumns = this.columns.length != definition.data.length;
+        this.debug('hasDifferentNumberOfColumns', hasDifferentNumberOfColumns);
+
+        if (hasDifferentNumberOfColumns) return true;
 
         let hasDifferencesByCaption = _.filter(definition.data, def => 
             this.columns[def.originalIndex].caption != def.caption
         ).length > 0;
 
-        this.debug('hasDifferentNumberOfColumns', hasDifferentNumberOfColumns);
         this.debug('hasDifferencesByCaption', hasDifferencesByCaption);
-
-        return hasDifferentNumberOfColumns || hasDifferencesByCaption;
+        return hasDifferencesByCaption;
     }
     private applyColumnReorderingDefinition(definition: ColumnReorderingDefinitionsModel): void {
         for (let i = 0; i < this.columns.length; i++) {
@@ -838,11 +861,20 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             def.userIndex = i;
         }
 
+        this._columnDefinitions = definition;
         this.localStorage.Set(this.userPerferencesKey, definition);
+    }
+    private getColumnReorderingDefinitionFrom(column: DataGridColumnModel): ColumnReorderingDefinitionsItemModel {
+        if (!this.userPerferencesKey) return undefined;
+        let definition = this.getColumnReorderingDefinition();
+        if (!definition) return undefined;
+        let def = definition.data.find(x => x.caption == column.caption);
+        if (!def) return undefined;
+        return def;
     }
 
     private debug(message: any, ...params: any[]): void {
-        if (!isDevMode()) return;
+        if (!this.debugMode) return;
         console.log(message, ...params);
     }
 }
