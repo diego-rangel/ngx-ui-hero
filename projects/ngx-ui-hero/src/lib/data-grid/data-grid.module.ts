@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { NgxUiHeroApiModule } from '../api/api.module';
 import { UiModule } from '../ui/ui.module';
 import { ColumnFilterComponent } from './components/column-filter/column-filter.component';
 import { DataGridConfig } from './config/data-grid-config';
@@ -23,7 +22,6 @@ export { ColumnReorderingDefinitionsModel, ColumnReorderingDefinitionsItemModel 
     CommonModule,
     FormsModule,
     UiModule,
-    NgxUiHeroApiModule
   ],
   declarations: [
     DataGridComponent,

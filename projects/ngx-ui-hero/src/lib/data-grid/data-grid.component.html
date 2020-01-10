@@ -120,11 +120,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="page-sizes mr-3 my-1" *ngIf="allowPageSizeChanges">
-                    <select class="form-control" [(ngModel)]="itemsPerPage" (change)="HandlePageSizeChange()">
-                        <option value="{{item}}" *ngFor="let item of pageSizes">{{item}}</option>
-                    </select>
-                </div>
             </div>
             <div class="info mr-3 my-1">
                 <span>{{GetInfo()}}</span>

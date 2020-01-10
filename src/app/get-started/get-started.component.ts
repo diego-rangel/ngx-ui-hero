@@ -144,7 +144,6 @@ export const dataGridSettings: DataGridConfig = {
     rotate: true,
     maxSize: 10,
     itemsPerPage: 10,
-    allowPageSizeChanges: true
   },
   styles: {
     animated: true,

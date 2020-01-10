@@ -4,7 +4,6 @@ import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination'
 
 import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, isDevMode, IterableDiffers, OnInit, Optional, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 
-import { LocalStorageService } from '../api/services/storage/local-storage.service';
 import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data-grid-config';
 import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
 import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
@@ -33,7 +32,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     currentElementBeingReorderedToIndex: number = -1;
     currentPage: number = 1;
     gridData: Array<any>;
-    pageSizes: Array<number> = [10, 20, 30, 40, 50, 100];
 
     public identifier = `datagrid-${identifier++}`;
 
@@ -51,7 +49,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() showSelectAllCheckbox?: boolean = true;
     @Input() showSummaries?: boolean = false;
     @Input() allowExports?: boolean = false;
-    @Input() allowPageSizeChanges?: boolean = true;
     @Input() exportButtonLabel?: string = 'Export';
     @Input() exportedFileName?: string = 'Export';
     @Input() exportedExcelSheetName?: string = 'Sheet';
@@ -85,9 +82,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @Output() OnColumnFiltered = new EventEmitter<DataGridColumnModel>();
-    @Output() OnPageSizeChanged = new EventEmitter<number>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef, static: true}) actionsColumnTemplate: ActionsColumnDirective;
-    @ViewChild('paginator', {static: true}) paginator: PaginationComponent;
+    @ViewChild('paginator', {static: false}) paginator: PaginationComponent;
 
     private _differ: any;
     private _internalData: Array<any>;
@@ -114,7 +110,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         private iterableDiffers: IterableDiffers,
         private modalService: BsModalService,
         private renderer: Renderer2,
-        private localStorage: LocalStorageService
     ) {
         Object.assign(this, defaultOptions);
 
@@ -216,7 +211,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 			this.initializeFilters();
 			this.initializePaging();
 			this.initializeSorting();
-			this.initializePageSizes();
             this.handleAutoFit();
             this.handleInitialRenderingFlag();
         },0);
@@ -416,13 +410,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
     }
 
-    HandlePageSizeChange(): void {
-        if (this.mode == EnumDataGridMode.OnClient)
-            this.Rerender();
-            
-        this.OnPageSizeChanged.emit(this.itemsPerPage);
-    }
-
     private initializeGridData(): void {
         if (this._externalData) {
             this._internalData = Object.assign([], this._externalData);
@@ -509,11 +496,6 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             this.paginator.page = this.currentPage;
             this.paginator.totalItems = this.totalItems;
         }
-    }
-    private initializePageSizes(): void {
-        if (this.pageSizes.filter(x => x == this.itemsPerPage).length > 0) return;
-        this.pageSizes.push(this.itemsPerPage);
-        this.pageSizes = _.orderBy(this.pageSizes, x => x);
     }
     private paddingDiff(col: any): number { 
         if (this.getStyleVal(col,'box-sizing') == 'border-box') {
@@ -792,7 +774,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         if (this._columnDefinitions) return this._columnDefinitions;
 
         this.debug('Readed from localstorage');
-        let json: string = this.localStorage.Get(this.userPerferencesKey);
+        let json: string = localStorage.getItem(this.userPerferencesKey);
         this._columnDefinitions = json ? JSON.parse(json) : null;
 
         return this._columnDefinitions;
@@ -820,7 +802,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }; 
         
         this._columnDefinitions = definition;
-        this.localStorage.Set(this.userPerferencesKey, definition);
+        localStorage.setItem(this.userPerferencesKey, JSON.stringify(definition));
         this.debug('Rebuilded ColumnReorderingDefinition');
 
         return definition;
@@ -862,7 +844,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
 
         this._columnDefinitions = definition;
-        this.localStorage.Set(this.userPerferencesKey, definition);
+        localStorage.setItem(this.userPerferencesKey, JSON.stringify(definition));
     }
     private getColumnReorderingDefinitionFrom(column: DataGridColumnModel): ColumnReorderingDefinitionsItemModel {
         if (!this.userPerferencesKey) return undefined;

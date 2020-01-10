@@ -14,7 +14,6 @@ export interface DataGridConfig {
 }
 
 export interface DataGridPagingConfig {
-    allowPageSizeChanges?: boolean;
     firstText?: string;
     previousText?: string;
     nextText?: string;
