@@ -3,6 +3,7 @@ import { BsModalService } from 'ngx-bootstrap';
 import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 
 import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, isDevMode, IterableDiffers, OnInit, Optional, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data-grid-config';
 import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
@@ -110,6 +111,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         private iterableDiffers: IterableDiffers,
         private modalService: BsModalService,
         private renderer: Renderer2,
+        private sanitizer: DomSanitizer
     ) {
         Object.assign(this, defaultOptions);
 
@@ -408,6 +410,16 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         } else {
             this.Rerender();
         }
+    }
+
+    HandleColumnClick(row: any, currentData: any, rowIndex: number, column: DataGridColumnModel): void {
+        if (!column.onClick) return;
+        column.onClick(row, currentData, rowIndex, column);
+    }
+
+    HandleColumnRendering(row: any, currentData: any, rowIndex: number, column: DataGridColumnModel): SafeHtml {
+        if (!column.render) return '';
+        return this.sanitizer.bypassSecurityTrustHtml(column.render(row, currentData, rowIndex));
     }
 
     private initializeGridData(): void {

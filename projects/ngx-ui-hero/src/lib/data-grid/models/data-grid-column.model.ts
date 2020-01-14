@@ -18,6 +18,7 @@ export class DataGridColumnModel {
     renderCaption?(): string;
     render?(row: any, currentData: any, rowIndex: number): string;
     renderOnPrint?(row: any, currentData: any, rowIndex: number): string;
+    onClick?(row: any, currentData: any, rowIndex: number, column: DataGridColumnModel): void;
 
     /**
      * If true, a summary value will be displayed in a bottom summaries row, into the proper column.

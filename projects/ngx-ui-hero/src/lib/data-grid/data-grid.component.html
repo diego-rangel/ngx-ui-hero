@@ -73,13 +73,29 @@
                             }">
                         </ng-container>
                     </td>
-                    <td *ngFor="let column of columns; let columnIndex = index;" class="{{column.dataClasses}}" [ngClass]="{
-                        'text-center': column.dataAlignment == 1,
-                        'text-right': column.dataAlignment == 2
-                    }">                        
-                        <span *ngIf="!column.render && column.data?.split('.').length == 1" [tooltip]="column.enableTooltip ? row[column.data] : ''">{{row[column.data]}}</span>
-                        <span *ngIf="!column.render && column.data?.split('.').length > 1" [tooltip]="column.enableTooltip ? RenderPropertyValue(column.data, row) : ''">{{RenderPropertyValue(column.data, row)}}</span>
-                        <span *ngIf="column.render" [innerHtml]="column.render(row, RenderPropertyValue(column.data, row), rowIndex)"></span>
+                    <td *ngFor="let column of columns; let columnIndex = index;" 
+                        class="{{column.dataClasses}}" 
+                        [ngClass]="{
+                            'text-center': column.dataAlignment == 1,
+                            'text-right': column.dataAlignment == 2
+                        }">                        
+                        <span 
+                            *ngIf="!column.render && column.data?.split('.').length == 1" 
+                            [tooltip]="column.enableTooltip ? row[column.data] : ''"
+                            (click)="HandleColumnClick(row, RenderPropertyValue(column.data, row), rowIndex, column)">
+                            {{row[column.data]}}
+                        </span>
+                        <span 
+                            *ngIf="!column.render && column.data?.split('.').length > 1" 
+                            [tooltip]="column.enableTooltip ? RenderPropertyValue(column.data, row) : ''"
+                            (click)="HandleColumnClick(row, RenderPropertyValue(column.data, row), rowIndex, column)">
+                            {{RenderPropertyValue(column.data, row)}}
+                        </span>
+                        <span 
+                            *ngIf="column.render" 
+                            [innerHtml]="HandleColumnRendering(row, RenderPropertyValue(column.data, row), rowIndex, column)"
+                            (click)="HandleColumnClick(row, RenderPropertyValue(column.data, row), rowIndex, column)">
+                        </span>
                     </td>
                 </tr>
                 <tr *ngIf="showSummaries && HasSummarizableColumns()" class="summaries">
