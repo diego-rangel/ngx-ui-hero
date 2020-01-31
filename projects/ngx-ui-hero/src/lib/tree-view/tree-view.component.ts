@@ -12,6 +12,7 @@ import { TreeViewColumnModel } from './models/tree-view-column.model';
 export class TreeViewComponent implements OnInit {
   @Input() columns: Array<TreeViewColumnModel>;
   @Input() data: Array<any>;
+  @Input() idProperty: string;
   @Input() labelProperty: string;
   @Input() collectionProperty: string;
   @Input() emptyResultsMessage?: string = 'No results found at this moment.';

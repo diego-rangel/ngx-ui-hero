@@ -83,7 +83,7 @@ export const treeViewConfig: TreeViewConfig = {
   expandAllOnInit: true,
   emptyResultsMessage: 'No results found at this moment.',
   styles: {
-    enableLabelLinkStyle: false,
+    enableLabelLinkStyle: true,
     normalItemIconClass: 'fa fa-file',
     collapsableClosedItemIconClass: 'fa fa-folder',
     collapsableOpennedItemIconClass: 'fa fa-folder-open'

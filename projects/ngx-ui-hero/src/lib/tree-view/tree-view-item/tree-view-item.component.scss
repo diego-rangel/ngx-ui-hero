@@ -47,10 +47,15 @@ i.fa.empty {
 .item > div > label {
     padding: 0 4px;
 }
+.item.active > div > label,
 .item.labels-as-link > div > label:hover {
     background-color: #666;
     color: #FFF;
     border-radius: 4px;
+}
+
+.item.active > div > label {
+    background-color: #09498E !important;
 }
 
 .no-selection::selection { 

@@ -4,6 +4,7 @@
     'has-no-columns': !columns || columns.length == 0,
     'has-no-icons': !showIcons,
     'labels-as-link': enableLabelLinkStyle,
+    'active': active,
     'first': first,
     'last': last
   }">
@@ -55,6 +56,7 @@
       ui-tree-view-item
       [row]="subitem"
       [columns]="columns"
+      [idProperty]="idProperty"
       [labelProperty]="labelProperty"
       [collectionProperty]="collectionProperty"
       [showIcons]="showIcons"

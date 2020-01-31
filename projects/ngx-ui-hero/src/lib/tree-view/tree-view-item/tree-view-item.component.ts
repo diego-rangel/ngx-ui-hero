@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { TreeViewColumnModel } from '../models/tree-view-column.model';
+import { TreeViewService } from '../tree-view.service';
 
 @Component({
   selector: '[ui-tree-view-item]',
@@ -9,6 +10,7 @@ import { TreeViewColumnModel } from '../models/tree-view-column.model';
 })
 export class TreeViewItemComponent implements OnInit {
   @Input() row: any;
+  @Input() idProperty: string;
   @Input() labelProperty: string;
   @Input() collectionProperty: string;
   @Input() columns: Array<TreeViewColumnModel>;
@@ -25,12 +27,15 @@ export class TreeViewItemComponent implements OnInit {
   @Output() OnItemExpanded = new EventEmitter<any>();
   @Output() OnItemClicked = new EventEmitter<any>();
 
+  active: boolean;
   summarizedStyle: boolean;
   equalHeightStyle: boolean;
 
-  constructor() { }
+  constructor(private service: TreeViewService) { }
 
   ngOnInit() {
+    this.handleSelecionChanges();
+
     this.equalHeightStyle = this.columns != undefined && this.columns.length > 0;
 
     this.summarizedStyle = this.columns != undefined 
@@ -72,6 +77,11 @@ export class TreeViewItemComponent implements OnInit {
   }
   private emitItemClickedEvent(data: any): void {
       this.OnItemClicked.emit(data);
+  }
+  private handleSelecionChanges(): void {
+    this.service.onSelecionChanged.subscribe(data => {
+      this.active = this.idProperty && this.row[this.idProperty] == data[this.idProperty];
+    });
   }
 
 }
