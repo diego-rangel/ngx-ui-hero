@@ -68,7 +68,7 @@
                         <ng-container 
                             [ngTemplateOutlet]="actionsColumnTemplate"
                             [ngTemplateOutletContext]="{
-                                row: row,
+                                row: row.model,
                                 rowIndex: rowIndex
                             }">
                         </ng-container>
