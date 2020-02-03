@@ -12,7 +12,7 @@
         }">
             <thead>
                 <tr>
-                    <th class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.length > 0" style="width: 50px;">
+                    <th class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.hasData" style="width: 50px;">
                         <input type="checkbox" [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" *ngIf="showSelectAllCheckbox" />
                     </th>
                     <th class="action text-center" *ngIf="showActionsColumn" [ngStyle]="{'width': actionsColumnWidth}">{{actionsColumnCaption}}</th>
@@ -34,9 +34,9 @@
                                 (mousedown)="OnColumnMouseDown($event, i)"
                                 [innerHtml]="column.renderCaption ? column.renderCaption() : column.caption">                                
                             </div>
-                            <i class="fa fa-sort ml-1" *ngIf="column.sortable && !column.sort?.sorting && gridData?.length > 0"></i>
-                            <i class="fa fa-sort-amount-asc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'asc' && gridData?.length > 0"></i>
-                            <i class="fa fa-sort-amount-desc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc' && gridData?.length > 0"></i>
+                            <i class="fa fa-sort ml-1" *ngIf="column.sortable && !column.sort?.sorting && gridData?.hasData"></i>
+                            <i class="fa fa-sort-amount-asc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'asc' && gridData?.hasData"></i>
+                            <i class="fa fa-sort-amount-desc ml-1" *ngIf="column.sortable && column.sort?.sorting && column.sort?.sortDirection == 'desc' && gridData?.hasData"></i>
 
                             <button type="button" class="btn btn-sm btn-filter ml-2 mr-1" *ngIf="allowColumnFilters && column.filterable && data?.length > 0"
                                 [popover]="popFilters" triggers="" [isOpen]="column.isFiltersOpenned" [placement]="filterPlacement" [adaptivePosition]="false" container="body" (click)="OnColumnFilterClick($event, column)" [ngClass]="{
@@ -60,9 +60,9 @@
                 </tr>
             </thead>
             <tbody *ngIf="sortApplied">
-                <tr *ngFor="let row of gridData; let rowIndex = index;" [ngClass]="row.ngClass">
-                    <td class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.length > 0">
-                        <input type="checkbox" [(ngModel)]="row.selected" (change)="OnRowSelectedChanged(row)" />
+                <tr *ngFor="let row of gridData.rows; let rowIndex = index;" [ngClass]="row.ngClass">
+                    <td class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.hasData">
+                        <input type="checkbox" [(ngModel)]="row.selected" (change)="OnRowSelectedChanged(row, rowIndex)" />
                     </td>
                     <td class="action text-center" *ngIf="showActionsColumn">
                         <ng-container 
@@ -80,26 +80,14 @@
                             'text-right': column.dataAlignment == 2
                         }">                        
                         <span 
-                            *ngIf="!column.render && column.data?.split('.').length == 1" 
-                            [tooltip]="column.enableTooltip ? row[column.data] : ''"
-                            (click)="HandleColumnClick(row, RenderPropertyValue(column.data, row), rowIndex, column)">
-                            {{row[column.data]}}
-                        </span>
-                        <span 
-                            *ngIf="!column.render && column.data?.split('.').length > 1" 
-                            [tooltip]="column.enableTooltip ? RenderPropertyValue(column.data, row) : ''"
-                            (click)="HandleColumnClick(row, RenderPropertyValue(column.data, row), rowIndex, column)">
-                            {{RenderPropertyValue(column.data, row)}}
-                        </span>
-                        <span 
-                            *ngIf="column.render" 
-                            [innerHtml]="HandleColumnRendering(row, RenderPropertyValue(column.data, row), rowIndex, column)"
-                            (click)="HandleColumnClick(row, RenderPropertyValue(column.data, row), rowIndex, column)">
+                            [tooltip]="column.enableTooltip ? row.columns[columnIndex].value : ''" container="body"
+                            [innerHtml]="row.columns[columnIndex].value"
+                            (click)="HandleColumnClick(row, row.columns[columnIndex].value, rowIndex, column)">
                         </span>
                     </td>
                 </tr>
                 <tr *ngIf="showSummaries && HasSummarizableColumns()" class="summaries">
-                    <td *ngIf="showCheckboxColumn && gridData?.length > 0"></td>
+                    <td *ngIf="showCheckboxColumn && gridData?.hasData"></td>
                     <td *ngIf="showActionsColumn"></td>
                     <td *ngFor="let column of columns; let columnIndex = index;" class="{{column.dataClasses}}" [ngClass]="{
                         'text-center': column.dataAlignment == 1,
@@ -109,9 +97,9 @@
                     </td>
                 </tr>
             </tbody>
-            <tfoot *ngIf="sortApplied && (!gridData || gridData.length == 0)">
+            <tfoot *ngIf="sortApplied && (!gridData || !gridData.hasData)">
                 <tr>
-                    <td class="empty-results text-center p-3" [attr.colspan]="columns?.length + (showActionsColumn ? 1 : 0) + (showCheckboxColumn && gridData?.length > 0 ? 1 : 0)">
+                    <td class="empty-results text-center p-3" [attr.colspan]="columns?.length + (showActionsColumn ? 1 : 0) + (showCheckboxColumn && gridData?.hasData ? 1 : 0)">
                         <p class="mb-0">{{emptyResultsMessage}}</p>
                     </td>
                 </tr>
@@ -123,7 +111,7 @@
         </div>
     </div>
 
-    <div class="d-flex align-items-center flex-wrap-reverse mt-3"  *ngIf="showInfos && gridData?.length > 0">
+    <div class="d-flex align-items-center flex-wrap-reverse mt-3"  *ngIf="showInfos && gridData?.hasData">
         <div class="d-flex align-items-center flex-wrap-reverse justify-content-center">
             <div class="d-flex align-items-center flex-wrap">
                 <div class="export-actions mr-3 my-1" *ngIf="allowExports">

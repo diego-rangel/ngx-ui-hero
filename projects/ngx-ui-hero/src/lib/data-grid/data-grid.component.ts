@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { BsModalService } from 'ngx-bootstrap';
 import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 
-import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, isDevMode, IterableDiffers, OnInit, Optional, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, IterableDiffers, OnInit, Optional, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data-grid-config';
@@ -16,12 +16,26 @@ import { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirec
 declare var $: any;
 let identifier = 0;
 
+class GridDataModel {
+    rows: Array<GridRowModel>;
+    hasData: boolean;
+}
+class GridRowModel {
+    model: any;
+    columns: Array<GridColumnModel>;
+    selected: boolean;
+    ngClass?: any;
+}
+class GridColumnModel {
+    value?: string | SafeHtml;
+    isHtml: boolean;
+}
+
 @Component({
     selector: 'datagrid',
     templateUrl: 'data-grid.component.html',
     styleUrls: ['data-grid.component.scss']
 })
-
 export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     initialRenderApplied: boolean = false;
     sortApplied: boolean = false;
@@ -32,7 +46,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     currentElementBeingReorderedFromIndex: number = -1;
     currentElementBeingReorderedToIndex: number = -1;
     currentPage: number = 1;
-    gridData: Array<any>;
+    gridData: GridDataModel;
 
     public identifier = `datagrid-${identifier++}`;
 
@@ -235,11 +249,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     RenderColumnSummary(column: DataGridColumnModel): number {
-        if (!this.gridData || this.gridData.length == 0) {
+        if (!this.gridData || !this.gridData.hasData) {
             return 0;
         }
         
-        return _.sumBy(this.gridData, x => Number(this.RenderPropertyValue(column.data, x)));
+        return _.sumBy(this.gridData.rows, x => Number(this.RenderPropertyValue(column.data, x)));
     }
 
     HasSummarizableColumns(): boolean {
@@ -251,18 +265,21 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     OnSelectAllChanged(): void {
-        if (!this.gridData || this.gridData.length == 0) {
+        if (!this.gridData || !this.gridData.hasData) {
             return;
         }
 
-        for (let i = 0; i < this.gridData.length; i++) {
-            this.gridData[i].selected = this.selectAll;
+        for (let i = 0; i < this.gridData.rows.length; i++) {
+            this.gridData.rows[i].selected = this.selectAll;
+            this._internalData[i + (this.itemsPerPage * (this.currentPage - 1))].selected = this.selectAll;
         }
 
         this.OnSelectionChanged.emit();
     }
 
-    OnRowSelectedChanged(row: any): void {
+    OnRowSelectedChanged(row: any, rowIndex: number): void {
+        this._internalData[rowIndex + (this.itemsPerPage * (this.currentPage - 1))].selected = row.selected;
+
         this.handleSelectAllCheckboxState();
         this.OnRowSelected.emit(row);
         this.OnSelectionChanged.emit();
@@ -430,9 +447,41 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
 
         if (this.mode == EnumDataGridMode.OnServer) {
-            this.gridData = Object.assign([], this._internalData);
+            this.initGridDataModel(Object.assign([], this._internalData));
             this.handleRowRenders();
         }        
+    }
+    private initGridDataModel(data: Array<any>): void {
+        this.gridData = {
+            hasData: data && data.length > 0,
+            rows: _.map(data, (row: any, rowIndex: number) => {
+                let _row: GridRowModel = {
+                    selected: row.selected,
+                    model: row,
+                    columns: _.map(this.columns, (column: DataGridColumnModel, columnIndex: number) => {
+                        let _column: GridColumnModel = {
+                            isHtml: column.render != undefined,
+                        };
+
+                        if (column.data) {
+                            if (column.data.split('.').length > 1) {
+                                _column.value = this.RenderPropertyValue(column.data, row);
+                            } else {
+                                _column.value = row[column.data];
+                            }
+                        }
+
+                        if (_column.isHtml) {
+                            _column.value = this.HandleColumnRendering(row, _column.value, rowIndex, column);
+                        }
+
+                        return _column;
+                    })
+                };
+
+                return _row;
+            })
+        };
     }
     private initializeColumns(): void {
         if (!this.columns || this.columns.length == 0) {
@@ -530,7 +579,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     private paginateOnClient(page: number): void {
         const startItem = (page - 1) * this.itemsPerPage;
         const endItem = page * this.itemsPerPage;
-        this.gridData = this._internalData.slice(startItem, endItem);
+        this.initGridDataModel(this._internalData.slice(startItem, endItem));
         
         this.handleRowRenders();
         this.handleSelectAllCheckboxState();
@@ -550,7 +599,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
     }
     private autofitByContent(): void {
-        if (!this.gridData || this.gridData.length == 0) {
+        if (!this.gridData || !this.gridData.hasData) {
             this.autofitByCaption();
             return;
         }
@@ -565,18 +614,15 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 gridWidth = $(`#${this.tableId}`).parents('.tab-content').width();
             }
 
-            for (let rowIndex = 0; rowIndex < this.gridData.length; rowIndex++) {
+            for (let rowIndex = 0; rowIndex < this.gridData.rows.length; rowIndex++) {
                 for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
                     let width: number = this._minColumnWidth;
-                    let currentData: string;
-    
-                    if (!this.isUndefinedOrNull(this.columns[columnIndex].data)) {                        
-                        if (this.columns[columnIndex].data.split('.').length > 1) {
-                            currentData = this.RenderPropertyValue(this.columns[columnIndex].data, this.gridData[rowIndex]);
-                        } else {
-                            currentData = this.gridData[rowIndex][this.columns[columnIndex].data];
-                        }
+                    let currentData: string | SafeHtml = null;
+
+                    if (!this.gridData.rows[rowIndex].columns[columnIndex].isHtml) {
+                        currentData = this.gridData.rows[rowIndex].columns[columnIndex].value;
                     }
+    
                     if (!this.isUndefinedOrNull(currentData)) {
                         width = (currentData.toString().length * 10) + 20;
                     }
@@ -646,19 +692,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         },0);
     }
     private handleSelectAllCheckboxState(): void {
-        if (!this.gridData || this.gridData.length == 0) {
+        if (!this.gridData || !this.gridData.hasData) {
             this.selectAll = false;
             return;
         }
 
-        for (let i = 0; i < this.gridData.length; i++) {
-            if (!this.gridData[i].selected) {
-                this.selectAll = false;
-                return;
-            }
-        }
-
-        this.selectAll = true;
+        this.selectAll = this.gridData.rows.filter(x => x.selected).length == this.gridData.rows.length;
     }
     private setDataGridWidths(widths: number[], gridWidth: number): void {
         let initialColumnsWidths = new Array<string>(this.columns.length);
@@ -771,9 +810,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
     }
     private handleRowRenders() {
-        if (!this.gridData || this.gridData.length == 0) return;
-        for (let i = 0; i < this.gridData.length; i++) {
-            this.OnRowRendered.emit(this.gridData[i]);
+        if (!this.gridData || !this.gridData.hasData) return;
+        for (let i = 0; i < this.gridData.rows.length; i++) {
+            this.OnRowRendered.emit(this.gridData.rows[i].model);
         }
     }
 
