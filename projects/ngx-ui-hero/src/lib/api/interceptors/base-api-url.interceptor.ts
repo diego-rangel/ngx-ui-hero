@@ -19,7 +19,7 @@ export class BaseApiUrlInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (!this._baseApiUrl || this._baseApiUrl.length == 0) 
+        if (!this._baseApiUrl || this._baseApiUrl.length == 0 || req.url.indexOf('http') >= 0) 
             return next.handle(req);
 
         let urlBase = this.concatUrl(this._baseApiUrl, this._apiAlias);

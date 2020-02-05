@@ -12,7 +12,7 @@ import { ActionsColumnDirective } from './directives/data-grid-templates.directi
 import { ExcelService } from './services/excel.service';
 
 export { DataGridConfig, DataGridStylesConfig, DataGridPagingConfig, DataGridExportingConfig, EnumDataGridMode, EnumAutoFitMode } from './config/data-grid-config';
-export { DataGridComponent } from './data-grid.component';
+export { DataGridComponent, GridDataModel, GridRowModel, GridColumnModel } from './data-grid.component';
 export { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
 export { ColumnFilterModel } from './models/column-filter.model';
 export { ColumnReorderingDefinitionsModel, ColumnReorderingDefinitionsItemModel } from './models/column-reordering-definitions.model';

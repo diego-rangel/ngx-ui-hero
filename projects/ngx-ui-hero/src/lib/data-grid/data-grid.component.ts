@@ -16,17 +16,17 @@ import { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirec
 declare var $: any;
 let identifier = 0;
 
-class GridDataModel {
+export class GridDataModel {
     rows: Array<GridRowModel>;
     hasData: boolean;
 }
-class GridRowModel {
+export class GridRowModel {
     model: any;
     columns: Array<GridColumnModel>;
     selected: boolean;
     ngClass?: any;
 }
-class GridColumnModel {
+export class GridColumnModel {
     value?: string | SafeHtml;
     isHtml: boolean;
 }
@@ -93,7 +93,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() filterPlacement?: string = 'bottom';
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
-    @Output() OnRowRendered = new EventEmitter<any>();
+    @Output() OnRowRendered = new EventEmitter<GridRowModel>();
     @Output() OnPaginate = new EventEmitter<any>();
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @Output() OnColumnFiltered = new EventEmitter<DataGridColumnModel>();
@@ -812,7 +812,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     private handleRowRenders() {
         if (!this.gridData || !this.gridData.hasData) return;
         for (let i = 0; i < this.gridData.rows.length; i++) {
-            this.OnRowRendered.emit(this.gridData.rows[i].model);
+            this.OnRowRendered.emit(this.gridData.rows[i]);
         }
     }
 
