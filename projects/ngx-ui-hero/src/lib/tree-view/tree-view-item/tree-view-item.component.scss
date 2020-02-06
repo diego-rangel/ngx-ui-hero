@@ -113,7 +113,7 @@ ul {
     border-right: 1px solid #CCC;
 }
 .item.has-children.first > div::before {
-    top: 17px;
+    top: 0;
 }
 .item.last > div::before {
     bottom: 22px;
