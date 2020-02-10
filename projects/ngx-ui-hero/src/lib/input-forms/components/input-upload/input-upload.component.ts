@@ -1,4 +1,4 @@
-import { FileUploader } from 'ng2-file-upload';
+import { FileItem, FileUploader } from 'ng2-file-upload';
 import { Observable, zip } from 'rxjs';
 import { retry } from 'rxjs/operators';
 
@@ -97,7 +97,7 @@ export class InputUploadComponent implements OnInit {
             }
 
             this.onUploadComplete.subscribe(result => resolve(result), error => reject(error));
-            this.onError.subscribe(result => { reject(); });
+            this.onError.subscribe(result => reject(result));
 
             if (this.chunk && this.chunks && this.chunks.length > 0) {
                 this.startChunkUpload();
@@ -185,9 +185,7 @@ export class InputUploadComponent implements OnInit {
                     this.chunkProgress += (100 / this.chunks.length) * chunks.length;
                     resolve();
                 },
-                error => {
-                    reject();
-                }
+                error => reject(error)
             );
         });
 
@@ -244,6 +242,9 @@ export class InputUploadComponent implements OnInit {
       }
     }
     private handleUploaderEvents(): void {
+        this.uploader.onBeforeUploadItem = (fileItem: FileItem) => {
+            fileItem.withCredentials = this.withCredentials;
+        };
         this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
             this.chunkProgress = 100;
             this.onUploadComplete.emit({item, response});
