@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'spinner',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class SpinnerComponent implements OnInit {
+    @Input() noMargins: boolean = false;
+
     constructor() { }
 
     ngOnInit() { }
