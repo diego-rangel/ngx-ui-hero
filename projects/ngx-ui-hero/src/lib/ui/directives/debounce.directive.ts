@@ -11,6 +11,8 @@ export class DebounceDirective implements OnInit {
   @Output() callback = new EventEmitter();
   @Output() arrowsCallback = new EventEmitter<any>();
 
+  private _arrowKeyCodes: number[] = [13,27,37,38,39,40];
+
   constructor(
     private elementRef: ElementRef
   ) {}
@@ -21,14 +23,14 @@ export class DebounceDirective implements OnInit {
         debounceTime(this.delay),
       )
       .subscribe((input: any) => {
-        if (input.keyCode < 37 || input.keyCode > 40) {
+        if (this._arrowKeyCodes.indexOf(input.keyCode) < 0) {
           this.callback.emit(input);
         }        
       });
 
     const event2 = fromEvent(this.elementRef.nativeElement, 'keyup')
       .subscribe((input: any) => {
-        if (input.keyCode == 13 || (input.keyCode >= 37 && input.keyCode <= 40)) {
+        if (this._arrowKeyCodes.indexOf(input.keyCode) >= 0) {
           this.arrowsCallback.emit(input);
         } 
       });
