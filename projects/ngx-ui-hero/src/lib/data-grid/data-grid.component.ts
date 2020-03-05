@@ -714,7 +714,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
     private setDataGridWidths(widths: number[], gridWidth: number): void {
         let initialColumnsWidths = new Array<string>(this.columns.length);
-        let _externalColumns = this._externalColumns.filter(x => x.visible);
+        let _externalColumns = this._externalColumns.filter(x => x.visible == undefined || x.visible == true);
 
         for (let i = 0; i < _externalColumns.length; i++) {
             let columnDefaultWidth = _externalColumns[i].width;
