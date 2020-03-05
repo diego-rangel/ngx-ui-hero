@@ -100,9 +100,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @ContentChild(ActionsColumnDirective, {read: TemplateRef, static: true}) actionsColumnTemplate: ActionsColumnDirective;
     @ViewChild('paginator', {static: false}) paginator: PaginationComponent;
 
-    private _differ: any;
+    private _dataDiffer: any;
     private _internalData: Array<any>;
     private _externalData: Array<any>;
+    private _internalColumns: Array<DataGridColumnModel>;
     private _externalColumns: Array<DataGridColumnModel>;
     private _maxWidth = 400;
     private _minColumnWidth = 150;
@@ -145,16 +146,15 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             Object.assign(this, defaultOptions.reordering);
         }
 
-        this._differ = this.iterableDiffers.find([]).create(null);
+        this._dataDiffer = this.iterableDiffers.find([]).create(null);
     }
 
     ngOnInit() {
-        this.initializeColumns();
-        this.Rerender();
+        this.Redraw();
     }
     ngDoCheck(): void {
-        let changes = this._differ.diff(this._externalData);
-        if (changes && this.initialRenderApplied) {
+        let dataHasChanges = this._dataDiffer.diff(this._externalData);
+        if (dataHasChanges && this.initialRenderApplied) {
             this.Rerender();
         }
     }
@@ -219,6 +219,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             .replace('{recordsFrom}', recordsFrom.toString())
             .replace('{recordsTo}', recordsTo.toString())
             .replace('{totalRecords}', totalRecords.toString());
+    }
+
+    Redraw(): void {
+        this.initializeColumns();
+        this.Rerender();
     }
 
     Rerender(): void {
@@ -394,6 +399,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                     el.removeEventListener("dragover", onDragOverCallback);
                 }              
             });
+
+            this.Rerender();
         };
         var onDragEnterCallback = (e: any, i: number) => {
             this.currentElementBeingReorderedToIndex = i;
@@ -489,7 +496,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             return;
         }
         
-        this._externalColumns = Object.assign([], this.columns);
+        if (!this._externalColumns)
+            this._externalColumns = _.clone(this.columns);
 
         for (let i = 0; i < this.columns.length; i++) {
             let target: DataGridColumnModel = {
@@ -501,6 +509,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 dataClasses: null,         
                 sortable: true,
                 filterable: true,
+                visible: true,
                 index: i
             };
 
@@ -520,7 +529,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             }            
         }
 
+        if (!this._internalColumns)
+            this._internalColumns = _.clone(this.columns);
+
         this.verifyColumnIndexPersistences();
+        this.filterColumnsThatShouldBeVisible();
     }
     private initializeSorting(): void {
         if (this.isUndefinedOrNull(this._internalData) || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
@@ -701,11 +714,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
     private setDataGridWidths(widths: number[], gridWidth: number): void {
         let initialColumnsWidths = new Array<string>(this.columns.length);
+        let _externalColumns = this._externalColumns.filter(x => x.visible);
 
-        for (let i = 0; i < this._externalColumns.length; i++) {
-            let columnDefaultWidth = this._externalColumns[i].width;
+        for (let i = 0; i < _externalColumns.length; i++) {
+            let columnDefaultWidth = _externalColumns[i].width;
             
-            let def = this.getColumnReorderingDefinitionFrom(this._externalColumns[i]);
+            let def = this.getColumnReorderingDefinitionFrom(_externalColumns[i]);
             if (!def) {
                 initialColumnsWidths[i] = columnDefaultWidth;
                 continue;
@@ -904,6 +918,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         let def = definition.data.find(x => x.caption == column.caption);
         if (!def) return undefined;
         return def;
+    }
+
+    private filterColumnsThatShouldBeVisible(): void {
+        this.columns = this._internalColumns.filter(x => x.visible);
     }
 
     private debug(message: any, ...params: any[]): void {

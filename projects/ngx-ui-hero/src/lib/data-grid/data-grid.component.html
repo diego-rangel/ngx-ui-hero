@@ -80,8 +80,8 @@
                             'text-right': column.dataAlignment == 2
                         }">                        
                         <span 
-                            [tooltip]="column.enableTooltip ? row.columns[columnIndex].value : ''" container="body"
-                            [innerHtml]="row.columns[columnIndex].value"
+                            [title]="column.enableTooltip ? row.columns[columnIndex].value : ''"
+                            [innerHtml]="row.columns[columnIndex]?.value"
                             (click)="HandleColumnClick(row, row.columns[columnIndex].value, rowIndex, column)">
                         </span>
                     </td>

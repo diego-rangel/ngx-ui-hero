@@ -15,6 +15,7 @@ export class DataGridColumnModel {
     isFiltersOpenned?: boolean = false;
     filterable?: boolean = true;
     index?: number;
+    visible?: boolean = false;
     renderCaption?(): string;
     render?(row: any, currentData: any, rowIndex: number): string;
     renderOnPrint?(row: any, currentData: any, rowIndex: number): string;
