@@ -117,7 +117,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this._externalData = value;
 
         if (this.isUndefinedOrNull(value) && !this.isUndefinedOrNull(this._internalData)) {
-            this.Rerender();
+            this.initializeRendering(true);
         }
     }
 
@@ -150,12 +150,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     ngOnInit() {
-        this.Redraw();
+        this.draw();
     }
     ngDoCheck(): void {
         let dataHasChanges = this._dataDiffer.diff(this._externalData);
         if (dataHasChanges && this.initialRenderApplied) {
-            this.Rerender();
+            this.initializeRendering(true);
         }
     }
 
@@ -222,19 +222,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     Redraw(): void {
-        this.initializeColumns();
-        this.Rerender();
-    }
-
-    Rerender(): void {
-        setTimeout(() => {
-            this.initializeGridData();
-			this.initializeFilters();
-			this.initializePaging();
-			this.initializeSorting();
-            this.handleAutoFit();
-            this.handleInitialRenderingFlag();
-        },0);
+        this.draw();
     }
 
     RenderPropertyValue(propertyPath: string, object: any): any {
@@ -400,7 +388,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 }              
             });
 
-            this.Rerender();
+            this.initializeRendering();
         };
         var onDragEnterCallback = (e: any, i: number) => {
             this.currentElementBeingReorderedToIndex = i;
@@ -432,7 +420,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         if (this.mode == EnumDataGridMode.OnServer) {
             this.OnColumnFiltered.emit(column);
         } else {
-            this.Rerender();
+            this.initializeRendering();
         }
     }
 
@@ -446,6 +434,20 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         return this.sanitizer.bypassSecurityTrustHtml(column.render(row, currentData, rowIndex));
     }
 
+    private draw(redrawing?: boolean): void {
+        this.initializeColumns();
+        this.initializeRendering(redrawing);
+    }
+    private initializeRendering(redrawing?: boolean): void {
+        setTimeout(() => {
+            this.initializeGridData();
+			this.initializeFilters();
+			this.initializePaging(redrawing);
+			this.initializeSorting();
+            this.handleAutoFit();
+            this.handleInitialRenderingFlag();
+        },0);
+    }
     private initializeGridData(): void {
         if (this._externalData) {
             this._internalData = Object.assign([], this._externalData);
@@ -557,13 +559,20 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         
         this.sortApplied = true;
     }
-    private initializePaging(): void {
-        if (!this.currentPage || this.mode == EnumDataGridMode.OnClient) {
+    private initializePaging(redrawing?: boolean): void {
+        if (!this.currentPage) {
             this.currentPage = 1;
         }
 
         if (this._internalData && this.mode == EnumDataGridMode.OnClient) {
             this.totalItems = this._internalData.length;
+        }
+
+        let currentPageFitsTheNumberOfItems = this.totalItems > (this.itemsPerPage * (this.currentPage - 1));
+        let shouldResetCurrentPage = this.currentPage > 1 && this.mode == EnumDataGridMode.OnClient && !currentPageFitsTheNumberOfItems;
+
+        if (redrawing || shouldResetCurrentPage) {
+            this.currentPage = 1;
         }
 
         if (this.paginator) {
