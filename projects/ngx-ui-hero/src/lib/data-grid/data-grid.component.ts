@@ -88,7 +88,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() allowColumnResize?: boolean = true;
     @Input() allowColumnFilters?: boolean = true;
     @Input() allowColumnReorder?: boolean = true;
-    @Input() userPerferencesKey?: string;
+    @Input() userPreferencesKey?: string;
     @Input() filterPlaceholder?: string = 'Filter...';
     @Input() filterPlacement?: string = 'bottom';
     @Output() OnSelectionChanged = new EventEmitter();
@@ -534,8 +534,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         if (!this._internalColumns)
             this._internalColumns = _.clone(this.columns);
 
-        this.verifyColumnIndexPersistences();
         this.filterColumnsThatShouldBeVisible();
+        this.verifyColumnIndexPersistences();
     }
     private initializeSorting(): void {
         if (this.isUndefinedOrNull(this._internalData) || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
@@ -840,7 +840,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     private verifyColumnIndexPersistences(): void {
-        if (!this.userPerferencesKey) return;
+        if (!this.userPreferencesKey) return;
         let definition = this.getOrCreateColumnReorderingDefinition();
         this.applyColumnReorderingDefinition(definition);
     }
@@ -848,7 +848,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         if (this._columnDefinitions) return this._columnDefinitions;
 
         this.debug('Readed from localstorage');
-        let json: string = localStorage.getItem(this.userPerferencesKey);
+        let json: string = localStorage.getItem(this.userPreferencesKey);
         this._columnDefinitions = json ? JSON.parse(json) : null;
 
         return this._columnDefinitions;
@@ -864,7 +864,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
     private buildColumnReorderingDefinition(): ColumnReorderingDefinitionsModel {
         let definition: ColumnReorderingDefinitionsModel = {
-            key: this.userPerferencesKey,
+            key: this.userPreferencesKey,
             data: this.columns.map(c => {
                 let item: ColumnReorderingDefinitionsItemModel = {
                     caption: c.caption,
@@ -876,7 +876,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }; 
         
         this._columnDefinitions = definition;
-        localStorage.setItem(this.userPerferencesKey, JSON.stringify(definition));
+        localStorage.setItem(this.userPreferencesKey, JSON.stringify(definition));
         this.debug('Rebuilded ColumnReorderingDefinition');
 
         return definition;
@@ -907,7 +907,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.columns = _.orderBy(this.columns, x => x.index);
     }
     private updateColumnReorderingDefinition(): void {
-        if (!this.userPerferencesKey) return;
+        if (!this.userPreferencesKey) return;
 
         let definition = this.getColumnReorderingDefinition();
         for (let i = 0; i < this.columns.length; i++) {
@@ -918,10 +918,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
 
         this._columnDefinitions = definition;
-        localStorage.setItem(this.userPerferencesKey, JSON.stringify(definition));
+        localStorage.setItem(this.userPreferencesKey, JSON.stringify(definition));
     }
     private getColumnReorderingDefinitionFrom(column: DataGridColumnModel): ColumnReorderingDefinitionsItemModel {
-        if (!this.userPerferencesKey) return undefined;
+        if (!this.userPreferencesKey) return undefined;
         let definition = this.getColumnReorderingDefinition();
         if (!definition) return undefined;
         let def = definition.data.find(x => x.caption == column.caption);
