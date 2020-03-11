@@ -571,7 +571,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         let currentPageFitsTheNumberOfItems = this.totalItems > (this.itemsPerPage * (this.currentPage - 1));
         let shouldResetCurrentPage = this.currentPage > 1 && this.mode == EnumDataGridMode.OnClient && !currentPageFitsTheNumberOfItems;
 
-        if (redrawing || shouldResetCurrentPage) {
+        if ((redrawing && this.mode == EnumDataGridMode.OnClient) || shouldResetCurrentPage) {
             this.currentPage = 1;
         }
 
