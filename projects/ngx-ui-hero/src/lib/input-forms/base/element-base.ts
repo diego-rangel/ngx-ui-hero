@@ -69,16 +69,6 @@ export abstract class ElementBase<T> extends ValueAccessorBase<T> {
       return;
     }
 
-    for (let i = 0; i < this.validators.length; i++) {
-      const props = Object.keys(this.validators[i] || {});
-
-      for (let p = 0; p < props.length; p++) {
-        if (props[p] === '_required') {
-          return true;
-        }
-      }
-    }
-
-    return false;
+    return this.validators.filter(x => x['required'] == true).length > 0;
   }
 }
