@@ -70,6 +70,7 @@
                     </div>
                 </div>
                 <div class="mouse-indicator" *ngIf="showingMouseIndicator" [ngStyle]="{'left.px': mouseIndicatorCoordinateX}"></div>
+                <div class="mouse-indicator today" *ngIf="showTodayIndicator" [ngStyle]="{'left.px': todayIndicatorCoordinateX}"></div>
             </div>
             <div class="footer" *ngIf="showFooter">
                 <div class="months">

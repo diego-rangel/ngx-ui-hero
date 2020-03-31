@@ -26,6 +26,7 @@ export class GanttChartComponent implements OnInit {
   @Input() tooltipPlacement: string = 'left';
   @Input() maxHeight: number = 0;
   @Input() showFooter: boolean = false;
+  @Input() showTodayIndicator: boolean = true;
   @Input() currentYear: number;
   @Output() onSelect = new EventEmitter<any>();
   @ContentChild(GanttSeriesTooltipTemplateDirective, {read: TemplateRef, static: true}) seriesTooltipTemplate: GanttSeriesTooltipTemplateDirective;
@@ -43,6 +44,7 @@ export class GanttChartComponent implements OnInit {
   showingMouseIndicator: boolean = false;
   mouseMovingLastMonth: boolean = false;
   mouseIndicatorCoordinateX: number;
+  todayIndicatorCoordinateX: number;
   dateIndicator: Date;
   colors: Array<string> = [
     '#8270fa', 
@@ -70,6 +72,7 @@ export class GanttChartComponent implements OnInit {
     this.initData();
     this.initMonths();
     this.initTimelineSizes();
+    this.initTodayIndicator();
   }
 
   onResize(){
@@ -164,6 +167,16 @@ export class GanttChartComponent implements OnInit {
   private initTimelineSizes(): void {
     setTimeout(() => {
       this.handleTimelineSizes();
+    }, 0);
+  }
+  private initTodayIndicator(): void {
+    setTimeout(() => {
+      let monthWidth: number = $(`#${this.identifier} .gantt-timeline .timeline .item:first-child`).children('.box:first-child').width();
+      let referenceDate = new Date();
+      let day = referenceDate.getDate();
+      let month = referenceDate.getMonth() + 1;
+      let firstDayWidth: number = monthWidth / moment(referenceDate).daysInMonth();
+      this.todayIndicatorCoordinateX = ((month - 1) * monthWidth) + ((day - 1) * firstDayWidth) + ((month - 1) * 2);
     }, 0);
   }
   private handleTimelineSizes(): void {
