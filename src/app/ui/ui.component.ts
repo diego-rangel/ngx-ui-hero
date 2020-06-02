@@ -1,4 +1,4 @@
-import { BsModalService } from 'ngx-bootstrap';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { BlockUi } from 'ngx-ui-hero';
 
 import { Component, OnInit } from '@angular/core';
@@ -53,7 +53,7 @@ export class MyComponent {
   `;
 
   modalCode = `
-import { BsModalService } from 'ngx-bootstrap';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 export class MyComponent {  
   constructor(private modalService: BsModalService) {}

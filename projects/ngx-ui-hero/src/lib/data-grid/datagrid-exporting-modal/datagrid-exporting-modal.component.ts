@@ -1,10 +1,11 @@
-import { LoadingImage } from './loading-image';
-import { ExcelService } from './../services/excel.service';
-import { Component, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { DataGridColumnModel, EnumSortDirection } from './../models/data-grid-column.model';
-
 import * as _ from 'lodash';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
+import { Component, OnInit } from '@angular/core';
+
+import { DataGridColumnModel, EnumSortDirection } from '../models/data-grid-column.model';
+import { ExcelService } from '../services/excel.service';
+import { LoadingImage } from './loading-image';
 
 @Component({
   selector: 'ui-datagrid-exporting-modal',

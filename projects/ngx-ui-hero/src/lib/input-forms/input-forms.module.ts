@@ -1,5 +1,3 @@
-import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
 import { FileUploadModule } from 'ng2-file-upload';
 
 import { CommonModule } from '@angular/common';
@@ -33,6 +31,7 @@ import { InputTextareaComponent } from './components/input-textarea/input-textar
 import { InputUploadComponent } from './components/input-upload/input-upload.component';
 import { InputValidationsComponent } from './components/input-validations/input-validations.component';
 import { RadialButtonComponent } from './components/radial-button/radial-button.component';
+import { CurrencyMaskDirective } from './directives/currency/currency-mask.directive';
 import { MaxValueDirective } from './directives/max-value-validator.directive';
 import { MinValueDirective } from './directives/min-value-validator.directive';
 import { InputFormsConfig } from './input-forms-config';
@@ -74,7 +73,6 @@ export { BlockUi } from './classes/block-ui';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    CurrencyMaskModule,    
     FileUploadModule,
     UiModule,
     NgxUiHeroDataGridModule
@@ -107,6 +105,7 @@ export { BlockUi } from './classes/block-ui';
     FilterMultiselectComponent,
     FilterDateComponent,
     MaskDirective,
+    CurrencyMaskDirective
   ],
   exports: [
     MaxValueDirective,
@@ -136,7 +135,8 @@ export { BlockUi } from './classes/block-ui';
     FilterDropdownSearchComponent,
     FilterMultiselectComponent,
     FilterDateComponent,
-    MaskDirective
+    MaskDirective,
+    CurrencyMaskDirective
   ],
 })
 export class NgxUiHeroInputFormsModule {
@@ -148,10 +148,6 @@ export class NgxUiHeroInputFormsModule {
           provide: INPUT_FORMS_CONFIG,
           useValue: config
         },
-        {
-          provide: CURRENCY_MASK_CONFIG,
-          useValue: config.currency
-        }
       ]
     };
   }
