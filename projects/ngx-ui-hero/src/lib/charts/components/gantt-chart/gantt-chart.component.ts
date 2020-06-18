@@ -77,6 +77,7 @@ export class GanttChartComponent implements OnInit {
 
   onResize(){
     this.handleTimelineSizes();
+    this.initTodayIndicator();
   }
   onSerieSelected(item: GanttInternalItemModel, serie: GanttInternalSerieModel): void {
     this.onSelect.emit({
