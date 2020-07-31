@@ -91,6 +91,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() userPreferencesKey?: string;
     @Input() filterPlaceholder?: string = 'Filter...';
     @Input() filterPlacement?: string = 'bottom';
+    @Input() boundedExportCallback?: () => Promise<any[]>;
     @Output() OnSelectionChanged = new EventEmitter();
     @Output() OnRowSelected = new EventEmitter<any>();
     @Output() OnRowRendered = new EventEmitter<GridRowModel>();
@@ -278,11 +279,17 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         this.OnSelectionChanged.emit();
     }
 
-    ExportToExcel() {
+    async ExportToExcel(event: MouseEvent): Promise<boolean> {
+        event.preventDefault();
+
+        let _data = this.boundedExportCallback
+            ? await this.boundedExportCallback()
+            : this._externalData;
+
         this.modalService.show(DatagridExportingModalComponent, {
             class: 'modal-md',
             initialState: {
-                data: this._externalData,
+                data: _data,
                 columns: this.columns.slice(0),
                 exportedFileName: this.exportedFileName,
                 exportedExcelSheetName: this.exportedExcelSheetName,
@@ -290,7 +297,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
                 initialSortDirection: this.initialSortDirection,
             }
         });
-        
+
         return false;
     }
 
