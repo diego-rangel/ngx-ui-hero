@@ -735,24 +735,66 @@
           <div class="card-header">Input Month/Year</div>
           <div class="card-body">
             <div class="form-group">
-              <input-month-year
-                label="My Label"
-                placeholder="Select..."
-                format="MMM/yyyy"
-                language="en"
-                [disabled]="false"
-                [showValidations]="true"
-                [(ngModel)]="myDateMonthYearModel" 
-                required>
-              </input-month-year>
+              <div class="row">
+                <div class="col-lg-6">                  
+                  <input-month-year
+                    label="My Label"
+                    placeholder="Select..."
+                    format="MMM/yyyy"
+                    language="en"
+                    [disabled]="false"
+                    [showValidations]="true"                
+                    [(ngModel)]="myDateMonthYearModel" 
+                    required>
+                  </input-month-year>
+
+                  <div>
+                    <pre><code [highlight]="myMonthYearCode"></code></pre>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <input-month-year
+                    label="My Label"
+                    placeholder="Select..."
+                    format="MMM/yyyy"
+                    language="en"
+                    [disabled]="false"
+                    [showValidations]="true" 
+                    [monthsAvailable]="myMonthsAvailable"               
+                    [(ngModel)]="myDateMonthYearModel" 
+                    required>
+                  </input-month-year>
+
+                  <div>
+                    <pre><code [highlight]="myMonthYearCustomCode"></code></pre>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <pre><code [highlight]="myMonthYearCode"></code></pre>
-            </div>
+            
 
             <p><b>Available languages:</b> cs, da, de, en, es, fi, fr, hu, it, jp, nl, pl, pt, ro, sk, zh.</p>
 
+            <h2>Inputs</h2>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b>monthsAvailable</b><br>Optional</td>
+                    <td><a href="https://github.com/diego-rangel/ngx-ui-hero/blob/master/projects/ngx-ui-hero/src/lib/data-grid/models/data-grid-column.model.ts" target="_blank">MonthYearAvaiableModel</a>[]</td>
+                    <td>List of year/month available</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <h2>Outputs</h2>
             <div class="table-responsive">
               <table class="table table-striped table-bordered">

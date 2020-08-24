@@ -4,12 +4,15 @@ import { Component, OnInit } from '@angular/core';
 
 declare var $: any;
 
+
+
 @Component({
   selector: 'app-components',
   templateUrl: './components.component.html',
   styleUrls: ['./components.component.scss']
 })
 export class ComponentsComponent implements OnInit {
+    
   inputTextCode = `
 <input-text
   [label]="'My Label here'"
@@ -223,6 +226,19 @@ export class ComponentsComponent implements OnInit {
   required>
 </input-month-year>
   `;
+  myMonthYearCustomCode = `
+<input-month-year
+  label="My Label"
+  placeholder="Select..."
+  format="MMM/yyyy"
+  language="en"
+  [disabled]="false"
+  [showValidations]="true"
+  [monthsAvailable]="myMonthsAvailable"  
+  [(ngModel)]="myDateMonthYearModel" 
+  required>
+</input-month-year>
+  `;
 
   inputDropdownGridTemplate = `
 <input-dropdown-grid
@@ -316,6 +332,51 @@ dropdownSearchData = [
   myFilterDropdownSearchModel: any;
   myDateMonthYearModel: Date;
   myFilterDateModel: Date;
+
+  myMonthsAvailable = [
+    {year: 2018, monthsAvaiable: [
+      {value: false},
+      {value: false},
+      {value: true},
+      {value: false},
+      {value: true},
+      {value: false},
+      {value: false},
+      {value: false},
+      {value: false},
+      {value: false},
+      {value: false},
+      {value: false},
+    ]},
+    {year: 2019, monthsAvaiable: [
+      {value: false},
+      {value: false},
+      {value: true},
+      {value: true},
+      {value: true},
+      {value: false},
+      {value: true},
+      {value: true},
+      {value: true},
+      {value: false},
+      {value: true},
+      {value: true},
+    ]},
+    {year: 2020, monthsAvaiable: [
+      {value: true},
+      {value: false},
+      {value: true},
+      {value: true},
+      {value: true},
+      {value: false},
+      {value: true},
+      {value: true},
+      {value: true},
+      {value: false},
+      {value: true},
+      {value: true},
+    ]},
+  ]
 
   dropdownGridData = [
     { id: 1, name: 'Person 1', email: 'person1@domain.com' },
