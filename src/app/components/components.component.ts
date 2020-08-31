@@ -425,9 +425,5 @@ dropdownSearchData = [
   OnUploadError(event: any): void {
     this.alert.error('Oops =(', "It's only a test and does not have a test backend.");
   }
-
-  search(str) {
-    console.log(str)
-  }
  
 }

@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { orderBy } from 'lodash-es';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 import { Component, OnInit } from '@angular/core';
@@ -77,7 +77,7 @@ export class DatagridExportingModalComponent implements OnInit {
       result.push(rowObject);
     }
 
-    return _.orderBy(result, [this.columns[this.initialColumnToSort].caption], [this.initialSortDirection]);
+    return orderBy(result, [this.columns[this.initialColumnToSort].caption], [this.initialSortDirection]);
   }
   private renderPropertyValue(propertyPath: string, object: any): any {
     let parts: string[] = propertyPath.split( "." );
