@@ -20,6 +20,7 @@ export class InputCurrencyComponent extends ElementBase<string> implements OnIni
   @Input() showInputGroup?: boolean = true;
   @Input() placeholder: string = '';
   @Input() precision: number = 2;
+  @Input() options: string = "{ prefix: '', thousands: '.', decimal: ',', precision: 2 }";
   @ViewChild(NgModel, {static: true}) model: NgModel;
   
   currencyCode: string;
