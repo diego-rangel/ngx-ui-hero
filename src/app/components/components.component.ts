@@ -128,6 +128,7 @@ export class ComponentsComponent implements OnInit {
   [disabled]="false"
   [showValidations]="true"
   [showInputGroup]="true"
+  [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 2 }"
   [(ngModel)]="myCurrencyModel"
   required>
 </input-currency>
