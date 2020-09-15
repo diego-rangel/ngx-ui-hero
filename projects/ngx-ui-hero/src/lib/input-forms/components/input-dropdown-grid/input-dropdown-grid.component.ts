@@ -37,8 +37,12 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
   @Input() public displayTextProperty: string;
   @Input() public valueProperty: string;
   @Input() public columns: Array<DataGridColumnModel>; 
-  @Input() itemsPerPage?: number = 5;
+  @Input() public lazyLoadedData: boolean;
+  @Input() itemsPerPage?: number = 5;  
+  @Input() maxSize?: number = 5;  
+  @Input() showInfos?: boolean = true;  
   @Output() public onChange = new EventEmitter<any>();
+  @Output() public onSearch = new EventEmitter<string>();
 
   get data(): Array<any> {
     return this._data;
@@ -129,6 +133,11 @@ export class InputDropdownGridComponent extends ElementBase<any> implements OnIn
     this.ToggleDropDown(null, false);
   }
   OnSearch(): void {
+    if(this.lazyLoadedData) {
+      this.onSearch.emit(this.search);
+      return;
+    }
+
     if (!this.search || this.search.length < 3) {
       this.clearSearchResults();
       return;

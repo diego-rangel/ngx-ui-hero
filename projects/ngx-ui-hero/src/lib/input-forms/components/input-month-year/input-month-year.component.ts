@@ -7,6 +7,7 @@ import { InputFormsConfig } from '../../input-forms-config';
 import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 import { INPUT_MONTH_YEAR_LANGUAGES } from './input-month-year.constants';
 import { InputMonthYearLanguage } from './input-month-year.language';
+import { MonthYearAvaiableModel } from './month-year-avaiable';
 
 let identifier = 0;
 
@@ -24,6 +25,7 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
   @Input() placeholder?: string = 'Select...';
   @Input() language?: string = 'en';
   @Input() format?: string = 'MMM/yyyy';
+  @Input() monthsAvailable?: Array<MonthYearAvaiableModel>;
   @ViewChild(NgModel, {static: true}) model: NgModel;
   @Output() onChange = new EventEmitter<Date>();
 
@@ -85,12 +87,21 @@ export class InputMonthYearComponent extends ElementBase<Date> implements OnInit
     this.selectedYear--;
   }
 
+  GetMonthAvaiable(index: number): boolean {
+    if (!this.monthsAvailable || (this.monthsAvailable && this.monthsAvailable.filter(x => x.year == this.selectedYear).length == 0) || (this.monthsAvailable && this.monthsAvailable.filter(x => x.year == this.selectedYear).length > 0 && !this.monthsAvailable.filter(x => x.year == this.selectedYear)[0].monthsAvaiable[index].value)) 
+      return true;
+    else 
+      return false;  
+  }
+
   SelectMonth(month: number): void {
     if (this.disabled) {
       this.showDropdown = false;
       return;
     }
-    
+    if(!this.GetMonthAvaiable(month)) {
+      return;
+    }
     let newDate = new Date(this.selectedYear, month, 1, 0, 0, 0, 0);
     this.value = newDate;
     this.showDropdown = false;

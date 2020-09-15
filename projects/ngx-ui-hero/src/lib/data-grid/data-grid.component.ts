@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { clone, filter, find, map, orderBy, some, sum, sumBy } from 'lodash-es';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
 
@@ -247,7 +247,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             return 0;
         }
         
-        return _.sumBy(this.gridData.rows, x => Number(this.RenderPropertyValue(column.data, x)));
+        return sumBy(this.gridData.rows, x => Number(this.RenderPropertyValue(column.data, x)));
     }
 
     HasSummarizableColumns(): boolean {
@@ -255,7 +255,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             return false;
         }
         
-        return _.some(this.columns, x => x.summarizable);
+        return some(this.columns, x => x.summarizable);
     }
 
     OnSelectAllChanged(): void {
@@ -470,11 +470,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     private initGridDataModel(data: Array<any>): void {
         this.gridData = {
             hasData: data && data.length > 0,
-            rows: _.map(data, (row: any, rowIndex: number) => {
+            rows: map(data, (row: any, rowIndex: number) => {
                 let _row: GridRowModel = {
                     selected: row.selected,
                     model: row,
-                    columns: _.map(this.columns, (column: DataGridColumnModel, columnIndex: number) => {
+                    columns: map(this.columns, (column: DataGridColumnModel, columnIndex: number) => {
                         let _column: GridColumnModel = {
                             isHtml: column.render != undefined,
                         };
@@ -506,7 +506,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
         
         if (!this._externalColumns)
-            this._externalColumns = _.clone(this.columns);
+            this._externalColumns = clone(this.columns);
 
         for (let i = 0; i < this.columns.length; i++) {
             let target: DataGridColumnModel = {
@@ -539,7 +539,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         }
 
         if (!this._internalColumns)
-            this._internalColumns = _.clone(this.columns);
+            this._internalColumns = clone(this.columns);
 
         this.filterColumnsThatShouldBeVisible();
         this.verifyColumnIndexPersistences();
@@ -555,7 +555,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
             return;
         }
 
-        const columnToSort = _.find(this.columns, x => x.sortable && x.sort && x.sort.sorting);
+        const columnToSort = find(this.columns, x => x.sortable && x.sort && x.sort.sorting);
 
         if (this.isUndefinedOrNull(columnToSort)) {
             this.paginateOnClient(this.currentPage);
@@ -603,7 +603,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         return value == undefined || value == null;
     }
     private sortOnClient(column: DataGridColumnModel): void {
-        this._internalData = _.orderBy(this._internalData, [column.data], [column.sort.sortDirection]);
+        this._internalData = orderBy(this._internalData, [column.data], [column.sort.sortDirection]);
     }
     private paginateOnClient(page: number): void {
         const startItem = (page - 1) * this.itemsPerPage;
@@ -746,7 +746,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
         this.debug('initialColumnsWidths', initialColumnsWidths);
 
-        let totalColumnsWidth = _.sum(widths);
+        let totalColumnsWidth = sum(widths);
         let totalColumnsWidthGreaterThanGrid = totalColumnsWidth > gridWidth;
 
         if (!totalColumnsWidthGreaterThanGrid) {
@@ -896,7 +896,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
         if (hasDifferentNumberOfColumns) return true;
 
-        let hasDifferencesByCaption = _.filter(definition.data, def => 
+        let hasDifferencesByCaption = filter(definition.data, def => 
             this.columns[def.originalIndex].caption != def.caption
         ).length > 0;
 
@@ -905,13 +905,13 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
     private applyColumnReorderingDefinition(definition: ColumnReorderingDefinitionsModel): void {
         for (let i = 0; i < this.columns.length; i++) {
-            let def = _.find(definition.data, x => x.caption == this.columns[i].caption);
+            let def = find(definition.data, x => x.caption == this.columns[i].caption);
             if (!def) continue;
             this.columns[i].index = def.userIndex;
             this.debug(this.columns[i].caption, this.columns[i].index);
         }
 
-        this.columns = _.orderBy(this.columns, x => x.index);
+        this.columns = orderBy(this.columns, x => x.index);
     }
     private updateColumnReorderingDefinition(): void {
         if (!this.userPreferencesKey) return;

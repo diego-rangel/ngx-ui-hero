@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { orderBy } from 'lodash-es';
 
 import { ElementRef, EventEmitter, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
@@ -83,7 +83,7 @@ export class TutorialService {
             let tasks = this._tasks.filter(x => x.element && x.element.nativeElement && x.element.nativeElement.isConnected);
             if (!tasks || tasks.length == 0) return;
 
-            tasks = _.orderBy(tasks, ['action.order'], ['asc']);
+            tasks = orderBy(tasks, ['action.order'], ['asc']);
 
             this.play(tasks);
         });
@@ -97,7 +97,7 @@ export class TutorialService {
             let tasks = this._tasks.filter(x => x.element && x.element.nativeElement && x.element.nativeElement.isConnected && x.action.key == key);
             if (!tasks || tasks.length == 0) return;
 
-            tasks = _.orderBy(tasks, ['action.order'], ['asc']);
+            tasks = orderBy(tasks, ['action.order'], ['asc']);
 
             this.play(tasks);
 

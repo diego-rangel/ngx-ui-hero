@@ -108,6 +108,10 @@
                 color: #007BFF;
                 font-weight: 600;
             }
+            li.disabled {
+                color: #dedede;
+                text-decoration:line-through;
+            }
             li:hover {
                 background-color: #007BFF;
                 color: #FFF;

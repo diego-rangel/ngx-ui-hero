@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { filter, uniqBy } from 'lodash-es';
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -59,8 +59,8 @@ export class ColumnFilterComponent implements OnInit {
       return this.renderPropertyValue(this.column.data, row);
     });
 
-    this.options = _.uniqBy(this.options, x => x);
-    this.options = _.filter(this.options, x => x != undefined && x != null);
+    this.options = uniqBy(this.options, x => x);
+    this.options = filter(this.options, x => x != undefined && x != null);
     this.clearFilters();
   }
   private renderPropertyValue(propertyPath: string, object: any): any {
