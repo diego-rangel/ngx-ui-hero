@@ -6,8 +6,8 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { HighlightModule } from 'ngx-highlightjs';
 import {
-    ApiSettings, BaseApiUrlInterceptor, ChartsConfig, CommonHeadersInterceptor, DataGridConfig, ErrorHandlerInterceptor, InputFormsConfig, JwtAuthInterceptor, NgxUiHeroApiModule, NgxUiHeroChartsModule, NgxUiHeroDataGridModule,
-    NgxUiHeroInputFormsModule, NgxUiHeroModule, NgxUiHeroTreeViewModule, ResponseDataInterceptor, TreeViewConfig
+    ApiSettings, BaseApiUrlInterceptor, ChartsConfig, CommonHeadersInterceptor, DataGridConfig, ErrorHandlerInterceptor, InputFormsConfig, JwtAuthInterceptor, NgxUiHeroApiModule, NgxUiHeroChartsModule, NgxUiHeroDataGridModule, NgxUiHeroInputFormsModule,
+    NgxUiHeroModule, NgxUiHeroTreeViewModule, ResponseDataInterceptor, TreeViewConfig
 } from 'ngx-ui-hero';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
