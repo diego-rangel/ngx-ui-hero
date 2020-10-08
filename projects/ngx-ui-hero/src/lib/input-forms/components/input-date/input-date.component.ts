@@ -36,7 +36,8 @@ export class InputDateComponent extends ElementBase<Date> implements OnInit, DoC
 
   locale?: string = 'en-gb';
   bsConfig: Partial<BsDatepickerConfig> = {
-    containerClass: this.theme
+    containerClass: this.theme,
+    customTodayClass: 'today',
   };
 
   public identifier = `input-date-${identifier++}`;

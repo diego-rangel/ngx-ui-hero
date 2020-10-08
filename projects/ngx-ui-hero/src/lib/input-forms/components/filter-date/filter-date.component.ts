@@ -36,7 +36,8 @@ export class FilterDateComponent extends ElementBase<Date> implements OnInit, Do
   clickOutsideEnabled: boolean = true;
   locale?: string = 'en-gb';
   bsConfig: Partial<BsDatepickerInlineConfig> = {
-    containerClass: this.theme,    
+    containerClass: this.theme,
+    customTodayClass: 'today', 
   };
 
   public identifier = `filter-date-${identifier++}`;
