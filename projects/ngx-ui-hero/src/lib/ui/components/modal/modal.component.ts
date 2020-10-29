@@ -1,6 +1,6 @@
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'ui-modal',
@@ -12,6 +12,7 @@ export class ModalComponent implements OnInit {
   @Input() hideActions?: boolean = false;
   @Input() noPaddings?: boolean = false;
   @Input() cancelButtonLabel?: string = 'Cancel';
+  @Output() onClose = new EventEmitter();
 
   constructor(
     private modalRef: BsModalRef
@@ -21,6 +22,7 @@ export class ModalComponent implements OnInit {
   }
 
   Fechar(): void {
+    this.onClose.emit();
     this.modalRef.hide();
   }
 
