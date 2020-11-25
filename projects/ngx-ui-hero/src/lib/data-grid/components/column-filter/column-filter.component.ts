@@ -5,6 +5,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ColumnFilterModel, EqualsOperator } from '../../models/column-filter.model';
 import { DataGridColumnModel } from '../../models/data-grid-column.model';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'ui-column-filter',
   templateUrl: './column-filter.component.html',
@@ -33,6 +35,7 @@ export class ColumnFilterComponent implements OnInit {
       return;
     }
 
+    
     this.filteredOptions = this.options.filter(x => x.toString().toUpperCase().indexOf(this.search.toUpperCase()) >= 0);
   }
   onClickOutside() {
@@ -61,6 +64,7 @@ export class ColumnFilterComponent implements OnInit {
 
     this.options = uniqBy(this.options, x => x);
     this.options = filter(this.options, x => x != undefined && x != null);
+    this.options = _.orderBy(this.options, x => x) ;
     this.clearFilters();
   }
   private renderPropertyValue(propertyPath: string, object: any): any {
@@ -79,7 +83,9 @@ export class ColumnFilterComponent implements OnInit {
   }
   private clearFilters() {
     this.search = '';
-    this.filteredOptions = Object.assign([], this.options);
+    
+    this.filteredOptions =  Object.assign([], this.options);
+    
   }
 
 }
