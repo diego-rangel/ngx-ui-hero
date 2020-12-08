@@ -8,6 +8,7 @@ import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from
 import { InputFormsConfig } from '../../input-forms-config';
 import { INPUT_FORMS_CONFIG } from '../../input-forms-config.constants';
 
+
 let identifier = 0;
 
 @Component({
@@ -32,6 +33,7 @@ export class InputUploadComponent implements OnInit {
     @Input() chunkRequestsCountInParallel?: number = 50;
     @Input() maxFileSize?: number = 0;
     @Input() withCredentials?: boolean = false;
+    @Input() jwtHeader?: any;        
     @Input() selectButtonIcon?: string = 'fa fa-folder';
     @Input() selectButtonLabel?: string = 'Select';
     @Input() removeButtonIcon?: string = 'fa fa-trash';
@@ -69,10 +71,14 @@ export class InputUploadComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        
+
         this.uploader = new FileUploader({
             url: this.url,
             autoUpload: false,
-            maxFileSize: this.maxFileSize * 1000000,
+            maxFileSize: this.maxFileSize * 1000000,                         
+            headers: [this.jwtHeader]
         });
 
         this.handleUploaderEvents();
