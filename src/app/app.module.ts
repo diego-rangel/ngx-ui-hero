@@ -1,9 +1,7 @@
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { HighlightModule } from 'ngx-highlightjs';
+import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
 import {
     ApiSettings, BaseApiUrlInterceptor, ChartsConfig, CommonHeadersInterceptor, DataGridConfig, ErrorHandlerInterceptor, InputFormsConfig, JwtAuthInterceptor, NgxUiHeroApiModule, NgxUiHeroChartsModule, NgxUiHeroDataGridModule, NgxUiHeroInputFormsModule,
     NgxUiHeroModule, NgxUiHeroTreeViewModule, ResponseDataInterceptor, TreeViewConfig
@@ -94,13 +92,6 @@ export const chartsConfig: ChartsConfig = {
   emptyMessage: 'No results found at this moment.'
 };
 
-export function hljsLanguages() {
-  return [
-    {name: 'typescript', func: typescript},
-    {name: 'xml', func: xml}
-  ];
-}
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -115,9 +106,7 @@ export function hljsLanguages() {
     NgxUiHeroInputFormsModule.forRoot(inputFormsConfig),
     NgxUiHeroTreeViewModule.forRoot(treeViewConfig),
     TabsModule.forRoot(),
-    HighlightModule.forRoot({
-      languages: hljsLanguages
-    }),
+    HighlightModule,
   ],
   declarations: [
     AppComponent,
@@ -143,6 +132,17 @@ export function hljsLanguages() {
     { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseDataInterceptor, multi: true },
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
+        languages: {
+          typescript: () => import('highlight.js/lib/languages/typescript'),
+          xml: () => import('highlight.js/lib/languages/xml')
+        }
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })
