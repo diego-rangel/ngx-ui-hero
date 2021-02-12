@@ -41,6 +41,11 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/jquery.scrollto/jquery.scrollTo.min.js",
               "node_modules/print-this/printThis.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "xlsx",
+              "highlight.js/lib/highlight.js",
+              "file-saver"
             ]
           },
           "configurations": {
