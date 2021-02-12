@@ -1,4 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+
 .ui-hero-datagrid {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+
     table {
         margin-bottom: 0;
 
@@ -94,7 +105,7 @@
         background-color: #f9f9f9;
     }
     table.table-animated * {
-        transition: all .15s ease-in-out;
+        transition: all .15s ease-in-out, border-color none;
     }
 
     .empty-results {
@@ -105,5 +116,31 @@
 
     .pagination {
         max-height: 40px;
+    }
+
+    .fixed-header {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+        overflow-y: auto;
+        height: 0;
+
+        table thead th { 
+            background-color: #FFF;
+            position: sticky; 
+            top: 0px; 
+            box-shadow: inset 0px 1px #dee2e6, 0 0.125rem 0.25rem rgba(0,0,0,.075);
+            z-index: 1;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            border-top: 2px solid #dee2e6;
+            z-index: 1;
+        }
     }
 }

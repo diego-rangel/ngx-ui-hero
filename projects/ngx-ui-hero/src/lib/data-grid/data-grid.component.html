@@ -1,5 +1,13 @@
 <div class="ui-hero-datagrid">
-    <div [ngClass]="{'table-responsive': responsive}">
+    <div 
+        [ngClass]="{
+            'table-responsive': responsive,
+            'fixed-header': fixedHeader
+        }"
+        [ngStyle]="{
+            'max-height.px': fixedHeader && maxHeight > 0 ? maxHeight : 'auto',
+            'min-height.px': fixedHeader && minHeight > 0 ? minHeight : 'auto'
+        }">
         <table [id]="tableId" class="table" [ngClass]="{
             'table-striped': striped,
             'table-bordered': bordered,

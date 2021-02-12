@@ -88,6 +88,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Input() allowColumnResize?: boolean = true;
     @Input() allowColumnFilters?: boolean = true;
     @Input() allowColumnReorder?: boolean = true;
+    @Input() fixedHeader?: boolean = false;
+    @Input() minHeight?: number = 200;
+    @Input() maxHeight?: number;
     @Input() userPreferencesKey?: string;
     @Input() filterPlaceholder?: string = 'Filter...';
     @Input() filterPlacement?: string = 'bottom';
