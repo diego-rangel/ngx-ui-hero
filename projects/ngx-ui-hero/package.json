@@ -32,10 +32,10 @@
     "url": "https://github.com/diego-rangel/ngx-ui-hero/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^8.2.2",
-    "@angular/core": "^8.2.2",
-    "@angular/forms":"^8.2.2",
-    "@angular/platform-browser":"^8.2.2",
+    "@angular/common": "^9.1.13",
+    "@angular/core": "^9.1.13",
+    "@angular/forms":"^9.1.13",
+    "@angular/platform-browser":"^9.1.13",
     "bootstrap": "^4.3.1",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",

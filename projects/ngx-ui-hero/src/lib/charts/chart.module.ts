@@ -27,7 +27,7 @@ export { GanttChartComponent } from './components/gantt-chart/gantt-chart.compon
     providers: [],
 })
 export class NgxUiHeroChartsModule {
-    static forRoot(config: ChartsConfig): ModuleWithProviders {
+    static forRoot(config: ChartsConfig): ModuleWithProviders<NgxUiHeroChartsModule> {
         return {
             ngModule: NgxUiHeroChartsModule,
             providers: [

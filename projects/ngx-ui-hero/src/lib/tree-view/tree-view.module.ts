@@ -32,7 +32,7 @@ export { TreeViewColumnModel, EnumTreeViewColumnDataType } from './models/tree-v
     ],
 })
 export class NgxUiHeroTreeViewModule {
-    static forRoot(config: TreeViewConfig): ModuleWithProviders {
+    static forRoot(config: TreeViewConfig): ModuleWithProviders<NgxUiHeroTreeViewModule> {
         return {
             ngModule: NgxUiHeroTreeViewModule,
             providers: [

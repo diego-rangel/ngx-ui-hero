@@ -41,7 +41,7 @@ export { ColumnReorderingDefinitionsModel, ColumnReorderingDefinitionsItemModel 
   ],  
 })
 export class NgxUiHeroDataGridModule {
-  static forRoot(config: DataGridConfig): ModuleWithProviders {
+  static forRoot(config: DataGridConfig): ModuleWithProviders<NgxUiHeroDataGridModule> {
     return {
       ngModule: NgxUiHeroDataGridModule,
       providers: [

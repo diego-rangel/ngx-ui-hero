@@ -23,7 +23,7 @@ export { LocalStorageService } from './services/storage/local-storage.service';
   declarations: [],
 })
 export class NgxUiHeroApiModule {
-  static forRoot(settings: ApiSettings): ModuleWithProviders {
+  static forRoot(settings: ApiSettings): ModuleWithProviders<NgxUiHeroApiModule> {
     return {
       ngModule: NgxUiHeroApiModule,
       providers: [

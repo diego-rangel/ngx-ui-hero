@@ -102,7 +102,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     @Output() OnSort = new EventEmitter<DataGridColumnModel>();
     @Output() OnColumnFiltered = new EventEmitter<DataGridColumnModel>();
     @ContentChild(ActionsColumnDirective, {read: TemplateRef, static: true}) actionsColumnTemplate: ActionsColumnDirective;
-    @ViewChild('paginator', {static: false}) paginator: PaginationComponent;
+    @ViewChild('paginator') paginator: PaginationComponent;
 
     private _dataDiffer: any;
     private _internalData: Array<any>;

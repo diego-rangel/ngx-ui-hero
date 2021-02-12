@@ -10,13 +10,14 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/ngx-ui-hero-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -44,6 +45,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -152,7 +159,8 @@
           "configurations": {
             "production": {
               "project": "projects/ngx-ui-hero/ng-package.prod.json"
-            }
+            ,              "tsConfig": "projects/ngx-ui-hero/tsconfig.lib.prod.json"
+}
           }
         },
         "test": {

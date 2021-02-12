@@ -140,7 +140,7 @@ export { BlockUi } from './classes/block-ui';
   ],
 })
 export class NgxUiHeroInputFormsModule {
-  static forRoot(config: InputFormsConfig): ModuleWithProviders {
+  static forRoot(config: InputFormsConfig): ModuleWithProviders<NgxUiHeroInputFormsModule> {
     return {
       ngModule: NgxUiHeroInputFormsModule,
       providers: [

@@ -1,4 +1,3 @@
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -109,7 +108,6 @@ export function hljsLanguages() {
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    AngularFontAwesomeModule,
     NgxUiHeroModule,
     NgxUiHeroChartsModule.forRoot(chartsConfig),
     NgxUiHeroApiModule.forRoot(apiSettings),

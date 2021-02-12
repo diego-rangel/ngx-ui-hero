@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Inject, Input } from '@angular/core';
+import { Inject, Input, Directive } from '@angular/core';
 import { NgModel } from '@angular/forms';
 
 import { InputFormsConfig } from '../input-forms-config';
@@ -9,6 +9,7 @@ import { INPUT_FORMS_CONFIG } from '../input-forms-config.constants';
 import { AsyncValidatorArray, message, validate, ValidationResult, ValidatorArray } from './validate';
 import { ValueAccessorBase } from './value-accessor-base';
 
+@Directive()
 export abstract class ElementBase<T> extends ValueAccessorBase<T> {
   @Input() public label: string;
   @Input() public disabled: boolean;
