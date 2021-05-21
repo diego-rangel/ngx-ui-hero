@@ -74,6 +74,6 @@ export interface DropdownConfig {
     searchPlaceholder?: string;
     emptyResultsMessage?: string;
     displayTextProperty?: string;
-    valueProperty?: string; 
-    clearSelectionButtonLabel?: string; 
+    valueProperty?: string;
+    clearSelectionButtonLabel?: string;
 }

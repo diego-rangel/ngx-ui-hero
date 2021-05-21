@@ -20,7 +20,7 @@
 />
 
 <small class="text-muted" *ngIf="description">{{description}}</small>
-  
+
 <input-validations
   *ngIf="showValidations && !disabled && touched && (invalid | async)"
   [messages]="failures | async">

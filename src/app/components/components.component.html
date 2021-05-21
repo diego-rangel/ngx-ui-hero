@@ -33,7 +33,7 @@
       <div class="col-xl-9 col-lg-8">
         <div id="card-input-text" class="card">
           <div class="card-header">Input Text</div>
-          <div class="card-body">              
+          <div class="card-body">
             <div class="row">
               <div class="col-xl-6">
                 <div class="form-group">
@@ -41,13 +41,13 @@
                     [label]="'My Label here'"
                     [placeholder]="'My placeholder...'"
                     [maxlength]="200"
-                    [disabled]="false"              
+                    [disabled]="false"
                     [showValidations]="true"
                     [(ngModel)]="myModel"
                     required>
                   </input-text>
                 </div>
-    
+
                 <div>
                   <pre><code [highlight]="inputTextCode"></code></pre>
                 </div>
@@ -58,13 +58,13 @@
                     [label]="'My Text with Mask'"
                     [placeholder]="'My placeholder...'"
                     [disabled]="false"
-                    [masking]="'(99) 0000-0000'"                
+                    [masking]="'(99) 0000-0000'"
                     [showValidations]="true"
                     [(ngModel)]="myModelComMascara"
                     required>
                   </input-text-mask>
                 </div>
-    
+
                 <div>
                   <pre><code [highlight]="inputTextComMascaraCode"></code></pre>
                 </div>
@@ -140,11 +140,11 @@
         <div id="card-input-multiselect" class="card mt-4">
           <div class="card-header">Input MultiSelect</div>
           <div class="card-body">
-            <input-multiselect 
+            <input-multiselect
               label="My Multiselect"
               [(ngModel)]="myMultiselectModel"
-              [options]="multiSelectOptions" 
-              displayTextProperty="text" 
+              [options]="multiSelectOptions"
+              displayTextProperty="text"
               valueProperty="value">
             </input-multiselect>
 
@@ -265,8 +265,8 @@
                 [(ngModel)]="myDropdownGridModel"
                 [disabled]="false"
                 [columns]="dropdownGridColumns"
-                [data]="dropdownGridData"        
-                [showValidations]="true"               
+                [data]="dropdownGridData"
+                [showValidations]="true"
                 required>
               </input-dropdown-grid>
             </div>
@@ -378,7 +378,7 @@
                 displayTextProperty="name"
                 valueProperty="id"
                 [(ngModel)]="myDropdownSearchModel"
-                [data]="dropdownGridData"        
+                [data]="dropdownGridData"
                 [showValidations]="true"
                 required>
               </input-dropdown-search>
@@ -736,15 +736,15 @@
           <div class="card-body">
             <div class="form-group">
               <div class="row">
-                <div class="col-lg-6">                  
+                <div class="col-lg-6">
                   <input-month-year
                     label="My Label"
                     placeholder="Select..."
                     format="MMM/yyyy"
                     language="en"
                     [disabled]="false"
-                    [showValidations]="true"                
-                    [(ngModel)]="myDateMonthYearModel" 
+                    [showValidations]="true"
+                    [(ngModel)]="myDateMonthYearModel"
                     required>
                   </input-month-year>
 
@@ -759,9 +759,9 @@
                     format="MMM/yyyy"
                     language="en"
                     [disabled]="false"
-                    [showValidations]="true" 
-                    [monthsAvailable]="myMonthsAvailable"               
-                    [(ngModel)]="myDateMonthYearModel" 
+                    [showValidations]="true"
+                    [monthsAvailable]="myMonthsAvailable"
+                    [(ngModel)]="myDateMonthYearModel"
                     required>
                   </input-month-year>
 
@@ -772,7 +772,7 @@
               </div>
             </div>
 
-            
+
 
             <p><b>Available languages:</b> cs, da, de, en, es, fi, fr, hu, it, jp, nl, pl, pt, ro, sk, zh.</p>
 
@@ -1262,11 +1262,11 @@
         <div id="card-filter-multiselect" class="card mt-4">
           <div class="card-header">Filter MultiSelect</div>
           <div class="card-body">
-            <filter-multiselect 
+            <filter-multiselect
               label="My Multiselect"
               [(ngModel)]="myFilterMultiselectModel"
-              [options]="multiSelectOptions" 
-              displayTextProperty="text" 
+              [options]="multiSelectOptions"
+              displayTextProperty="text"
               valueProperty="value">
             </filter-multiselect>
 

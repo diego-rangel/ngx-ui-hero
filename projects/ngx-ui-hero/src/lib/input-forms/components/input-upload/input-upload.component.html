@@ -3,23 +3,19 @@
   <i class="fa fa-question-circle ml-2" tooltip="{{help}}" container="body" *ngIf="help"></i>
 </label>
 
-<input type="file" class="d-none" 
-  [(ngModel)]="selectedFileModel"
-  (change)="OnFileChange($event)" #fileInput ng2FileSelect 
-  [uploader]="uploader" 
-  [disabled]="disabled"
-  id="{{identifier}}-0" />
+<input type="file" class="d-none" [(ngModel)]="selectedFileModel" (change)="OnFileChange($event)" #fileInput
+  ng2FileSelect [uploader]="uploader" [disabled]="disabled" id="{{identifier}}-0" />
 
 <div class="input-group">
-    <input type="text" class="form-control" 
-      [value]="selectedFileName" 
-      placeholder="{{placeholder}}" 
-      id="{{identifier}}-1"
-      (click)="fileInput.click()" readonly />
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="button" (click)="fileInput.click()" [disabled]="disabled"><i *ngIf="selectButtonIcon" class="{{selectButtonIcon}}"></i> {{selectButtonLabel}}</button>
-      <button class="btn btn-outline-danger" type="button" *ngIf="selectedFileName" (click)="Clear()" [disabled]="disabled"><i *ngIf="removeButtonIcon" class="{{removeButtonIcon}}"></i> {{removeButtonLabel}}</button>
-    </div>
+  <input type="text" class="form-control" [value]="selectedFileName" placeholder="{{placeholder}}" id="{{identifier}}-1"
+    (click)="fileInput.click()" readonly />
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="button" (click)="fileInput.click()" [disabled]="disabled"><i
+        *ngIf="selectButtonIcon" class="{{selectButtonIcon}}"></i> {{selectButtonLabel}}</button>
+    <button class="btn btn-outline-danger" type="button" *ngIf="selectedFileName && removeButtonAllowed"
+      (click)="Clear()" [disabled]="disabled"><i *ngIf="removeButtonIcon" class="{{removeButtonIcon}}"></i>
+      {{removeButtonLabel}}</button>
+  </div>
 </div>
 
 <p class="mb-0" *ngIf="description">
@@ -27,15 +23,15 @@
 </p>
 
 <small class="text-muted" *ngIf="maxFileSize > 0">
-    {{maxFileSizeLabel}} <b>{{maxFileSize}}MB</b>.
+  {{maxFileSizeLabel}} <b>{{maxFileSize}}MB</b>.
 </small>
 <small class="text-muted" *ngIf="allowedExtensions?.length > 0">
-    {{allowedExtensionsLabel}}
-    <span *ngFor="let item of allowedExtensions; let first = first;">
-        <span *ngIf="!first">, </span>
-        <b>{{item}}</b>
-    </span>
-    <span>.</span>
+  {{allowedExtensionsLabel}}
+  <span *ngFor="let item of allowedExtensions; let first = first;">
+    <span *ngIf="!first">, </span>
+    <b>{{item}}</b>
+  </span>
+  <span>.</span>
 </small>
 
 <div *ngIf="errorMessage">
@@ -53,8 +49,7 @@
           <small class="file-name"><b>{{selectedFileName}} ({{chunks.length}})</b></small>
           <small class="file-size ml-auto">{{selectedFileBlob?.size / 1000 | number:'1.2-2'}}KB</small>
         </div>
-        <progressbar
-          [value]="chunkProgress">
+        <progressbar [value]="chunkProgress">
           {{chunkProgress}}%
         </progressbar>
       </div>
@@ -62,12 +57,8 @@
   </div>
 </div>
 
-<div ng2FileDrop *ngIf="showDropZone"
-    [ngClass]="{'mouse-over': hasDropZoneOver}"
-    (fileOver)="OnFileOver($event)"
-    (onFileDrop)="OnFileDrop($event)"
-    [uploader]="uploader"
-    class="dropzone">
-    <i class="fa fa-cloud-download fa-4x"></i><br/>
-    <span>{{dropZonePlaceholder}}</span>
+<div ng2FileDrop *ngIf="showDropZone" [ngClass]="{'mouse-over': hasDropZoneOver}" (fileOver)="OnFileOver($event)"
+  (onFileDrop)="OnFileDrop($event)" [uploader]="uploader" class="dropzone">
+  <i class="fa fa-cloud-download fa-4x"></i><br />
+  <span>{{dropZonePlaceholder}}</span>
 </div>
