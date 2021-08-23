@@ -13,7 +13,7 @@ export class DatagridComponent implements OnInit {
     {
       caption: 'Name',
       data: 'name'
-    },    
+    },
     {
       caption: 'E-mail',
       data: 'email',
@@ -50,15 +50,15 @@ export class DatagridComponent implements OnInit {
   ];
 
   dataGridBasicUsageExampleTemplate: string = `
-<datagrid 
-  [data]="myBasicDatagridModel" 
-  [columns]="myBasicDatagridColumns" 
+<datagrid
+  [data]="myBasicDatagridModel"
+  [columns]="myBasicDatagridColumns"
   [allowExports]="true"
   [initialColumnToSort]="0">
 </datagrid>
   `;
 
-  dataGridBasicUsageExampleCode: string = `  
+  dataGridBasicUsageExampleCode: string = `
 import { DataGridColumnModel, EnumAlignment } from 'ngx-ui-hero';
 
 myBasicDatagridModel: Array<any>;
@@ -83,9 +83,9 @@ myBasicDatagridColumns: Array<DataGridColumnModel> = [
   `;
 
   dataGridComplexUsageExampleTemplate: string = `
-<datagrid 
-  [data]="myComplexDatagridModel" 
-  [columns]="myComplexDatagridColumns" 
+<datagrid
+  [data]="myComplexDatagridModel"
+  [columns]="myComplexDatagridColumns"
   [showActionsColumn]="true"
   [initialColumnToSort]="0">
 
@@ -151,32 +151,32 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
         name: 'Baar',
         email: 'my-email@domain.com',
         active: false
-      },      
+      },
       {
         name: 'Baar',
         email: 'my-email@domain.com',
         active: false
-      },      
+      },
       {
         name: 'Baar',
         email: 'my-email@domain.com',
         active: false
-      },      
+      },
       {
         name: 'Baar',
         email: 'my-email@domain.com',
         active: false
-      },      
+      },
       {
         name: 'Baar',
         email: 'my-email@domain.com',
         active: false
-      },      
+      },
       {
         name: 'Baar',
         email: 'my-email@domain.com',
         active: false
-      },      
+      },
       {
         name: 'Very Very Very large Name for example Very Very Very large Name for example',
         email: 'myverylargeexampleofemail@domain.com',
@@ -198,7 +198,7 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
         active: false
       },
     ];
-    
+
     this.myBasicDatagridModel = model;
     this.myComplexDatagridModel = model;
   }
