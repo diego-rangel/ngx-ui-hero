@@ -18,11 +18,7 @@
               [data]="myBasicDatagridModel"
               [columns]="myBasicDatagridColumns"
               [allowExports]="true"
-              [initialColumnToSort]="0"
-              [selectAllPages]="true"
-              [showCheckboxColumn]="true"
-              [showSelectAllCheckbox]="true"
-              [checkBoxMode]="1"
+              [initialColumnToSort]="0"                            
             >
             </datagrid>
           </div>
@@ -343,6 +339,26 @@
                 <td>
                   When true, a select all checkbox will be shown at the column
                   header.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>selectAllPages</b><br />
+                  Default: <small>false</small>
+                </td>
+                <td>boolean</td>
+                <td>
+                  When true, all records will be selected on all pages.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>checkBoxMode</b><br />
+                  Default: <small>0</small>
+                </td>
+                <td>number</td>
+                <td>
+                  If the value is '1', the checkbox style will appear as a switch.
                 </td>
               </tr>
               <tr>
