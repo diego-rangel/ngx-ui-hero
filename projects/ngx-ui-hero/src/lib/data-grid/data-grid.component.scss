@@ -42,6 +42,7 @@
         td > * {
             word-break: break-word;
         }
+       
         th.sortable {
             cursor: pointer;
         }        
@@ -107,7 +108,12 @@
     table.table-animated * {
         transition: all .15s ease-in-out, border-color none;
     }
-
+    .custom-control-label {
+        overflow: initial !important;
+    }
+    .custom-control-label::after {
+        top: calc(.23rem + 2px) !important;
+    }
     .empty-results {
         border: 1px solid #dee2e6;
         background-color: #f9f9f9;
