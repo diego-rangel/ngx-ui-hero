@@ -62,6 +62,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   @Input() responsive?: boolean = true;
   @Input() showCheckboxColumn?: boolean = false;
   @Input() showSelectAllCheckbox?: boolean = true;
+  @Input() selectAllPages?: boolean = true;
+  @Input() checkBoxMode?: number = 0;
   @Input() showSummaries?: boolean = false;
   @Input() allowExports?: boolean = false;
   @Input() exportButtonLabel?: string = 'Export';
@@ -268,7 +270,15 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
     for (let i = 0; i < this.gridData.rows.length; i++) {
       this.gridData.rows[i].selected = this.selectAll;
-      this._internalData[i + (this.itemsPerPage * (this.currentPage - 1))].selected = this.selectAll;
+      
+      if(!this.selectAllPages)
+        this._internalData[i + (this.itemsPerPage * (this.currentPage - 1))].selected = this.selectAll;
+    }
+
+    if(this.selectAllPages) {
+      for (let i = 0; i < this._internalData.length; i++) {        
+        this._internalData[i].selected = this.selectAll;
+      }
     }
 
     this.OnSelectionChanged.emit();
