@@ -193,8 +193,8 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
         active: false
       },
       {
-        name: 'Very Very Very large Name for example',
-        email: 'myverylargeexampleofemail@domain.com',
+        name: 'Renato Silvado',
+        email: 'myemail@domain.com',
         active: false
       },
     ];
@@ -202,5 +202,7 @@ myComplexDatagridColumns: Array<DataGridColumnModel> = [
     this.myBasicDatagridModel = model;
     this.myComplexDatagridModel = model;
   }
+
+ 
 
 }
