@@ -20,11 +20,11 @@
         }">
             <thead>
                 <tr>
-                    <th class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.hasData" style="width: 50px;">
+                    <th class="" *ngIf="showCheckboxColumn && gridData?.hasData" style="width: 50px;">
 
-                        <div  class="custom-control custom-switch" *ngIf="checkBoxMode == 1 && showSelectAllCheckbox">
-                            <input type="checkbox" class="custom-control-input" id="customSwitchDataGrid" [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" >    
-                            <label class="custom-control-label" for="customSwitchDataGrid"></label>                        
+                        <div  class=" custom-control custom-switch" *ngIf="checkBoxMode == 1 && showSelectAllCheckbox">
+                            <input type="checkbox" class="custom-control-input" [id]="'customSwitchDataGrid' + tableId " [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" >    
+                            <label class="custom-control-label" [for]="'customSwitchDataGrid' + tableId"></label>                        
                         </div>
 
                         <input type="checkbox" [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" *ngIf="checkBoxMode == 0 && showSelectAllCheckbox" />
@@ -75,11 +75,14 @@
             </thead>
             <tbody *ngIf="sortApplied">
                 <tr *ngFor="let row of gridData.rows; let rowIndex = index;" [ngClass]="row.ngClass">
-                    <td class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.hasData">
-                        <div  class="custom-control custom-switch" *ngIf="checkBoxMode == 1 ">
-                            <input type="checkbox" class="custom-control-input" [id]="'customSwitchDataGrid' + rowIndex" [(ngModel)]="row.selected" (change)="OnRowSelectedChanged(row, rowIndex)" style="left: 1px !important;" >    
-                            <label class="custom-control-label" [for]="'customSwitchDataGrid' + rowIndex"></label>                        
-                        </div>
+                    <td class="" *ngIf="showCheckboxColumn && gridData?.hasData && checkBoxMode == 1">
+                        <div  class="custom-control custom-switch" style="overflow: initial !important">
+                            <input type="checkbox" class="custom-control-input" [id]="'customSwitchDataGrid' + rowIndex + tableId" [(ngModel)]="row.selected" (change)="OnRowSelectedChanged(row, rowIndex)" >    
+                            <label class="custom-control-label" [for]="'customSwitchDataGrid' + rowIndex + tableId"></label>                        
+                        </div>                        
+                    </td>
+                    <td class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.hasData && checkBoxMode == 0">
+                        
                         <input type="checkbox" [(ngModel)]="row.selected" (change)="OnRowSelectedChanged(row, rowIndex)" *ngIf="checkBoxMode == 0 " />
                     </td>
                     <td class="action text-center" *ngIf="showActionsColumn">
