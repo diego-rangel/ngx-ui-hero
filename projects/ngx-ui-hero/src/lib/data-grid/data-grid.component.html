@@ -20,7 +20,7 @@
         }">
             <thead>
                 <tr>
-                    <th class="" *ngIf="showCheckboxColumn && gridData?.hasData" style="width: 50px;">
+                    <th class="text-center checkbox-column" *ngIf="showCheckboxColumn && gridData?.hasData" style="width: 50px;">
 
                         <div  class=" custom-control custom-switch" *ngIf="checkBoxMode == 1 && showSelectAllCheckbox">
                             <input type="checkbox" class="custom-control-input" [id]="'customSwitchDataGrid' + tableId " [(ngModel)]="selectAll" (change)="OnSelectAllChanged()" >    
