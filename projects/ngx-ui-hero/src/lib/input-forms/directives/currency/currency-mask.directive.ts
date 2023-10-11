@@ -149,7 +149,7 @@ export class CurrencyMaskDirective implements AfterViewInit, ControlValueAccesso
             result.min = true;
         }
 
-        return result != {} ? result : null;
+        return result;
     }
 
     writeValue(value: number): void {
