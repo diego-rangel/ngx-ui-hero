@@ -1,17 +1,46 @@
-import { clone, filter, find, map, orderBy, some, sum, sumBy } from 'lodash-es';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { PageChangedEvent, PaginationComponent } from 'ngx-bootstrap/pagination';
+import { clone, filter, find, map, orderBy, some, sum, sumBy } from "lodash-es";
+import { BsModalService } from "ngx-bootstrap/modal";
+import {
+  PageChangedEvent,
+  PaginationComponent,
+} from "ngx-bootstrap/pagination";
 
-import { Component, ContentChild, DoCheck, EventEmitter, Inject, Input, IterableDiffers, OnInit, Optional, Output, Renderer2, TemplateRef, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {
+  Component,
+  ContentChild,
+  DoCheck,
+  EventEmitter,
+  Inject,
+  Input,
+  IterableDiffers,
+  OnInit,
+  Optional,
+  Output,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
-import { DataGridConfig, EnumAutoFitMode, EnumDataGridMode } from './config/data-grid-config';
-import { DATAGRID_CONFIG } from './config/data-grid-config.constants';
-import { DatagridExportingModalComponent } from './datagrid-exporting-modal/datagrid-exporting-modal.component';
-import { ActionsColumnDirective } from './directives/data-grid-templates.directive';
-import { ColumnFilterModel } from './models/column-filter.model';
-import { ColumnReorderingDefinitionsItemModel, ColumnReorderingDefinitionsModel } from './models/column-reordering-definitions.model';
-import { DataGridColumnModel, DataGridSortingModel, EnumAlignment, EnumSortDirection } from './models/data-grid-column.model';
+import {
+  DataGridConfig,
+  EnumAutoFitMode,
+  EnumDataGridMode,
+} from "./config/data-grid-config";
+import { DATAGRID_CONFIG } from "./config/data-grid-config.constants";
+import { DatagridExportingModalComponent } from "./datagrid-exporting-modal/datagrid-exporting-modal.component";
+import { ActionsColumnDirective } from "./directives/data-grid-templates.directive";
+import { ColumnFilterModel } from "./models/column-filter.model";
+import {
+  ColumnReorderingDefinitionsItemModel,
+  ColumnReorderingDefinitionsModel,
+} from "./models/column-reordering-definitions.model";
+import {
+  DataGridColumnModel,
+  DataGridSortingModel,
+  EnumAlignment,
+  EnumSortDirection,
+} from "./models/data-grid-column.model";
 
 declare var $: any;
 let identifier = 0;
@@ -32,9 +61,9 @@ export class GridColumnModel {
 }
 
 @Component({
-  selector: 'datagrid',
-  templateUrl: 'data-grid.component.html',
-  styleUrls: ['data-grid.component.scss']
+  selector: "datagrid",
+  templateUrl: "data-grid.component.html",
+  styleUrls: ["data-grid.component.scss"],
 })
 export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   initialRenderApplied: boolean = false;
@@ -53,8 +82,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   @Input() debugMode: boolean = false;
   @Input() tableId?: string = this.identifier;
   @Input() columns: Array<DataGridColumnModel>;
-  @Input() emptyResultsMessage?: string = 'No results found at this moment.';
-  @Input() infoMessage?: string = 'Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.';
+  @Input() emptyResultsMessage?: string = "No results found at this moment.";
+  @Input() infoMessage?: string =
+    "Showing records from {recordsFrom} to {recordsTo} of {totalRecords} records found.";
   @Input() animated?: boolean = true;
   @Input() striped?: boolean = true;
   @Input() bordered?: boolean = true;
@@ -66,11 +96,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   @Input() checkBoxMode?: number = 0;
   @Input() showSummaries?: boolean = false;
   @Input() allowExports?: boolean = false;
-  @Input() exportButtonLabel?: string = 'Export';
-  @Input() exportedFileName?: string = 'Export';
-  @Input() exportedExcelSheetName?: string = 'Sheet';
+  @Input() exportButtonLabel?: string = "Export";
+  @Input() exportedFileName?: string = "Export";
+  @Input() exportedExcelSheetName?: string = "Sheet";
   @Input() initialColumnToSort?: number = 0;
-  @Input() initialSortDirection?: EnumSortDirection = EnumSortDirection.Ascending;
+  @Input() initialSortDirection?: EnumSortDirection =
+    EnumSortDirection.Ascending;
   @Input() mode?: EnumDataGridMode = EnumDataGridMode.OnClient;
   @Input() totalItems?: number;
   @Input() itemsPerPage?: number = 10;
@@ -80,12 +111,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   @Input() rotate?: boolean = true;
   @Input() showActionsColumn?: boolean = false;
   @Input() showInfos?: boolean = true;
-  @Input() actionsColumnCaption?: string = '#';
-  @Input() actionsColumnWidth?: string = '100px';
-  @Input() firstText?: string = 'First';
-  @Input() previousText?: string = 'Previous';
-  @Input() nextText?: string = 'Next';
-  @Input() lastText?: string = 'Last';
+  @Input() actionsColumnCaption?: string = "#";
+  @Input() actionsColumnWidth?: string = "100px";
+  @Input() firstText?: string = "First";
+  @Input() previousText?: string = "Previous";
+  @Input() nextText?: string = "Next";
+  @Input() lastText?: string = "Last";
   @Input() autoFitMode?: EnumAutoFitMode = EnumAutoFitMode.ByContent;
   @Input() allowColumnResize?: boolean = true;
   @Input() allowColumnFilters?: boolean = true;
@@ -94,8 +125,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   @Input() minHeight?: number = 200;
   @Input() maxHeight?: number;
   @Input() userPreferencesKey?: string;
-  @Input() filterPlaceholder?: string = 'Filter...';
-  @Input() filterPlacement?: string = 'bottom';
+  @Input() filterPlaceholder?: string = "Filter...";
+  @Input() filterPlacement?: string = "bottom";
   @Input() boundedExportCallback?: () => Promise<any[]>;
   @Output() OnSelectionChanged = new EventEmitter();
   @Output() OnRowSelected = new EventEmitter<any>();
@@ -103,8 +134,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   @Output() OnPaginate = new EventEmitter<any>();
   @Output() OnSort = new EventEmitter<DataGridColumnModel>();
   @Output() OnColumnFiltered = new EventEmitter<DataGridColumnModel>();
-  @ContentChild(ActionsColumnDirective, { read: TemplateRef, static: true }) actionsColumnTemplate: ActionsColumnDirective;
-  @ViewChild('paginator') paginator: PaginationComponent;
+  @ContentChild(ActionsColumnDirective, { read: TemplateRef, static: true })
+  actionsColumnTemplate: ActionsColumnDirective;
+  @ViewChild("paginator") paginator: PaginationComponent;
 
   private _dataDiffer: any;
   private _internalData: Array<any>;
@@ -118,11 +150,14 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   get data(): Array<any> {
     return this._externalData;
   }
-  @Input('data')
+  @Input("data")
   set data(value: Array<any>) {
     this._externalData = value;
 
-    if (this.isUndefinedOrNull(value) && !this.isUndefinedOrNull(this._internalData)) {
+    if (
+      this.isUndefinedOrNull(value) &&
+      !this.isUndefinedOrNull(this._internalData)
+    ) {
       this.initializeRendering(true);
     }
   }
@@ -190,7 +225,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       this.paginateOnClient(this.currentPage);
     } else {
       if (this.isUndefinedOrNull(this.OnSort)) {
-        console.error('The [OnSort] callback must be provided when DataGrid Server mode is enabled.');
+        console.error(
+          "The [OnSort] callback must be provided when DataGrid Server mode is enabled."
+        );
         return;
       }
 
@@ -203,7 +240,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       this.paginateOnClient(event.page);
     } else {
       if (this.isUndefinedOrNull(this.OnPaginate)) {
-        console.error('The [OnPaginate] callback must be provided when DataGrid Server mode is enabled.');
+        console.error(
+          "The [OnPaginate] callback must be provided when DataGrid Server mode is enabled."
+        );
         return;
       }
     }
@@ -213,7 +252,8 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
   GetInfo(): string {
     let result = this.infoMessage;
-    let recordsFrom: number = this.currentPage * this.itemsPerPage - (this.itemsPerPage - 1);
+    let recordsFrom: number =
+      this.currentPage * this.itemsPerPage - (this.itemsPerPage - 1);
     let recordsTo: number = this.currentPage * this.itemsPerPage;
     let totalRecords: number = this.totalItems;
 
@@ -222,9 +262,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
 
     return result
-      .replace('{recordsFrom}', recordsFrom.toString())
-      .replace('{recordsTo}', recordsTo.toString())
-      .replace('{totalRecords}', totalRecords.toString());
+      .replace("{recordsFrom}", recordsFrom.toString())
+      .replace("{recordsTo}", recordsTo.toString())
+      .replace("{totalRecords}", totalRecords.toString());
   }
 
   Redraw(): void {
@@ -252,7 +292,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       return 0;
     }
 
-    return sumBy(this.gridData.rows, x => Number(this.RenderPropertyValue(column.data, x.model)));
+    return sumBy(this.gridData.rows, (x) =>
+      Number(this.RenderPropertyValue(column.data, x.model))
+    );
   }
 
   HasSummarizableColumns(): boolean {
@@ -260,7 +302,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       return false;
     }
 
-    return some(this.columns, x => x.summarizable);
+    return some(this.columns, (x) => x.summarizable);
   }
 
   OnSelectAllChanged(): void {
@@ -270,13 +312,23 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
 
     for (let i = 0; i < this.gridData.rows.length; i++) {
       this.gridData.rows[i].selected = this.selectAll;
-      
-      if(!this.selectAllPages)
-        this._internalData[i + (this.itemsPerPage * (this.currentPage - 1))].selected = this.selectAll;
+
+      if (!this.selectAllPages) {
+        switch (this.mode) {
+          case EnumDataGridMode.OnServer:
+            this._internalData[i].selected = this.selectAll;
+            break;
+          default:
+            this._internalData[
+              i + this.itemsPerPage * (this.currentPage - 1)
+            ].selected = this.selectAll;
+            break;
+        }
+      }
     }
 
-    if(this.selectAllPages) {
-      for (let i = 0; i < this._internalData.length; i++) {        
+    if (this.selectAllPages) {
+      for (let i = 0; i < this._internalData.length; i++) {
         this._internalData[i].selected = this.selectAll;
       }
     }
@@ -285,7 +337,16 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   }
 
   OnRowSelectedChanged(row: any, rowIndex: number): void {
-    this._internalData[rowIndex + (this.itemsPerPage * (this.currentPage - 1))].selected = row.selected;
+    switch (this.mode) {
+      case EnumDataGridMode.OnServer:
+        this._internalData[rowIndex].selected = row.selected;
+        break;
+      default:
+        this._internalData[
+          rowIndex + this.itemsPerPage * (this.currentPage - 1)
+        ].selected = row.selected;
+        break;
+    }
 
     this.handleSelectAllCheckboxState();
     this.OnRowSelected.emit(row);
@@ -300,7 +361,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       : this._externalData;
 
     this.modalService.show(DatagridExportingModalComponent, {
-      class: 'modal-md',
+      class: "modal-md",
       initialState: {
         data: _data,
         columns: this.columns.slice(0),
@@ -308,7 +369,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         exportedExcelSheetName: this.exportedExcelSheetName,
         initialColumnToSort: this.initialColumnToSort,
         initialSortDirection: this.initialSortDirection,
-      }
+      },
     });
 
     return false;
@@ -328,17 +389,15 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     var padding = this.paddingDiff(curCol);
 
     curColWidth = curCol.offsetWidth - padding;
-    if (nxtCol)
-      nxtColWidth = nxtCol.offsetWidth - padding;
+    if (nxtCol) nxtColWidth = nxtCol.offsetWidth - padding;
 
     var onMouseMoveCallback = (e: any) => {
       if (curCol) {
         var diffX = e.pageX - pageX;
 
-        if (nxtCol)
-          nxtCol.style.width = (nxtColWidth - (diffX)) + 'px';
+        if (nxtCol) nxtCol.style.width = nxtColWidth - diffX + "px";
 
-        curCol.style.width = (curColWidth + diffX) + 'px';
+        curCol.style.width = curColWidth + diffX + "px";
       }
     };
     var onMouseUpCallback = (e: any) => {
@@ -368,26 +427,45 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       e.dataTransfer.setDragImage(img, 0, 0);
       this.isReordering = true;
       this.currentElementBeingReorderedFromIndex = index;
-      this.renderer.addClass(e.target.parentElement.parentElement, 'dragging');
+      this.renderer.addClass(e.target.parentElement.parentElement, "dragging");
 
-      e.target.addEventListener("dragenter", (e: any) => onDragEnterCallback(e, index));
+      e.target.addEventListener("dragenter", (e: any) =>
+        onDragEnterCallback(e, index)
+      );
       e.target.addEventListener("dragend", onDragEndCallback);
 
       $(`#${this.identifier} thead tr th.column`).each((i, el) => {
         if (i != index) {
-          el.addEventListener("dragenter", (e: any) => onDragEnterCallback(e, i));
+          el.addEventListener("dragenter", (e: any) =>
+            onDragEnterCallback(e, i)
+          );
           el.addEventListener("dragover", onDragOverCallback);
         }
       });
     };
     var onDragEndCallback = (e: any) => {
-      if (this.currentElementBeingReorderedFromIndex != this.currentElementBeingReorderedToIndex) {
-        this.debug('From', this.currentElementBeingReorderedFromIndex, 'To', this.currentElementBeingReorderedToIndex);
+      if (
+        this.currentElementBeingReorderedFromIndex !=
+        this.currentElementBeingReorderedToIndex
+      ) {
+        this.debug(
+          "From",
+          this.currentElementBeingReorderedFromIndex,
+          "To",
+          this.currentElementBeingReorderedToIndex
+        );
 
-        var columnFromCopy = Object.assign({}, this.columns[this.currentElementBeingReorderedFromIndex]);
+        var columnFromCopy = Object.assign(
+          {},
+          this.columns[this.currentElementBeingReorderedFromIndex]
+        );
         var columnsCopy = Object.assign([], this.columns);
         columnsCopy.splice(this.currentElementBeingReorderedFromIndex, 1);
-        columnsCopy.splice(this.currentElementBeingReorderedToIndex, 0, columnFromCopy);
+        columnsCopy.splice(
+          this.currentElementBeingReorderedToIndex,
+          0,
+          columnFromCopy
+        );
         this.columns = columnsCopy;
 
         this.updateColumnReorderingDefinition();
@@ -396,14 +474,21 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       this.isReordering = false;
       this.currentElementBeingReorderedFromIndex = -1;
       this.currentElementBeingReorderedToIndex = -1;
-      this.renderer.removeClass(e.target.parentElement.parentElement, 'dragging');
+      this.renderer.removeClass(
+        e.target.parentElement.parentElement,
+        "dragging"
+      );
 
-      e.target.removeEventListener("dragenter", (e: any) => onDragEnterCallback(e, index));
+      e.target.removeEventListener("dragenter", (e: any) =>
+        onDragEnterCallback(e, index)
+      );
       e.target.removeEventListener("dragend", onDragEndCallback);
 
       $(`#${this.identifier} thead tr th.column`).each((i, el) => {
         if (i != index) {
-          el.removeEventListener("dragenter", (e: any) => onDragEnterCallback(e, i));
+          el.removeEventListener("dragenter", (e: any) =>
+            onDragEnterCallback(e, i)
+          );
           el.removeEventListener("dragover", onDragOverCallback);
         }
       });
@@ -444,14 +529,26 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
   }
 
-  HandleColumnClick(row: any, currentData: any, rowIndex: number, column: DataGridColumnModel): void {
+  HandleColumnClick(
+    row: any,
+    currentData: any,
+    rowIndex: number,
+    column: DataGridColumnModel
+  ): void {
     if (!column.onClick) return;
     column.onClick(row, currentData, rowIndex, column);
   }
 
-  HandleColumnRendering(row: any, currentData: any, rowIndex: number, column: DataGridColumnModel): SafeHtml {
-    if (!column.render) return '';
-    return this.sanitizer.bypassSecurityTrustHtml(column.render(row, currentData, rowIndex));
+  HandleColumnRendering(
+    row: any,
+    currentData: any,
+    rowIndex: number,
+    column: DataGridColumnModel
+  ): SafeHtml {
+    if (!column.render) return "";
+    return this.sanitizer.bypassSecurityTrustHtml(
+      column.render(row, currentData, rowIndex)
+    );
   }
 
   private draw(redrawing?: boolean): void {
@@ -487,39 +584,46 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         let _row: GridRowModel = {
           selected: row.selected,
           model: row,
-          columns: map(this.columns, (column: DataGridColumnModel, columnIndex: number) => {
-            let _column: GridColumnModel = {
-              isHtml: column.render != undefined,
-            };
+          columns: map(
+            this.columns,
+            (column: DataGridColumnModel, columnIndex: number) => {
+              let _column: GridColumnModel = {
+                isHtml: column.render != undefined,
+              };
 
-            if (column.data) {
-              if (column.data.split('.').length > 1) {
-                _column.value = this.RenderPropertyValue(column.data, row);
-              } else {
-                _column.value = row[column.data];
+              if (column.data) {
+                if (column.data.split(".").length > 1) {
+                  _column.value = this.RenderPropertyValue(column.data, row);
+                } else {
+                  _column.value = row[column.data];
+                }
               }
-            }
 
-            if (_column.isHtml) {
-              _column.value = this.HandleColumnRendering(row, _column.value, rowIndex, column);
-            }
+              if (_column.isHtml) {
+                _column.value = this.HandleColumnRendering(
+                  row,
+                  _column.value,
+                  rowIndex,
+                  column
+                );
+              }
 
-            return _column;
-          })
+              return _column;
+            }
+          ),
         };
 
         return _row;
-      })
+      }),
     };
   }
   private initializeColumns(): void {
     if (!this.columns || this.columns.length == 0) {
-      console.error('Param [columns] cannot be undefined or empty.');
+      console.error("Param [columns] cannot be undefined or empty.");
       return;
     }
 
-    if (!this._externalColumns)
-      this._externalColumns = clone(this.columns);
+    if (!this._externalColumns) this._externalColumns = clone(this.columns);
 
     for (let i = 0; i < this.columns.length; i++) {
       let target: DataGridColumnModel = {
@@ -532,7 +636,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         sortable: true,
         filterable: true,
         visible: true,
-        index: i
+        index: i,
       };
 
       Object.assign(target, this.columns[i]);
@@ -540,7 +644,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       this.columns[i] = target;
       this.columns[i].sort = new DataGridSortingModel();
 
-      if (!this.isUndefinedOrNull(this.initialColumnToSort) && this.initialColumnToSort == i) {
+      if (
+        !this.isUndefinedOrNull(this.initialColumnToSort) &&
+        this.initialColumnToSort == i
+      ) {
         this.columns[i].sort.sorting = true;
 
         if (this.columns[i].sortDirection) {
@@ -551,24 +658,32 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       }
     }
 
-    if (!this._internalColumns)
-      this._internalColumns = clone(this.columns);
+    if (!this._internalColumns) this._internalColumns = clone(this.columns);
 
     this.filterColumnsThatShouldBeVisible();
     this.verifyColumnIndexPersistences();
   }
   private initializeSorting(): void {
-    if (this.isUndefinedOrNull(this._internalData) || this.mode == EnumDataGridMode.OnServer || this.isUndefinedOrNull(this.initialColumnToSort)) {
+    if (
+      this.isUndefinedOrNull(this._internalData) ||
+      this.mode == EnumDataGridMode.OnServer ||
+      this.isUndefinedOrNull(this.initialColumnToSort)
+    ) {
       this.sortApplied = true;
       return;
     }
-    if (this.initialColumnToSort > (this.columns.length - 1)) {
-      console.error('Param [initialColumnToSort] greater than the number of columns.');
+    if (this.initialColumnToSort > this.columns.length - 1) {
+      console.error(
+        "Param [initialColumnToSort] greater than the number of columns."
+      );
       this.sortApplied = true;
       return;
     }
 
-    const columnToSort = find(this.columns, x => x.sortable && x.sort && x.sort.sorting);
+    const columnToSort = find(
+      this.columns,
+      (x) => x.sortable && x.sort && x.sort.sorting
+    );
 
     if (this.isUndefinedOrNull(columnToSort)) {
       this.paginateOnClient(this.currentPage);
@@ -588,10 +703,17 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       this.totalItems = this._internalData.length;
     }
 
-    let currentPageFitsTheNumberOfItems = this.totalItems > (this.itemsPerPage * (this.currentPage - 1));
-    let shouldResetCurrentPage = this.currentPage > 1 && this.mode == EnumDataGridMode.OnClient && !currentPageFitsTheNumberOfItems;
+    let currentPageFitsTheNumberOfItems =
+      this.totalItems > this.itemsPerPage * (this.currentPage - 1);
+    let shouldResetCurrentPage =
+      this.currentPage > 1 &&
+      this.mode == EnumDataGridMode.OnClient &&
+      !currentPageFitsTheNumberOfItems;
 
-    if ((redrawing && this.mode == EnumDataGridMode.OnClient) || shouldResetCurrentPage) {
+    if (
+      (redrawing && this.mode == EnumDataGridMode.OnClient) ||
+      shouldResetCurrentPage
+    ) {
       this.currentPage = 1;
     }
 
@@ -601,13 +723,13 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
   }
   private paddingDiff(col: any): number {
-    if (this.getStyleVal(col, 'box-sizing') == 'border-box') {
+    if (this.getStyleVal(col, "box-sizing") == "border-box") {
       return 0;
     }
 
-    var padLeft = this.getStyleVal(col, 'padding-left');
-    var padRight = this.getStyleVal(col, 'padding-right');
-    return (parseInt(padLeft) + parseInt(padRight));
+    var padLeft = this.getStyleVal(col, "padding-left");
+    var padRight = this.getStyleVal(col, "padding-right");
+    return parseInt(padLeft) + parseInt(padRight);
   }
   private getStyleVal(elm: any, css: any): string {
     return window.getComputedStyle(elm, null).getPropertyValue(css);
@@ -616,7 +738,11 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     return value == undefined || value == null;
   }
   private sortOnClient(column: DataGridColumnModel): void {
-    this._internalData = orderBy(this._internalData, [column.data], [column.sort.sortDirection]);
+    this._internalData = orderBy(
+      this._internalData,
+      [column.data],
+      [column.sort.sortDirection]
+    );
   }
   private paginateOnClient(page: number): void {
     const startItem = (page - 1) * this.itemsPerPage;
@@ -652,24 +778,33 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       let widths: number[] = [];
       let gridWidth: number = $(`#${this.tableId}`).parent().width();
 
-      if (gridWidth == 0 && $(`#${this.tableId}`).parents('.tab-content').length) {
-        gridWidth = $(`#${this.tableId}`).parents('.tab-content').width();
+      if (
+        gridWidth == 0 &&
+        $(`#${this.tableId}`).parents(".tab-content").length
+      ) {
+        gridWidth = $(`#${this.tableId}`).parents(".tab-content").width();
       }
 
       for (let rowIndex = 0; rowIndex < this.gridData.rows.length; rowIndex++) {
-        for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+        for (
+          let columnIndex = 0;
+          columnIndex < this.columns.length;
+          columnIndex++
+        ) {
           let width: number = this._minColumnWidth;
           let currentData: string | SafeHtml = null;
 
           if (!this.gridData.rows[rowIndex].columns[columnIndex].isHtml) {
-            currentData = this.gridData.rows[rowIndex].columns[columnIndex].value;
+            currentData =
+              this.gridData.rows[rowIndex].columns[columnIndex].value;
           }
 
           if (!this.isUndefinedOrNull(currentData)) {
-            width = (currentData.toString().length * 10) + 20;
+            width = currentData.toString().length * 10 + 20;
           }
           if (!this.isUndefinedOrNull(this.columns[columnIndex].caption)) {
-            let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 40;
+            let widthByCaption =
+              this.columns[columnIndex].caption.toString().length * 10 + 40;
 
             if (widthByCaption > width) {
               width = widthByCaption;
@@ -677,13 +812,21 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
               if (this.allowColumnResize) {
                 width += 20;
               }
-              if (this.allowColumnFilters && this.columns[columnIndex].filterable && this.isUndefinedOrNull(widths[columnIndex]) || width > widths[columnIndex]) {
+              if (
+                (this.allowColumnFilters &&
+                  this.columns[columnIndex].filterable &&
+                  this.isUndefinedOrNull(widths[columnIndex])) ||
+                width > widths[columnIndex]
+              ) {
                 width += 30;
               }
             }
           }
 
-          if (this.isUndefinedOrNull(widths[columnIndex]) || width > widths[columnIndex]) {
+          if (
+            this.isUndefinedOrNull(widths[columnIndex]) ||
+            width > widths[columnIndex]
+          ) {
             if (width > this._maxWidth) {
               widths[columnIndex] = this._maxWidth;
             } else {
@@ -702,9 +845,14 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     this.animating = true;
 
     setTimeout(() => {
-      for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+      for (
+        let columnIndex = 0;
+        columnIndex < this.columns.length;
+        columnIndex++
+      ) {
         if (this.isUndefinedOrNull(this.columns[columnIndex].width)) {
-          let widthByCaption = (this.columns[columnIndex].caption.toString().length * 10) + 40;
+          let widthByCaption =
+            this.columns[columnIndex].caption.toString().length * 10 + 40;
 
           if (this.allowColumnResize) {
             widthByCaption += 10;
@@ -724,9 +872,13 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     this.animating = true;
 
     setTimeout(() => {
-      for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+      for (
+        let columnIndex = 0;
+        columnIndex < this.columns.length;
+        columnIndex++
+      ) {
         if (this.isUndefinedOrNull(this.columns[columnIndex].width)) {
-          this.columns[columnIndex].width = '150px';
+          this.columns[columnIndex].width = "150px";
         }
       }
 
@@ -739,11 +891,15 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       return;
     }
 
-    this.selectAll = this.gridData.rows.filter(x => x.selected).length == this.gridData.rows.length;
+    this.selectAll =
+      this.gridData.rows.filter((x) => x.selected).length ==
+      this.gridData.rows.length;
   }
   private setDataGridWidths(widths: number[], gridWidth: number): void {
     let initialColumnsWidths = new Array<string>(this.columns.length);
-    let _externalColumns = this._externalColumns.filter(x => x.visible == undefined || x.visible == true);
+    let _externalColumns = this._externalColumns.filter(
+      (x) => x.visible == undefined || x.visible == true
+    );
 
     for (let i = 0; i < _externalColumns.length; i++) {
       let columnDefaultWidth = _externalColumns[i].width;
@@ -757,7 +913,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       initialColumnsWidths[def.userIndex] = columnDefaultWidth;
     }
 
-    this.debug('initialColumnsWidths', initialColumnsWidths);
+    this.debug("initialColumnsWidths", initialColumnsWidths);
 
     let totalColumnsWidth = sum(widths);
     let totalColumnsWidthGreaterThanGrid = totalColumnsWidth > gridWidth;
@@ -765,36 +921,44 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     if (!totalColumnsWidthGreaterThanGrid) {
       let biggestColumnIndex = 0;
       let biggestWidth = widths[widths.length - 1];
-      for (let i = (widths.length - 2); i >= 0; i--) {
+      for (let i = widths.length - 2; i >= 0; i--) {
         if (widths[i] > biggestWidth) {
           biggestWidth = widths[i];
           biggestColumnIndex = i;
         }
       }
 
-      for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+      for (
+        let columnIndex = 0;
+        columnIndex < this.columns.length;
+        columnIndex++
+      ) {
         if (columnIndex == biggestColumnIndex) {
           this.columns[columnIndex].width = `auto`;
 
           if (widths[columnIndex] >= this._maxWidth) {
             if (!this.columns[columnIndex].dataClasses) {
-              this.columns[columnIndex].dataClasses = '';
+              this.columns[columnIndex].dataClasses = "";
             }
 
-            this.columns[columnIndex].dataClasses += ' td-break-word';
+            this.columns[columnIndex].dataClasses += " td-break-word";
           }
         } else {
           this.columns[columnIndex].width = `${widths[columnIndex]}px`;
         }
       }
     } else {
-      for (let columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+      for (
+        let columnIndex = 0;
+        columnIndex < this.columns.length;
+        columnIndex++
+      ) {
         if (widths[columnIndex] >= this._maxWidth) {
           if (!this.columns[columnIndex].dataClasses) {
-            this.columns[columnIndex].dataClasses = '';
+            this.columns[columnIndex].dataClasses = "";
           }
 
-          this.columns[columnIndex].dataClasses += ' td-break-word';
+          this.columns[columnIndex].dataClasses += " td-break-word";
         }
 
         this.columns[columnIndex].width = `${widths[columnIndex]}px`;
@@ -813,7 +977,14 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     }
   }
   private initializeFilters() {
-    if (!this.columns || this.columns.length == 0 || !this.data || this.data.length == 0 || this.mode == EnumDataGridMode.OnServer) return;
+    if (
+      !this.columns ||
+      this.columns.length == 0 ||
+      !this.data ||
+      this.data.length == 0 ||
+      this.mode == EnumDataGridMode.OnServer
+    )
+      return;
 
     let filters: ColumnFilterModel[] = [];
 
@@ -821,7 +992,10 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
       if (this.columns[i].simpleFilter) {
         filters.push(this.columns[i].simpleFilter);
       }
-      if (this.columns[i].customFilters && this.columns[i].customFilters.length > 0) {
+      if (
+        this.columns[i].customFilters &&
+        this.columns[i].customFilters.length > 0
+      ) {
         filters.push(...this.columns[i].customFilters);
       }
     }
@@ -833,9 +1007,12 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
         let value: any = null;
 
         if (filters[i].column.render)
-          value = filters[i].column.render(row, this.RenderPropertyValue(filters[i].column.data, row), rowIndex);
-        else
-          value = this.RenderPropertyValue(filters[i].column.data, row);
+          value = filters[i].column.render(
+            row,
+            this.RenderPropertyValue(filters[i].column.data, row),
+            rowIndex
+          );
+        else value = this.RenderPropertyValue(filters[i].column.data, row);
 
         if (!filters[i].operator.validate(filters[i].filter, value)) {
           return false;
@@ -867,7 +1044,7 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   private getColumnReorderingDefinition(): ColumnReorderingDefinitionsModel {
     if (this._columnDefinitions) return this._columnDefinitions;
 
-    this.debug('Readed from localstorage');
+    this.debug("Readed from localstorage");
     let json: string = localStorage.getItem(this.userPreferencesKey);
     this._columnDefinitions = json ? JSON.parse(json) : null;
 
@@ -885,46 +1062,56 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
   private buildColumnReorderingDefinition(): ColumnReorderingDefinitionsModel {
     let definition: ColumnReorderingDefinitionsModel = {
       key: this.userPreferencesKey,
-      data: this.columns.map(c => {
+      data: this.columns.map((c) => {
         let item: ColumnReorderingDefinitionsItemModel = {
           caption: c.caption,
           originalIndex: c.index,
-          userIndex: c.index
-        }
+          userIndex: c.index,
+        };
         return item;
-      })
+      }),
     };
 
     this._columnDefinitions = definition;
     localStorage.setItem(this.userPreferencesKey, JSON.stringify(definition));
-    this.debug('Rebuilded ColumnReorderingDefinition');
+    this.debug("Rebuilded ColumnReorderingDefinition");
 
     return definition;
   }
-  private definitionIsNotCompatibleAnymore(definition: ColumnReorderingDefinitionsModel): boolean {
-    this.debug('Compatibility checking on:', definition);
+  private definitionIsNotCompatibleAnymore(
+    definition: ColumnReorderingDefinitionsModel
+  ): boolean {
+    this.debug("Compatibility checking on:", definition);
 
-    let hasDifferentNumberOfColumns = this.columns.length != definition.data.length;
-    this.debug('hasDifferentNumberOfColumns', hasDifferentNumberOfColumns);
+    let hasDifferentNumberOfColumns =
+      this.columns.length != definition.data.length;
+    this.debug("hasDifferentNumberOfColumns", hasDifferentNumberOfColumns);
 
     if (hasDifferentNumberOfColumns) return true;
 
-    let hasDifferencesByCaption = filter(definition.data, def =>
-      this.columns[def.originalIndex].caption != def.caption
-    ).length > 0;
+    let hasDifferencesByCaption =
+      filter(
+        definition.data,
+        (def) => this.columns[def.originalIndex].caption != def.caption
+      ).length > 0;
 
-    this.debug('hasDifferencesByCaption', hasDifferencesByCaption);
+    this.debug("hasDifferencesByCaption", hasDifferencesByCaption);
     return hasDifferencesByCaption;
   }
-  private applyColumnReorderingDefinition(definition: ColumnReorderingDefinitionsModel): void {
+  private applyColumnReorderingDefinition(
+    definition: ColumnReorderingDefinitionsModel
+  ): void {
     for (let i = 0; i < this.columns.length; i++) {
-      let def = find(definition.data, x => x.caption == this.columns[i].caption);
+      let def = find(
+        definition.data,
+        (x) => x.caption == this.columns[i].caption
+      );
       if (!def) continue;
       this.columns[i].index = def.userIndex;
       this.debug(this.columns[i].caption, this.columns[i].index);
     }
 
-    this.columns = orderBy(this.columns, x => x.index);
+    this.columns = orderBy(this.columns, (x) => x.index);
   }
   private updateColumnReorderingDefinition(): void {
     if (!this.userPreferencesKey) return;
@@ -932,7 +1119,9 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     let definition = this.getColumnReorderingDefinition();
     for (let i = 0; i < this.columns.length; i++) {
       this.columns[i].index = i;
-      let def = definition.data.find(x => x.caption == this.columns[i].caption);
+      let def = definition.data.find(
+        (x) => x.caption == this.columns[i].caption
+      );
       if (!def) continue;
       def.userIndex = i;
     }
@@ -940,17 +1129,19 @@ export class DataGridComponent implements OnInit, DoCheck, DataGridConfig {
     this._columnDefinitions = definition;
     localStorage.setItem(this.userPreferencesKey, JSON.stringify(definition));
   }
-  private getColumnReorderingDefinitionFrom(column: DataGridColumnModel): ColumnReorderingDefinitionsItemModel {
+  private getColumnReorderingDefinitionFrom(
+    column: DataGridColumnModel
+  ): ColumnReorderingDefinitionsItemModel {
     if (!this.userPreferencesKey) return undefined;
     let definition = this.getColumnReorderingDefinition();
     if (!definition) return undefined;
-    let def = definition.data.find(x => x.caption == column.caption);
+    let def = definition.data.find((x) => x.caption == column.caption);
     if (!def) return undefined;
     return def;
   }
 
   private filterColumnsThatShouldBeVisible(): void {
-    this.columns = this._internalColumns.filter(x => x.visible);
+    this.columns = this._internalColumns.filter((x) => x.visible);
   }
 
   private debug(message: any, ...params: any[]): void {
